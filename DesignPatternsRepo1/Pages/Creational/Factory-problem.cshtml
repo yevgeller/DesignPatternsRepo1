@@ -1,0 +1,22 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Creational.FactoryModel
+@{
+}
+<script>hljs.highlightAll();</script>
+
+<h1 class="title is-1 is-spaced">Factory Pattern &mdash; Problem</h1>
+
+
+<p>Example code:</p>
+<br /><br />
+<pre><code class="language-ts">
+  class SimpleToyFactory {
+    makeAToy(): ToyCar {
+      return new ToyCar();
+    }
+  }
+  </code>
+</pre>
+<p>The code above demonstrates how a simple toy factory can make the only toy they know about -- a car. But what if they learned to create other toys?</p>
+
+<a class="navbar-item" asp-area="" asp-page="/Creational/Factory-solution"><i class="fa-solid fa-arrow-right"></i>&nbsp;Solution: Factory</a>

@@ -1,32 +1,22 @@
 ﻿@page
-@model DesignPatternsRepo1.Pages.Creational.FactoryModel
+@model DesignPatternsRepo1.Pages.Creational.Factory_solutionModel
 @{
 }
+
 <script>hljs.highlightAll();</script>
 
-<h1 class="title is-1 is-spaced">Factory Pattern ye</h1>
+<h1 class="title is-1 is-spaced">Factory Solution</h1>
 <h2 class="subtitle">A pattern used to differentiate between items that have something in common</h2>
 
 
-<p>Problem: extending functionality for more providers.</p>
-<p>Example code:</p>
-<pre><code class="language-ts">
-  class SimpleToyFactory {
-    makeAToy(): ToyCar {
-      return new ToyCar();
-    }
-  }
-  </code>
-</pre>
-<p>The code above demonstrates how a simple toy factory can make the only toy they know about -- a car. But what if they learned to create other toys?</p>
-
-<pre>Some code here</pre>
-
+<p>First, let's extract something in common from all elements so that we can operate on an abstraction and not a concrete entity</p>
 <pre><code class="language-ts">
     interface Present {
     whatIsIt(): string;
   }
-
+  </code></pre>
+  <p>Then let's define concrete classes and ensure they implement the common interface:</p>
+  <pre><code class="language-ts">
   class ToyCar implements Present {
     whatIsIt(): string {
       return "This is a toy car";
@@ -44,13 +34,15 @@
       return "This kid has been naughty";
     }
   }
-
+    </code></pre>
+    <p>Next, the Creator class, this is where the magic of extensibility happens:</p>
+    <pre><code class="language-ts">
   enum ToyType {
     car,
     boat,
     coal,
   }
-//Creator class
+    //Creator class
   class ToyFactory {
     makeAToy(typeOfToy: ToyType): Present {
       switch (typeOfToy) {
@@ -67,6 +59,10 @@
     }
   }
 
+  </code></pre>
+    <p>Finally, the wire-up:</p>
+    <pre><code class="language-ts">
+  
   class ElvesFactory {
     toyFactory: ToyFactory;
 
@@ -81,7 +77,11 @@
       });
     }
   }
-
+  </code></pre>
+    <p>Test:</p>
+    <pre><code class="language-ts">
+  
+  //check:
   let tf = new ToyFactory();
   let toyProductionFacility = new ElvesFactory(tf);
   let order = new Array(
@@ -95,10 +95,11 @@
   toyProductionFacility.makeToys(order);
   </code>
 </pre>
-
-<p><code>Some other code right here</code></p>
-
-<div class="highlight"><pre><code>Some more code right over here
-
-    const a = () => return 'here';
-</code></pre></div>
+<p>If elves learn to make more toys, there will need to be a class created for that toy that implements the Present interface, add a value to the enum,
+    and then a condition to create that type of toy into the creator class.
+</p>
+<br />
+<br />
+<br />
+<br />
+<br />
