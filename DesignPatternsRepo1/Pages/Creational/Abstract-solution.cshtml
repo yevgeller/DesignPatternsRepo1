@@ -1,0 +1,178 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Creational.Abstract_solutionModel
+@{
+}
+
+<h1 class="title is-1 is-spaced">Abstract factory Pattern &mdash; Solution</h1>
+<h2 class="subtitle">Abstract Factory Pattern is a creational design pattern that provides organization while creating groups of related objects without explicitly specifying their concrete classe</h2>
+
+
+<script>hljs.highlightAll();</script>
+<p>
+    Use Abstract Factory when code needs to work with
+    various families of related products without tight
+    coupling to the actual concrete classes, because they
+    are either unknown at the time or may be expanded in the future.
+</p>
+<br />
+<p>
+    In this example, we're working with factories of first responders.
+    So far there are Police and Firemen. We can also add Medical teams,
+    or other teams that follow the same structure.
+</p>
+<br />
+<p>
+    <h5 class="title is-5">Things needed for the Abstract Factory:</h5>
+    <ol>
+        <li>
+            Explicitly declare interfaces for each distinct piece
+            of the item family (so Chief, Lieutenant, UnitMember)
+        </li>
+        <li>Make all variants of pieces that follow those interfaces</li>
+        <li>
+            Declare an abstract Factory (ResponderFactory)
+            with methods to create all items in the family
+            (Chief, Lieutenant, UnitMember)
+        </li>
+        <li>
+            Declare a separate factory class for each type of ResponderFactory
+            And no mixing and matching!
+        </li>
+    </ol>
+</p><br /><br />
+<h3 class="title is-3">Code Example:</h3>
+ First, declare interfaces for the "pieces" that comprise a unit:
+<br />
+<br />
+<pre><code class="language-ts">
+  interface Chief {
+    command(): string;
+  }
+
+  interface Lieutenant {
+    manage(): string;
+  }
+
+  interface UnitMember {
+    doStuff(): string;
+  }
+  </code></pre>
+  Then, declare abstract factory interface:
+<br />
+<br />
+<pre><code class="language-ts">
+  interface ResponderFactory {
+    chief: Chief;
+    lt: Lieutenant;
+    unitMember: UnitMember;
+    makeChief(): Chief;
+    makeLieutenant(): Lieutenant;
+    makeUnitMember(): UnitMember;
+  }
+  </code></pre>
+  Then, declare concrete implementations of the pieces comprising units:
+<br />
+<br />
+<pre><code class="language-ts">
+  class FireChief implements Chief {
+    command(): string {
+      return "Get those hoses right there right away and gimme water!!";
+    }
+  }
+
+  class PoliceChief implements Chief {
+    command(): string {
+      return "I need this solved yesterday!";
+    }
+  }
+
+  class FireLieutenant implements Lieutenant {
+    manage(): string {
+      return "Jeeves, get those two hoses right away! Wooster, turn on the water!";
+    }
+  }
+
+  class PoliceLieutenant implements Lieutenant {
+    manage(): string {
+      return "I put my two best men on this case.";
+    }
+  }
+
+  class FireMan implements UnitMember {
+    doStuff(): string {
+      return "... (grumble-grumble)";
+    }
+  }
+
+  class PoliceUnitMember implements UnitMember {
+    doStuff(): string {
+      return "Pulling out magnifying glass, I'm on the case!";
+    }
+  }
+  </code></pre>
+  Finally, implement concrete factories creating specific variants of families of products:
+<br />
+<br />
+<pre><code class="language-ts">
+  class FiremenUnitFactory implements ResponderFactory {
+    chief: Chief;
+    lt: Lieutenant;
+    unitMember: UnitMember;
+    makeChief(): Chief {
+      this.chief = new FireChief();
+      return this.chief;
+    }
+    makeLieutenant(): Lieutenant {
+      this.lt = new FireLieutenant();
+      return this.lt;
+    }
+    makeUnitMember(): UnitMember {
+      this.unitMember = new FireMan();
+      return this.unitMember;
+    }
+    constructor() {
+      this.makeChief();
+      this.makeLieutenant();
+      this.makeUnitMember();
+    }
+  }
+
+  class PoliceUnitFactory implements ResponderFactory {
+    chief: Chief;
+    lt: Lieutenant;
+    unitMember: UnitMember;
+
+    makeChief(): Chief {
+      this.chief = new PoliceChief();
+      return this.chief;
+    }
+    makeLieutenant(): Lieutenant {
+      this.lt = new PoliceLieutenant();
+      return this.lt;
+    }
+
+    makeUnitMember(): UnitMember {
+      this.unitMember = new PoliceUnitMember();
+      return this.unitMember;
+    }
+    constructor() {
+      this.makeChief();
+      this.makeLieutenant();
+      this.makeUnitMember();
+    }
+  }
+  </code></pre>
+  Test:
+<br />
+<br />
+<pre><code class="language-ts">
+  let policeUnit = new PoliceUnitFactory();
+  console.log(policeUnit.chief.command());
+  console.log(policeUnit.lt.manage());
+  console.log(policeUnit.unitMember.doStuff());
+
+  let fireUnit = new FiremenUnitFactory();
+  console.log(fireUnit.chief.command());
+  console.log(fireUnit.lt.manage());
+  console.log(fireUnit.unitMember.doStuff());
+  </code></pre>

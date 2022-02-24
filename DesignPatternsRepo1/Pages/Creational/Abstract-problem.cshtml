@@ -1,0 +1,32 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Creational.AbstractModel
+@{
+}
+
+
+<h1 class="title is-1 is-spaced">Abstract factory Pattern &mdash; Problem</h1>
+<h2 class="subtitle">Abstract Factory Pattern is a creational design pattern that provides organization while creating groups of related objects without explicitly specifying their concrete classe</h2>
+
+
+<script>hljs.highlightAll();</script>
+
+
+<div class="block">Here is a simple way to put together a police unit and a fire unit. Instantiate classes, and then create a unit based on those classes. 
+</div>
+<pre><code class="language-ts">
+  let chief = new FireChief();
+  let lt = new FireLieutenant();
+  let unitMember = new FireMan();
+  let chief2 = new PoliceChief();
+  let lt2 = new PoliceLieutenant();
+  let unitMember2 = new PoliceUnitMember();
+
+  let PoliceUnit = new Unit(chief2, lt, unitMember);
+  let FireMen = new Unit(chief, lt, unitMember);
+  </code>
+</pre>
+
+<div class="block">While doing that, it's easy to 
+    make mistakes and assign personnel of wrong type to a wrong unit. Abstract factory pattern helps put creation of such units "on rails" and ensure order.</div>
+
+<a class="navbar-item" asp-area="" asp-page="/Creational/Abstract-solution"><i class="fa-solid fa-arrow-right"></i>&nbsp;Solution: Abstract Factory&nbsp;&nbsp;<i class="fa-solid fa-screwdriver-wrench fa-2x"></i></a>
