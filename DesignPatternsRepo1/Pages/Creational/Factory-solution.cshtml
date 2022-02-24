@@ -5,7 +5,7 @@
 
 <script>hljs.highlightAll();</script>
 
-<h1 class="title is-1 is-spaced">Factory Solution</h1>
+<h1 class="title is-1 is-spaced">Factory &mdash; Solution</h1>
 <h2 class="subtitle">A pattern used to differentiate between items that have something in common</h2>
 
 
@@ -93,6 +93,14 @@
     ToyType.car
   );
   toyProductionFacility.makeToys(order);
+
+  //output:
+  This is a toy boat
+  This is a toy car 
+  This is a toy boat
+  This is a toy car 
+  This kid has been naughty
+  This is a toy car
   </code>
 </pre>
 <p>If elves learn to make more toys, there will need to be a class created for that toy that implements the Present interface, add a value to the enum,
