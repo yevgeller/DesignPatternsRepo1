@@ -11,9 +11,11 @@
 
 <p>First, let's extract something in common from all elements so that we can operate on an abstraction and not a concrete entity</p>
 <pre><code class="language-ts">
-    interface Present {
+  interface Present {
     whatIsIt(): string;
+    play(): string;
   }
+
   </code></pre>
   <p>Then let's define concrete classes and ensure they implement the common interface:</p>
   <pre><code class="language-ts">
@@ -21,17 +23,26 @@
     whatIsIt(): string {
       return "This is a toy car";
     }
+    play(): string {
+      return "vroom!!";
+    }
   }
 
   class ToyBoat implements Present {
+    play(): string {
+      return "Off we go!";
+    }
     whatIsIt(): string {
       return "This is a toy boat";
     }
   }
 
   class BagOfCoal implements Present {
+    play(): string {
+      return "You now have a dirty face!";
+    }
     whatIsIt(): string {
-      return "This kid has been naughty";
+      return "Bag of coal";
     }
   }
     </code></pre>
@@ -42,7 +53,7 @@
     boat,
     coal,
   }
-    //Creator class
+  //Creator class
   class ToyFactory {
     makeAToy(typeOfToy: ToyType): Present {
       switch (typeOfToy) {
@@ -74,6 +85,7 @@
       order.forEach((x) => {
         let toy = this.toyFactory.makeAToy(x);
         console.log(toy.whatIsIt());
+        console.log(toy.play());
       });
     }
   }
@@ -95,12 +107,23 @@
   toyProductionFacility.makeToys(order);
 
   //output:
-  This is a toy boat
-  This is a toy car 
-  This is a toy boat
-  This is a toy car 
-  This kid has been naughty
-  This is a toy car
+    This is a toy boat
+    Off we go!
+
+    This is a toy car
+    vroom!!
+
+    This is a toy boat
+    Off we go!
+
+    This is a toy car
+    vroom!!
+
+    Bag of coal
+    You now have a dirty face!
+
+    This is a toy car
+    vroom!!
   </code>
 </pre>
 <p>If elves learn to make more toys, there will need to be a class created for that toy that implements the Present interface, add a value to the enum,
