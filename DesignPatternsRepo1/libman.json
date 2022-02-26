@@ -9,6 +9,10 @@
         "highlight.min.js",
         "styles/default.min.css"
       ]
+    },
+    {
+      "library": "bulma@0.9.3",
+      "destination": "wwwroot/lib/bulma/"
     }
   ]
 }
