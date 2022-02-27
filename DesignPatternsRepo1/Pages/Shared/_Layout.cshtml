@@ -8,12 +8,12 @@
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     @*<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">*@
     <link class="codestyle" rel="stylesheet" href="~/lib/highlight.js/styles/stackoverflow-dark.min.css" />
     <link rel="stylesheet" href="~/DesignPatternsRepo1.styles.css" asp-append-version="true" />
     <script src="~/lib/highlight.js/highlight.min.js"></script>
     <script src="~/lib/highlight.js/languages/typescript.min.js"></script>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -43,7 +43,7 @@
 
                             <a class="navbar-item" asp-area="" asp-page="/Creational/Factory-problem"><i class="fa-solid fa-industry"></i>&nbsp;Factory</a>
                             <a class="navbar-item" asp-area="" asp-page="/Creational/Abstract-problem"><i class="fa-solid fa-cube"></i><i class="fa-solid fa-industry"></i>&nbsp;Abstract Factory</a>
-                            <a class="navbar-item" asp-area="" asp-page="/Creational/Builder"><i class="fa-solid fa-wrench"></i>&nbsp;Builder</a>
+                            <a class="navbar-item" asp-area="" asp-page="/Creational/Builder-problem"><i class="fa-solid fa-wrench"></i>&nbsp;Builder</a>
                             <a class="navbar-item" asp-area="" asp-page="/Index"><i class="fa-solid"></i>&nbsp;Prototype</a>
                             <a class="navbar-item" asp-area="" asp-page="/Index"><i class="fa-solid"></i>&nbsp;Singleton</a>
 
@@ -64,7 +64,8 @@
         </nav>
 
     </header>
-    <div class="container">
+
+    <div class="container is-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -74,8 +75,8 @@
         &copy; 2022
     </footer>
 
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+   <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)

@@ -31,4 +31,5 @@ pre code.hljs {
     position:fixed;
     line-height:35px;
     padding: 1rem;
+    bottom:-75px;
 }
