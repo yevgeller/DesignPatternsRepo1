@@ -29,11 +29,9 @@
 </div>
 <br /><Br /><br />
 <h6 class="title is-6">Recipe:</h6>
-<div class="block">First, extract the interface of methods that are common for all the Products:</div>
+<div class="block">First, extract the interface of methods that help create common parts for all the Products:</div>
 <pre><code class="language-ts">
  namespace SoMuchBetterUsingABuilderPattern {
-  //Builder interface specifies methods for
-  //creating the different parts of the Product objects
   interface PizzaBuilder {
     prepareDough(): void;
     addSauce(): void;
@@ -41,16 +39,18 @@
     addCheese(): void;
     bake(): void;
   }
-
+  </code></pre><div class="block mt-5">This particular class extracts the common methods from the children classes for simplicity. 
+      It's not necessarily a part of the pattern, but makes the code cleaner in this particular example.</div><pre><code class="language-ts">
   class PizzaBase {
     protected pizza: Pizza;
 
     constructor() {
       this.reset();
     }
-
+    //this call ensures that the Product is started from scratch every time
+    //The pattern is not strict about it, and this can be customized
     public reset(): void {
-      this.pizza = new Pizza();
+      this.pizza = new Pizza(); 
     }
 
     public getProduct(): Pizza {
@@ -59,23 +59,14 @@
       return result;
     }
   }
-
-  //This is a specific implementation of a product
-  //that requires certain steps
-
+  </code></pre><div class="block mt-5">This is a specific implementation of a Product that requires certain steps.</div><pre><code class="language-ts">
   class CheesePizzaBuilderThinCrust16Inches
     extends PizzaBase
     implements PizzaBuilder
   {
-    //private pizza: Pizza;
-
     constructor() {
       super();
     }
-
-    //   public reset(): void {
-    //     this.pizza = new Pizza();
-    //   }
 
     prepareDough(): void {
       this.pizza.parts.push("thin crust, 16 inches");
@@ -91,23 +82,8 @@
     bake(): void {
       this.pizza.parts.push("bake now");
     }
-
-    /**
-     * Concrete Builders are supposed to provide their own methods for
-     * retrieving results. That's because various types of builders may create
-     * entirely different products that don't follow the same interface.
-     * Therefore, such methods cannot be declared in the base Builder interface
-     * (at least in a statically typed programming language).
-     *
-     * Usually, after returning the end result to the client, a builder instance
-     * is expected to be ready to start producing another product. That's why
-     * it's a usual practice to call the reset method at the end of the
-     * `getProduct` method body. However, this behavior is not mandatory, and
-     * you can make your builders wait for an explicit reset call from the
-     * client code before disposing of the previous result.
-     */
   }
-
+  </code></pre><div class="block mt-5">Another Builder just to show the possibilities.</div><pre><code class="language-ts">
   class ChicagoDeepDish16InchSupreme extends PizzaBase implements PizzaBuilder {
     constructor() {
       super();
@@ -135,14 +111,9 @@
       this.pizza.parts.push("bake now");
     }
   }
-  /**
-   * It makes sense to use the Builder pattern only when your products are quite
-   * complex and require extensive configuration.
-   *
-   * Unlike in other creational patterns, different concrete builders can produce
-   * unrelated products. In other words, results of various builders may not
-   * always follow the same interface.
-   */
+  </code></pre><div class="block mt-5">In this scenarios, both Builders return objects of the same type: Pizza. But, unlike in other creational patterns,
+      Builder pattern can return objects of different, unrelated types.
+  </div><pre><code class="language-ts">
   class Pizza {
     public parts: string[] = [];
 
@@ -150,21 +121,13 @@
       console.log(`Product parts: ${this.parts.join(", ")}\n`);
     }
   }
-
-  /**
-   * The Director is only responsible for executing the building steps in a
-   * particular sequence. It is helpful when producing products according to a
-   * specific order or configuration. Strictly speaking, the Director class is
-   * optional, since the client can control builders directly.
-   */
+  </code></pre><div class="block mt-5">The Director class is actually optional, as it is only used to control the order of events. 
+      One Director can construct several product variations by altering the order of steps. Also, Builders can be controlled directly
+      for even finer customizations.
+      </div><pre><code class="language-ts">
   class Director {
     private builder: PizzaBuilder;
 
-    /**
-     * The Director works with any builder instance that the client code passes
-     * to it. This way, the client code may alter the final type of the newly
-     * assembled product.
-     */
     public setBuilder(builder: PizzaBuilder): void {
       this.builder = builder;
     }
