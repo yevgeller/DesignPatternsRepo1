@@ -5,21 +5,31 @@
 
 
 <h1 class="title is-1 is-spaced">Builder Pattern &mdash; Problem</h1>
-<h2 class="subtitle">
+<h2 class="subtitle is-spaced">
     Builder pattern simplifies construction of complex objects by extracting
     the steps and centralizing the control of what happens at each step. It
     also allows for easier customization.
 </h2>
 
-
-
-Lots of computational logic in class constructors
-Number of related classes that perform similar functions with different representations
-
-Control over the construction process
-Lets vary internal product representation
-Focuses on sequence of steps (Factory focuses on families of items being created)
-
+<div class="block">
+    <h6 class="title is-6">Problems that Builder pattern can help address:</h6>
+    <ul><li>Lots of computational logic in class constructors</li><li>Number of related classes that perform similar functions with different representations</li></ul>
+</div>
+<div class="block">
+    <h6 class="title is-6">Advantages that Builder brings along:</h6>
+    <ul>
+        <li>Control over the construction process</li>
+        <li>
+            Lets vary internal product representation
+        </li>
+        <li>
+            Focuses on sequence of steps (Factory focuses on families of items being created)
+        </li>
+    </ul>
+</div>
+<br /><Br /><br />
+<h6 class="title is-6">Recipe:</h6>
+<div class="block">First, extract the interface of methods that are common for all the Products:</div>
 <pre><code class="language-ts">
  namespace SoMuchBetterUsingABuilderPattern {
   //Builder interface specifies methods for
@@ -227,7 +237,7 @@ Focuses on sequence of steps (Factory focuses on families of items being created
 
 <div class="block">Resulting output:</div>
 <pre>
-    <code>
+<code>
         Kind of like Papa Murphy's:
         Product parts: thin crust, 16 inches, marinara sauce, mozzarella, 1x
 
