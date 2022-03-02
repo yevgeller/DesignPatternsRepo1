@@ -10,13 +10,14 @@
     the steps and centralizing the control of what happens at each step. It
     also allows for easier customization.
 </h2>
-
+<div class="content">
 <div class="block">
-    <h6 class="title is-6">Problems that Builder pattern can help address:</h6>
+    <h4 class="title is-4 is-spaced">Problems that Builder pattern can help address:</h4>
     <ul><li>Lots of computational logic in class constructors</li><li>Number of related classes that perform similar functions with different representations</li></ul>
 </div>
+<br />
 <div class="block">
-    <h6 class="title is-6">Advantages that Builder brings along:</h6>
+    <h4 class="title is-4 is-spaced">Advantages that Builder brings along:</h4>
     <ul>
         <li>Control over the construction process</li>
         <li>
@@ -27,11 +28,10 @@
         </li>
     </ul>
 </div>
-<br /><Br /><br />
-<h6 class="title is-6">Recipe:</h6>
+<br />
+<h4 class="title is-4">Recipe:</h4>
 <div class="block">First, extract the interface of methods that help create common parts for all the Products:</div>
 <pre><code class="language-ts">
- namespace SoMuchBetterUsingABuilderPattern {
   interface PizzaBuilder {
     prepareDough(): void;
     addSauce(): void;
@@ -59,7 +59,7 @@
       return result;
     }
   }
-  </code></pre><div class="block mt-5">This is a specific implementation of a Product that requires certain steps.</div><pre><code class="language-ts">
+  </code></pre><div class="block mt-5">This is one specific implementation of a Product that requires certain steps.</div><pre><code class="language-ts">
   class CheesePizzaBuilderThinCrust16Inches
     extends PizzaBase
     implements PizzaBuilder
@@ -132,10 +132,6 @@
       this.builder = builder;
     }
 
-    /**
-     * The Director can construct several product variations using the same
-     * building steps.
-     */
     public prepForTakeOutAndBakeAtHome(): void {
       this.builder.prepareDough();
       this.builder.addSauce();
@@ -151,12 +147,7 @@
       this.builder.bake();
     }
   }
-
-  /**
-   * The client code creates a builder object, passes it to the director and then
-   * initiates the construction process. The end result is retrieved from the
-   * builder object.
-   */
+  </code></pre><div class="block mt-5">Testing code</div><pre><code class="language-ts">
   function clientCode(director: Director) {
     const builder = new CheesePizzaBuilderThinCrust16Inches();
     director.setBuilder(builder);
@@ -193,9 +184,6 @@
 
   const director = new Director();
   clientCode(director);
-}
-
-
 </code></pre>
 
 <div class="block">Resulting output:</div>
@@ -217,6 +205,6 @@
         Product parts: deep dish crust, 16 inches, marinara sauce, black olives, bell peppers, green olives, red onions, italian sausage, kitchen sink, mozzarella, 1x, bake now
     </code>
 </pre>
-
+</div>
 
 <script>hljs.highlightAll();</script>
