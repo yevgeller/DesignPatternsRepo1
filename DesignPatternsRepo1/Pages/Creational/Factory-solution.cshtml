@@ -7,9 +7,9 @@
 
 <h1 class="title is-1 is-spaced">Factory &mdash; Solution</h1>
 <h2 class="subtitle">A pattern used to differentiate between items that have something in common</h2>
+<div class="content">
 
-
-<p>First, let's extract something in common from all elements so that we can operate on an abstraction and not a concrete entity</p>
+    <p>First, let's extract something in common from all elements so that we can operate on an abstraction and not a concrete entity</p>
 <pre><code class="language-ts">
   interface Present {
     whatIsIt(): string;
@@ -17,7 +17,7 @@
   }
 
   </code></pre>
-<p>Then let's define concrete classes and ensure they implement the common interface:</p>
+    <p>Then let's define concrete classes and ensure they implement the common interface:</p>
 <pre><code class="language-ts">
   class ToyCar implements Present {
     whatIsIt(): string {
@@ -46,7 +46,7 @@
     }
   }
     </code></pre>
-<p>Next, the Creator class, this is where the magic of extensibility happens:</p>
+    <p>Next, the Creator class, this is where the magic of extensibility happens:</p>
 <pre><code class="language-ts">
   enum ToyType {
     car,
@@ -71,7 +71,7 @@
   }
 
   </code></pre>
-<p>Finally, the wire-up:</p>
+    <p>Finally, the wire-up:</p>
 <pre><code class="language-ts">
 
   class ElvesFactory {
@@ -90,7 +90,7 @@
     }
   }
   </code></pre>
-<p>Test:</p>
+    <p>Test:</p>
 <pre><code class="language-ts">
 
   //check:
@@ -126,13 +126,21 @@
     vroom!!
   </code>
 </pre>
-<div class="block">
-    If elves learn to make more toys, there will need to be a class created for that toy that implements the Present interface, add a value to the enum,
-    and then a condition to create that type of toy into the creator class.
+    <div class="block">
+        If elves learn to make more toys, there will need to be a class created for that toy that implements the Present interface, add a value to the enum,
+        and then a condition to create that type of toy into the creator class.
+    </div>
 </div>
-<div class="block">
-    <a class="navbar-item" asp-area="" asp-page="/Index">
-        <i class="fa-solid fa-house-user fa-2x"></i>
-        &nbsp;Back to Index&nbsp;&nbsp;
-    </a>
+<div class="columns">
+    <div class="column is-2">
+        <a class="navbar-item" asp-area="" asp-page="/Index">
+            <i class="fa-solid fa-house-user fa-2x"></i>
+            &nbsp;Back
+        </a>
+    </div><div class="column is-3">
+        <a class="navbar-item" asp-area="" asp-page="/Creational/Abstract-problem">
+            <i class="fa-solid fa-cube fa-2x"></i>&nbsp;<i class="fa-solid fa-industry fa-2x"></i>
+            &nbsp;Next: Abstract Factory
+        </a>
+    </div>
 </div>

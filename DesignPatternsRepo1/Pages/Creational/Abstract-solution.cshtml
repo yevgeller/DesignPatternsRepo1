@@ -8,42 +8,43 @@
 
 
 <script>hljs.highlightAll();</script>
-<p>
-    Use Abstract Factory when code needs to work with
-    various families of related products without tight
-    coupling to the actual concrete classes, because they
-    are either unknown at the time or may be expanded in the future.
-</p>
-<br />
-<p>
-    In this example, we're working with factories of first responders.
-    So far there are Police and Firemen. We can also add Medical teams,
-    or other teams that follow the same structure.
-</p>
-<br />
-<p>
-    <h5 class="title is-5">Things needed for the Abstract Factory:</h5>
-    <ol>
-        <li>
-            Explicitly declare interfaces for each distinct piece
-            of the item family (so Chief, Lieutenant, UnitMember)
-        </li>
-        <li>Make all variants of pieces that follow those interfaces</li>
-        <li>
-            Declare an abstract Factory (ResponderFactory)
-            with methods to create all items in the family
-            (Chief, Lieutenant, UnitMember)
-        </li>
-        <li>
-            Declare a separate factory class for each type of ResponderFactory
-            And no mixing and matching!
-        </li>
-    </ol>
-</p><br /><br />
-<h3 class="title is-3">Code Example:</h3>
- First, declare interfaces for the "pieces" that comprise a unit:
-<br />
-<br />
+<div class="content">
+    <p>
+        Use Abstract Factory when code needs to work with
+        various families of related products without tight
+        coupling to the actual concrete classes, because they
+        are either unknown at the time or may be expanded in the future.
+    </p>
+    <br />
+    <p>
+        In this example, we're working with factories of first responders.
+        So far there are Police and Firemen. We can also add Medical teams,
+        or other teams that follow the same structure.
+    </p>
+    <br />
+    <p>
+        <h5 class="title is-5">Things needed for the Abstract Factory:</h5>
+        <ol>
+            <li>
+                Explicitly declare interfaces for each distinct piece
+                of the item family (so Chief, Lieutenant, UnitMember)
+            </li>
+            <li>Make all variants of pieces that follow those interfaces</li>
+            <li>
+                Declare an abstract Factory (ResponderFactory)
+                with methods to create all items in the family
+                (Chief, Lieutenant, UnitMember)
+            </li>
+            <li>
+                Declare a separate factory class for each type of ResponderFactory
+                And no mixing and matching!
+            </li>
+        </ol>
+    </p><br /><br />
+    <h3 class="title is-3">Code Example:</h3>
+    First, declare interfaces for the "pieces" that comprise a unit:
+    <br />
+    <br />
 <pre><code class="language-ts">
   interface Chief {
     command(): string;
@@ -57,9 +58,9 @@
     doStuff(): string;
   }
   </code></pre>
-  Then, declare abstract factory interface:
-<br />
-<br />
+    Then, declare abstract factory interface:
+    <br />
+    <br />
 <pre><code class="language-ts">
   interface ResponderFactory {
     chief: Chief;
@@ -70,9 +71,9 @@
     makeUnitMember(): UnitMember;
   }
   </code></pre>
-  Then, declare concrete implementations of the pieces comprising units:
-<br />
-<br />
+    Then, declare concrete implementations of the pieces comprising units:
+    <br />
+    <br />
 <pre><code class="language-ts">
   class FireChief implements Chief {
     command(): string {
@@ -110,9 +111,9 @@
     }
   }
   </code></pre>
-  Finally, implement concrete factories creating specific variants of families of products:
-<br />
-<br />
+    Finally, implement concrete factories creating specific variants of families of products:
+    <br />
+    <br />
 <pre><code class="language-ts">
   class FiremenUnitFactory implements ResponderFactory {
     chief: Chief;
@@ -162,9 +163,9 @@
     }
   }
   </code></pre>
-  Test:
-<br />
-<br />
+    Test:
+    <br />
+    <br />
 <pre><code class="language-ts">
   let policeUnit = new PoliceUnitFactory();
   console.log(policeUnit.chief.command());
@@ -176,3 +177,18 @@
   console.log(fireUnit.lt.manage());
   console.log(fireUnit.unitMember.doStuff());
   </code></pre>
+</div>
+<div class="columns">
+    <div class="column is-2">
+        <a class="navbar-item" asp-area="" asp-page="/Index">
+            <i class="fa-solid fa-house-user fa-2x"></i>
+            &nbsp;Back
+        </a>
+    </div><div class="column is-2">
+        <a class="navbar-item" asp-area="" asp-page="/Creational/Builder-problem">
+            <i class="fa-solid fa-helmet-safety fa-2x"></i>
+            &nbsp;Next: Builder
+        </a>
+    </div>
+</div>
+
