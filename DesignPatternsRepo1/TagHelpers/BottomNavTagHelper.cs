@@ -8,6 +8,7 @@ namespace DesignPatternsRepo1.TagHelpers
 
         public string NextIcon1 { get; set; } = "";
         public string NextIcon2 { get; set; } = "";
+        public string NextIcon3 { get; set; } = "";
         public string NextLink { get; set; } = "/Index";
         public string NextName { get; set; } = "";
         public string NextPointerWord { get; set; } = "Next";
@@ -24,6 +25,11 @@ namespace DesignPatternsRepo1.TagHelpers
                 "" :
                 "<i class='" + this.NextIcon2 + " fa-2x mr-2'></i>";
 
+
+            var nextIcon3 = this.NextIcon3 == "" ?
+                "" :
+                "<i class='" + this.NextIcon3 + " fa-2x ml-2'></i>";
+
             output.Content.AppendHtml(@$"
                 <div class='column is-2'> 
                     <a class='navbar-item' href='/Index'> 
@@ -34,6 +40,7 @@ namespace DesignPatternsRepo1.TagHelpers
                     <a class='navbar-item' href='/{NextLink.Replace('|', '/')}'> 
                         {nextIcon1}{nextIcon2}
                         {NextPointerWord}: {NextName}
+                        {nextIcon3}
                     </a>
                 </div>");
         }
