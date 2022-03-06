@@ -11,26 +11,26 @@
     also allows for easier customization.
 </h2>
 <div class="content">
-<div class="block">
-    <h4 class="title is-4 is-spaced">Problems that Builder pattern can help address:</h4>
-    <ul><li>Lots of computational logic in class constructors</li><li>Number of related classes that perform similar functions with different representations</li></ul>
-</div>
-<br />
-<div class="block">
-    <h4 class="title is-4 is-spaced">Advantages that Builder brings along:</h4>
-    <ul>
-        <li>Control over the construction process</li>
-        <li>
-            Lets vary internal product representation
-        </li>
-        <li>
-            Focuses on sequence of steps (Factory focuses on families of items being created)
-        </li>
-    </ul>
-</div>
-<br />
-<h4 class="title is-4">Recipe:</h4>
-<div class="block">First, extract the interface of methods that help create common parts for all the Products:</div>
+    <div class="block">
+        <h4 class="title is-4 is-spaced">Problems that Builder pattern can help address:</h4>
+        <ul><li>Lots of computational logic in class constructors</li><li>Number of related classes that perform similar functions with different representations</li></ul>
+    </div>
+    <br />
+    <div class="block">
+        <h4 class="title is-4 is-spaced">Advantages that Builder brings along:</h4>
+        <ul>
+            <li>Control over the construction process</li>
+            <li>
+                Lets vary internal product representation
+            </li>
+            <li>
+                Focuses on sequence of steps (Factory focuses on families of items being created)
+            </li>
+        </ul>
+    </div>
+    <br />
+    <h4 class="title is-4">Recipe:</h4>
+    <div class="block">First, extract the interface of methods that help create common parts for all the Products:</div>
 <pre><code class="language-ts">
   interface PizzaBuilder {
     prepareDough(): void;
@@ -39,8 +39,10 @@
     addCheese(): void;
     bake(): void;
   }
-  </code></pre><div class="block mt-5">This particular class extracts the common methods from the children classes for simplicity. 
-      It's not necessarily a part of the pattern, but makes the code cleaner in this particular example.</div><pre><code class="language-ts">
+  </code></pre><div class="block mt-5">
+        This particular class extracts the common methods from the children classes for simplicity.
+        It's not necessarily a part of the pattern, but makes the code cleaner in this particular example.
+    </div><pre><code class="language-ts">
   class PizzaBase {
     protected pizza: Pizza;
 
@@ -111,9 +113,10 @@
       this.pizza.parts.push("bake now");
     }
   }
-  </code></pre><div class="block mt-5">In this scenarios, both Builders return objects of the same type: Pizza. But, unlike in other creational patterns,
-      Builder pattern can return objects of different, unrelated types.
-  </div><pre><code class="language-ts">
+  </code></pre><div class="block mt-5">
+        In this scenarios, both Builders return objects of the same type: Pizza. But, unlike in other creational patterns,
+        Builder pattern can return objects of different, unrelated types.
+    </div><pre><code class="language-ts">
   class Pizza {
     public parts: string[] = [];
 
@@ -121,10 +124,11 @@
       console.log(`Product parts: ${this.parts.join(", ")}\n`);
     }
   }
-  </code></pre><div class="block mt-5">The Director class is actually optional, as it is only used to control the order of events. 
-      One Director can construct several product variations by altering the order of steps. Also, Builders can be controlled directly
-      for even finer customizations.
-      </div><pre><code class="language-ts">
+  </code></pre><div class="block mt-5">
+        The Director class is actually optional, as it is only used to control the order of events.
+        One Director can construct several product variations by altering the order of steps. Also, Builders can be controlled directly
+        for even finer customizations.
+    </div><pre><code class="language-ts">
   class Director {
     private builder: PizzaBuilder;
 
@@ -186,7 +190,7 @@
   clientCode(director);
 </code></pre>
 
-<div class="block">Resulting output:</div>
+    <div class="block">Resulting output:</div>
 <pre>
 <code>
         Kind of like Papa Murphy's:
@@ -206,10 +210,10 @@
     </code>
 </pre>
 </div>
-<div class="block">
-    <a class="navbar-item" asp-page="/Index">
-        <i class="fa-solid fa-house-user fa-2x"></i>
-        &nbsp;Back
-    </a>
-</div>
+
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-clone"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Creational|Prototype"
+            next-name="Prototype"></bottom-nav>
 <script>hljs.highlightAll();</script>
