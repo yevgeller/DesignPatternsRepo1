@@ -3,21 +3,25 @@
 @{
 }
 
-<h1 class="title is-1 is-spaced">Prototype</h1>
+<h1 class="title is-1 is-spaced"><i class="fa-regular fa-clone mr-2"></i>Prototype</h1>
 <h2 class="subtitle">This pattern enables copying of existing objects without a dependency on a concrete class that needs to be copied</h2>
 <div class="content">
 
-    <div class="block">I don't have a real-world example for this particular pattern, I have yet to come up with one. 
-        It's pretty universal and can be applied to many things, yet I don't know what example to use to explain it.</div>
+    <div class="block">
+        I don't have a real-world example for this particular pattern, I have yet to come up with one.
+        It's pretty universal and can be applied to many things, yet I don't know what example to use to explain it.
+    </div>
 
-        <div class="block">The premise though is that in case a copy of an object is needed, sometimes it's not as easy
-            as instantiating an object of the same class and assign properties, the object may have some private fields, or the object is an interface.
-            Also, such attempts to instantiate an object require us to know the concrete class, and that is not always flexible.
-        </div>
+    <div class="block">
+        The premise though is that in case a copy of an object is needed, sometimes it's not as easy
+        as instantiating an object of the same class and assign properties, the object may have some private fields, or the object is an interface.
+        Also, such attempts to instantiate an object require us to know the concrete class, and that is not always flexible.
+    </div>
 
-        <div>So what's the solution? The solution is offloading the process of copying objects to objects themselves
-            by introducing a "clone" method on each of them, and programming it so that the magic is happening inside that method.
-        </div>
+    <div>
+        So what's the solution? The solution is offloading the process of copying objects to objects themselves
+        by introducing a "clone" method on each of them, and programming it so that the magic is happening inside that method.
+    </div>
 <pre>
     <code class="language-ts">
   interface ICloneable {
@@ -52,17 +56,10 @@
         and then a condition to create that type of toy into the creator class.
     </div>
 </div>
-<div class="columns">
-    <div class="column is-2">
-        <a class="navbar-item" asp-area="" asp-page="/Index">
-            <i class="fa-solid fa-house-user fa-2x"></i>
-            &nbsp;Back
-        </a>
-    </div><div class="column is-3">
-        <a class="navbar-item" asp-area="" asp-page="/Creational/Abstract-problem">
-            <i class="fa-solid fa-cube fa-2x"></i>&nbsp;<i class="fa-solid fa-industry fa-2x"></i>
-            &nbsp;Next: Abstract Factory
-        </a>
-    </div>
-</div>
+
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-atom"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Creational|Singleton"
+            next-name="Singleton"></bottom-nav>
 <script>hljs.highlightAll();</script>
