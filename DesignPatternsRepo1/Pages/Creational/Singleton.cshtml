@@ -2,3 +2,104 @@
 @model DesignPatternsRepo1.Pages.Creational.SingletonModel
 @{
 }
+
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-atom mr-1"></i>Singleton Pattern</h1>
+<div class="content">
+
+    <div class="block">
+        Singleton pattern is used when code requires only one instance of something at all times.
+        In that case, if an instance of an object exists, that instance needs to be returned and worked with.
+        If no object of that type has been instanciated yet, then it needs to be instanciated and then returned.
+    </div>
+    <div class="block">
+        Implementation recipe:
+        <ol>
+            <li>Add a private static field to hold the instance of the object</li>
+            <li>Make the constructor of the class private</li>
+            <li>
+                Create a public static method to (create if does not exist and then) return the instance of the object.
+            </li>
+            <li>Replace all calls in existing code use the method to get the instance of an object</li>
+        </ol>
+
+    </div>
+    <div class="block">
+        The following example illustrates a ticket checker. Imagine you came to see a show, 
+        and you give your ticket to any attendants in a booth to verify that your ticket is legitimate
+        &mdash; haven't been used yet. And for some reasons there is no database available for use.
+        Whoever shows up first and shows a ticket with a certain number, can come in. Anyone else who 
+        tries to come in using a ticket that's already been verified cannot come in.
+    </div>
+    <div class="block">
+        When a ticket is validated, it's being stored in an internal store (an array of strings), 
+        and if there is more than one machine checking the tickets, they need to operate on the same
+        subset of data. A singleton is handy in this matter because it maintains one store, and 
+        "opening" any other line would not help the matter because they all work with the same 
+        data store.
+    </div>
+<pre><code class="hljs language-ts">class TicketChecker {
+  private static instance: TicketChecker; //field to hold the instance of the class
+  private ticketsInUse: string[] = [];
+  private constructor() {}; //private constructor
+
+  public static getInstance(): TicketChecker { //method to return an instance of the object
+    if (!TicketChecker.instance) {
+      TicketChecker.instance = new TicketChecker();
+    }
+
+    return TicketChecker.instance;
+  }
+
+  public validateTicket(ticketNumber: string): string {
+    if (this.ticketsInUse.indexOf(ticketNumber) >= 0)
+      return `Ticket ${ticketNumber} has already been used.`;
+
+    this.ticketsInUse.push(ticketNumber);
+    return `Ticket ${ticketNumber} has not been used yet. Welcome to the show!`;
+  }
+
+  public ticketIsAlreadyInUse(ticketNumber: string): string {
+    if (this.ticketsInUse.indexOf(ticketNumber) >= 0)
+      return `Ticket ${ticketNumber} has already been used.`;
+    return `Ticket ${ticketNumber} has not been used yet.`;
+  }
+}
+  </code>
+</pre>
+<pre><code class="hljs language-ts">let tc1 = TicketChecker.getInstance();
+console.log("Attempting to use ticket 'abc': ", tc1.validateTicket("abc"));
+console.log("Attempting to use ticket 'def': ", tc1.validateTicket("def"));
+console.log(
+  "Has ticket 'abc' been used already? ",
+  tc1.ticketIsAlreadyInUse("abc")
+);
+console.log(
+  "Has ticket 'def' been used already? ",
+  tc1.ticketIsAlreadyInUse("def")
+);
+let tc2 = TicketChecker.getInstance();
+console.log("--- Using a different Ticket Checker ---");
+console.log(
+  "Has ticket 'abc' been used already? ",
+  tc1.ticketIsAlreadyInUse("abc")
+);
+console.log(
+  "Has ticket 'def' been used already? ",
+  tc1.ticketIsAlreadyInUse("def")
+);
+console.log(
+  "Are both ticket checkers point to the same instance? Is tc1 === tc2?",
+  tc1 === tc2
+);
+  </code>
+</pre>
+    <p>The code above demonstrates how a simple toy factory can make the only toy they know about -- a car. But what if they learned to create other toys?</p>
+</div>
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-circle-question"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Index"
+            next-name="TBA"></bottom-nav>
+
+<script>hljs.highlightAll();</script>
