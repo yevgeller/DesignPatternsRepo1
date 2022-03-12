@@ -8,10 +8,14 @@
 <div class="content">
 
     <div class="block">
-        Singleton pattern is used when code requires only one instance of something at all times.
-        In that case, if an instance of an object exists, that instance needs to be returned and worked with.
-        If no object of that type has been instanciated yet, then it needs to be instanciated and then returned.
+        Adapter pattern is used to combine two pieces of functionality that don't work together right out of the box,
+        like trying to use data out of an old/new service that comes in an unusual format. Alternatively, an adapter
+        pattern can be used to create one way to interact with 2+ resources.
     </div>
+        <div class="block">
+        In this example, class JSONProcessor only uses data in JSON format. There is a requirement to
+        utilize data out of a service that returns data in CSV format (CSVProvider below). In order to 
+    use data from CSVProvider in JSONProcessor, an adapter is required.</div>
     <div class="block">
         Implementation recipe:
         <ol>
