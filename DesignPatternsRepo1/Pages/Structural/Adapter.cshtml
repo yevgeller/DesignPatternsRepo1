@@ -12,10 +12,15 @@
         like trying to use data out of an old/new service that comes in an unusual format. Alternatively, an adapter
         pattern can be used to create one way to interact with 2+ resources.
     </div>
-        <div class="block">
+    <div class="block">
         In this example, class JSONProcessor only uses data in JSON format. There is a requirement to
-        utilize data out of a service that returns data in CSV format (CSVProvider below). In order to 
-    use data from CSVProvider in JSONProcessor, an adapter is required.</div>
+        utilize data out of a service that returns data in CSV format (CSVProvider below). In order to
+        use data from CSVProvider in JSONProcessor, an adapter is required.
+    </div>
+    <div class="block">
+        "Adapter" is the class that takes CSV from CSVProvider, converts it to JSON and feeds it
+        to an instance of the JSONProcessor class.
+    </div>
     <div class="block">
         Implementation recipe:
         <ol>
@@ -29,17 +34,17 @@
 
     </div>
     <div class="block">
-        The following example illustrates a ticket checker. Imagine you came to see a show, 
+        The following example illustrates a ticket checker. Imagine you came to see a show,
         and you give your ticket to any attendants in a booth to verify that your ticket is legitimate
         &mdash; haven't been used yet. And for some reasons there is no database available for use.
-        Whoever shows up first and shows a ticket with a certain number, can come in. Anyone else who 
+        Whoever shows up first and shows a ticket with a certain number, can come in. Anyone else who
         tries to come in using a ticket that's already been verified cannot come in.
     </div>
     <div class="block">
-        When a ticket is validated, it's being stored in an internal store (an array of strings), 
+        When a ticket is validated, it's being stored in an internal store (an array of strings),
         and if there is more than one machine checking the tickets, they need to operate on the same
-        subset of data. A singleton is handy in this matter because it maintains one store, and 
-        "opening" any other line would not help the matter because they all work with the same 
+        subset of data. A singleton is handy in this matter because it maintains one store, and
+        "opening" any other line would not help the matter because they all work with the same
         data store.
     </div>
 <pre><code class="hljs language-ts">class TicketChecker {
@@ -79,10 +84,10 @@
   </code>
 </pre>
 
-<bottom-nav next-pointer-word="Next"
-            next-icon1="fa-solid fa-circle-question"
-            next-icon3="fa-solid fa-arrow-right"
-            next-link="Index"
-            next-name="TBA"></bottom-nav>
+    <bottom-nav next-pointer-word="Next"
+                next-icon1="fa-solid fa-circle-question"
+                next-icon3="fa-solid fa-arrow-right"
+                next-link="Index"
+                next-name="TBA"></bottom-nav>
 
-<script>hljs.highlightAll();</script>
+    <script>hljs.highlightAll();</script>
