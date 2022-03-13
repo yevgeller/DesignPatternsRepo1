@@ -14,19 +14,20 @@
         <div>
             <span class="is-uppercase has-text-weight-semibold">Creational</span>
             <div class="is-flex is-flex-direction-column is-justify-content-space-evenly">
-                <div><new-badge></new-badge><a asp-area="" asp-page="/Creational/Factory-problem"><i class="fa-solid fa-industry mr-2"></i>Factory</a></div>
-                <div><new-badge></new-badge><a asp-area="" asp-page="/Creational/Abstract-problem"><i class="fa-solid fa-cube"></i><i class="fa-solid fa-industry mr-2"></i>Abstract Factory</a></div>
-                <div><new-badge></new-badge><a asp-area="" asp-page="/Creational/Builder-problem"><i class="fa-solid fa-helmet-safety mr-2"></i>Builder</a></div>
-                <div><new-badge></new-badge><a asp-area="" asp-page="/Creational/Prototype"><i class="fa-regular fa-clone mr-2"></i>&nbsp;Prototype</a></div>
-                <div><new-badge></new-badge><a asp-area="" asp-page="/Creational/Singleton"><i class="fa-solid fa-atom mr-2"></i>&nbsp;Singleton</a></div>
+                <div><a asp-area="" asp-page="/Creational/Factory-problem"><i class="fa-solid fa-industry mr-2"></i>Factory</a></div>
+                <div><a asp-area="" asp-page="/Creational/Abstract-problem"><i class="fa-solid fa-cube"></i><i class="fa-solid fa-industry mr-2"></i>Abstract Factory</a></div>
+                <div><a asp-area="" asp-page="/Creational/Builder-problem"><i class="fa-solid fa-helmet-safety mr-2"></i>Builder</a><new-badge></new-badge></div>
+                <div><a asp-area="" asp-page="/Creational/Prototype"><i class="fa-regular fa-clone mr-2"></i>&nbsp;Prototype</a><new-badge></new-badge></div>
+                <div><a asp-area="" asp-page="/Creational/Singleton"><i class="fa-solid fa-atom mr-2"></i>&nbsp;Singleton</a><new-badge></new-badge></div>
 
             </div>
         </div>
         <div>
             <span class="is-uppercase has-text-weight-semibold">Structural</span><div class="is-flex is-flex-direction-column is-justify-content-space-evenly">
-               <div><new-badge></new-badge><a asp-area="" asp-page="/Structural/Adapter"><i class="fa-solid fa-plug mr-2"></i>Adapter</a></div>
-               <div>Adapter</div> 
-               <div>Bridge</div><div>Composite</div><div>...</div>
+                <div><a asp-area="" asp-page="/Structural/Adapter"><i class="fa-solid fa-plug mr-2"></i>Adapter</a><new-badge></new-badge></div>
+                @*<div><a asp-area="" asp-page="/Structural/Bridge"><i class="fa-solid fa-left-right mr-2"></i>Bridge</a><new-badge></new-badge></div>*@
+                <div>Bridge</div>
+                <div>Composite</div><div>Decorator</div><div>Facade</div><div>Flyweight</div><div>Proxy</div>
             </div>
         </div>
         <div>
@@ -38,13 +39,13 @@
     </div>
 </div>
 @*
-<bottom-nav next-icon1="fa-solid fa-industry"
-            next-icon2="fa-solid fa-anchor"
-            next-link="Creational|Factory-solution"
-            next-name="Some other Name Pattern"></bottom-nav>
+    <bottom-nav next-icon1="fa-solid fa-industry"
+    next-icon2="fa-solid fa-anchor"
+    next-link="Creational|Factory-solution"
+    next-name="Some other Name Pattern"></bottom-nav>
 
-<br />
-<br />
-<bottom-nav next-icon1="fa-solid fa-archway"
-            next-link="Creational|Abstract-problem"
-            next-name="Something here too"></bottom-nav>*@
+    <br />
+    <br />
+    <bottom-nav next-icon1="fa-solid fa-archway"
+    next-link="Creational|Abstract-problem"
+    next-name="Something here too"></bottom-nav>*@
