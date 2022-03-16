@@ -17,6 +17,9 @@
         utilize data out of a service that returns data in CSV format (CSVProvider below). In order to
         use data from CSVProvider in JSONProcessor, an adapter is required.
     </div>
+    <div class="block">
+        The following class, CSVProvider returns some data in CSV format. 
+    </div>
     <pre><code class="hljs language-ts">class CSVProvider {
   public getColumnHeaders(): string {
     return "FirstName,LastName,Age";
@@ -31,9 +34,11 @@
     const res = interimResult.join(CRLF);
     return res;
   }
-}
-
-class JSONProcessor {
+}</code></pre>
+<div class="block">The following class, JSONProcessor, needs to work with data that is provided by the CSVProvider,
+    but JSONProcessor can only work with JSON data. The formats are not quite compatible.
+</div>
+<pre><code class="hljs language-ts">class JSONProcessor {
   public doSomethingWithJSON(json: string): void {
     console.log(JSON.stringify(json, null, 2));
   }
@@ -42,10 +47,10 @@ class JSONProcessor {
     console.table(json);
   }
 }</code></pre>
-
     <div class="block">
-        "Adapter" is the class that takes CSV from CSVProvider, converts it to JSON and feeds it
-        to an instance of the JSONProcessor class.
+        "Adapter" is the middleware that takes CSV from CSVProvider, converts it to JSON and feeds it
+        to an instance of the JSONProcessor class. No need to alter neither CSVProvider nor JSONProcessor, Adapter
+        acts as a shim that makes the two data sources work.
     </div>
 <pre><code class="hljs language-ts">class Adapter {
   private csvProvider: CSVProvider;
@@ -56,16 +61,13 @@ class JSONProcessor {
     const incoming = this.csvProvider.getData().split("\n");
     const columnHeaders = this.csvProvider.getColumnHeaders().split(",");
     let arr = [] as any;
-    for (let i = 1; i < incoming.length; i++) {
-      console.table(incoming[i]);
+    for (let i = 0; i < incoming.length; i++) {
       let vals = incoming[i].split(",");
       const person = new Object();
       for (let j = 0; j < columnHeaders.length; j++) {
         person[columnHeaders[j]] = vals[j];
       }
-      console.log("person", person);
       arr.push(person);
-      //console.table(vals);
     }
     return arr;
   }
@@ -74,8 +76,37 @@ class JSONProcessor {
     <div class="block">
         And this is one of the ways that it could be used:
     </div>
-<pre><code class="hljs language-ts">
-    //test code here
+<pre><code class="hljs language-ts">const adapter1 = new Adapter();
+//const jp = new JSONProcessor();
+//jp.doSomethingWithJSON(adapter1.ConvertCsvToJson());
+//jp.showJSON(adapter1.ConvertCsvToJson());
+
+//result
+[
+  {
+    "FirstName": "John",
+    "LastName": "Smith",
+    "Age": "25"
+  },
+  {
+    "FirstName": "Mary",
+    "LastName": "Smith",
+    "Age": "25"
+  },
+  {
+    "FirstName": "Jacob",
+    "LastName": "Smith",
+    "Age": "3"
+  }
+]
+┌─────────┬───────────┬──────────┬──────┐
+│ (index) │ FirstName │ LastName │ Age  │
+├─────────┼───────────┼──────────┼──────┤
+│    0    │  'John'   │ 'Smith'  │ '25' │
+│    1    │  'Mary'   │ 'Smith'  │ '25' │
+│    2    │  'Jacob'  │ 'Smith'  │ '3'  │
+└─────────┴───────────┴──────────┴──────┘
+
     </code></pre>
 
     <bottom-nav next-pointer-word="Next"
