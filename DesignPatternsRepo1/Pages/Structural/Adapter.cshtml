@@ -77,9 +77,9 @@
         And this is one of the ways that it could be used:
     </div>
 <pre><code class="hljs language-ts">const adapter1 = new Adapter();
-//const jp = new JSONProcessor();
-//jp.doSomethingWithJSON(adapter1.ConvertCsvToJson());
-//jp.showJSON(adapter1.ConvertCsvToJson());
+const jp = new JSONProcessor();
+jp.doSomethingWithJSON(adapter1.ConvertCsvToJson());
+jp.showJSON(adapter1.ConvertCsvToJson());
 
 //result
 [
