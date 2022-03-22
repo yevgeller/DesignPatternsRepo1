@@ -82,12 +82,11 @@
 
   </code>
   </pre>
-      <div class="block">
-                  And then you got a word that another interior color may be available. Also, it has to be customizable for different car models.
+    <div class="block">
+        And then you got a word that another interior color may be available. Also, it has to be customizable for different car models.
         Creating a class for each combination of resources will quickly become unwieldy. There has to be a better way!
-        
     </div>
-<h3 class="subtitle is-3">Solution -- applying Bridge pattern</h3>
+    <h3 class="subtitle is-3">Solution -- applying Bridge pattern</h3>
 
     <div class="block">
 
@@ -109,6 +108,26 @@
     </div>
 </div>
 
+<div class="block">
+    Ultimately, we went from a flat, tightly coupled hierarchy like this:
+    <br />
+
+</div>
+<div class="columns is-centered">
+    <div class="image">
+        <img src="~/images/Bridge-bad.drawio.png" />
+    </div>
+</div>
+<div class="block">
+    to a more decoupled hierarchy like this:
+
+</div>
+
+<div class="columns is-centered">
+    <div class="image">
+        <img src="~/images/Bridge-good.drawio.png" />
+    </div>
+</div>
 <bottom-nav next-pointer-word="Next"
             next-icon1="fa-solid fa-circle-question"
             next-icon3="fa-solid fa-arrow-right"

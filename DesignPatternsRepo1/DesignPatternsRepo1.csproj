@@ -13,4 +13,20 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="wwwroot\images\Bridge-bad.drawio.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="wwwroot\images\Bridge-good.drawio.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\images\Bridge-bad.drawio.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\images\Bridge-good.drawio.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

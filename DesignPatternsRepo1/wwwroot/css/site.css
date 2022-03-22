@@ -33,3 +33,7 @@ pre code.hljs {
     padding: 1rem;
     bottom:-75px;
 }
+
+.image {
+    width: 75%;
+}
