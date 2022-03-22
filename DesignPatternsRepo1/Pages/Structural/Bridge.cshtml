@@ -6,27 +6,108 @@
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-left-right mr-2"></i>Bridge</h1>
 <h2 class="subtitle">Decoupling Abstraction from Implementation</h2>
 <div class="content">
-    Abstraction is ...
+    <div class="block">
+        Imagine you are working on an interface for buyers to spec out new vehicles and it is time to work on the Interior configuration.
+        For the sake of simplicity, customers can only pick one of two interior colors (black or beige) and one of two materials (cloth or leather).
 
-    Implementation is ...
-    
-
-    <div>
-    Text here </div>
+        Then the code for each of the interiors would look something like that:
+    </div>
 <pre>
-    <code class="language-ts">
+<code class="language-ts">class CarInterior {
+    model: string;
+    interiorColor: string;
+    interiorMaterial: string;
+    constructor(model: string) {
+      this.model = model;
+    }
+    getSummary = () =>
+      console.log(
+        `Model: ${this.model}, ${this.interiorColor} ${this.interiorMaterial} interior.`
+      );
+  }
+
+  class BlackLeatherInterior extends CarInterior {
+    constructor(model: string) {
+      super(model);
+      this.model = model;
+      this.interiorColor = "black";
+      this.interiorMaterial = "leather";
+    }
+  }
+  class BeigeLeatherInterior extends CarInterior {
+    constructor(model: string) {
+      super(model);
+      this.model = model;
+      this.interiorColor = "beige";
+      this.interiorMaterial = "leather";
+    }
+  }
+  class BlackClothInterior extends CarInterior {
+    constructor(model: string) {
+      super(model);
+      this.model = model;
+      this.interiorColor = "black";
+      this.interiorMaterial = "cloth";
+    }
+  }
+  class BeigeClothInterior extends CarInterior {
+    constructor(model: string) {
+      super(model);
+      this.model = model;
+      this.interiorColor = "beige";
+      this.interiorMaterial = "cloth";
+    }
+  }
+
   </code>
   </pre>
     <div class="block">
-        Text here
+        This testing code returns this:
+    </div>
+<pre>
+<code class="language-ts">
+  let bl = new BlackLeatherInterior("A");
+  let rc = new BeigeClothInterior("B");
+  let bc = new BlackClothInterior("C");
+
+  bl.getSummary();
+  rc.getSummary();
+  bc.getSummary();
+
+  //output:
+  Model: A, black leather interior.
+  Model: B, beige cloth interior.
+  Model: C, black cloth interior.
+
+  </code>
+  </pre>
+
+
+    <div class="block">
+
+        Abstraction is ...
+
+        Implementation is ...
+
+
+        <div>
+            Text here
+        </div>
+<pre>
+        <code class="language-ts">
+  </code>
+  </pre>
+        <div class="block">
+            Text here
+        </div>
     </div>
 </div>
 
-  <bottom-nav next-pointer-word="Next"
-                next-icon1="fa-solid fa-circle-question"
-                next-icon3="fa-solid fa-arrow-right"
-                next-link="Index"
-                next-name="TBA"></bottom-nav>
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-circle-question"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Index"
+            next-name="TBA"></bottom-nav>
 <script>hljs.highlightAll();</script>
 
 Fix link from Adapter to Bridge
@@ -34,3 +115,18 @@ Fix link from Adapter to Bridge
 Think about putting whole menu on the bottom, disabling link to the one that the page is currently on
 
 новую функцию и постоянно заменяют
+<div class="block">
+    Text here
+</div>
+<div class="block">
+    Text here
+</div>
+
+<pre>
+<code class="language-ts">
+  </code>
+  </pre>
+<pre>
+<code class="language-ts">
+  </code>
+  </pre>
