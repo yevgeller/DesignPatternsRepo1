@@ -5,6 +5,7 @@
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-left-right mr-2"></i>Bridge</h1>
 <h2 class="subtitle">Decoupling Abstraction from Implementation</h2>
+<h3 class="subtitle is-3">Problem</h3>
 <div class="content">
     <div class="block">
         Imagine you are working on an interface for buyers to spec out new vehicles and it is time to work on the Interior configuration.
@@ -81,7 +82,12 @@
 
   </code>
   </pre>
-
+      <div class="block">
+                  And then you got a word that another interior color may be available. Also, it has to be customizable for different car models.
+        Creating a class for each combination of resources will quickly become unwieldy. There has to be a better way!
+        
+    </div>
+<h3 class="subtitle is-3">Solution -- applying Bridge pattern</h3>
 
     <div class="block">
 
