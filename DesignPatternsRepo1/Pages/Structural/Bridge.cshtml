@@ -96,7 +96,7 @@
         it will still be a bead bracelet.
     </div>
     <div class="block">
-        To rework the previous example, let's deem the Interior class as the Abstraction. Any vehicle has an interior, 
+        To rework the previous example, let's deem the Interior class as the Abstraction. Any vehicle has an interior,
         and everything else will be considered "implementation" and vary as needed.
     </div>
 
@@ -123,9 +123,9 @@
   }
 </code>
   </pre>
-  <div class="block">
-      Let's specify the InteriorColor and InteriorMaterial interfaces that help implementations vary:
-  </div>
+    <div class="block">
+        Let's specify the InteriorColor and InteriorMaterial interfaces that will help color and material implementations vary:
+    </div>
 <pre>
     <code class="language-ts">
   interface InteriorColor {
@@ -134,7 +134,41 @@
 
   interface InteriorMaterial {
     interiorMaterial: string;
-  }</code></pre> 
+  }</code></pre>
+    <div class="block">
+        Text here
+    </div>
+
+    <div class="block">
+        Next, separate classes that implement those interfaces and focus on only one aspect:
+    </div>
+<pre>
+<code class="language-ts">class BlackInterior implements InteriorColor {
+    interiorColor: string;
+    constructor() {
+      this.interiorColor = "black";
+    }
+  }
+  class BeigeInterior implements InteriorColor {
+    interiorColor: string;
+    constructor() {
+      this.interiorColor = "beige";
+    }
+  }
+
+  class LeatherInterior implements InteriorMaterial {
+    constructor() {
+      this.interiorMaterial = "leather";
+    }
+    interiorMaterial: string;
+  }
+
+  class ClothInterior implements InteriorMaterial {
+    interiorMaterial: string;
+    constructor() {
+      this.interiorMaterial = "cloth";
+    }
+  }</code></pre>
     <div class="block">
         Text here
     </div>
