@@ -79,53 +79,87 @@
   Model: A, black leather interior.
   Model: B, beige cloth interior.
   Model: C, black cloth interior.
-
   </code>
   </pre>
     <div class="block">
         And then you got a word that another interior color may be available. Also, it has to be customizable for different car models.
         Creating a class for each combination of resources will quickly become unwieldy. There has to be a better way!
     </div>
-    <h3 class="subtitle is-3">Solution -- applying Bridge pattern</h3>
-
+</div>
+<h3 class="subtitle is-3">Solution -- applying Bridge pattern</h3>
+<div class="content">
     <div class="block">
+        Bridge pattern is applicable when you can separate a component into parts reducing coupling. One of the parts
+        is deemed as the <em>abstraction"</em>" and it will be sort of a foundation on which everything else is built. Every other
+        variable aspect is deemed <em>"implementation"</em> and the two can vary independently. It is almost like making a bead
+        bracelet: the string is the abstraction, it holds everything together, but it does not care what beads you put on,
+        it will still be a bead bracelet.
+    </div>
+    <div class="block">
+        To rework the previous example, let's deem the Interior class as the Abstraction. Any vehicle has an interior, 
+        and everything else will be considered "implementation" and vary as needed.
+    </div>
 
-        Abstraction is ...
-
-        Implementation is ...
-
-
-        <div>
-            Text here
-        </div>
 <pre>
-        <code class="language-ts">
-  </code>
+    <code class="language-ts">
+ class CarInterior {
+    interiorColor: string;
+    interiorMaterial: string;
+    model: string;
+    constructor(
+      model: string,
+      color: InteriorColor,
+      material: InteriorMaterial
+    ) {
+      this.model = model;
+      this.interiorColor = color.interiorColor;
+      this.interiorMaterial = material.interiorMaterial;
+    }
+
+    getSummary = () =>
+      console.log(
+        `Model: ${this.model}, ${this.interiorColor} ${this.interiorMaterial} interior.`
+      );
+  }
+</code>
   </pre>
-        <div class="block">
-            Text here
+  <div class="block">
+      Let's specify the InteriorColor and InteriorMaterial interfaces that help implementations vary:
+  </div>
+<pre>
+    <code class="language-ts">
+  interface InteriorColor {
+    interiorColor: string;
+  }
+
+  interface InteriorMaterial {
+    interiorMaterial: string;
+  }</code></pre> 
+    <div class="block">
+        Text here
+    </div>
+</div>
+
+<div class="content">
+    <div class="block">
+        Ultimately, we went from a flat, tightly coupled hierarchy like this:
+        <br />
+
+    </div>
+    <div class="columns is-centered">
+        <div class="image">
+            <img src="~/images/Bridge-bad.drawio.png" />
         </div>
     </div>
-</div>
+    <div class="block">
+        to a more decoupled hierarchy like this:
 
-<div class="block">
-    Ultimately, we went from a flat, tightly coupled hierarchy like this:
-    <br />
-
-</div>
-<div class="columns is-centered">
-    <div class="image">
-        <img src="~/images/Bridge-bad.drawio.png" />
     </div>
-</div>
-<div class="block">
-    to a more decoupled hierarchy like this:
 
-</div>
-
-<div class="columns is-centered">
-    <div class="image">
-        <img src="~/images/Bridge-good.drawio.png" />
+    <div class="columns is-centered">
+        <div class="image">
+            <img src="~/images/Bridge-good.drawio.png" />
+        </div>
     </div>
 </div>
 <bottom-nav next-pointer-word="Next"
