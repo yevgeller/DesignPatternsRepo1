@@ -8,8 +8,9 @@
 <h3 class="subtitle is-3">Problem</h3>
 <div class="content">
     <div class="block">
-        Imagine you are working on an interface for buyers to spec out new vehicles and it is time to work on the Interior configuration.
-        For the sake of simplicity, customers can only pick one of two interior colors (black or beige) and one of two materials (cloth or leather).
+        Imagine you are working on an interface for buyers to spec out new vehicles and it is time to work on
+        the Interior configuration. For now requirements state that customers can only pick one of two interior colors
+        (black or beige) and one of two materials (cloth or leather). It may change though, but it's not certain.
 
         Then the code for each of the interiors would look something like that:
     </div>
@@ -58,10 +59,7 @@
       this.interiorColor = "beige";
       this.interiorMaterial = "cloth";
     }
-  }
-
-  </code>
-  </pre>
+  }</code></pre>
     <div class="block">
         This testing code returns this:
     </div>
@@ -90,10 +88,10 @@
 <div class="content">
     <div class="block">
         Bridge pattern is applicable when you can separate a component into parts reducing coupling. One of the parts
-        is deemed as the <em>abstraction"</em>" and it will be sort of a foundation on which everything else is built. Every other
-        variable aspect is deemed <em>"implementation"</em> and the two can vary independently. It is almost like making a bead
-        bracelet: the string is the abstraction, it holds everything together, but it does not care what beads you put on,
-        it will still be a bead bracelet.
+        is deemed as the <em>"abstraction"</em> and it will be sort of a foundation on which everything else is built. Every other
+        variable aspect is deemed <em>"implementation"</em> and abstractions and implementations can vary independently.
+        It is almost like making a bead bracelet: the string is the abstraction, it holds everything together,
+        but it does not care what beads you put on, it will still be a bead bracelet.
     </div>
     <div class="block">
         To rework the previous example, let's deem the Interior class as the Abstraction. Any vehicle has an interior,
@@ -101,10 +99,9 @@
     </div>
 
 <pre>
-    <code class="language-ts">
- class CarInterior {
-    interiorColor: string;
-    interiorMaterial: string;
+    <code class="language-ts">class CarInterior {
+    interiorColor: InteriorColor;
+    interiorMaterial: InteriorMaterial;
     model: string;
     constructor(
       model: string,
@@ -112,29 +109,25 @@
       material: InteriorMaterial
     ) {
       this.model = model;
-      this.interiorColor = color.interiorColor;
-      this.interiorMaterial = material.interiorMaterial;
+      this.interiorColor = color;
+      this.interiorMaterial = material;
     }
 
     getSummary = () =>
       console.log(
-        `Model: ${this.model}, ${this.interiorColor} ${this.interiorMaterial} interior.`
+        `Model: ${this.model}, ${this.interiorColor.interiorColor} ${this.interiorMaterial.interiorMaterial} interior.`
       );
-  }
-</code>
-  </pre>
+  }</code></pre>
     <div class="block">
         Let's specify the InteriorColor and InteriorMaterial interfaces that will help color and material implementations vary:
     </div>
-<pre>
-    <code class="language-ts">
-  interface InteriorColor {
+<pre><code class="language-ts">interface InteriorColor {
     interiorColor: string;
-  }
+}
 
-  interface InteriorMaterial {
+interface InteriorMaterial {
     interiorMaterial: string;
-  }</code></pre>
+}</code></pre>
     <div class="block">
         Text here
     </div>
@@ -170,8 +163,39 @@
     }
   }</code></pre>
     <div class="block">
-        Text here
+        Here's some test code showing that the result stayed the same:
     </div>
+    <pre><code class="language-ts">
+    let bl = new CarInterior("D", new BlackInterior(), new LeatherInterior());
+    let rc = new CarInterior("E", new BeigeInterior(), new ClothInterior());
+    let bc = new CarInterior("F", new BlackInterior(), new ClothInterior());
+
+  //output:  
+    Model: D, black leather interior.
+    Model: E, beige cloth interior.
+    Model: F, black cloth interior.
+
+</code></pre>
+    <div class="block">
+        And, say, there's a new requirement that some interiors will be made of cloth/leather combo. With Bridge,
+        such variation is expected and is not that difficult to handle. The only thing that needs to happen is
+        create a new class to implement the combo material, and then it's ready to be tested:
+    </div>
+
+    <pre><code class="language-ts">  class ClothLeatherComboInterior implements InteriorMaterial {
+    interiorMaterial: string;
+    constructor() {
+      this.interiorMaterial = "cloth/leather combo";
+    }
+  }
+
+  let rcl = new CarInterior("G", new BeigeInterior(), new ClothLeatherComboInterior());  
+
+  rcl.getSummary();
+
+  //output  
+  Model: G, beige cloth/leather combo interior.
+</code></pre>
 </div>
 
 <div class="content">
@@ -194,6 +218,30 @@
         <div class="image">
             <img src="~/images/Bridge-good.drawio.png" />
         </div>
+    </div>
+
+    <div class="block">
+        Needless to say, that adding new features to interior, such as climate control,
+        or ventilated front seats will be pretty easy.
+    </div>
+
+    <div class="block">
+        Bridge pattern really emphasizes Composition over Inheritance and it allows multiple aspects to
+        be developed independently while supporting interactions via an existing interface. Other examples
+        are remotes and TVs -- remotes can vary in shape and size, and TVs can be bigger or smaller or use
+        different resolution/technology, yet a remote can turn a TV on and off and adjust volume.
+    </div>
+    <div class="block">
+        Another example
+        would be a car driver. Cars change every year and a driver no longer worries about what's under a car's hood
+        and how a drive train operates on a particular model. All they know is that they need to get into the vehicle,
+        shift gear to "D" and steer. At the same time, car does not care about who drives it, seats can adjust to support
+        a variety of bodies.
+    </div><div class="block">
+        Also, the Bluetooth audio interface is a great example of the Bridge pattern.
+        You can hook up any device to a Bluetooth receiver, and it can be a phone, or a tablet, and Bluetooth
+        speakers will provide audio output. Also, devices do not really care what speaker blasts their output,
+        it can be anything from headphones to sound bars, sound is coming out all the same.
     </div>
 </div>
 <bottom-nav next-pointer-word="Next"
