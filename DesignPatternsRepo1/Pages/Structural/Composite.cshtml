@@ -2,3 +2,73 @@
 @model DesignPatternsRepo1.Pages.Structural.CompositeModel
 @{
 }
+
+
+@page
+@model DesignPatternsRepo1.Pages.Creational.PrototypeModel
+@{
+}
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-magnifying-glass-arrow-right mr-2"></i>Composite</h1>
+<h2 class="subtitle">Recursive processing</h2>
+<div class="content">
+
+    <div class="block">
+        I don't have a real-world example for this particular pattern, I have yet to come up with one.
+        It's pretty universal and can be applied to many things, yet I don't know what example to use to explain it.
+    </div>
+
+    <div class="block">
+        The premise though is that in case a copy of an object is needed, sometimes it's not as easy
+        as instantiating an object of the same class and assign properties, the object may have some private fields, or the object is an interface.
+        Also, such attempts to instantiate an object require us to know the concrete class, and that is not always flexible.
+    </div>
+
+    <div>
+        So what's the solution? The solution is offloading the process of copying objects to objects themselves
+        by introducing a "clone" method on each of them, and programming it so that the magic is happening inside that method.
+    </div>
+<pre>
+    <code class="language-ts">
+  interface ICloneable {
+    clone();
+  }
+
+  class Marble implements ICloneable {
+    size: number;
+    color: string;
+    constructor(size: number, color: string) {
+      this.size = size;
+      this.color = color;
+    }
+    clone(): Marble {
+      return new Marble(this.size, this.color);
+    }
+    displayProperties(): string {
+      return `size: ${this.size}; color: ${this.color}`;
+    }
+  }
+
+  let greenMarble = new Marble(1, "green");
+  let redMarble = greenMarble.clone();
+  redMarble.color = "red";
+  console.log(greenMarble.displayProperties());
+  console.log(redMarble.displayProperties());
+
+  //output:
+  size: 1; color: green
+  size: 1; color: red
+  </code>
+  </pre>
+    <div class="block">
+        If elves learn to make more toys, there will need to be a class created for that toy that implements the Present interface, add a value to the enum,
+        and then a condition to create that type of toy into the creator class.
+    </div>
+</div>
+
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-atom"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Creational|Singleton"
+            next-name="Singleton"></bottom-nav>
+<script>hljs.highlightAll();</script>
