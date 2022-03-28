@@ -8,19 +8,23 @@
 <div class="content">
 
     <div class="block">
-        I don't have a real-world example for this particular pattern, I have yet to come up with one.
-        It's pretty universal and can be applied to many things, yet I don't know what example to use to explain it.
+        This pattern is used for working with nested-container type of items. It's a uniform way to treat an object
+        whether it's another container or actually an item that can do some action.
     </div>
-
     <div class="block">
-        The premise though is that in case a copy of an object is needed, sometimes it's not as easy
-        as instantiating an object of the same class and assign properties, the object may have some private fields, or the object is an interface.
-        Also, such attempts to instantiate an object require us to know the concrete class, and that is not always flexible.
-    </div>
-
-    <div>
-        So what's the solution? The solution is offloading the process of copying objects to objects themselves
-        by introducing a "clone" method on each of them, and programming it so that the magic is happening inside that method.
+        Here's the recipe of all that's needed to implement the pattern:
+        <ol>
+            <li>General class called "Component" that has basic properties and methods</li>
+            <li>Class "Leaf" that accepts an identifier as a parameter (a name in the example case). This class
+                can perform a basic operation that is required (just return its name in our example);
+            </li>
+            <li>Class "Composite" that also takes an identifier as a parameter. It also tracks a collection
+                of its children leafs or composites that are assigned to this class. The class can process
+                assignments/removals to that collection. The class can als return its name as its
+                primary operation. The primary operation on this class also triggers the primary operation on
+                each of the children in the collection.
+            </li>
+        </ol>
     </div>
 <pre>
     <code class="language-ts">
