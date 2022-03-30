@@ -18,20 +18,19 @@
             <li>Class "Leaf" that accepts an identifier as a parameter (a name in the example case). This class
                 can perform a basic operation that is required (just return its name in our example);
             </li>
-            <li>Class "Composite" that also takes an identifier as a parameter. It also tracks a collection
-                of its children leafs or composites that are assigned to this class. The class can process
-                assignments/removals to that collection. The class can als return its name as its
-                primary operation. The primary operation on this class also triggers the primary operation on
-                each of the children in the collection.
+            <li>Class "Composite" that also takes an identifier as a parameter. It has a few other notable characteristics:
+                <ul>
+                    <li>Tracks a collection of its children items (leafs or composites) rooted under this composite</li>
+                    <li>Processes additions/removals to this collection</li>
+                    <li>Primary operation returns its name, as well as triggers a primary operation on all tracked children</li>
+                </ul>
             </li>
         </ol>
     </div>
 <pre>
-    <code class="language-ts">class Component {
+    <code class="language-ts">class Component { //base class extracting repeating functionality
   name: string;
   primaryOperation(depth: number): void {}
-  add(component: Component): void {}
-  remove(component: Component): void {}
 
   constructor(name: string) {
     this.name = name;
@@ -47,17 +46,11 @@ class Leaf extends Component {
   primaryOperation(depth: number): void {
     console.log(Array(depth).join("-") + this.name);
   }
-  add(component: Component): void {
-    throw new Error("Method not implemented.");
-  }
-  remove(component: Component): void {
-    throw new Error("Method not implemented.");
-  }
 }
 
 class Composite extends Component {
   name: string;
-  components: Component[];
+  components: Component[]; //collection to track children
   constructor(name: string) {
     super(name);
     this.name = name;
@@ -65,7 +58,7 @@ class Composite extends Component {
   }
   primaryOperation(depth: number): void {
     console.log(Array(depth).join("-") + this.name);
-    this.components.forEach((x) => x.primaryOperation(depth + 2));
+    this.components.forEach((x) => x.primaryOperation(depth + 2)); //trigger primary operation on all tracked children
   }
   add(component: Component): void {
     this.components.push(component);
@@ -73,9 +66,7 @@ class Composite extends Component {
   remove(component: Component): void {
     this.components = this.components.filter((x) => x.name !== component.name);
   }
-}
-  </code>
-  </pre>
+}</code></pre>
     <div class="block">
        Source: <a href="https://app.pluralsight.com/library/courses/c-sharp-design-patterns-composite/table-of-contents" 
        target="_blank">C# Design Patterns: Composite on Pluralsight.com</a>
