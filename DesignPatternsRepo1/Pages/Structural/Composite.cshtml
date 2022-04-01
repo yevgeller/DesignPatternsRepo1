@@ -67,6 +67,37 @@ class Composite extends Component {
     this.components = this.components.filter((x) => x.name !== component.name);
   }
 }</code></pre>
+<div class="block">Here's some test code and output:</div>
+<pre><code class="language-ts">const root = new Composite("root");
+root.add(new Leaf("Leaf 1"));
+root.add(new Leaf("Leaf 2"));
+
+const comp1 = new Composite("Subtree 1");
+comp1.add(new Leaf("Subtree 1 Leaf 1"));
+comp1.add(new Leaf("Subtree 1 Leaf 2"));
+
+const comp2 = new Composite("Sub-Subtree 1");
+comp2.add(new Leaf("Sub-Subtree 1 Leaf 1"));
+comp1.add(comp2);
+
+root.add(comp1);
+root.add(new Leaf("Leaf 3"));
+
+root.primaryOperation(1);
+
+/*
+//output:
+root
+--Leaf 1
+--Leaf 2
+--Subtree 1
+----Subtree 1 Leaf 1
+----Subtree 1 Leaf 2
+----Sub-Subtree 1
+------Sub-Subtree 1 Leaf 1
+--Leaf 3
+*/
+</code></pre>
     <div class="block">
        Source: <a href="https://app.pluralsight.com/library/courses/c-sharp-design-patterns-composite/table-of-contents" 
        target="_blank">C# Design Patterns: Composite on Pluralsight.com</a>
