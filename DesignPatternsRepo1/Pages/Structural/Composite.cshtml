@@ -15,10 +15,12 @@
         Here's the recipe of all that's needed to implement the pattern:
         <ol>
             <li>General class called "Component" that has basic properties and methods</li>
-            <li>Class "Leaf" that accepts an identifier as a parameter (a name in the example case). This class
+            <li>
+                Class "Leaf" that accepts an identifier as a parameter (a name in the example case). This class
                 can perform a basic operation that is required (just return its name in our example);
             </li>
-            <li>Class "Composite" that also takes an identifier as a parameter. It has a few other notable characteristics:
+            <li>
+                Class "Composite" that also takes an identifier as a parameter. It has a few other notable characteristics:
                 <ul>
                     <li>Tracks a collection of its children items (leafs or composites) rooted under this composite</li>
                     <li>Processes additions/removals to this collection</li>
@@ -67,7 +69,7 @@ class Branch extends Component {
       (x) => x.name !== component.name
     ));
 }</code></pre>
-<div class="block">Here's some test code and output:</div>
+    <div class="block">Here's some test code and output:</div>
 <pre><code class="language-ts">const root = new Branch("root");
 root.add(new Leaf("Leaf 1"));
 root.add(new Leaf("Leaf 2"));
@@ -97,12 +99,13 @@ root
 --Leaf 3
 */
 </code></pre>
-<h2 class="subtitle">Bonus: Composite with Builder</h2>
-<div class="block">If you notice in the code above that creates a tree, there's some repetition that 
-    can be automated using the <a asp-page="/Creational/Builder-solution">Builder pattern</a>. In short,
-    our new ConponentTreeBuilder class will have methods to add leafs and composites, as well as let us
-    navigate between composites on the tree to add/remove elements.    
-</div>
+    <h2 class="subtitle">Bonus: Composite with Builder</h2>
+    <div class="block">
+        If you notice in the code above that creates a tree, there's some repetition that
+        can be automated using the <a asp-page="/Creational/Builder-solution">Builder pattern</a>. In short,
+        our new ConponentTreeBuilder class will have methods to add leafs and composites, as well as let us
+        navigate between composites on the tree to add/remove elements.
+    </div>
 <pre><code class="language-ts">class ComponentTreeBuilder {
   rootComponent: Branch;
   currentComponent: Branch;
@@ -144,13 +147,15 @@ root
   }
 }
     </code></pre>
-    <div class="block">Here's the code that calls the ComponentTreeBuilder to put together a tree. It seems a bit less verbose 
-        than the previous way and it provides for a way to navigate branches easier</div>
+    <div class="block">
+        Here's the code that calls the ComponentTreeBuilder to put together a tree. It seems a bit less verbose
+        than the previous way and it provides for a way to navigate branches easier
+    </div>
 
 
-        <div class="block">
-       Source/Inspiration: <a href="https://app.pluralsight.com/library/courses/c-sharp-design-patterns-composite/table-of-contents" 
-       target="_blank">C# Design Patterns: Composite on Pluralsight.com</a>
+    <div class="block">
+        Source/Inspiration: <a href="https://app.pluralsight.com/library/courses/c-sharp-design-patterns-composite/table-of-contents"
+                               target="_blank">C# Design Patterns: Composite on Pluralsight.com</a>
     </div>
 </div>
 <bottom-nav next-pointer-word="Next"
