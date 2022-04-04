@@ -43,14 +43,13 @@ class Leaf extends Component {
     super(name);
     this.name = name;
   }
-  primaryOperation(depth: number): void {
+  primaryOperation = (depth: number): void =>
     console.log(Array(depth).join("-") + this.name);
-  }
 }
 
-class Composite extends Component {
+class Branch extends Component {
   name: string;
-  components: Component[]; //collection to track children
+  components: Component[];
   constructor(name: string) {
     super(name);
     this.name = name;
@@ -58,25 +57,26 @@ class Composite extends Component {
   }
   primaryOperation(depth: number): void {
     console.log(Array(depth).join("-") + this.name);
-    this.components.forEach((x) => x.primaryOperation(depth + 2)); //trigger primary operation on all tracked children
+    this.components.forEach((x) => x.primaryOperation(depth + 2));
   }
-  add(component: Component): void {
-    this.components.push(component);
-  }
-  remove(component: Component): void {
-    this.components = this.components.filter((x) => x.name !== component.name);
-  }
+
+  add = (component: Component): number => this.components.push(component);
+
+  remove = (component: Component): Component[] =>
+    (this.components = this.components.filter(
+      (x) => x.name !== component.name
+    ));
 }</code></pre>
 <div class="block">Here's some test code and output:</div>
-<pre><code class="language-ts">const root = new Composite("root");
+<pre><code class="language-ts">const root = new Branch("root");
 root.add(new Leaf("Leaf 1"));
 root.add(new Leaf("Leaf 2"));
 
-const comp1 = new Composite("Subtree 1");
+const comp1 = new Branch("Subtree 1");
 comp1.add(new Leaf("Subtree 1 Leaf 1"));
 comp1.add(new Leaf("Subtree 1 Leaf 2"));
 
-const comp2 = new Composite("Sub-Subtree 1");
+const comp2 = new Branch("Sub-Subtree 1");
 comp2.add(new Leaf("Sub-Subtree 1 Leaf 1"));
 comp1.add(comp2);
 
@@ -85,8 +85,7 @@ root.add(new Leaf("Leaf 3"));
 
 root.primaryOperation(1);
 
-/*
-//output:
+/*   output:
 root
 --Leaf 1
 --Leaf 2
@@ -99,15 +98,59 @@ root
 */
 </code></pre>
 <h2 class="subtitle">Bonus: Composite with Builder</h2>
-<div class="block">If you notice in the calling code above, there's some repetition that can be automated using the <a>Builder pattern</a></div>
+<div class="block">If you notice in the code above that creates a tree, there's some repetition that 
+    can be automated using the <a asp-page="/Creational/Builder-solution">Builder pattern</a>. In short,
+    our new ConponentTreeBuilder class will have methods to add leafs and composites, as well as let us
+    navigate between composites on the tree to add/remove elements.    
+</div>
+<pre><code class="language-ts">class ComponentTreeBuilder {
+  rootComponent: Branch;
+  currentComponent: Branch;
+  constructor(rootComponentName: string) {
+    this.rootComponent = new Branch(rootComponentName);
+    this.currentComponent = this.rootComponent;
+  }
+
+  addComponentItem(name: string): Branch {
+    let comp = new Branch(name);
+    this.currentComponent.add(comp);
+    this.currentComponent = comp;
+    return comp;
+  }
+
+  addLeaf(name: string): Leaf {
+    let leaf = new Leaf(name);
+    this.currentComponent.add(leaf);
+    return leaf;
+  }
+
+  setCurrentComponent(branchName: string): Branch {
+    let stack = [];
+    stack.push(this.rootComponent); //start from the top
+    while (stack.length > 0) {
+      let current = stack.pop();
+      if (current.name === branchName) { //is that the branch we need?
+        this.currentComponent = current; //set it to current component
+        return current; 
+      }
+      let branchesOfCurrent = current.components.filter(
+        (x) => typeof x.add === "function" //get only branches, no leafs
+      );
+      stack.push(...branchesOfCurrent); //work on the next level of branches
+    }
+    throw new Error(
+      `Component name "${branchName}" does not exist in the current hierarchy`
+    );
+  }
+}
+    </code></pre>
 
 
-    <div class="block">
-       Source: <a href="https://app.pluralsight.com/library/courses/c-sharp-design-patterns-composite/table-of-contents" 
+        <div class="block">
+       Source/Inspiration: <a href="https://app.pluralsight.com/library/courses/c-sharp-design-patterns-composite/table-of-contents" 
        target="_blank">C# Design Patterns: Composite on Pluralsight.com</a>
     </div>
 </div>
-
 <bottom-nav next-pointer-word="Next"
             next-icon1="fa-solid fa-circle-question"
             next-icon3="fa-solid fa-arrow-right"
