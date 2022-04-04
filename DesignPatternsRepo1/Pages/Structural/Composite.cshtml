@@ -151,7 +151,23 @@ root
         Here's the code that calls the ComponentTreeBuilder to put together a tree. It seems a bit less verbose
         than the previous way and it provides for a way to navigate branches easier
     </div>
-
+    <pre><code class="language-ts">    const builder = new ComponentTreeBuilder("root");
+    builder.addComponentItem("left branch");
+    builder.addLeaf("left branch, leaf 1");
+    builder.addLeaf("left branch, leaf 2");
+    builder.setCurrentComponent("root");
+    builder.addComponentItem("center branch");
+    builder.addLeaf("center branch, leaf 1");
+    builder.addLeaf("center branch, leaf 2");
+    builder.setCurrentComponent("root");
+    builder.addComponentItem("right branch");
+    builder.addLeaf("right branch, leaf 1");
+    builder.addLeaf("right branch, leaf 2");
+    builder.setCurrentComponent("center branch");
+    builder.addComponentItem("sub-center branch");
+    builder.addLeaf("sub-center branch, leaf 1");
+    builder.rootComponent.primaryOperation(1);
+    </code></pre>
 
     <div class="block">
         Source/Inspiration: <a href="https://app.pluralsight.com/library/courses/c-sharp-design-patterns-composite/table-of-contents"
