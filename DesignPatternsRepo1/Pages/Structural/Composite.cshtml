@@ -167,6 +167,22 @@ root
     builder.addComponentItem("sub-center branch");
     builder.addLeaf("sub-center branch, leaf 1");
     builder.rootComponent.primaryOperation(1);
+
+    
+    /* output:
+    root
+    --left branch
+    ----left branch, leaf 1
+    ----left branch, leaf 2
+    --center branch
+    ----center branch, leaf 1
+    ----center branch, leaf 2
+    ----sub-center branch
+    ------sub-center branch, leaf 1
+    --right branch
+    ----right branch, leaf 1
+    ----right branch, leaf 2
+    */
     </code></pre>
 
     <div class="block">
