@@ -5,45 +5,48 @@
 
 
 <div class="block">
-    Decorator is a way to enhance a behavior of an object by adding a wrapper around 
-    its functionality. In the example below, class SimulatedApi provides a fake call 
-    to an API that can take anywhere between one and five seconds. Let's imagine that 
-    we want to enhance the method by tracking how long the calls take and also add 
-    caching in case the data has been previously received. Something that may come 
-    to mind first would be to extend a class and add desired behavior. But inheritance 
-    may put us on wheels such that future updates and enhancements may be limited. Favoring 
-    Composition over Inheritance, the solution is to create a new class and inject the 
+    Decorator is a way to enhance a behavior of an object by adding a wrapper around
+    its functionality. In the example below, class SimulatedApi provides a fake call
+    to an API that can take anywhere between one and five seconds.
+</div>
+    
+<div class="block">
+    Let's imagine that
+    we want to enhance the method by tracking how long the calls take and also add
+    caching in case the data has been previously received. Something that may come
+    to mind first would be to extend a class and add desired behavior. But inheritance
+    may put us on wheels such that future updates and enhancements may be limited. Favoring
+    Composition over Inheritance, the solution is to create a new class and inject the
     API service as a dependency. First, we'll extract the interface:
 </div>
 
+
+------------ interface code here ----------------
 <div class="block">
-
+    The next class implements this interface and calculates the total time it took for the
+    data to come back.
 </div>
-
+--------- SimulatedApiWithLogging here -------------
 <div class="block">
-
+    When the class is instantiated, it takes an instance of the SimulatedApi class in a
+    constructor. This is the main idea behind a Decorator pattern -- get something, wrap it
+    in another class and decorate the existing functionality with the extra functionality that's
+    needed further.
 </div>
-
 <div class="block">
-
+    In order to cache data and keep the code clean, we need to create a SimpleCacheAccessor
+    class that implements an ICacheAccessor interface.
 </div>
-
 <div class="block">
-
+    Finally, the code for the SimulatedApiWithCaching class that can make calls, log time
+    taken, and use cache.
 </div>
-
+------------------- SimulatedApiWithCaching here ------------
 <div class="block">
-
+    Here's the code to call an instance of the SimulatedApiWithCaching class. Notice the
+    pattern like nesting dolls, this is also one of the peculiarities of the Decorator
+    pattern -- nested wrapping of the instantiation calls.
 </div>
+------------------- Calling code here -----------------------
 
-<div class="block">
-
-</div>
-
-<div class="block">
-
-</div>
-
-<div class="block">
-
-</div>
+------------------- Results code here -----------------------
