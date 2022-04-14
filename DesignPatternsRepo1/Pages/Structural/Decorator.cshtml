@@ -2,51 +2,61 @@
 @model DesignPatternsRepo1.Pages.Structural.DecoratorModel
 @{
 }
+<h1 class="title is-1 is-spaced"><i class="fa-solid  fa-chart-line mr-2"></i>Decorator</h1>
+<h2 class="subtitle">Providing more functionality while ensuring single responsibility</h2>
+<div class="content">
+
+    <div class="block">
+        Decorator is a way to enhance a behavior of an object by adding a wrapper around
+        its functionality. In the example below, class SimulatedApi provides a fake call
+        to an API that can take anywhere between one and five seconds.
+    </div>
+
+    <div class="block">
+        Let's imagine that
+        we want to enhance the method by tracking how long the calls take and also add
+        caching in case the data has been previously received. Something that may come
+        to mind first would be to extend a class and add desired behavior. But inheritance
+        may put us on wheels such that future updates and enhancements may be limited. Favoring
+        Composition over Inheritance, the solution is to create a new class and inject the
+        API service as a dependency. First, we'll extract the interface:
+    </div>
 
 
-<div class="block">
-    Decorator is a way to enhance a behavior of an object by adding a wrapper around
-    its functionality. In the example below, class SimulatedApi provides a fake call
-    to an API that can take anywhere between one and five seconds.
-</div>
-    
-<div class="block">
-    Let's imagine that
-    we want to enhance the method by tracking how long the calls take and also add
-    caching in case the data has been previously received. Something that may come
-    to mind first would be to extend a class and add desired behavior. But inheritance
-    may put us on wheels such that future updates and enhancements may be limited. Favoring
-    Composition over Inheritance, the solution is to create a new class and inject the
-    API service as a dependency. First, we'll extract the interface:
+    ------------ interface code here ----------------
+    <div class="block">
+        The next class implements this interface and calculates the total time it took for the
+        data to come back.
+    </div>
+    --------- SimulatedApiWithLogging here -------------
+    <div class="block">
+        When the class is instantiated, it takes an instance of the SimulatedApi class in a
+        constructor. This is the main idea behind a Decorator pattern -- get something, wrap it
+        in another class and decorate the existing functionality with the extra functionality that's
+        needed further. Single Responsibility Principle in action, so to speak.
+    </div>
+    <div class="block">
+        In order to cache data and keep the code clean, we need to create a SimpleCacheAccessor
+        class that implements an ICacheAccessor interface.
+    </div>
+    <div class="block">
+        Finally, the code for the SimulatedApiWithCaching class that can make calls, log time
+        taken, and use cache.
+    </div>
+    ------------------- SimulatedApiWithCaching here ------------
+    <div class="block">
+        Here's the code to call an instance of the SimulatedApiWithCaching class. Notice the
+        pattern like nesting dolls, this is also one of the peculiarities of the Decorator
+        pattern -- nested wrapping of the instantiation calls.
+    </div>
+    ------------------- Calling code here -----------------------
+
+    ------------------- Results code here -----------------------
 </div>
 
-
------------- interface code here ----------------
-<div class="block">
-    The next class implements this interface and calculates the total time it took for the
-    data to come back.
-</div>
---------- SimulatedApiWithLogging here -------------
-<div class="block">
-    When the class is instantiated, it takes an instance of the SimulatedApi class in a
-    constructor. This is the main idea behind a Decorator pattern -- get something, wrap it
-    in another class and decorate the existing functionality with the extra functionality that's
-    needed further. Single Responsibility Principle in action, so to speak.
-</div>
-<div class="block">
-    In order to cache data and keep the code clean, we need to create a SimpleCacheAccessor
-    class that implements an ICacheAccessor interface.
-</div>
-<div class="block">
-    Finally, the code for the SimulatedApiWithCaching class that can make calls, log time
-    taken, and use cache.
-</div>
-------------------- SimulatedApiWithCaching here ------------
-<div class="block">
-    Here's the code to call an instance of the SimulatedApiWithCaching class. Notice the
-    pattern like nesting dolls, this is also one of the peculiarities of the Decorator
-    pattern -- nested wrapping of the instantiation calls.
-</div>
-------------------- Calling code here -----------------------
-
-------------------- Results code here -----------------------
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-circle-question"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Index"
+            next-name="TBA"></bottom-nav>
+<script>hljs.highlightAll();</script>
