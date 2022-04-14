@@ -39,13 +39,31 @@
         API service as a dependency. First, we'll extract the interface:
     </div>
 
-    <pre><code class="language-ts"></code></pre>
+    <pre><code class="language-ts">interface IMakingSimulatedApiCalls {
+  makeRequest(): Promise<any>;
+}</code></pre>
     ------------ interface code here ----------------
     <div class="block">
         The next class implements this interface and calculates the total time it took for the
         data to come back.
     </div>
-    --------- SimulatedApiWithLogging here -------------<pre><code class="language-ts"></code></pre>
+    --------- SimulatedApiWithLogging here -------------
+    <pre><code class="language-ts">class SimulatedApiWithLogging implements IMakingSimulatedApiCalls {
+  simulatedApi: IMakingSimulatedApiCalls;
+  startDate: number;
+  endDate: number;
+  constructor(simulatedApi: IMakingSimulatedApiCalls) {
+    this.simulatedApi = simulatedApi;
+  }
+
+  async makeRequest(): Promise<any> {
+    this.startDate = Date.now();
+    const responseData = await this.simulatedApi.makeRequest();
+    this.endDate = Date.now();
+    console.log("time taken (ms): ", this.endDate - this.startDate);
+    return new Promise((resolve) => resolve(responseData));
+  }
+}</code></pre>
     <div class="block">
         When the class is instantiated, it takes an instance of the SimulatedApi class in a
         constructor. This is the main idea behind a Decorator pattern -- get something, wrap it
@@ -56,19 +74,68 @@
         In order to cache data and keep the code clean, we need to create a SimpleCacheAccessor
         class that implements an ICacheAccessor interface.
     </div>
+    <pre><code class="language-ts">interface ICacheAccessor {
+  setCache(incomingData: Array<{}>): void;
+  getCache: () => Array<{}>;
+  hasData(): boolean;
+  showData(): any[];
+}
+
+class SimpleCacheAccessor implements ICacheAccessor {
+  setCache(incomingData: {}[]): void {
+    this.data = incomingData;
+  }
+  getCache = () => this.data;
+  data: any[] = [];
+  showData = () => this.data;
+  hasData(): boolean {
+    return this.data.length > 0;
+  }
+}</code></pre>
     <div class="block">
         Finally, the code for the SimulatedApiWithCaching class that can make calls, log time
         taken, and use cache.
     </div>
-    ------------------- SimulatedApiWithCaching here ------------<pre><code class="language-ts"></code></pre>
+    ------------------- SimulatedApiWithCaching here ------------
+    <pre><code class="language-ts">class SimulatedApiWithCaching implements IMakingSimulatedApiCalls {
+  api: IMakingSimulatedApiCalls;
+  cacheAccessor: ICacheAccessor;
+
+  constructor(api: IMakingSimulatedApiCalls, cacheAccessor: ICacheAccessor) {
+    this.api = api;
+    this.cacheAccessor = cacheAccessor;
+  }
+
+  async makeRequest(): Promise<any> {
+    if (!this.cacheAccessor.hasData()) {
+      console.log("reaching out to API");
+      const result = await this.api.makeRequest();
+      this.cacheAccessor.setCache(result);
+      console.log("data:", this.cacheAccessor.showData());
+    } else {
+      console.log("data from cache:", this.cacheAccessor.showData());
+      return this.cacheAccessor.showData();
+    }
+  }
+}</code></pre>
     <div class="block">
         Here's the code to call an instance of the SimulatedApiWithCaching class. Notice the
         pattern like nesting dolls, this is also one of the peculiarities of the Decorator
         pattern -- nested wrapping of the instantiation calls.
     </div>
-    ------------------- Calling code here -----------------------<pre><code class="language-ts"></code></pre>
+    ------------------- Calling code here -----------------------
+    <pre><code class="language-ts">let cacheAccessor = new SimpleCacheAccessor();
+let c = new SimulatedApiWithCaching(b, cacheAccessor);
+console.log("---  request 1 ---");
+c.makeRequest();
+setTimeout(() => {
+  console.log("---  request 2 ---");
+  c.makeRequest();
+}, 5000);
+</code></pre>
 
-    ------------------- Results code here -----------------------<pre><code class="language-ts"></code></pre>
+    ------------------- Results code here -----------------------
+    <pre><code class="language-ts"></code></pre>
 </div>
 
 <bottom-nav next-pointer-word="Next"
