@@ -11,7 +11,24 @@
         its functionality. In the example below, class SimulatedApi provides a fake call
         to an API that can take anywhere between one and five seconds.
     </div>
+    <pre><code class="language-ts">class SimulatedApi {
+  makeRequest = async (): Promise<any> =>
+    new Promise((resolve) =>
+      setTimeout(() => resolve(this.getData()), this.getTimeout() * 1000)
+    );
 
+  getData = () => [
+    { name: "John Johnson", age: 32 },
+    { name: "Jane Johnson", age: 32 },
+    { name: "Jim Johnson", age: 10 },
+  ];
+
+  getTimeout = () => {
+    const delay = Math.random() * (5 - 1) + 1;
+    //console.log("delay (ms): ", Math.round(delay * 1000));
+    return delay;
+  };
+}</code></pre>
     <div class="block">
         Let's imagine that
         we want to enhance the method by tracking how long the calls take and also add
@@ -22,13 +39,13 @@
         API service as a dependency. First, we'll extract the interface:
     </div>
 
-
+    <pre><code class="language-ts"></code></pre>
     ------------ interface code here ----------------
     <div class="block">
         The next class implements this interface and calculates the total time it took for the
         data to come back.
     </div>
-    --------- SimulatedApiWithLogging here -------------
+    --------- SimulatedApiWithLogging here -------------<pre><code class="language-ts"></code></pre>
     <div class="block">
         When the class is instantiated, it takes an instance of the SimulatedApi class in a
         constructor. This is the main idea behind a Decorator pattern -- get something, wrap it
@@ -43,15 +60,15 @@
         Finally, the code for the SimulatedApiWithCaching class that can make calls, log time
         taken, and use cache.
     </div>
-    ------------------- SimulatedApiWithCaching here ------------
+    ------------------- SimulatedApiWithCaching here ------------<pre><code class="language-ts"></code></pre>
     <div class="block">
         Here's the code to call an instance of the SimulatedApiWithCaching class. Notice the
         pattern like nesting dolls, this is also one of the peculiarities of the Decorator
         pattern -- nested wrapping of the instantiation calls.
     </div>
-    ------------------- Calling code here -----------------------
+    ------------------- Calling code here -----------------------<pre><code class="language-ts"></code></pre>
 
-    ------------------- Results code here -----------------------
+    ------------------- Results code here -----------------------<pre><code class="language-ts"></code></pre>
 </div>
 
 <bottom-nav next-pointer-word="Next"
