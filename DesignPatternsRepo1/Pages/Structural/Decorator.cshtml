@@ -42,12 +42,10 @@
     <pre><code class="language-ts">interface IMakingSimulatedApiCalls {
   makeRequest(): Promise<any>;
 }</code></pre>
-    ------------ interface code here ----------------
     <div class="block">
         The next class implements this interface and calculates the total time it took for the
         data to come back.
     </div>
-    --------- SimulatedApiWithLogging here -------------
     <pre><code class="language-ts">class SimulatedApiWithLogging implements IMakingSimulatedApiCalls {
   simulatedApi: IMakingSimulatedApiCalls;
   startDate: number;
@@ -96,7 +94,6 @@ class SimpleCacheAccessor implements ICacheAccessor {
         Finally, the code for the SimulatedApiWithCaching class that can make calls, log time
         taken, and use cache.
     </div>
-    ------------------- SimulatedApiWithCaching here ------------
     <pre><code class="language-ts">class SimulatedApiWithCaching implements IMakingSimulatedApiCalls {
   api: IMakingSimulatedApiCalls;
   cacheAccessor: ICacheAccessor;
@@ -113,7 +110,7 @@ class SimpleCacheAccessor implements ICacheAccessor {
       this.cacheAccessor.setCache(result);
       console.log("data:", this.cacheAccessor.showData());
     } else {
-      console.log("data from cache:", this.cacheAccessor.showData());
+      console.log("data (from cache):", this.cacheAccessor.showData());
       return this.cacheAccessor.showData();
     }
   }
@@ -123,19 +120,35 @@ class SimpleCacheAccessor implements ICacheAccessor {
         pattern like nesting dolls, this is also one of the peculiarities of the Decorator
         pattern -- nested wrapping of the instantiation calls.
     </div>
-    ------------------- Calling code here -----------------------
-    <pre><code class="language-ts">let cacheAccessor = new SimpleCacheAccessor();
-let c = new SimulatedApiWithCaching(b, cacheAccessor);
+    <pre><code class="language-ts">let simpleApiAccessor = new SimulatedApi(); //instantiate api accessor
+let apiAccessorWithLogging = new SimulatedApiWithLogging(simpleApiAccessor); //use it for class with logging
+let cacheAccessor = new SimpleCacheAccessor();
+let apiAccessorWithLoggingWithCaching = new SimulatedApiWithCaching( //use that for class with caching
+  apiAccessorWithLogging,
+  cacheAccessor
+);
 console.log("---  request 1 ---");
-c.makeRequest();
+apiAccessorWithLoggingWithCaching.makeRequest();
 setTimeout(() => {
   console.log("---  request 2 ---");
-  c.makeRequest();
+  apiAccessorWithLoggingWithCaching.makeRequest();
 }, 5000);
 </code></pre>
-
-    ------------------- Results code here -----------------------
-    <pre><code class="language-ts"></code></pre>
+    <div class="block">Here are the results:</div>
+    <pre><code class="language-ts">---  request 1 ---
+reaching out to API
+time taken (ms):  1815
+data: [
+  { name: 'John Johnson', age: 32 },
+  { name: 'Jane Johnson', age: 32 },
+  { name: 'Jim Johnson', age: 10 }
+]
+---  request 2 ---
+data (from cache): [
+  { name: 'John Johnson', age: 32 },
+  { name: 'Jane Johnson', age: 32 },
+  { name: 'Jim Johnson', age: 10 }
+]</code></pre>
 </div>
 
 <bottom-nav next-pointer-word="Next"
