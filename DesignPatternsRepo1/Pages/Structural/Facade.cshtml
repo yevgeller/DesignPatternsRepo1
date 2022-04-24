@@ -91,7 +91,11 @@ class Orchestra {
   }
   prepare = (): void => console.log("orchestra is ready");
 }
-
+</code></pre>
+<div class='block'>
+In order to start the performance, the following code would need to be typed each time:
+</div>
+<pre><code class="language-ts">
 let soundBooth = new SoundBooth();
 soundBooth.setUpSound();
 soundBooth.setUpOnStageMicrophones();
@@ -107,7 +111,55 @@ choir.prepare();
 let orchestra = new Orchestra();
 orchestra.prepare();
 auditorium.dimLights();</code></pre>
+<div class="block">
+    This is very error-prone and repetitive. So instead, another class is created,
+    which has a sole responsibility of running this code.
 </div>
+ <pre><code class="language-ts">class PerformanceStarter {
+  startPerformance(): void {
+    let soundBooth = new SoundBooth();
+    soundBooth.setUpSound();
+    soundBooth.setUpOnStageMicrophones();
+    let lightingProvider = new LightingProvider();
+    let auditorium = new Auditorium(lightingProvider);
+    auditorium.openDoors();
+    let talentManager = new TalentManager();
+    let stageManager = new StageManager(lightingProvider, talentManager);
+    stageManager.ensureActorsReady();
+    stageManager.ensureLightIsSet();
+    let choir = new Choir();
+    choir.prepare();
+    let orchestra = new Orchestra();
+    orchestra.prepare();
+    auditorium.dimLights();
+  }
+}</code></pre>
+<div class="block">
+    And then running the code looks almost trivial:
+</div>
+ <pre><code class="language-ts">let performanceStarter = new PerformanceStarter();
+performanceStarter.startPerformance();</code></pre>
+<div class="block">
+    And the results are the same:
+</div>
+ <pre><code class="language-ts">sound booth here
+sound set up
+stage microphones set up
+Lighting Provider initialized
+auditorium here
+doors are open
+talent manager is ready to deal with cast
+stage manager is ready
+actors are ready
+stage lights are set properly
+choir is here
+choir is ready
+orchestra is here
+orchestra is ready
+lights dimmed</code></pre>
+</div>
+
+
 
 
 <bottom-nav next-pointer-word="Next"
