@@ -27,6 +27,62 @@
         The current choice of background plants is grass, fern, or pine trees, and name and description will be the same among 
         each type of plant, but each of the plants will have some individual trait that will be shown in the display method.
     </div>
+
+    <div class="block">
+        First, an interface shared by the plants. It shows which items are intrinsic, specific to each class, repetitive items 
+        and kind of "baked in" to each of the classes. It also shows which items are extrinsic, size can vary, and another 
+        extrinsic item. This can be anything specific to each class, something that is not the cookie-cutter item.
+    </div>
+    <pre><code class="language-ts">interface IFloraItem {
+  readonly name: string; //intrinsic state
+  readonly description: string; //intrinsic state
+  display(
+    size: "small" | "medium" | "large",
+    somethingElseExtrinsic: string
+  ): void; //extrinsic
+    </code></pre>
+
+    
+    <div class="block">
+        Next, a parent class that implements the display method, in this particular implementation it is the same among all three classes:
+    </div>
+    <pre><code class="language-ts">class FloraItemParent implements IFloraItem {
+  name: string = "no name";
+  description: string = "no description";
+  display(
+    size: "small" | "medium" | "large",
+    somethingElseExtrinsic: string = ""
+  ): void {
+    console.log(
+      `A ${size}-sized ${this.name}, looks like a ${this.description} is here.`
+    );
+    if (somethingElseExtrinsic.length > 0) {
+      console.log("Extra data: ", somethingElseExtrinsic);
+    }
+  }
+}</code></pre>
+
+    <div class="block">
+        First, an interface shared by the plants:
+    </div>
+    <pre><code class="language-ts">
+
+    </code></pre>
+    <div class="block">
+        First, an interface shared by the plants:
+    </div>
+    <pre><code class="language-ts">
+
+    </code></pre>
+    <div class="block">
+        First, an interface shared by the plants:
+    </div>
+    <pre><code class="language-ts">
+
+    </code></pre>
+    <div class="block">
+        First, an interface shared by the plants:
+    </div>
     <pre><code class="language-ts">
 
     </code></pre>
