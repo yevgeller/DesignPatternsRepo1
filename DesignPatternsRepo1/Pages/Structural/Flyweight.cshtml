@@ -63,25 +63,105 @@
 }</code></pre>
 
     <div class="block">
-        First, an interface shared by the plants:
+        Next, the three concrete classes of plants:
+    </div>
+    <pre><code class="language-ts">class Fern extends FloraItemParent {
+  constructor() {
+    super();
+    this.name = "Fern";
+    this.description =
+      "A plant with a bunch of tiny leaves. Makes a great house plant.";
+  }
+}
+
+class PineTree extends FloraItemParent {
+  constructor() {
+    super();
+    this.name = "Pine tree";
+    this.description = "Tall mighty tree. Watch out for pine cones!";
+  }
+}
+
+class GrassBlade extends FloraItemParent {
+  constructor() {
+    super();
+    this.name = "blade of grass";
+    this.description = "green string.";
+  }
+}
+    </code></pre>
+    <div class="block">
+        The final piece of the puzzle is a 
+        <a asp-area="" asp-page="/Creational/Factory-problem"><i class="fa-solid fa-industry mr-2"></i>factory</a>
+        that checks the dictionary if a type has already been instantiated, and if not, create a new class of 
+        that type and add it to the dictionary. The factory has extra method showDictionary that will show
+        that regardless of how many various classes are created, only one type of each class is actually
+        stored in that dictionary.
+    </div>
+    <pre><code class="language-ts">class FloraFactory {
+  dictionary = {};
+  constructor() {
+    console.log("\n");
+    console.log("FloraFactory is ready. Your options are: fern, pine, grass");
+    console.log("\n");
+  }
+  getFloraItem(itemKey: string): FloraItemParent {
+    switch (itemKey) {
+      case "fern":
+        if (this.dictionary.hasOwnProperty("fern"))
+          return this.dictionary["fern"];
+        else {
+          this.dictionary["fern"] = new Fern();
+          return this.dictionary["fern"];
+        }
+      case "pine":
+        if (this.dictionary.hasOwnProperty("pine"))
+          return this.dictionary["pine"];
+        else {
+          this.dictionary["pine"] = new PineTree();
+          return this.dictionary["pine"];
+        }
+      case "grass":
+        if (this.dictionary.hasOwnProperty("grass"))
+          return this.dictionary["grass"];
+        else {
+          this.dictionary["grass"] = new GrassBlade();
+          return this.dictionary["grass"];
+        }
+
+      default:
+        break;
+    }
+    return new GrassBlade();
+  }
+
+  showDictionary(showIndividualRecords: boolean = false): void {
+    if (showIndividualRecords)
+      console.log("----- Current state of the factory:");
+    let count = 0;
+    for (const prop in this.dictionary) {
+      if (showIndividualRecords) {
+        console.log(
+          `${prop}: ${(this.dictionary[prop] as FloraItemParent).name}`
+        );
+      }
+      count++;
+    }
+    console.log("Total number of records in the factory:", count);
+    console.log();
+  }
+}
+
+
+    </code></pre>
+    <div class="block">
+        Next, test code:
     </div>
     <pre><code class="language-ts">
 
     </code></pre>
     <div class="block">
-        First, an interface shared by the plants:
-    </div>
-    <pre><code class="language-ts">
-
-    </code></pre>
-    <div class="block">
-        First, an interface shared by the plants:
-    </div>
-    <pre><code class="language-ts">
-
-    </code></pre>
-    <div class="block">
-        First, an interface shared by the plants:
+        Results:
     </div>
     <pre><code class="language-ts">
 
