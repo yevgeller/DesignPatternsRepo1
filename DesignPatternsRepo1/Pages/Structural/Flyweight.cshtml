@@ -11,6 +11,22 @@
         In case many objects need to be created and some of their state is the same among them (or groups of them),
         then Flyweight pattern can be used to save memory.
     </div>
+
+    <div class="block">
+        The idea behind this pattern is to separate the common parts among all types of objects (intrinsic data) 
+        and their differences (extrinsic data). Then create a dictionary of some sort to store just one copy of
+        each type and provide a way to set extrinsic data. 
+    </div>
+    <div class="block">
+        The reasoning behind such separation is to save on memory by not storing same data over and over again.
+    </div>
+
+    <div class="block">
+        The following code imitates drawing various plants for a game background. Assumption is that there will need to be
+        many plants in the background and the game needs to run smoothly on systems with even limited resources. 
+        The current choice of background plants is grass, fern, or pine trees, and name and description will be the same among 
+        each type of plant, but each of the plants will have some individual trait that will be shown in the display method.
+    </div>
     <pre><code class="language-ts">
 
     </code></pre>
