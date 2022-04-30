@@ -155,7 +155,9 @@ class GrassBlade extends FloraItemParent {
 
     </code></pre>
     <div class="block">
-        Next, test code:
+        Next, test code. The following code initializes 3 large items of each kind, then 3 medium, then 3 small, 
+        then 3 random items.  After each item is initialized, there is a check that shows how many items
+        are in the dictionary.
     </div>
     <pre><code class="language-ts">let floraFactory = new FloraFactory();
 console.log("-- large items --");
@@ -197,7 +199,7 @@ let smallFern = floraFactory.getFloraItem("fern");
 smallFern.display("small", "a young fern");
 floraFactory.showDictionary(true);
 
-console.log("-- one of each items --");
+console.log("-- three random items --");
 let largePine2 = floraFactory.getFloraItem("pine");
 largePine2.display("large", "Another large pine tree!");
 floraFactory.showDictionary();
@@ -216,7 +218,76 @@ floraFactory.showDictionary(true);
     <div class="block">
         Results:
     </div>
-    <pre><code class="language-ts">
+    <pre><code class="language-ts">FloraFactory is ready. Your options are: fern, pine, grass
+
+
+-- large items --
+A large-sized Pine tree, looks like a Tall mighty tree. Watch out for pine cones!
+Extra data:  a large pine, but seems that it has absolutely no cones
+Total number of records in the factory: 1
+
+A large-sized blade of grass, looks like a green string.
+Extra data:  some bug is sitting on this huge blade of grass
+Total number of records in the factory: 2
+
+A large-sized Fern, looks like a A plant with a bunch of tiny leaves. Makes a great house plant.
+Extra data:  this fern is so large, it is starting to wilt
+-- Current state of the factory:
+pine: Pine tree
+grass: blade of grass
+fern: Fern
+Total number of records in the factory: 3
+
+-- medium items --
+A medium-sized Pine tree, looks like a Tall mighty tree. Watch out for pine cones!
+Extra data:  nice and perfect size tree
+Total number of records in the factory: 3
+
+A medium-sized blade of grass, looks like a green string.
+Extra data:  this blade of grass is ready to be cut
+Total number of records in the factory: 3
+
+A medium-sized Fern, looks like a A plant with a bunch of tiny leaves. Makes a great house plant.
+Extra data:  this fern is a part of a huge fern patch
+----- Current state of the factory:
+pine: Pine tree
+grass: blade of grass
+fern: Fern
+Total number of records in the factory: 3
+
+-- small items --
+A small-sized Pine tree, looks like a Tall mighty tree. Watch out for pine cones!
+Extra data:  this tree could make a great house tree for Christmas
+Total number of records in the factory: 3
+
+A small-sized blade of grass, looks like a green string.
+Extra data:  freshly cut and smells great
+Total number of records in the factory: 3
+
+A small-sized Fern, looks like a A plant with a bunch of tiny leaves. Makes a great house plant.
+Extra data:  a young fern
+----- Current state of the factory:
+pine: Pine tree
+grass: blade of grass
+fern: Fern
+Total number of records in the factory: 3
+
+-- three random items --
+A large-sized Pine tree, looks like a Tall mighty tree. Watch out for pine cones!
+Extra data:  Another large pine tree!
+Total number of records in the factory: 3
+
+A small-sized blade of grass, looks like a green string.
+Extra data:  ALSO freshly cut
+Total number of records in the factory: 3
+
+A medium-sized Fern, looks like a A plant with a bunch of tiny leaves. Makes a great house plant.
+Extra data:  not such young fern, but not as bushy as an adult plant
+----- Current state of the factory:
+pine: Pine tree
+grass: blade of grass
+fern: Fern
+Total number of records in the factory: 3
 
     </code></pre>
 </div>
