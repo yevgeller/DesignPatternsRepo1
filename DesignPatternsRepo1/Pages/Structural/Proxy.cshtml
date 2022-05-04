@@ -29,12 +29,16 @@
     <div class="block">
         The difference between <a asp-area="" asp-page="/Structural/Decorator"><i class="fa-solid fa-chart-line mr-2"></i>Decorator</a> and Proxy is that 
         Proxy controls the lifecycle of an object that it contains, while Decorator is controlled by the execution flow. Also, Proxy controls access 
-        to an object, while Decorator focuses on adding functionality.
+        to an object, while <a asp-area="" asp-page="/Structural/Decorator"><i class="fa-solid fa-chart-line mr-2"></i>Decorator</a> focuses on adding functionality.
     </div>
     <div class="block">
-        Let's look at some code examples. First, let's define a "resource:"
+        Let's look at some code examples. First, let's define an interface that a resource provider uses, as wel as a "resource:"
     </div>
-    <pre><code class="language-ts">class Resource {
+    <pre><code class="language-ts">interface IResourceProvider {
+  getResource(): boolean;
+}
+
+class Resource {
   getResource(): boolean {
     console.log("Here you go!");
     return true;
@@ -42,8 +46,68 @@
 }
 </code></pre>
     <div class="block">
-
+        The next class is an example of a Proxy with complications. Access to the resource is granted on a random basis. The timeout is added to simulate
+        creation of a large resource.
     </div>
+<pre><code class="language-ts">class ResourceControllerByWhim implements IResourceProvider {
+  resource: Resource;
+  constructor() {
+    this.resource = new Resource();
+  }
+
+  getResource(): boolean {
+    let whim = Math.floor(Math.random() * 10);
+    console.log("whim: ", whim);
+    if (whim < 3) {
+      console.log("contacting remote resource...");
+      setTimeout(() => {
+        this.resource.getResource();
+        return true;
+      }, 1000);
+    } else {
+      console.log("I don't feel like it, so no.");
+      return false;
+    }
+  }
+}</code></pre>
+
+<div class="block">The following class is an example of a Protection Proxy:</div>
+
+<pre><code class="language-ts">class ResourceControllerByPermissions implements IResourceProvider {
+  resource: Resource;
+  permission: string;
+  constructor(permission: string) {
+    this.resource = new Resource();
+    this.permission = permission;
+  }
+
+  getResource(): boolean {
+    if (this.permission === "access") return this.resource.getResource();
+    else {
+      console.log("Access denied");
+      return false;
+    }
+  }
+}</code></pre>
+
+<div class="block">
+Here is what it looks like when run:
+</div>
+
+<pre><code class="language-ts">/*
+whim:  7
+I don't feel like it, so no.
+whim:  5
+I don't feel like it, so no.
+whim:  2
+contacting remote resource...
+Here you go!
+
+
+----- Permission Proxy access example: no permissions
+Access denied
+----- Permission Proxy access example: with permissions
+Here you go!*/</code></pre>
     <div class="block">
         Source: <ul>
             <li>
