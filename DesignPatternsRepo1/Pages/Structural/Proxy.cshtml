@@ -3,13 +3,6 @@
 @{
 }
 
-Remote proxy -- client can communicate with a proxy, feels like local resource
-Virtual proxy -- Allows creating expensive objects on demand
-Smart proxy -- Allows adding additional logic around the subject
-Protection proxy -- used to control access to an object
-
-Decorator adds responsibilities to an object, Proxy controls access to an object
-
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-door-open mr-2"></i>Proxy</h1>
 <h2 class="subtitle">A placeholder for another object for a few reasons</h2>
 <div class="content">
@@ -25,7 +18,7 @@ Decorator adds responsibilities to an object, Proxy controls access to an object
             </li>
             <li>
                 Smart proxy. Client communicates with a proxy object while proxy object performs
-                additional duties. Essentially a <a asp-area="" asp-page="/Structural/Decorator"><i class="fa-solid fa-chart-line mr-2"></i>Decorator</a>
+                additional duties. Essentially a <a asp-area="" asp-page="/Structural/Decorator"><i class="fa-solid fa-chart-line mr-2"></i>Decorator</a>.
             </li>
             <li>
                 Protection proxy. Client communicates with a proxy object, which ensures that the
@@ -35,10 +28,22 @@ Decorator adds responsibilities to an object, Proxy controls access to an object
     </div>
     <div class="block">
         The difference between <a asp-area="" asp-page="/Structural/Decorator"><i class="fa-solid fa-chart-line mr-2"></i>Decorator</a> and Proxy is that 
-        Proxy controls the lifecycle of an object that it contains, while Decorator is controlled by the execution flow.
+        Proxy controls the lifecycle of an object that it contains, while Decorator is controlled by the execution flow. Also, Proxy controls access 
+        to an object, while Decorator focuses on adding functionality.
     </div>
+    <div class="block">
+        Let's look at some code examples. First, let's define a "resource:"
+    </div>
+    <pre><code class="language-ts">class Resource {
+  getResource(): boolean {
+    console.log("Here you go!");
+    return true;
+  }
+}
+</code></pre>
+    <div class="block">
 
-    <pre><code class="language-ts"></code></pre>
+    </div>
     <div class="block">
         Source: <ul>
             <li>
