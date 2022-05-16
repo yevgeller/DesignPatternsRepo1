@@ -29,6 +29,10 @@
             </li>
         </ol>
     </div>
+    <div class="block">
+        The first thing that needs to be done is to extract same functionality between branches and leaves into a class Component.
+        It defines a parameter for a name, and a method that will work in a Leaf and a Brach class.
+    </div>
 <pre>
     <code class="language-ts">class Component { //base class extracting repeating functionality
   name: string;
@@ -37,9 +41,18 @@
   constructor(name: string) {
     this.name = name;
   }
-}
+}</code></pre>
+<div class="block">
+    The next piece of code defines Leaf and Branch classes. Branch class can have many leaves (hence the container for 
+    leaves called "components" and is of type Component[]). Also, it is worth noting the different implementation
+    of the "primaryOperation" method between the two classes. In the Leaf class, it returns the identifier for the 
+    object it is in. For the Branch class, it also returns an identifier, but it also calls the same method for all
+    items in its' components container. This is how the pattern is working, method is the same among both types 
+    of objects, but it acts differently between the two types of objects.
+</div>
 
-class Leaf extends Component {
+<pre>
+    <code class="language-ts">class Leaf extends Component {
   name: string;
   constructor(name: string) {
     super(name);
