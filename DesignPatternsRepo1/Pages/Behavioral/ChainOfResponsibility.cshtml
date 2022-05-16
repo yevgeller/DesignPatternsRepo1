@@ -1,0 +1,59 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Behavioral.ChainOfResponsibilityModel
+@{
+}
+
+
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-link mr-2"></i>Chain of Responsibility</h1>
+<h2 class="subtitle">Standardizing similar separate functionality</h2>
+<div class="content">
+
+    <div class="block">
+        Chain of Responsibility is used for separate similar functionality that can be standardized. It can be anything, like permission checks,
+        data validation, quality control. Something sequential that needs to be automated. Stand-alone checkers may seem like a lot of code,
+        but that pattern plays a lot into the Single Responsibility Principle. Separating big mechanism into smaller pieces allows for
+        easier troubleshooting, maintenance, and improvement.
+    </div>
+    <div class="block">
+        The basic approach is to have an interface that provides two methods: one to chain the next handler (if available) and another one to actually
+        handle 
+    </div>
+    <div class="block">
+    </div>
+    <pre><code class="language-ts"></code></pre>
+    <div class="block">
+    </div>
+<pre><code class="language-ts"></code></pre>
+
+    <div class="block"></div>
+
+<pre><code class="language-ts"></code></pre>
+
+    <div class="block">
+    </div>
+
+<pre><code class="language-ts"></code></pre>
+    <div class="block">
+        Source: <ul>
+            <li>
+                <a href="https://app.pluralsight.com/library/courses/c-sharp-10-design-patterns/table-of-contents">
+                    C# 10 Design Patterns course (Pluralsight)
+                </a>
+            </li>
+            <li>
+                <a href="https://refactoring.guru/design-patterns/proxy">Proxy (Refactoring Guru)</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-bowl-rice"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Structural|Flyweight"
+            next-name="Flyweight"></bottom-nav>
+<script>hljs.highlightAll();</script>
