@@ -17,23 +17,144 @@
     </div>
     <div class="block">
         The basic approach is to have an interface that provides two methods: one to chain the next handler (if available) and another one to actually
-        handle 
-    </div>
-    <div class="block">
-    </div>
-    <pre><code class="language-ts"></code></pre>
-    <div class="block">
-    </div>
-<pre><code class="language-ts"></code></pre>
+        provide code for necessary action. The following example is about a quality control at the North Pole factory that creates toy cars. Each car 
+        needs to have four wheels, wheels need be able to turn, horn needs to honk. Here is the code for the interface followed by the code of the test subject class:
+    </div> <pre><code class="language-ts">interface IToyCarQualityControlHandler {
+  setNext(handler: IToyCarQualityControlHandler): IToyCarQualityControlHandler;
+  handle(request: ToyCar): void;
+}
 
-    <div class="block"></div>
+class ToyCar {
+  serialNumber: string;
+  wheels: number;
+  hornHonking: boolean;
+  wheelsTurning: boolean;
+  issues: any = [];
 
-<pre><code class="language-ts"></code></pre>
+  constructor(
+    wheels: number,
+    hornHonking: boolean,
+    wheelsTurning: boolean,
+    serialNumber: string
+  ) {
+    this.wheels = wheels;
+    this.hornHonking = hornHonking;
+    this.wheelsTurning = wheelsTurning;
+    this.serialNumber = serialNumber;
+  }
+}</code></pre>
+    <div class="block">The following is the parent class for a quality control handler. It abstracts the necessary functionality and acts as a director ensuring
+        that each handler executes in prescribed order.
+    </div>
+    <pre><code class="language-ts">abstract class AbstractHandler implements IToyCarQualityControlHandler {
+  private nextHandler: IToyCarQualityControlHandler;
+  public setNext(
+    handler: IToyCarQualityControlHandler
+  ): IToyCarQualityControlHandler {
+    this.nextHandler = handler;
+    return handler;
+  }
 
-    <div class="block">
+  public handle(request: ToyCar): void {
+    if (this.nextHandler) {
+      this.nextHandler.handle(request);
+    }
+    return null;
+  }
+}
+</code></pre>
+    <div class="block">The following is a sample code for three trivial object attribute checks:
+    </div>
+<pre><code class="language-ts">
+class NumberOfWheelsCheckHandler extends AbstractHandler {
+  public handle(request: ToyCar): void {
+    if (request.wheels !== 4) {
+      request.issues.push(
+        `unacceptable number of wheels, ${request.wheels} instead of 4`
+      );
+    }
+    return super.handle(request);
+  }
+}
+
+class HornHonksCheckHandler extends AbstractHandler {
+  public handle(request: ToyCar): void {
+    if (request.hornHonking !== true) {
+      request.issues.push("horn does not work");
+    }
+    return super.handle(request);
+  }
+}
+
+class WheelsTurnCheckHandler extends AbstractHandler {
+  public handle(request: ToyCar): void {
+    if (!request.wheelsTurning) {
+      request.issues.push("wheels are not turning");
+    }
+    return super.handle(request);
+  }
+}</code></pre>
+
+    <div class="block">Finally, a test harness set up. An item of note is that it's not necessary to start with the very first check. 
+        However, checks are executed successfully at and after whichever one started the chain.
     </div>
 
-<pre><code class="language-ts"></code></pre>
+<pre><code class="language-ts">
+let wheelsCheck = new NumberOfWheelsCheckHandler();
+let hornCheck = new HornHonksCheckHandler();
+let wheelsTurnCheck = new WheelsTurnCheckHandler();
+
+wheelsCheck.setNext(hornCheck).setNext(wheelsTurnCheck);
+
+let goodCar = new ToyCar(4, true, true, "TOYCAR001");
+let badCar1 = new ToyCar(3, false, false, "TOYCAR002");
+let badCar2 = new ToyCar(3, false, false, "TOYCAR003");
+let badCar3 = new ToyCar(3, false, false, "TOYCAR004");
+function processResult(item: ToyCar) {
+  if (item.issues.length > 0) {
+    console.log(
+      `car ${item.serialNumber} was found to have the following issues during the inspection: `
+    );
+    console.table(item.issues);
+  } else
+    console.log(`car ${item.serialNumber} processed inspection without issues`);
+}
+
+wheelsCheck.handle(goodCar);
+processResult(goodCar);
+wheelsCheck.handle(badCar1);
+processResult(badCar1);
+hornCheck.handle(badCar2);
+processResult(badCar2);
+wheelsTurnCheck.handle(badCar3);
+processResult(badCar3);
+</code></pre>
+
+    <div class="block">Here are the results of the code executed above:
+    </div>
+
+<pre><code class="language-ts">car TOYCAR001 processed inspection without issues
+car TOYCAR002 was found to have the following issues during the inspection: 
+┌─────────┬─────────────────────────────────────────────────┐
+│ (index) │                     Values                      │
+├─────────┼─────────────────────────────────────────────────┤
+│    0    │ 'unacceptable number of wheels, 3 instead of 4' │
+│    1    │              'horn does not work'               │
+│    2    │            'wheels are not turning'             │
+└─────────┴─────────────────────────────────────────────────┘
+car TOYCAR003 was found to have the following issues during the inspection:
+┌─────────┬──────────────────────────┐
+│ (index) │          Values          │
+├─────────┼──────────────────────────┤
+│    0    │   'horn does not work'   │
+│    1    │ 'wheels are not turning' │
+└─────────┴──────────────────────────┘
+car TOYCAR004 was found to have the following issues during the inspection:
+┌─────────┬──────────────────────────┐
+│ (index) │          Values          │
+├─────────┼──────────────────────────┤
+│    0    │ 'wheels are not turning' │
+└─────────┴──────────────────────────┘</code></pre>
     <div class="block">
         Source: <ul>
             <li>
@@ -52,8 +173,8 @@
 
 
 <bottom-nav next-pointer-word="Next"
-            next-icon1="fa-solid fa-bowl-rice"
+            next-icon1="fa-solid fa-bullhorn"
             next-icon3="fa-solid fa-arrow-right"
-            next-link="Structural|Flyweight"
+            next-link="Behavioral|Command"
             next-name="Flyweight"></bottom-nav>
 <script>hljs.highlightAll();</script>
