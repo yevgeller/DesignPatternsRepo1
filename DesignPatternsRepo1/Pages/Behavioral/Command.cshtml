@@ -10,24 +10,186 @@
 Command becomes a self-sufficient unit that knows how to do everything and knows how to undo itself too.
 
 <div class="block">Command pattern is essentially abstracting an action into its own self-sufficient object that knows how to 
-    do one thing and one thing alone. Well, maybe more than one thing.
+    do one thing and one thing alone. Well, maybe more than one thing -- commands may also know how to undo what they did. The 
+    following example simulates a warehouse that loads trucks. This example intends to show that a command can be a standalone
+    object -- when a foreman tells to put one pallet of bananas in truck number one, he does not need to explain what forklift 
+    to take or where to find the pallet or how to put it in the truck, he/she relies on professionals to know exactly what 
+    needs to be done.    
 </div> 
 <pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
+<div class="block">First, let's define details, Truck class that has describes a truck and its capacity along with the currently loaded weight:</div> 
+<pre><code class="language-ts">class Truck {
+    id: number;
+    weightCapacity: number;
+    shipments: Array<Shipment>;
+    constructor(id: number, weight: number) {
+      this.id = id;
+      this.weightCapacity = weight;
+      this.shipments = [];
+    }
+    totalWeightSoFar(): number {
+      if (this.shipments === undefined) return 0;
+      if (this.shipments.length === 0) return 0;
+      let runningTotal = 0;
+      this.shipments.forEach((s) => (runningTotal += s.weight));
+      return runningTotal;
+    }
+  }</code></pre>
+<div class="block">Shipment describes goods that go in the truck. Id, weight, description, nothing special, just another container for information.</div> 
+<pre><code class="language-ts">  class Shipment {
+    id: number;
+    weight: number;
+    description: string;
+    constructor(id: number, weight: number, description: string) {
+      this.id = id;
+      this.weight = weight;
+      this.description = description;
+    }
+  }</code></pre>
+<div class="block">Next, repository. This is the team of Teamsters that know how to load and unload a Shipment from a Truck. This class also
+    keeps track of trucks in bays, and can provide status on each truck's available capacity. It implements an interface for a possible 
+    future expansion.
+</div> 
+<pre><code class="language-ts">interface ITruckLoaderRepository {
+    addShipment(shipment: Shipment, truckId: number);
+    removeShipment(shipment: Shipment, truckId: number);
+    provideStatus(): void;
+  }
 
+  class TruckLoaderRepository implements ITruckLoaderRepository {
+    trucks: Truck[];
+    constructor() {
+      this.trucks = [];
+      this.trucks.push(new Truck(1, 3));
+      this.trucks.push(new Truck(2, 5));
+    }
+    addShipment(shipment: Shipment, truckId: number) {
+      let thisTruckInArray = this.trucks.filter((t) => t.id === truckId);
+      if (thisTruckInArray !== undefined && thisTruckInArray.length > 0) {
+        let thisTruck = thisTruckInArray[0];
+        thisTruck.shipments.push(shipment);
+        thisTruck.weightCapacity += shipment.weight;
+      }
+    }
+    removeShipment(shipment: Shipment, truckId: number) {
+      let thisTruckInArray = this.trucks.filter((t) => t.id === truckId);
+      if (thisTruckInArray !== undefined && thisTruckInArray.length > 0) {
+        let thisTruck = thisTruckInArray[0];
+        thisTruck.shipments = thisTruck.shipments.filter(
+          (s) => s.id !== shipment.id
+        );
+        thisTruck.weightCapacity -= shipment.weight;
+      }
+    }
+    provideStatus(): void {
+      this.trucks.forEach((t) => {
+        console.log(
+          `Truck ${t.id}, ${
+            t.shipments.length
+          } shipments, ${t.totalWeightSoFar()}/${t.weightCapacity} filled`
+        );
+        if (t.shipments?.length > 0) {
+          console.log("Truck contents:");
+          t.shipments.forEach((s) =>
+            console.log(
+              `Shipment ${s.id}, weight: ${s.weight}, contents: ${s.description}`
+            )
+          );
+        }
+      });
+    }
+  }</code></pre>
+<div class="block">Now that the toy objects are out of the way, let's get to the Command itself. First, the interface. It implements the "execute" 
+    method that does the work. It also provides a "canExecute" method, that signals whether it is possible to execute the Command safely. Also,
+    there is the "undo" method.
+</div> 
+<pre><code class="language-ts">  interface ICommand {
+    execute(): void;
+    canExecute(): boolean;
+    undo(): void;
+  }</code></pre>
+<div class="block">Here is the definition of a Command. As you can see, the class has everything it needs to perform the required action. It
+    knows about what truck to load a shipment into (truckId field), what shipment to load (shipment property), and it knows how to do it 
+    (repository).
+</div> 
+<pre><code class="language-ts">  class LoadShipment implements ICommand {
+    private readonly truckId: number;
+    private readonly shipment: Shipment;
+    private readonly repository: ITruckLoaderRepository;
+    constructor(
+      truckId: number,
+      shipment: Shipment,
+      repository: ITruckLoaderRepository
+    ) {
+      this.truckId = truckId;
+      this.shipment = shipment;
+      this.repository = repository;
+    }
+    execute(): void {
+      this.repository.addShipment(this.shipment, this.truckId);
+    }
+    canExecute(): boolean {
+      if (this.shipment === undefined) {
+        console.log(
+          "Shipment is undefined, cannot load shipment on this truck"
+        );
+        return false;
+      }
+      //...more checks as needed
+      return true;
+    }
+    undo(): void {
+      this.repository.removeShipment(this.shipment, this.truckId);
+    }
+  }</code></pre>
+<div class="block">A command can be assigned to a button or another control element. Moreover, several different control elements
+    can implement the same command. In our case though, the harness will be a class that invokes commands and keeps track of their 
+    order for the undo capabilities.
+</div> 
+<pre><code class="language-ts">class CommandManager {
+    //since there is no UI, this will be a way to "click" "buttons"
+
+    private commandStack: ICommand[];
+    constructor() {
+      this.commandStack = [];
+    }
+    public invoke(command: ICommand): void {
+      if (command.canExecute()) {
+        this.commandStack.push(command);
+        command.execute();
+      }
+    }
+
+    public undo(): void {
+      if (this.commandStack?.length > 0) {
+        let lastCommand = this.commandStack.pop();
+        lastCommand.undo();
+      }
+    }
+  }</code></pre>
+<div class="block">Finally, that is how it all comes together.</div> 
+<pre><code class="language-ts">  let cmdMgr = new CommandManager();
+  let repository = new TruckLoaderRepository();
+  let shipmentOfBananas = new Shipment(1, 1, "bananas");
+  let shipmentOfMangoes = new Shipment(2, 1, "mangoes");
+  console.log("Initial repository state:");
+  repository.provideStatus();
+  console.log("adding bananas to truck 1 for weight of 1");
+  cmdMgr.invoke(new LoadShipment(1, shipmentOfBananas, repository));
+  repository.provideStatus();
+  console.log("adding mangoes to truck 2 for weight of 1");
+  cmdMgr.invoke(new LoadShipment(2, shipmentOfMangoes, repository));
+  repository.provideStatus();
+  console.log(
+    "Oops! Mangoes should have gone to truck one. Undo loading to truck 2"
+  );
+  cmdMgr.undo();
+  repository.provideStatus();
+  console.log("loading mangoes to truck 1 for weight of 1");
+  cmdMgr.invoke(new LoadShipment(1, shipmentOfMangoes, repository));
+  repository.provideStatus();</code></pre>
+<div class="block">And here is the result:</div> 
+<pre><code class="language-ts"></code></pre>
 </div>
 
 
