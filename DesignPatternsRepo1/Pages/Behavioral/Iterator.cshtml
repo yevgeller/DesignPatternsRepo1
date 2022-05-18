@@ -1,0 +1,131 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Behavioral.IteratorModel
+@{
+}
+
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-arrow-rotate-right mr-2"></i>Iterator</h1>
+<h2 class="subtitle">A way to traverse a collection without exposing its inner structure</h2>
+<div class="content">  
+
+<div class="block">If there is a custom collection of elements, implementing an iterator helps get that special order of elements
+    in a standardized way without looking under the hood. The following example is used to print out a recipe in such a way that 
+    ingredients are displayed in the order that they need to be mixed, regardless of the order that they were added when a recipe
+    was recorded.
+</div> 
+<div class="block">First, service classes. CLass Ingredient describes each ingredient, whether it's dry or wet, and stores how much 
+    of it is needed for a recipe. Class Recipe takes in the name of the dish, array of Ingredients, and array of strings for directions.
+    Then, in the printRecipe method, it gets an enumerator for the collection of ingredients, and lists each one of them until there are 
+    no more ingredients to show. 
+</div>
+<pre><code class="language-ts">  class Ingredient {
+    name: string;
+    isDry: boolean;
+    unitOfMeasure: string;
+    units: string;
+    constructor(
+      name: string,
+      isDry: boolean,
+      unitOfMeasure: string,
+      units: string
+    ) {
+      this.name = name;
+      this.isDry = isDry;
+      this.unitOfMeasure = unitOfMeasure;
+      this.units = units;
+    }
+
+    displayIngredient = () =>
+      `${this.name} (${this.isDry ? "dry" : "wet"}), ${this.units} ${
+        this.unitOfMeasure.toLocaleLowerCase() === "unit"
+          ? ""
+          : this.unitOfMeasure
+      }`;
+  }
+
+  class Recipe {
+    ingredients: IngredientsCollection;
+    directions: Array<string>;
+    dishName: string;
+    constructor(
+      dishName: string,
+      ingredients: Array<Ingredient>,
+      directions: Array<string>
+    ) {
+      this.dishName = dishName;
+      this.ingredients = new IngredientsCollection(ingredients);
+      this.directions = directions;
+    }
+    printRecipe(): void {
+      console.log(this.dishName.toUpperCase());
+      let ingrenum = this.ingredients.getEnumerator();
+      console.log("\nINGREDIENTS:");
+      while (ingrenum.hasNext()) {
+        console.log(ingrenum.next().displayIngredient());
+      }
+      console.log("\nDIRECTIONS: ");
+      this.directions.forEach((d) => console.log(d));
+    }
+    cookRecipe(): void {
+      //lol not this time
+    }
+  }</code></pre>
+<div class="block">So what is that getEnumerator method? It is coming from IIngredientEnumerable interface and is implemented by 
+    the IngredientsCollection class.
+</div> 
+<pre><code class="language-ts">  interface IIngredientEnumerable {
+    getEnumerator(): IIngredientIterator;
+  }
+
+  class IngredientsCollection implements IIngredientEnumerable {
+    private allIngredients: Array<Ingredient>;
+    constructor(allIngredients: Array<Ingredient>) {
+      if (allIngredients === undefined || allIngredients.length === 0)
+        throw new Error("Cannot iterate over empty ingredient collection");
+      this.allIngredients = allIngredients;
+    }
+    getEnumerator(): IIngredientIterator {
+      return new IngredientEnumerator(this.allIngredients);
+    }
+  }</code></pre>
+<div class="block">getEnumerator returns an object </div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+<div class="block"></div> 
+<pre><code class="language-ts"></code></pre>
+
+</div>
+
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-ICON"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="FOLDER|PAGE"
+            next-name="PATTERNNAME"></bottom-nav>
+<script>hljs.highlightAll();</script>
