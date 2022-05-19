@@ -58,7 +58,7 @@
     }
     printRecipe(): void {
       console.log(this.dishName.toUpperCase());
-      let ingrenum = this.ingredients.getEnumerator();
+      let ingrenum = this.ingredients.getIterator();
       console.log("\nINGREDIENTS:");
       while (ingrenum.hasNext()) {
         console.log(ingrenum.next().displayIngredient());
