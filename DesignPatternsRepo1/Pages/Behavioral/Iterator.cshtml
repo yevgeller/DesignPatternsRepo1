@@ -145,9 +145,62 @@ where we can go, in our case only forward. The other two methods are windows in 
 that implements the <code>IIngredientIterable</code> is the driver. He/she summons the vehicle and can drive on the road (iterate over an <code>Array</code> of <code>Ingredients</code>),
 to the next <code>Ingredient</code> (by calling <code>next()</code> on <code>IIngredientIterator</code> method) while knowing where he/she is at all
 times (<code>currentItem</code> property and <code>hasNext()</code> method of the <code>IIngredientIterator</code> interface).</div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
+<div class="block">
+    Here is the calling code and the result. All that it needed to do was to print out dry ingredients first, then wet ingredients, regardless of how the recipe was 
+    originally recorded.
+</div>
+<pre><code class="language-ts">  let ingrFlour = new Ingredient("flour", true, "cup", "1.5");
+  let ingrSugar = new Ingredient("sugar", true, "cup", "0.5");
+  let ingrBakingPowder = new Ingredient("baking powder", true, "tsp", "1.5");
+  let ingrSalt = new Ingredient("salt", true, "tsp", "0.5");
+  let ingrOil = new Ingredient("oil", false, "cup", "1/3");
+  let ingrVanilla = new Ingredient("vanilla extract", false, "tbsp", "2");
+  let ingrRicotta = new Ingredient("ricotta cheese", false, "cup", "1.5");
+  let ingrMilk = new Ingredient("milk", false, "tbsp", "5");
+  let ingrEgg = new Ingredient("egg", false, "unit", "1");
+  let ingrBlueberries = new Ingredient("blueberries", false, "cup", "1/3");
+  let arrayOfIngre = [
+    ingrBakingPowder,
+    ingrBlueberries,
+    ingrEgg,
+    ingrFlour,
+    ingrMilk,
+    ingrOil,
+    ingrRicotta,
+    ingrSalt,
+    ingrSugar,
+    ingrVanilla,
+  ] as Array<Ingredient>;
+
+  let muffins = new Recipe("Ricotta blueberry muffins", arrayOfIngre, [
+    "mix dry ingredients",
+    "mix wet ingredients",
+    "mix together",
+    "put in muffin pan",
+    "bake at 375 for 32 minutes or until ready",
+  ]);
+  muffins.printRecipe();</code></pre>
+
+<pre><code class="language-ts">RICOTTA BLUEBERRY MUFFINS
+
+INGREDIENTS:
+baking powder (dry), 1.5 tsp
+flour (dry), 1.5 cup      
+salt (dry), 0.5 tsp       
+sugar (dry), 0.5 cup      
+blueberries (wet), 1/3 cup
+egg (wet), 1
+milk (wet), 5 tbsp
+oil (wet), 1/3 cup
+ricotta cheese (wet), 1.5 cup
+vanilla extract (wet), 2 tbsp
+
+DIRECTIONS:
+mix dry ingredients
+mix wet ingredients
+mix together
+put in muffin pan
+bake at 375 for 32 minutes or until ready</code></pre>
 <div class="block"></div> 
 <pre><code class="language-ts"></code></pre>
 <div class="block"></div> 
