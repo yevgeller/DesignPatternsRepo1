@@ -4,7 +4,7 @@
 }
 
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-arrow-rotate-right mr-2"></i>Iterator</h1>
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-arrow-rotate-right mr-5"></i>Iterator</h1>
 <h2 class="subtitle">A way to traverse a collection without exposing its inner structure</h2>
 <div class="content">  
 
@@ -58,7 +58,7 @@
     }
     printRecipe(): void {
       console.log(this.dishName.toUpperCase());
-      let ingrenum = this.ingredients.getIterator();
+      let ingrenum = this.ingredients.getIterator(); //&lt;-- getting iterator 
       console.log("\nINGREDIENTS:");
       while (ingrenum.hasNext()) {
         console.log(ingrenum.next().displayIngredient());
@@ -70,29 +70,81 @@
       //lol not this time
     }
   }</code></pre>
-<div class="block">So what is that getEnumerator method? It is coming from IIngredientEnumerable interface and is implemented by 
+<div class="block">So what is that getIterator method? It is coming from IIngredientEnumerable interface and is implemented by 
     the IngredientsCollection class, which acts as a container.
 </div> 
-<pre><code class="language-ts">  interface IIngredientEnumerable {
-    getEnumerator(): IIngredientIterator;
+<pre><code class="language-ts">  interface IIngredientIterable {
+    getIterator(): IIngredientIterator;
   }
 
-  class IngredientsCollection implements IIngredientEnumerable {
+  class IngredientsCollection implements IIngredientIterable {
     private allIngredients: Array<Ingredient>;
     constructor(allIngredients: Array<Ingredient>) {
       if (allIngredients === undefined || allIngredients.length === 0)
         throw new Error("Cannot iterate over empty ingredient collection");
       this.allIngredients = allIngredients;
     }
-    getEnumerator(): IIngredientIterator {
-      return new IngredientEnumerator(this.allIngredients);
+    getIterator(): IIngredientIterator {
+      return new IngredientIterator(this.allIngredients);
+    }
+  }
+</code></pre>
+<div class="block">getIterator returns an object that provides utility methods needed to navigate the underlying collection.
+    There is no requirement for what methods should be, as long as they provide a convenient way to navigate for users. 
+    The following iterator interface implements three methods, one for advancing to the next Ingredient, one to check 
+    if there is indeed a next Ingredient, and one to return the current Ingredient.
+</div> 
+<pre><code class="language-ts">
+  interface IIngredientIterator {
+    next(): Ingredient;
+    hasNext(): boolean;
+    currentItem: Ingredient;
+  }</code></pre>
+<div class="block">The following class is the actual iterator (yay, we finally got to it!) and it implements the methods in 
+    the interface above.
+</div> 
+<pre><code class="language-ts">  class IngredientIterator implements IIngredientIterator {
+    private allIngredients: Array<Ingredient>;
+    private currentIndex: number;
+    currentItem: Ingredient;
+    constructor(allIngredients: Array<Ingredient>) {
+      this.allIngredients = allIngredients;
+      this.sortIngredientsByTypeThenName();
+      this.currentIndex = 0;
+      this.currentItem = allIngredients[0];
+    }
+    next(): Ingredient {
+      if (!this.hasNext()) return null;
+      this.currentIndex++;
+      this.currentItem = this.allIngredients[this.currentIndex];
+      return this.currentItem;
+    }
+    hasNext(): boolean {
+      return this.currentIndex < this.allIngredients.length - 1;
+    }
+    private sortIngredientsByTypeThenName() {
+      let sorted = this.allIngredients.filter(
+        (x) => x.isDry == true
+      ) as Ingredient[];
+      sorted.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0));
+      let wetIngredients = this.allIngredients.filter(
+        (x) => x.isDry === false
+      ) as Array<Ingredient>;
+      wetIngredients.sort((a, b) =>
+        a.name > b.name ? 1 : a.name < b.name ? -1 : 0
+      );
+      sorted.push(...wetIngredients);
+      this.allIngredients.length = 0;
+      this.allIngredients.push(...sorted);
     }
   }</code></pre>
-<div class="block">getEnumerator returns an object </div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
+<div class="block">In the scenario above, you can think of it as a vehicle on the road. The road in this case is the 
+    <code>Array&lt;Ingredient&gt; allIngredients</code> in class <code>IngredientIterator</code>. It is the road because our vehicle can only drive
+    on it, not anywhere left or right, but just on it. The <code>next()</code> method of interface <code>IIngredientIterator</code> is our transmission. It specifies
+where we can go, in our case only forward. The other two methods are windows in the car, we can see where we are and whether there is road ahead. Finally, a class
+that implements the <code>IIngredientIterable</code> is the driver. He/she summons the vehicle and can drive on the road (iterate over an <code>Array</code> of <code>Ingredients</code>),
+to the next <code>Ingredient</code> (by calling <code>next()</code> on <code>IIngredientIterator</code> method) while knowing where he/she is at all
+times (<code>currentItem</code> property and <code>hasNext()</code> method of the <code>IIngredientIterator</code> interface).</div> 
 <pre><code class="language-ts"></code></pre>
 <div class="block"></div> 
 <pre><code class="language-ts"></code></pre>
