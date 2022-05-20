@@ -12,7 +12,9 @@
     in a standardized way without looking under the hood. The following example is used to print out a recipe in such a way that 
     ingredients are displayed in the order that they need to be mixed, regardless of the order that they were added when a recipe
     was recorded. The "magic" is happening when ingredients are added to a collection, they are being sorted at the time of creation
-    of the collection, 
+    of the collection. The end user of the collection does not know it. That was my choice of implementing it that way, I could have
+    done it differently, but the user does not care. They give me the name for the recipe, a set of ingredients, and want it printed 
+    out nicely. 
 </div> 
 <div class="block">First, service classes. CLass Ingredient describes each ingredient, whether it's dry or wet, and stores how much 
     of it is needed for a recipe. Class Recipe takes in the name of the dish, array of Ingredients, and array of strings for directions.
@@ -205,12 +207,64 @@ bake at 375 for 32 minutes or until ready</code></pre>
 <div class="block">The example above may seem slightly complicated. Just remember the main idea. There is a container that has some data.
     User can navigate the container using pre-determined methods for them, but they have no idea how it works and what is under the hood.
     The same as public transportation, you get a ticket to ride the bus. The stops are predetermined and someone else is driving it, but
-    you can get off at any stop.
+    you can get off at any stop, and you see each stop as the bus goes along its route. You have no idea how the bus' engine works, you
+    cannot drive it, you cannot change its course, but you consume its services.
 </div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
+<div class="block">Here is another, slightly simpler example. The following code generates Fibonacci sequence based on users' input. 
+    The same structure, a container, then a class for the actual iterator, then some calling code:
+</div> 
+<pre><code class="language-ts">interface IIterable {
+  getIterator(): IIterator;
+}
+
+class FibonacciSequence implements IIterable { //container
+  numberOfDigits: number;
+  constructor(numberOfDigits: number) {
+    this.numberOfDigits = numberOfDigits;
+  }
+  getIterator(): IIterator {
+    return new FibonacciEnumerator(this.numberOfDigits);
+  }
+}
+
+interface IIterator {
+  current(): number;
+  moveNext(): boolean;
+}
+class FibonacciEnumerator implements IIterator {
+  numberOfDigits: number;
+  currentPosition: number;
+  previousTotal: number;
+  currentTotal: number;
+  constructor(numberOfDigits: number) {
+    this.numberOfDigits = numberOfDigits;
+    this.reset();
+  }
+  current(): number {
+    return this.currentTotal;
+  }
+  moveNext(): boolean {
+    let newTotal = this.previousTotal + this.currentTotal;
+    this.previousTotal = this.currentTotal;
+    this.currentTotal = newTotal;
+    this.currentPosition++;
+    return this.currentPosition <= this.numberOfDigits;
+  }
+
+  private reset(): void {
+    this.currentPosition = 0;
+    this.previousTotal = 0;
+    this.currentTotal = 1;
+  }
+}
+
+let f = new FibonacciSequence(10);
+let e = f.getIterator();
+while (e.moveNext()) {
+  console.log(e.current());
+}
+</code></pre>
+<div class="block">Result:</div> 
 <pre><code class="language-ts"></code></pre>
 <div class="block"></div> 
 <pre><code class="language-ts"></code></pre>
