@@ -11,7 +11,8 @@
 <div class="block">If there is a custom collection of elements, implementing an iterator helps get that special order of elements
     in a standardized way without looking under the hood. The following example is used to print out a recipe in such a way that 
     ingredients are displayed in the order that they need to be mixed, regardless of the order that they were added when a recipe
-    was recorded.
+    was recorded. The "magic" is happening when ingredients are added to a collection, they are being sorted at the time of creation
+    of the collection, 
 </div> 
 <div class="block">First, service classes. CLass Ingredient describes each ingredient, whether it's dry or wet, and stores how much 
     of it is needed for a recipe. Class Recipe takes in the name of the dish, array of Ingredients, and array of strings for directions.
