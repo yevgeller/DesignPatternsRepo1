@@ -4,23 +4,25 @@
 }
 
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-arrow-rotate-right mr-5"></i>Iterator</h1>
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-arrow-up-right-dots mr-3"></i>Iterator</h1>
 <h2 class="subtitle">A way to traverse a collection without exposing its inner structure</h2>
-<div class="content">  
+<div class="content">
 
-<div class="block">If there is a custom collection of elements, implementing an iterator helps get that special order of elements
-    in a standardized way without looking under the hood. The following example is used to print out a recipe in such a way that 
-    ingredients are displayed in the order that they need to be mixed, regardless of the order that they were added when a recipe
-    was recorded. The "magic" is happening when ingredients are added to a collection, they are being sorted at the time of creation
-    of the collection. The end user of the collection does not know it. That was my choice of implementing it that way, I could have
-    done it differently, but the user does not care. They give me the name for the recipe, a set of ingredients, and want it printed 
-    out nicely. 
-</div> 
-<div class="block">First, service classes. CLass Ingredient describes each ingredient, whether it's dry or wet, and stores how much 
-    of it is needed for a recipe. Class Recipe takes in the name of the dish, array of Ingredients, and array of strings for directions.
-    Then, in the printRecipe method, it gets an enumerator for the collection of ingredients, and lists each one of them until there are 
-    no more ingredients to show. 
-</div>
+    <div class="block">
+        If there is a custom collection of elements, implementing an iterator helps get that special order of elements
+        in a standardized way without looking under the hood. The following example is used to print out a recipe in such a way that
+        ingredients are displayed in the order that they need to be mixed, regardless of the order that they were added when a recipe
+        was recorded. The "magic" is happening when ingredients are added to a collection, they are being sorted at the time of creation
+        of the collection. The end user of the collection does not know it. That was my choice of implementing it that way, I could have
+        done it differently, but the user does not care. They give me the name for the recipe, a set of ingredients, and want it printed
+        out nicely.
+    </div>
+    <div class="block">
+        First, service classes. CLass Ingredient describes each ingredient, whether it's dry or wet, and stores how much
+        of it is needed for a recipe. Class Recipe takes in the name of the dish, array of Ingredients, and array of strings for directions.
+        Then, in the printRecipe method, it gets an enumerator for the collection of ingredients, and lists each one of them until there are
+        no more ingredients to show.
+    </div>
 <pre><code class="language-ts">  class Ingredient {
     name: string;
     isDry: boolean;
@@ -73,9 +75,10 @@
       //lol not this time
     }
   }</code></pre>
-<div class="block">So what is that getIterator method? It is coming from IIngredientEnumerable interface and is implemented by 
-    the IngredientsCollection class, which acts as a container.
-</div> 
+    <div class="block">
+        So what is that getIterator method? It is coming from IIngredientEnumerable interface and is implemented by
+        the IngredientsCollection class, which acts as a container.
+    </div>
 <pre><code class="language-ts">  interface IIngredientIterable {
     getIterator(): IIngredientIterator;
   }
@@ -92,20 +95,22 @@
     }
   }
 </code></pre>
-<div class="block">getIterator returns an object that provides utility methods needed to navigate the underlying collection.
-    There is no requirement for what methods should be, as long as they provide a convenient way to navigate for users. 
-    The following iterator interface implements three methods, one for advancing to the next Ingredient, one to check 
-    if there is indeed a next Ingredient, and one to return the current Ingredient.
-</div> 
+    <div class="block">
+        getIterator returns an object that provides utility methods needed to navigate the underlying collection.
+        There is no requirement for what methods should be, as long as they provide a convenient way to navigate for users.
+        The following iterator interface implements three methods, one for advancing to the next Ingredient, one to check
+        if there is indeed a next Ingredient, and one to return the current Ingredient.
+    </div>
 <pre><code class="language-ts">
   interface IIngredientIterator {
     next(): Ingredient;
     hasNext(): boolean;
     currentItem: Ingredient;
   }</code></pre>
-<div class="block">The following class is the actual iterator (yay, we finally got to it!) and it implements the methods in 
-    the interface above.
-</div> 
+    <div class="block">
+        The following class is the actual iterator (yay, we finally got to it!) and it implements the methods in
+        the interface above.
+    </div>
 <pre><code class="language-ts">  class IngredientIterator implements IIngredientIterator {
     private allIngredients: Array<Ingredient>;
     private currentIndex: number;
@@ -141,17 +146,19 @@
       this.allIngredients.push(...sorted);
     }
   }</code></pre>
-<div class="block">In the scenario above, you can think of it as a vehicle on the road. The road in this case is the 
-    <code>Array&lt;Ingredient&gt; allIngredients</code> in class <code>IngredientIterator</code>. It is the road because our vehicle can only drive
-    on it, not anywhere left or right, but just on it. The <code>next()</code> method of interface <code>IIngredientIterator</code> is our transmission. It specifies
-where we can go, in our case only forward. The other two methods are windows in the car, we can see where we are and whether there is road ahead. Finally, a class
-that implements the <code>IIngredientIterable</code> is the driver. He/she summons the vehicle and can drive on the road (iterate over an <code>Array</code> of <code>Ingredients</code>),
-to the next <code>Ingredient</code> (by calling <code>next()</code> on <code>IIngredientIterator</code> method) while knowing where he/she is at all
-times (<code>currentItem</code> property and <code>hasNext()</code> method of the <code>IIngredientIterator</code> interface).</div> 
-<div class="block">
-    Here is the calling code and the result. All that it needed to do was to print out dry ingredients first, then wet ingredients, regardless of how the recipe was 
-    originally recorded.
-</div>
+    <div class="block">
+        In the scenario above, you can think of it as a vehicle on the road. The road in this case is the
+        <code>Array&lt;Ingredient&gt; allIngredients</code> in class <code>IngredientIterator</code>. It is the road because our vehicle can only drive
+        on it, not anywhere left or right, but just on it. The <code>next()</code> method of interface <code>IIngredientIterator</code> is our transmission. It specifies
+        where we can go, in our case only forward. The other two methods are windows in the car, we can see where we are and whether there is road ahead. Finally, a class
+        that implements the <code>IIngredientIterable</code> is the driver. He/she summons the vehicle and can drive on the road (iterate over an <code>Array</code> of <code>Ingredients</code>),
+        to the next <code>Ingredient</code> (by calling <code>next()</code> on <code>IIngredientIterator</code> method) while knowing where he/she is at all
+        times (<code>currentItem</code> property and <code>hasNext()</code> method of the <code>IIngredientIterator</code> interface).
+    </div>
+    <div class="block">
+        Here is the calling code and the result. All that it needed to do was to print out dry ingredients first, then wet ingredients, regardless of how the recipe was
+        originally recorded.
+    </div>
 <pre><code class="language-ts">  let ingrFlour = new Ingredient("flour", true, "cup", "1.5");
   let ingrSugar = new Ingredient("sugar", true, "cup", "0.5");
   let ingrBakingPowder = new Ingredient("baking powder", true, "tsp", "1.5");
@@ -183,9 +190,10 @@ times (<code>currentItem</code> property and <code>hasNext()</code> method of th
     "bake at 375 for 32 minutes or until ready",
   ]);
   muffins.printRecipe();</code></pre>
-  <div class="block">Output, note how all dry ingredients come in one group and all wet ingredients come in another. Ingredients are sorted
-      by name within a group.
-  </div>
+    <div class="block">
+        Output, note how all dry ingredients come in one group and all wet ingredients come in another. Ingredients are sorted
+        by name within a group.
+    </div>
 <pre><code class="language-ts">RICOTTA BLUEBERRY MUFFINS
 
 INGREDIENTS:
@@ -206,15 +214,17 @@ mix wet ingredients
 mix together
 put in muffin pan
 bake at 375 for 32 minutes or until ready</code></pre>
-<div class="block">The example above may seem slightly complicated. Just remember the main idea. There is a container that has some data.
-    User can navigate the container using pre-determined methods for them, but they have no idea how it works and what is under the hood.
-    The same as public transportation, you get a ticket to ride the bus. The stops are predetermined and someone else is driving it, but
-    you can get off at any stop, and you see each stop as the bus goes along its route. You have no idea how the bus' engine works, you
-    cannot drive it, you cannot change its course, but you consume its services.
-</div> 
-<div class="block">Here is another, slightly simpler example. The following code generates Fibonacci sequence based on users' input. 
-    The same structure, a container, then a class for the actual iterator, then some calling code:
-</div> 
+    <div class="block">
+        The example above may seem slightly complicated. Just remember the main idea. There is a container that has some data.
+        User can navigate the container using pre-determined methods for them, but they have no idea how it works and what is under the hood.
+        The same as public transportation, you get a ticket to ride the bus. The stops are predetermined and someone else is driving it, but
+        you can get off at any stop, and you see each stop as the bus goes along its route. You have no idea how the bus' engine works, you
+        cannot drive it, you cannot change its course, but you consume its services.
+    </div>
+    <div class="block">
+        Here is another, slightly simpler example. The following code generates Fibonacci sequence based on users' input.
+        The same structure, a container, then a class for the actual iterator, then some calling code:
+    </div>
 <pre><code class="language-ts">interface IIterable {
   getIterator(): IIterator;
 }
@@ -262,30 +272,13 @@ class FibonacciEnumerator implements IIterator {
 
 let f = new FibonacciSequence(10);
 let e = f.getIterator();
+let output = "Result: ";
 while (e.moveNext()) {
-  console.log(e.current());
+  output += e.current() + " ";
 }
+console.log(output);
 </code></pre>
-<div class="block">Result:</div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
+    <div class="block">Result: 1 2 3 5 8 13 21 34 55 89 </div>
 
 </div>
 
@@ -293,5 +286,5 @@ while (e.moveNext()) {
             next-icon1="fa-solid fa-ICON"
             next-icon3="fa-solid fa-arrow-right"
             next-link="FOLDER|PAGE"
-            next-name="PATTERNNAME"></bottom-nav>
+            next-name="TBA"></bottom-nav>
 <script>hljs.highlightAll();</script>
