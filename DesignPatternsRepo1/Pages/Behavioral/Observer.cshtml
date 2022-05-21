@@ -16,44 +16,163 @@
     firemen don't bother with parties, and ambulances are too busy to participate in parades. The code below sets up a notification system that allows each
     of the services to unsubscribe from notifications they don't need to respond to and then resubscribe again after.
 </div> 
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
-<div class="block"></div> 
-<pre><code class="language-ts"></code></pre>
+<div class="block">The following code sets up general infrastructure, an enum to specify disaster types, a class to hold information about a Disaster and then
+    a <a asp-area="" asp-page="/Creational/Factory-problem"><i class="fa-solid fa-industry mr-2"></i>Factory</a> that lets us create disasters arbitrarily.
+</div> 
+<pre><code class="language-ts">  enum DisasterType {
+    Fire = 1, //fire trucks and ambulance
+    Party, //police and ambulance
+    Parade, //fire and police
+  }
 
+  class Disaster {
+    disasterType: DisasterType;
+    destroyedArea: number;
+    constructor(disasterType: DisasterType, destroyedArea: number) {
+      this.disasterType = disasterType;
+      this.destroyedArea = destroyedArea;
+    }
+  }
+
+  class DisasterFactory {
+    area: number;
+    constructor(area: number) {
+      this.area = area;
+    }
+    createDisasterByType(type: string): Disaster {
+      switch (type.toUpperCase()) {
+        case "FIRE":
+          return new Disaster(DisasterType.Fire, this.area);
+        case "PARTY":
+          return new Disaster(DisasterType.Party, this.area);
+        default:
+          return new Disaster(DisasterType.Parade, this.area);
+      }
+    }
+  }</code></pre>
+<div class="block">The following class is a container for the array of emergency services. It also abstracts add/remove listener methods and notification mechanism. </div> 
+<pre><code class="language-ts">  abstract class GeneralDisasterNotifier {
+    private emergencyServices: Array<IDisasterNotificationListener>;
+    constructor() {
+      this.emergencyServices = [];
+    }
+
+    addListener(listener: IDisasterNotificationListener) {
+      this.emergencyServices.push(listener);
+    }
+
+    removeListener(listener: IDisasterNotificationListener) {
+      this.emergencyServices = this.emergencyServices.filter(
+        (x) => x.id !== listener.id
+      );
+    }
+
+    notify(disaster: Disaster): void {
+      this.emergencyServices.forEach((es) =>
+        es.receiveDisasterNotification(disaster)
+      );
+    }
+  }</code></pre>
+<div class="block">The following class extends the class above adding a concrete method to create a disaster and notify all known responders:</div> 
+<pre><code class="language-ts">  class ConcreteDisasterNotifier extends GeneralDisasterNotifier {
+    callEmergencyServices(
+      disasterType: "fire" | "party" | "parade",
+      destroyedArea: number
+    ) {
+      console.log(
+        `Attention! There is a ${disasterType} in the area, affecting ${destroyedArea} sq. miles. Dispatching appropriate services...`
+      );
+      let df = new DisasterFactory(destroyedArea);
+
+      this.notify(df.createDisasterByType(disasterType));
+    }
+  }
+</code></pre>
+<div class="block">Next, the code that declare interface for emergency services to be able to receive notifications and boilerplate implementations
+    of the three types of emergency services with methods that output that they are notified about a disaster.
+</div> 
+<pre><code class="language-ts">  interface IDisasterNotificationListener {
+    id: number;
+    receiveDisasterNotification(disaster: Disaster): void;
+  }
+
+  class FireBrigade implements IDisasterNotificationListener {
+    id: number;
+    receiveDisasterNotification(disaster: Disaster): void {
+      console.log(
+        `Fire Brigade ${this.id} has been notified about ${
+          DisasterType[disaster.disasterType]
+        }`
+      );
+    }
+    constructor() {
+      this.id = 1;
+    }
+  }
+  class PoliceSquad implements IDisasterNotificationListener {
+    id: number;
+    receiveDisasterNotification(disaster: Disaster): void {
+      console.log(
+        `Police Squad ${this.id} has been notified about ${
+          DisasterType[disaster.disasterType]
+        }`
+      );
+    }
+    constructor() {
+      this.id = 2;
+    }
+  }
+  class AmbulanceCrew implements IDisasterNotificationListener {
+    id: number;
+    receiveDisasterNotification(disaster: Disaster): void {
+      console.log(
+        `Ambulance Crew ${this.id} has been notified about ${
+          DisasterType[disaster.disasterType]
+        }`
+      );
+    }
+    constructor() {
+      this.id = 3;
+    }
+  }</code></pre>
+<div class="block">Finally, code that brings it all together. First, we instantiate emergency services, then we create the service notify them all, 
+    record all emergency services as listeners, and then customize addressees by adding and removing notification subscribers as needed:</div> 
+<pre><code class="language-ts">
+  let f = new FireBrigade();
+  let p = new PoliceSquad();
+  let a = new AmbulanceCrew();
+
+  let n = new ConcreteDisasterNotifier();
+  n.addListener(f);
+  n.addListener(p);
+  n.addListener(a);
+
+  n.removeListener(f);
+  n.callEmergencyServices("party", 1);
+  n.removeListener(p);
+  n.addListener(f);
+  n.callEmergencyServices("fire", 1);
+  n.removeListener(a);
+  n.addListener(p);
+  n.callEmergencyServices("parade", 2);</code></pre>
+<div class="block">Result:</div> 
+<pre><code class="language-ts">Attention! There is a party in the area, affecting 1 sq. miles. Dispatching appropriate services...
+Police Squad 2 has been notified about Party
+Ambulance Crew 3 has been notified about Party
+Attention! There is a fire in the area, affecting 1 sq. miles. Dispatching appropriate services...  
+Ambulance Crew 3 has been notified about Fire
+Fire Brigade 1 has been notified about Fire
+Attention! There is a parade in the area, affecting 2 sq. miles. Dispatching appropriate services...
+Fire Brigade 1 has been notified about Parade
+Police Squad 2 has been notified about Parade</code></pre>
+<div class="block">This pattern is about the choice of subscribers to be included or excluded in notifications. Hopefully the code above shows how it is possible
+    to do from the level of notification service.
+</div> 
 </div>
 
 <bottom-nav next-pointer-word="Next"
-            next-icon1="fa-solid fa-ICON"
+            next-icon1="fa-solid fa-wand-sparkles"
             next-icon3="fa-solid fa-arrow-right"
-            next-link="FOLDER|PAGE"
-            next-name="TBA"></bottom-nav>
+            next-link="Behavioral|State"
+            next-name="State"></bottom-nav>
 <script>hljs.highlightAll();</script>
