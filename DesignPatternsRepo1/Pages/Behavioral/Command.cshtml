@@ -189,13 +189,41 @@ Command becomes a self-sufficient unit that knows how to do everything and knows
   cmdMgr.invoke(new LoadShipment(1, shipmentOfMangoes, repository));
   repository.provideStatus();</code></pre>
 <div class="block">And here is the result:</div> 
-<pre><code class="language-ts"></code></pre>
+<pre><code class="language-ts">Initial repository state:
+Truck 1, 0 shipments, 0/3 filled
+Truck 2, 0 shipments, 0/5 filled
+adding bananas to truck 1 for weight of 1
+Truck 1, 1 shipments, 1/4 filled
+Truck contents:
+Shipment 1, weight: 1, contents: bananas
+Truck 2, 0 shipments, 0/5 filled
+adding mangoes to truck 2 for weight of 1
+Truck 1, 1 shipments, 1/4 filled
+Truck contents:
+Shipment 1, weight: 1, contents: bananas
+Truck 2, 1 shipments, 1/6 filled
+Truck contents:
+Shipment 2, weight: 1, contents: mangoes
+Oops! Mangoes should have gone to truck one. Undo loading to truck 2
+Truck 1, 1 shipments, 1/4 filled
+Truck contents:
+Shipment 1, weight: 1, contents: bananas
+Truck 2, 0 shipments, 0/5 filled
+loading mangoes to truck 1 for weight of 1
+Truck 1, 2 shipments, 2/5 filled
+Truck contents:
+Shipment 1, weight: 1, contents: bananas
+Shipment 2, weight: 1, contents: mangoes
+Truck 2, 0 shipments, 0/5 filled</code></pre>
+<div class="block">
+    As you can see, a command of type LoadShipment is an example of how an object can do stuff and undo stuff as well.
+</div>
 </div>
 
 
 <bottom-nav next-pointer-word="Next"
-            next-icon1="fa-solid fa-ICON"
+            next-icon1="fa-solid fa-arrow-up-right-dots"
             next-icon3="fa-solid fa-arrow-right"
-            next-link="FOLDER|PAGE"
-            next-name="PATTERNNAME"></bottom-nav>
+            next-link="Behavioral|Iterator"
+            next-name="Iterator"></bottom-nav>
 <script>hljs.highlightAll();</script>
