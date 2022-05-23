@@ -1,0 +1,168 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Behavioral.MementoModel
+@{
+}
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-gift mr-2"></i>Memento</h1>
+<h2 class="subtitle">An ability to provide and consume internal state via a predefined channel</h2>
+<div class="content">  
+
+<div class="block">The gist of the Memento pattern is that it allows to restore to a previous state of an object
+    by providing state differences in a predetermined format and being able to process those differences. Sounds complex,
+    let's dive right into an example. The code below is a Hangman game and you have three attempts to guess the word "SECRET"
+    correctly. As you enter each guess, assuming it passes validation, a stack of "undos" gets another fragment. Then, if you
+    enter "-" instead of a character, the game jumps back one character, and it keeps jumping back as long as the user keeps
+    entering "-" at the prompt. At the same time, all methods and properties are private, the game is closed for modification.
+</div> 
+<div class="block">This is the main Game class. It can only process letters: </div>
+<pre><code class="language-ts">class Game {
+  private word: string;
+  guesses: string[];
+  numberOfErrors: number;
+  private numberOfAllowedAttempts: number;
+  private gameOver: boolean;
+  supportUndo: boolean;
+  message: string;
+
+  constructor() {
+    this.word = "SECRET";
+    this.guesses = [];
+    this.numberOfErrors = 0;
+    this.numberOfAllowedAttempts = 3;
+    this.supportUndo = false;
+  }
+
+  processGuess(guess: string) {
+    if (guess.length !== 1) {
+      this.message = "One letter at a time, please";
+      return;
+    }
+    guess = guess.toUpperCase();
+    if (!/^[a-zA-Z\-]+$/.test(guess)) {
+      this.message = "alphabetic characters only, please";
+      return;
+    }
+    if (this.guesses.indexOf(guess) >= 0) {
+      this.message = `already guessed ${guess}. Try again`;
+      return;
+    }
+
+    this.guesses.push(guess);
+
+    if (this.word.indexOf(guess) >= 0) {
+      this.message = "Good guess!";
+      if (this.currentPuzzleState().indexOf("_") < 0) {
+        this.message = `Victory! With only ${this.numberOfErrors} errors!`;
+        this.gameOver = true;
+      }
+    } else {
+      this.numberOfErrors++;
+      this.message = `bad guess! This word contains no ${guess}. You have ${this.attemptsLeft()} guesses left`;
+      if (this.attemptsLeft() === 0) {
+        this.gameOver = true;
+        this.message = `You lost. The word was: ${this.word.toUpperCase()}`;
+      }
+    }
+    //console.log(this.currentPuzzleState());
+  }
+
+  private attemptsLeft(): number {
+    return this.numberOfAllowedAttempts - this.numberOfErrors;
+  }
+
+  currentPuzzleState(): string {
+    let result = "";
+    for (let i = 0; i < this.word.length; i++) {
+      if (this.guesses.indexOf(this.word[i].toString()) >= 0) {
+        result += this.word[i].toString().toUpperCase() + " ";
+      } else {
+        result += "_ ";
+      }
+    }
+    return result;
+  }
+
+  public gameIsOver(): boolean {
+    return this.gameOver;
+  }
+}</code></pre>
+<div class="block">The following simple class defines what we can save/restore to manipulate the game's internal state. I only need to keep
+    the previously entered letters and a number of incorrect attempts.
+</div> 
+<pre><code class="language-ts">class Memento {
+  guesses: string[];
+  numberOfErrors: number;
+  constructor(guesses: string[], numberOfErrors: number) {
+    this.guesses = guesses;
+    this.numberOfErrors = numberOfErrors;
+  }
+}</code></pre>
+<div class="block">The following class extends the Game class, it can create and process a state checkpoint. </div> 
+<pre><code class="language-ts">class GameWithUndo extends Game {
+  constructor() {
+    super();
+    this.supportUndo = true;
+    console.log("undo supported!");
+  }
+  public createCheckPoint(): Memento {
+    return new Memento([...this.guesses], this.numberOfErrors);
+  }
+
+  public processCheckPoint(checkPoint: Memento): void {
+    this.guesses.length = 0;
+    this.guesses.push(...checkPoint.guesses);
+    this.numberOfErrors = checkPoint.numberOfErrors;
+  }
+}</code></pre>
+<div class="block">Finally, the "Caretaker" component of the game, the code that runs it all:</div> 
+<pre><code class="language-ts">
+let input = ".";
+let g2 = new GameWithUndo(); //originator
+
+let mementos = [] as Array<Memento>;
+mementos.push(g2.createCheckPoint());
+console.log("Puzzle is: ", g2.currentPuzzleState());
+
+while (!g2.gameIsOver()) {
+  //this main program is the CareTaker
+  input = prompt("enter a letter, or '-' to undo");
+  console.log("Input: ", input);
+  if (input === "-") {
+    if (mementos.length > 1) {
+      console.log("undoing...");
+      let p = mementos.pop();
+      let m = mementos[mementos.length - 1];
+      g2.processCheckPoint(m);
+      console.log(g2.currentPuzzleState());
+    } else {
+      console.log("cannot undo anymore");
+    }
+  } else {
+    g2.processGuess(input);
+    let m = g2.createCheckPoint();
+    mementos.push(m);
+
+    console.log(g2.message);
+    console.log(g2.currentPuzzleState());
+  }
+}</code></pre>
+<div class="block">As you can see above, at each turn, a Memento object is created and stored, unless a user enters a "-". In that
+    case, a Memento object is popped from the array that stores it and is processed.
+</div> 
+<div class="block">This pattern follows the same principle as the Prototype pattern, which is the Open-Closed principle. Instead of opening a class
+    for modification, provide a way to extract/consume required state. That way the class is still closed for modification, yet it provides a way 
+    to manipulate its internal state.</div> 
+<div class="block">
+        Source/Inspiration: 
+                <a href="https://www.pluralsight.com/courses/c-sharp-design-patterns-memento">
+                    Pluralsight
+                </a>
+    </div>
+</div>
+
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-eye"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Behavioral|Observer"
+            next-name="Observer"></bottom-nav>
+<script>hljs.highlightAll();</script>
