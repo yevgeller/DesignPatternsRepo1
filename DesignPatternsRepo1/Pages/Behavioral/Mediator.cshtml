@@ -1,0 +1,204 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Behavioral.MediatorModel
+@{
+}
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-tower-cell mr-2"></i>Mediator</h1>
+<h2 class="subtitle">Abstracting communication function to a dedicated entity</h2>
+<div class="content">  
+
+<div class="block">The idea behind this design pattern is pretty simple: instead of everyone having a way to talk to everyone,
+    it is better to have a dedicated entity that is responsible for relaying messages. There are many examples of it in life:
+    mass communications, phone communication, radio. The only problem may be that the mediator becomes a single point of failure
+    of all conversations, but it is also becomes a single source of truth and helps with debugging individual and mass communications.
+    So advantages all around.
+</div> 
+
+<div class="block">First, let's see the problem. The example below inroduces a "family chat." Assuming there are two parents and two children.
+    Now each parent class has a method to talk to spouse, and talk to each of the children. There are also interfaces to "help"
+    make the class definitions more standard, but the disadvantages are already quite obvious. Adding another family member introduces
+    a problem. Troubleshooting communication problems can quickly become tedious, there is obvious repeated functionality, classes
+    do not follow the single responsibility principle... numerous problems:
+</div> 
+<pre><code class="language-ts">interface IParentCommunicator {
+  saySomethingToSon(): void;
+  saySomethingToDaughter(): void;
+  saySomethingToSpouse(): void;
+}
+
+interface IChildCommunicator {
+  saySomethingToMother(): void;
+  saySomethingToFather(): void;
+  saySomethingToOtherSibling(): void;
+}
+
+class Mother implements IParentCommunicator {
+  constructor() {}
+  saySomethingToDaughter(): void {
+    //...
+  }
+  saySomethingToSpouse(): void {
+    //...
+  }
+  saySomethingToSon(): void {}
+}
+
+class Father implements IParentCommunicator {
+  constructor() {}
+  saySomethingToDaughter(): void {
+    //...
+  }
+  saySomethingToSpouse(): void {
+    //...
+  }
+  saySomethingToSon(): void {}
+}
+
+class Son implements IChildCommunicator {
+  saySomethingToMother(): void {
+    //...
+  }
+  saySomethingToFather(): void {
+    //...
+  }
+  saySomethingToOtherSibling(): void {
+    //...
+  }
+}
+
+class Daughter implements IChildCommunicator {
+  saySomethingToMother(): void {
+    //...
+  }
+  saySomethingToFather(): void {
+    //...
+  }
+  saySomethingToOtherSibling(): void {
+    //...
+  }
+}</code></pre>
+<div class="block">To fix the problem, let's pivot the requested tasks and extract the communication functionality into it's own class. 
+    We will also need to provide ways for users to access communication functionality. Hence the two interfaces below:
+</div> 
+<pre><code class="language-ts">interface IFamilyChatRoom {
+  register(person: IFamilyMember): void;
+  notify(from: string, message: string, isPrivate: boolean): void;
+  notifyDirectly(from: string, message: string, name: string): void;
+}
+
+interface IFamilyMember {
+  send(message: string): void;
+  sendPrivate(message: string, to: string): void;
+  receive(message: string, from: string, isPrivate: boolean): void;
+  setChatRoom(room: IFamilyChatRoom): void;
+  getName(): string;
+  getPosition(): string;
+}</code></pre>
+<div class="block">The class below now signifies a family member. It no longer matters who it is, they are all equal in a way
+    that they can send and receive broadcast and private messages. If a message needs to be passed, they contact their known
+    chat room property and don't bother themselves knowing how the message gets there.
+</div> 
+<pre><code class="language-ts">class FamilyMember implements IFamilyMember {
+  name: string;
+  position: string;
+  room: IFamilyChatRoom; //everyone knows a single mediator
+  constructor(name: string, position: string, room: IFamilyChatRoom) {
+    this.name = name;
+    this.position = position;
+    this.room = room;
+  }
+
+  getName(): string {
+    return this.name;
+  }
+
+  getPosition(): string {
+    return this.position;
+  }
+
+  send(message: string): void {
+    console.log(`${this.name} sent ${message}`);
+    this.room.notify(message, this.name, false);
+  }
+  sendPrivate(message: string, to: string): void {
+    this.room.notifyDirectly(this.name, message, to);
+  }
+  receive(message: string, from: string, isPrivate: boolean) {
+    if (!isPrivate) {
+      console.log(
+        `${this.position} ${this.name} received message ${message} from ${from}`
+      );
+    } else {
+      console.log(
+        `${this.position} ${this.name} received a PRIVATE message ${message} from ${from}`
+      );
+    }
+  }
+  setChatRoom(room: IFamilyChatRoom): void {
+    this.room = room;
+  }
+}</code></pre>
+<div class="block">And here is the class responsible for communication. It keeps track of who is subscribed to its services
+    (information stored in the array of items implementing IFamilyMember interface). It adds more members by using <code>register</code>
+    method, and it sends broadcasts using <code>notify</code> method, and private messages are exchanged using <code>notifyDirectly</code>
+    method.
+</div> 
+<pre><code class="language-ts">class ChatRoom implements IFamilyChatRoom {
+  recipients: IFamilyMember[]; //mediator knows about all
+  constructor() {
+    this.recipients = [];
+  }
+  notifyDirectly(from: string, message: string, name: string): void {
+    let recipient = this.recipients.filter((r) => r.getName() === name);
+    if (recipient && recipient.length > 0 && recipient[0] != undefined) {
+      recipient[0].receive(message, from, true);
+    } else {
+      throw new Error(`Recipient ${name} is not registered`);
+    }
+  }
+  notify(message: string, from: string, isPrivate: boolean): void {
+    this.recipients.forEach((r) => r.receive(message, from, false));
+    console.log();
+  }
+  register(person: IFamilyMember): void {
+    this.recipients.push(person); //check for duplicates
+  }
+  registerInBulk(people: IFamilyMember[]): void {
+    this.recipients.push(...people);
+    this.recipients.forEach((r) => r.setChatRoom(this));
+  }
+}</code></pre>
+<div class="block">Here is some test code:</div> 
+<pre><code class="language-ts">let cha = new ChatRoom();
+let fa = new FamilyMember("John", "father", cha);
+let ma = new FamilyMember("Mary", "mother", cha);
+let so = new FamilyMember("Jack", "son", cha);
+let da = new FamilyMember("Jill", "daughter", cha);
+
+cha.registerInBulk([fa, ma, so, da]);
+fa.send("hi!");
+da.sendPrivate("hello!", "Jack");
+ma.sendPrivate("Hey!", "Jill");
+</code></pre>
+<div class="block">Result:</div> 
+<pre><code class="language-ts">John sent hi!
+father John received message hi! from John
+mother Mary received message hi! from John
+son Jack received message hi! from John
+daughter Jill received message hi! from John
+
+son Jack received a PRIVATE message hello! from Jill
+daughter Jill received a PRIVATE message Hey! from Mary</code></pre>
+<div class="block">This is a trivial implementation as it shows that the recipient also received their own messages, there is no way to 
+    leave the chat room, but it shows that extracting specific functionality into it's own class and letting users subscribe to it is 
+    a way to reduce complexity and improve maintenance and scalability.
+</div> 
+
+</div>
+
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-gift"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Behavioral|Memento"
+            next-name="Memento"></bottom-nav>
+<script>hljs.highlightAll();</script>
