@@ -1,0 +1,125 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Behavioral.TemplateMethodModel
+@{
+}
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-train-tram mr-3"></i>Template Method</h1>
+<h2 class="subtitle">Allowing subclasses to vary a common algorithm</h2>
+<div class="content">  
+
+<div class="block">Imagine a workday morning. You get up, go through the regular routine, but put on nice clothes today
+    because you have a presentation to give. Next morning, you wake up, do the regular routine, put on presentable clothes,
+    but not as spiffy as yesterday. Oh, and you hit a bakery on the way to work because you wanted to celebrate 
+    someone's achievement. On your day off, you wake up, brush teeth, put on sports outfit and go for a run.
+</div> 
+<div class="block">The Template Method pattern is about a routine that is happening every time, but allowing for slight
+    variations. In this case, an abstract class <code>Morning</code> would have a <code>getReady()</code> method, with the following items:
+    <ul>
+        <li><code>shutOffAlarm()</code></li>
+        <li><code>brushTeeth()</code></li>
+        <li><code>shower()</code></li>
+        <li><code>getDressed()</code></li>
+        <li><code>eatBreakfast()</code></li>
+        <li><code>headToThePlaceOfMorningActivity()</code></li>
+        <li><code>purchaseSomethingOnTheWay()</code></li>
+
+    </ul>
+    And then for <code>MondayMorning</code>, method <code>getDressed</code> can have specific outfit for a day busy with mornings. And for a class 
+    <code>SaturdayMorning</code>, the method <code>shutOffAlarm</code> could do nothing since you have no alarm on weekends. Each subclass of 
+    <code>Morning</code> still goes throud the <code>getReady</code> method, just with its own variations.
+</div> 
+<div class="block">The code example looks at the way an e-mail is composed. One e-mail is sent to the CEO of a company, it has many parts making it 
+    an official document easy to read and with lots of details. Another e-mail is a quick note to a friend. Both classes inherit from an abstract
+    class <code>Email</code>, and both go through the <code>compose</code> method's routine, but the e-mail to a friend skips a bunch of formalities
+    and goes straight to the details.
+</div> 
+<pre><code class="language-ts">  abstract class Email {
+    compose(): void {
+      this.salutation();
+      this.summary();
+      this.discussion();
+      this.figures();
+      this.closingStatements();
+      this.signature();
+      this.contactInfo();
+    }
+    protected abstract salutation(): void; //needs to be overwritten in child class
+    protected summary(): void {}
+    protected abstract discussion(): void; //needs to be overwritten in child class
+    protected figures(): void {}
+    protected closingStatements(): void {}
+    protected signature(): void {}
+    protected contactInfo(): void {}
+  }
+
+  class EmailToCEO extends Email {
+    salutation(): void {
+      console.log("Dear Mr. CEO");
+    }
+    summary(): void {
+      console.log("Everything is great");
+    }
+    discussion(): void {
+      console.log(
+        "Since you have been our CEO and making such great decisions, our profits increased."
+      );
+    }
+    figures(): void {
+      console.log(
+        "Here are three tables that show how much more money we are making."
+      );
+    }
+    closingStatements(): void {
+      console.log("In summary, all is well");
+    }
+    signature(): void {
+      console.log("Sincerely yours, your best worker.");
+    }
+    contactInfo(): void {
+      console.log("You can contact me at 555-5555");
+    }
+  }
+
+  class EmailToFriend extends Email {
+    salutation(): void {
+      console.log("yo!");
+    }
+    discussion(): void {
+      console.log("let's have a party!");
+    }
+    contactInfo(): void {
+      console.log;
+    }
+  }</code></pre>
+<div class="block">Test code:</div> 
+<pre><code class="language-ts">  console.log("Email to CEO:");
+  let c = new EmailToCEO();
+  c.compose();
+  console.log("\nEmail to a friend:");
+  let f = new EmailToFriend();
+  f.compose();</code></pre>
+<div class="block">Result:</div> 
+<pre><code class="language-ts">Email to CEO:
+Dear Mr. CEO
+Everything is great
+Since you have been our CEO and making such great decisions, our profits increased.
+Here are three tables that show how much more money we are making.
+In summary, all is well
+Sincerely yours, your best worker.
+You can contact me at 555-5555
+
+Email to a friend:
+yo!
+let's have a party!</code></pre>
+<div class="block">Use this patterns when the steps among several processes are common and it is easy to separate those steps and override 
+    implementation for each individual case.
+</div> 
+
+</div>
+
+<bottom-nav next-pointer-word="Next"
+            next-icon1="fa-solid fa-person-circle-question"
+            next-icon3="fa-solid fa-arrow-right"
+            next-link="Behavioral|Visitor"
+            next-name="Visitor"></bottom-nav>
+<script>hljs.highlightAll();</script>
