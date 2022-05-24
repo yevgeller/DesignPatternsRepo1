@@ -1,0 +1,106 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Behavioral.VisitorModel
+@{
+    ViewData["Title"] = "Visitor Software Design Pattern";
+}
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-person-circle-question mr-2"></i>Visitor</h1>
+<h2 class="subtitle">Separating algorithms from objects on which they operate</h2>
+<div class="content">  
+
+<div class="block">This pattern allows for introducing a new behavior without modifying a class. The new behavior 
+    is extracted to another class, and the object (that needs a new behavior) is passed to that new class to be worked on.
+</div> 
+<div class="block">The code example below looks at home appliances. Sometimes they need to be repaired, but it is not their
+    primary function. So now they need to implement a "repair me" functionality by being worked on, but adding that code
+    to the appliance class violates the Single Responsibility Principle as a dishwasher must wash dishes and not repair itself.
+    Hence, introducing an interface <code>RepairPerson</code> that can fix ovens, dishwashers and washing machines:
+</div> 
+<pre><code class="language-ts">interface RepairPerson {
+  fixWashingMachine(a: Appliance): void;
+  fixDishwasher(a: Appliance): void;
+  fixOven(a: Appliance): void;
+}</code></pre>
+<div class="block">Here is an class that implements <code>RepairPerson</code> interface:</div> 
+<pre><code class="language-ts">class SuperService implements RepairPerson {
+  fixWashingMachine(a: Appliance): void {
+    console.log(
+      'SuperService reports: "Attempting to fix a washing machine". \nNeed to drain water first, then unscrew the back and fix this washing machine'
+    );
+    a.work();
+  }
+  fixDishwasher(a: Appliance): void {
+    console.log(
+      'SuperService reports: "Attempting to fix a dishwasher". \n First, need to pull it out, then take it from there.'
+    );
+    a.work();
+  }
+  fixOven(a: Appliance): void {
+    console.log(
+      'SuperService reports: "Attempting to fix an oven". \nOh, seems like it was unplugeed. Easy repair!'
+    );
+    a.work();
+  }
+}</code></pre>
+<div class="block">Each method takes an instance of a class that implements the <code>Appliance</code> interface, which is:</div> 
+<pre><code class="language-ts">interface Appliance {
+  work(): void;
+  accept(repairPerson: RepairPerson): void; //functionality is separate because it's not a primary function of this object
+}</code></pre>
+<div class="block">And now the three appliances:</div> 
+<pre><code class="language-ts">class WashingMachine implements Appliance {
+  work(): void {
+    console.log("washing machine is working");
+  }
+  normalCycle(): void {
+    console.log("normal cycle");
+  }
+  accept(repairPerson: RepairPerson) {
+    repairPerson.fixWashingMachine(this);
+  }
+}
+class DishWasher implements Appliance {
+  work(): void {
+    console.log("Dishwasher is working");
+  }
+  accept(repairPerson: RepairPerson): void {
+    repairPerson.fixDishwasher(this);
+  }
+}
+class Oven implements Appliance {
+  work(): void {
+    console.log("Oven is working");
+  }
+  accept(repairPerson: RepairPerson): void {
+    repairPerson.fixOven(this);
+  }
+}</code></pre>
+<div class="block">Each appliance knows that in order to get fixed, it takes an instance of a <code>RepairPerson</code>, this is the actual Visitor.
+    Then, appliance calls the appropriate method to request the required behavior. So on one hand, an appliance acquired new behavior, but on the other
+    hand, that behavior is a part of another class and is maintained there, outside the actual appliance. Here is the setup code:</div> 
+<pre><code class="language-ts">let fixItNow = new SuperService();
+let wm = new WashingMachine();
+wm.accept(fixItNow);
+console.log();
+let dw = new DishWasher();
+dw.accept(fixItNow);
+console.log();
+let ov = new Oven();
+ov.accept(fixItNow);
+</code></pre>
+<div class="block">The result:</div> 
+<pre><code class="language-ts">SuperService reports: "Attempting to fix a washing machine". 
+Need to drain water first, then unscrew the back and fix this washing machine
+washing machine is working
+
+SuperService reports: "Attempting to fix a dishwasher".
+ First, need to pull it out, then take it from there.
+Dishwasher is working
+
+SuperService reports: "Attempting to fix an oven".
+Oh, seems like it was unplugeed. Easy repair!
+Oven is working</code></pre>
+</div>
+
+<bottom-nav the-end="yes"></bottom-nav>
+<script>hljs.highlightAll();</script>
