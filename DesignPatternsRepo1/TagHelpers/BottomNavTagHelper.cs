@@ -12,6 +12,8 @@ namespace DesignPatternsRepo1.TagHelpers
         public string NextLink { get; set; } = "/Index";
         public string NextName { get; set; } = "";
         public string NextPointerWord { get; set; } = "Next";
+
+        public string TheEnd { get; set; } = "no"; 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";
@@ -30,7 +32,19 @@ namespace DesignPatternsRepo1.TagHelpers
                 "" :
                 "<i class='" + this.NextIcon3 + " fa-2x ml-2'></i>";
 
-            output.Content.AppendHtml(@$"
+
+            if (this.TheEnd.ToLower() == "yes")
+            {
+                output.Content.AppendHtml(@$"
+                <div class='column is-2'> 
+                    <a class='navbar-item' href='/Index'> 
+                        <i class='fa-solid fa-house-user fa-2x mr-1'></i>Back 
+                    </a> 
+                </div>");
+            }
+            else
+            {
+                output.Content.AppendHtml(@$"
                 <div class='column is-2'> 
                     <a class='navbar-item' href='/Index'> 
                         <i class='fa-solid fa-house-user fa-2x mr-1'></i>Back 
@@ -43,6 +57,7 @@ namespace DesignPatternsRepo1.TagHelpers
                         {nextIcon3}
                     </a>
                 </div>");
+            }
         }
     }
 }
