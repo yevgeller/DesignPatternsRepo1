@@ -9,6 +9,7 @@ namespace DesignPatternsRepo1.TagHelpers
         {
             output.TagName = "div";
             output.Attributes.SetAttribute("class", "container is-flex is-flex-direction-row is-justify-content-space-evenly mt-6 ");
+            output.Content.Append(this.Pattern);
         }
     }
 }
