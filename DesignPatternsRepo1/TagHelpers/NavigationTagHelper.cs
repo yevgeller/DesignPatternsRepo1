@@ -9,6 +9,7 @@ namespace DesignPatternsRepo1.TagHelpers
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";
+            output.Attributes.SetAttribute("tag", "one");
             output.Attributes.SetAttribute("class", "container is-flex is-flex-direction-row is-justify-content-space-evenly mt-6 ");
             output.Content.AppendHtml($@"<div><span class='is-uppercase has-text-weight-semibold'>Creational</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
@@ -27,7 +28,7 @@ namespace DesignPatternsRepo1.TagHelpers
             if (this.Pattern != "singleton") output.Content.AppendHtml("<div><a asp-page='/Creational/Singleton'><i class='fa-solid fa-atom mr-2'></i>&nbsp;Singleton</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-atom mr-2'></i>&nbsp;Singleton</div>");
 
-            output.Content.AppendHtml("</div>");
+            output.Content.AppendHtml("</div></div>");
             output.Content.AppendHtml(@"<div><span class='is-uppercase has-text-weight-semibold'>Structural</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
             if (this.Pattern != "prototype") output.Content.AppendHtml("<div><a asp-page='/Structural/Adapter'><i class='fa-solid fa-plug mr-2'></i>Adapter</a></div>");
@@ -51,7 +52,7 @@ namespace DesignPatternsRepo1.TagHelpers
             if (this.Pattern != "proxy") output.Content.AppendHtml("<div><a asp-area='' asp-page='/Structural/Proxy'><i class='fa-solid fa-door-open mr-2'></i>Proxy</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-door-open mr-2'></i>Proxy</div>");
 
-            output.Content.AppendHtml("</div>");
+            output.Content.AppendHtml("</div></div>");
             output.Content.AppendHtml(@"<div><span class='is-uppercase has-text-weight-semibold'>Behavioral</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
             if (this.Pattern != "chain") output.Content.AppendHtml("<div><a asp-page='/Behavioral/ChainOfResponsibility'><i class='fa-solid fa-link mr-2'></i>Chain of Responsibility</a></div>");
