@@ -12,7 +12,7 @@ namespace DesignPatternsRepo1.TagHelpers
             output.Attributes.SetAttribute("class", "container is-flex is-flex-direction-row is-justify-content-space-evenly mt-6 ");
             output.Content.AppendHtml($@"<div><span class='is-uppercase has-text-weight-semibold'>Creational</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
-            if (this.Pattern != "fac") output.Content.AppendHtml("<div><a asp-page='/Creational/Factory'><i class='fa-solid fa-industry mr-2'></i>Factory</a></div>");
+            if (this.Pattern != "fac") output.Content.AppendHtml("<div><a href='/Creational/Factory'><i class='fa-solid fa-industry mr-2'></i>Factory</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-industry mr-2'></i>Factory</div>");
 
             if (this.Pattern != "abs") output.Content.AppendHtml("<div><a asp-page='/Creational/Abstract-problem'><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</a></div>");
