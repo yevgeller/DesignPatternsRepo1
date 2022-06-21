@@ -15,16 +15,16 @@ namespace DesignPatternsRepo1.TagHelpers
             if (this.Pattern != "fac") output.Content.AppendHtml("<div><a href='/Creational/Factory'><i class='fa-solid fa-industry mr-2'></i>Factory</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-industry mr-2'></i>Factory</div>");
 
-            if (this.Pattern != "abs") output.Content.AppendHtml("<div><a asp-page='/Creational/Abstract-problem'><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</a></div>");
+            if (this.Pattern != "abs") output.Content.AppendHtml("<div><a href='/Creational/Abstract-problem'><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</div>");
 
-            if (this.Pattern != "bui") output.Content.AppendHtml("<div><a asp-page='/Creational/Builder-problem'><i class='fa-solid fa-helmet-safety mr-2'></i>Builder</a></div>");
+            if (this.Pattern != "bui") output.Content.AppendHtml("<div><a href='/Creational/Builder-problem'><i class='fa-solid fa-helmet-safety mr-2'></i>Builder</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-helmet-safety mr-2'></i>Builder</div>");
 
-            if (this.Pattern != "proto") output.Content.AppendHtml("<div><a asp-page='/Creational/Prototype'><i class='fa-regular fa-clone mr-2'></i>&nbsp;Prototype</a></div>"); 
+            if (this.Pattern != "proto") output.Content.AppendHtml("<div><a href='/Creational/Prototype'><i class='fa-regular fa-clone mr-2'></i>&nbsp;Prototype</a></div>"); 
             else output.Content.AppendHtml("<div><i class='fa-regular fa-clone mr-2'></i>&nbsp;Prototype</div>");
 
-            if (this.Pattern != "sin") output.Content.AppendHtml("<div><a asp-page='/Creational/Singleton'><i class='fa-solid fa-atom mr-2'></i>&nbsp;Singleton</a></div>");
+            if (this.Pattern != "sin") output.Content.AppendHtml("<div><a href='/Creational/Singleton'><i class='fa-solid fa-atom mr-2'></i>&nbsp;Singleton</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-atom mr-2'></i>&nbsp;Singleton</div>");
 
             output.Content.AppendHtml("</div></div>");
