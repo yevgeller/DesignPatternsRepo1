@@ -54,37 +54,37 @@ namespace DesignPatternsRepo1.TagHelpers
             output.Content.AppendHtml("</div></div>");
             output.Content.AppendHtml(@"<div><span class='is-uppercase has-text-weight-semibold'>Behavioral</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
-            if (this.Pattern != "cha") output.Content.AppendHtml("<div><a asp-page='/Behavioral/ChainOfResponsibility'><i class='fa-solid fa-link mr-2'></i>Chain of Responsibility</a></div>");
+            if (this.Pattern != "cha") output.Content.AppendHtml("<div><a href='/Behavioral/ChainOfResponsibility'><i class='fa-solid fa-link mr-2'></i>Chain of Responsibility</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-link mr-2'></i>Chain of Responsibility</div>");
             
-            if (this.Pattern != "com") output.Content.AppendHtml("<div><a asp-page='/Behavioral/Command'><i class='fa-solid fa-bullhorn mr-2'></i>Command</a></div>");
+            if (this.Pattern != "com") output.Content.AppendHtml("<div><a href='/Behavioral/Command'><i class='fa-solid fa-bullhorn mr-2'></i>Command</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-bullhorn mr-2'></i>Command</div>");
             
-            if (this.Pattern != "int") output.Content.AppendHtml("<div><a asp-page='/Behavioral/Interpreter'><i class='fa-solid fa-language mr-2'></i>Interpreter</a></div>");
+            if (this.Pattern != "int") output.Content.AppendHtml("<div><a href='/Behavioral/Interpreter'><i class='fa-solid fa-language mr-2'></i>Interpreter</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-language mr-2'></i>Interpreter</div>");
             
-            if (this.Pattern != "ite") output.Content.AppendHtml("<div><a asp-page='/Behavioral/Iterator'><i class='fa-solid fa-arrow-up-right-dots mr-2'></i>Iterator</a></div>");
+            if (this.Pattern != "ite") output.Content.AppendHtml("<div><a href='/Behavioral/Iterator'><i class='fa-solid fa-arrow-up-right-dots mr-2'></i>Iterator</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-arrow-up-right-dots mr-2'></i>Iterator</div>");
             
-            if (this.Pattern != "med") output.Content.AppendHtml("<div><a asp-page='/Behavioral/Mediator'><i class='fa-solid fa-tower-cell mr-2'></i>Mediator</a></div>");
+            if (this.Pattern != "med") output.Content.AppendHtml("<div><a href='/Behavioral/Mediator'><i class='fa-solid fa-tower-cell mr-2'></i>Mediator</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-tower-cell mr-2'></i>Mediator</div>");
             
-            if (this.Pattern != "mem") output.Content.AppendHtml("<div><a asp-page='/Behavioral/Memento'><i class='fa-solid fa-gift mr-2'></i>Memento</a></div>");
+            if (this.Pattern != "mem") output.Content.AppendHtml("<div><a href='/Behavioral/Memento'><i class='fa-solid fa-gift mr-2'></i>Memento</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-gift mr-2'></i>Memento</div>");
             
-            if (this.Pattern != "obs") output.Content.AppendHtml("<div><a asp-page='/Behavioral/Observer'><i class='fa-solid fa-eye mr-2'></i>Observer</a></div>");
+            if (this.Pattern != "obs") output.Content.AppendHtml("<div><a href='/Behavioral/Observer'><i class='fa-solid fa-eye mr-2'></i>Observer</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-eye mr-2'></i>Observer</div>");
             
-            if (this.Pattern != "sta") output.Content.AppendHtml("<div><a asp-page='/Behavioral/State'><i class='fa-solid fa-wand-sparkles mr-2'></i>State</a></div>");
+            if (this.Pattern != "sta") output.Content.AppendHtml("<div><a href='/Behavioral/State'><i class='fa-solid fa-wand-sparkles mr-2'></i>State</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-wand-sparkles mr-2'></i>State</div>");
 
-            if (this.Pattern != "str") output.Content.AppendHtml("<div><a asp-page='/Behavioral/Strategy'><i class='fa-solid fa-chess-knight mr-2'></i>Strategy</a></div>");
+            if (this.Pattern != "str") output.Content.AppendHtml("<div><a href='/Behavioral/Strategy'><i class='fa-solid fa-chess-knight mr-2'></i>Strategy</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-chess-knight mr-2'></i>Strategy</div>");
 
-            if (this.Pattern != "tem") output.Content.AppendHtml("<div><a asp-page='/Behavioral/TemplateMethod'><i class='fa-solid fa-train-tram mr-2'></i>Template Method</a></div>");
+            if (this.Pattern != "tem") output.Content.AppendHtml("<div><a href='/Behavioral/TemplateMethod'><i class='fa-solid fa-train-tram mr-2'></i>Template Method</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-train-tram mr-2'></i>Template Method</div>");
 
-            if (this.Pattern != "vis") output.Content.AppendHtml("<div><a asp-page='/Behavioral/Visitor'><i class='fa-solid fa-person-circle-question mr-2'></i>Visitor</a></div>");
+            if (this.Pattern != "vis") output.Content.AppendHtml("<div><a href='/Behavioral/Visitor'><i class='fa-solid fa-person-circle-question mr-2'></i>Visitor</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-person-circle-question mr-2'></i>Visitor</div>");
 
             output.Content.AppendHtml("</div>");
