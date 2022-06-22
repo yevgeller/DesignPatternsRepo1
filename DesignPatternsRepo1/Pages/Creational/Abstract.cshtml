@@ -92,9 +92,8 @@
     makeUnitMember(): UnitMember;
   }
   </code></pre>
-    Then, declare concrete implementations of the pieces comprising units:
-    <br />
-    <br />
+    <div class="block">Then, declare concrete implementations of the pieces comprising units:</div>
+    
 <pre><code class="language-ts">
   class FireChief implements Chief {
     command(): string {
@@ -132,9 +131,8 @@
     }
   }
   </code></pre>
-    Finally, implement concrete factories creating specific variants of families of products:
-    <br />
-    <br />
+    <div class="block">Finally, implement concrete factories creating specific variants of families of products:</div>
+    
 <pre><code class="language-ts">
   class FiremenUnitFactory implements ResponderFactory {
     chief: Chief;
@@ -184,9 +182,8 @@
     }
   }
   </code></pre>
-    Test:
-    <br />
-    <br />
+    <div class="block">Test:</div>
+    
 <pre><code class="language-ts">
   let policeUnit = new PoliceUnitFactory();
   console.log(policeUnit.chief.command());
