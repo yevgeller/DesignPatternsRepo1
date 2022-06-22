@@ -15,7 +15,7 @@ namespace DesignPatternsRepo1.TagHelpers
             if (this.Pattern != "fac") output.Content.AppendHtml("<div><a href='/Creational/Factory'><i class='fa-solid fa-industry mr-2'></i>Factory</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-industry mr-2'></i>Factory</div>");
 
-            if (this.Pattern != "abs") output.Content.AppendHtml("<div><a href='/Creational/Abstract-problem'><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</a></div>");
+            if (this.Pattern != "abs") output.Content.AppendHtml("<div><a href='/Creational/Abstract'><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</div>");
 
             if (this.Pattern != "bui") output.Content.AppendHtml("<div><a href='/Creational/Builder-problem'><i class='fa-solid fa-helmet-safety mr-2'></i>Builder</a></div>");
