@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DesignPatternsRepo1.Pages.Creational
 {
-    public class BuilderModel : PageModel
+    public class Builder1Model : PageModel
     {
         public void OnGet()
         {
