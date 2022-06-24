@@ -1,0 +1,278 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Creational.BuilderModel
+@{
+}
+
+
+<h1 class="title is-1 is-spaced"><i class="fa-solid fa-helmet-safety mr-2"></i>Builder Pattern &mdash; Problem</h1>
+<h2 class="subtitle">
+    Builder pattern simplifies construction of complex objects by extracting
+    the steps and centralizing the control of what happens at each step. It
+    also allows for easier customization.
+</h2>
+
+
+<script>hljs.highlightAll();</script>
+
+<div class="content">
+    <div class="block">
+        Pizza shop. Need multiple overloads to take a pizza order. Well, not really because C# allows for default parameters,
+        but still, the constructor method looks pretty intimidating even though these are not even all possible toppings.
+    </div>
+
+<pre><code class="language-csharp">
+namespace NoBuilderPattern
+{
+    using System;
+
+    public class Pizza {
+        private int size = 16;
+        private bool cheese = true;
+        private bool pepperoni = false;
+        private bool blackOlives = false;
+        private bool greenOlives = false;
+        private bool bellPeppers = false;
+        private bool pineapple = false;
+        private bool onions = false;
+        private bool steak = false;
+        private bool chicken = false;
+        private bool bacon = false;
+        private bool ranch = false;
+
+        public Pizza()
+        {
+            this.size = 16;
+        }
+
+        public Pizza(int size)
+        {
+            this.size = size;
+        }
+
+        public Pizza(bool pepperoni)
+        {
+            this.pepperoni = pepperoni;
+        }
+
+        public Pizza(int size = 16, bool cheese = true, bool pepperoni = false, 
+            bool blackOlives = false, bool greenOlives = false, bool bellPeppers = false,
+            bool pineapple = false, bool onions = false, bool steak = false,
+            bool chicken = false, bool bacon = false, bool ranch = false)
+        {
+            this.size = size;
+            this.cheese = cheese;
+            this.pepperoni = pepperoni;
+            this.blackOlives = blackOlives;
+            this.greenOlives = greenOlives;
+            this.bellPeppers = bellPeppers;
+            this.pineapple = pineapple;
+            this.onions = onions;
+            this.steak = steak;
+            this.chicken = chicken;
+            this.bacon = bacon;
+            this.ranch = ranch;
+        }
+    }
+}
+  </code>
+</pre>
+
+    <div class="block">
+        <h4 class="title is-4 is-spaced">Problems that Builder pattern can help address:</h4>
+        <ul><li>Lots of computational logic in class constructors</li><li>Number of related classes that perform similar functions with different representations</li></ul>
+    </div>
+    <br />
+    <div class="block">
+        <h4 class="title is-4 is-spaced">Advantages that Builder brings along:</h4>
+        <ul>
+            <li>Control over the construction process</li>
+            <li>
+                Lets vary internal product representation
+            </li>
+            <li>
+                Focuses on sequence of steps (Factory focuses on families of items being created)
+            </li>
+        </ul>
+    </div>
+    <br />
+    <h4 class="title is-4">Recipe:</h4>
+    <div class="block">First, extract the interface of methods that help create common parts for all the Products:</div>
+<pre><code class="language-ts">
+  interface PizzaBuilder {
+    prepareDough(): void;
+    addSauce(): void;
+    addIngredients(): void;
+    addCheese(): void;
+    bake(): void;
+  }
+  </code></pre><div class="block mt-5">
+        This particular class extracts the common methods from the children classes for simplicity.
+        It's not necessarily a part of the pattern, but makes the code cleaner in this particular example.
+    </div><pre><code class="language-ts">
+  class PizzaBase {
+    protected pizza: Pizza;
+
+    constructor() {
+      this.reset();
+    }
+    //this call ensures that the Product is started from scratch every time
+    //The pattern is not strict about it, and this can be customized
+    public reset(): void {
+      this.pizza = new Pizza(); 
+    }
+
+    public getProduct(): Pizza {
+      const result = this.pizza;
+      this.reset();
+      return result;
+    }
+  }
+  </code></pre><div class="block mt-5">This is one specific implementation of a Product that requires certain steps.</div><pre><code class="language-ts">
+  class CheesePizzaBuilderThinCrust16Inches
+    extends PizzaBase
+    implements PizzaBuilder
+  {
+    constructor() {
+      super();
+    }
+
+    prepareDough(): void {
+      this.pizza.parts.push("thin crust, 16 inches");
+    }
+    addSauce(): void {
+      this.pizza.parts.push("marinara sauce");
+    }
+    addIngredients(): void {} //no extra ingredients
+
+    addCheese(): void {
+      this.pizza.parts.push("mozzarella, 1x");
+    }
+    bake(): void {
+      this.pizza.parts.push("bake now");
+    }
+  }
+  </code></pre><div class="block mt-5">Another Builder just to show the possibilities.</div><pre><code class="language-ts">
+  class ChicagoDeepDish16InchSupreme extends PizzaBase implements PizzaBuilder {
+    constructor() {
+      super();
+    }
+
+    prepareDough(): void {
+      this.pizza.parts.push("deep dish crust, 16 inches");
+    }
+    addSauce(): void {
+      this.pizza.parts.push("marinara sauce");
+    }
+    addIngredients(): void {
+      this.pizza.parts.push("black olives");
+      this.pizza.parts.push("bell peppers");
+      this.pizza.parts.push("green olives");
+      this.pizza.parts.push("red onions");
+      this.pizza.parts.push("italian sausage");
+      this.pizza.parts.push("kitchen sink");
+    }
+
+    addCheese(): void {
+      this.pizza.parts.push("mozzarella, 1x");
+    }
+    bake(): void {
+      this.pizza.parts.push("bake now");
+    }
+  }
+  </code></pre><div class="block mt-5">
+        In this scenarios, both Builders return objects of the same type: Pizza. But, unlike in other creational patterns,
+        Builder pattern can return objects of different, unrelated types.
+    </div><pre><code class="language-ts">
+  class Pizza {
+    public parts: string[] = [];
+
+    public listParts(): void {
+      console.log(`Product parts: ${this.parts.join(", ")}\n`);
+    }
+  }
+  </code></pre><div class="block mt-5">
+        The Director class is actually optional, as it is only used to control the order of events.
+        One Director can construct several product variations by altering the order of steps. Also, Builders can be controlled directly
+        for even finer customizations.
+    </div><pre><code class="language-ts">
+  class Director {
+    private builder: PizzaBuilder;
+
+    public setBuilder(builder: PizzaBuilder): void {
+      this.builder = builder;
+    }
+
+    public prepForTakeOutAndBakeAtHome(): void {
+      this.builder.prepareDough();
+      this.builder.addSauce();
+      this.builder.addIngredients();
+      this.builder.addCheese();
+    }
+
+    public prepAndBake(): void {
+      this.builder.prepareDough();
+      this.builder.addSauce();
+      this.builder.addIngredients();
+      this.builder.addCheese();
+      this.builder.bake();
+    }
+  }
+  </code></pre><div class="block mt-5">Testing code</div><pre><code class="language-ts">
+  function clientCode(director: Director) {
+    const builder = new CheesePizzaBuilderThinCrust16Inches();
+    director.setBuilder(builder);
+
+    console.log("Kind of like Papa Murphy's:");
+    director.prepForTakeOutAndBakeAtHome();
+    builder.getProduct().listParts();
+
+    console.log("For here:");
+    director.prepAndBake();
+    builder.getProduct().listParts();
+
+    // Remember, the Builder pattern can be used without a Director class.
+    console.log("Extra cheesy");
+    builder.prepareDough();
+    builder.addSauce();
+    builder.addIngredients();
+    builder.addCheese();
+    builder.addCheese();
+    builder.addCheese();
+    builder.bake();
+    builder.getProduct().listParts();
+
+    const builder2 = new ChicagoDeepDish16InchSupreme();
+    director.setBuilder(builder2);
+    console.log("Chicago deep dish to go");
+    director.prepForTakeOutAndBakeAtHome();
+    builder2.getProduct().listParts();
+
+    console.log("Chicago deep dish for here");
+    director.prepAndBake();
+    builder2.getProduct().listParts();
+  }
+
+  const director = new Director();
+  clientCode(director);
+</code></pre>
+
+    <div class="block">Resulting output:</div>
+<pre>
+<code>
+        Kind of like Papa Murphy's:
+        Product parts: thin crust, 16 inches, marinara sauce, mozzarella, 1x
+
+        For here:
+        Product parts: thin crust, 16 inches, marinara sauce, mozzarella, 1x, bake now
+
+        Extra cheesy
+        Product parts: thin crust, 16 inches, marinara sauce, mozzarella, 1x, mozzarella, 1x, mozzarella, 1x, bake now
+
+        Chicago deep dish to go
+        Product parts: deep dish crust, 16 inches, marinara sauce, black olives, bell peppers, green olives, red onions, italian sausage, kitchen sink, mozzarella, 1x
+
+        Chicago deep dish for here
+        Product parts: deep dish crust, 16 inches, marinara sauce, black olives, bell peppers, green olives, red onions, italian sausage, kitchen sink, mozzarella, 1x, bake now
+    </code>
+</pre>
+</div>
