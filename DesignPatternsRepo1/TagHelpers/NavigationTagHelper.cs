@@ -30,25 +30,25 @@ namespace DesignPatternsRepo1.TagHelpers
             output.Content.AppendHtml("</div></div>");
             output.Content.AppendHtml(@"<div><span class='is-uppercase has-text-weight-semibold ml-5'>Structural</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
-            if (this.Pattern != "ada") output.Content.AppendHtml("<div><a href='/Structural/Adapter'><i class='fa-solid fa-plug mr-2'></i>Adapter</a></div>");
+            if (this.Pattern != "ada") output.Content.AppendHtml("<div><a href='/Structural/Adapter'><i class='fa-solid fa-plug mr-2 ml-5'></i>Adapter</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-plug mr-2'></i>Adapter</div>");
             
-            if (this.Pattern != "bri") output.Content.AppendHtml("<div><a href='/Structural/Bridge'><i class='fa-solid fa-left-right mr-2'></i>Bridge</a></div>");
+            if (this.Pattern != "bri") output.Content.AppendHtml("<div><a href='/Structural/Bridge'><i class='fa-solid fa-left-right mr-2 ml-5'></i>Bridge</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-left-right mr-2'></i>Bridge</div>");
             
-            if (this.Pattern != "sit") output.Content.AppendHtml("<div><a href='/Structural/Composite'><i class='fa-solid fa-magnifying-glass-arrow-right mr-2'></i>Composite</a></div>");
+            if (this.Pattern != "sit") output.Content.AppendHtml("<div><a href='/Structural/Composite'><i class='fa-solid fa-magnifying-glass-arrow-right mr-2 ml-5'></i>Composite</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-magnifying-glass-arrow-right mr-2'></i>Composite</div>");
 
-            if (this.Pattern != "dec") output.Content.AppendHtml("<div><a href='/Structural/Decorator'><i class='fa-solid fa-chart-line mr-2'></i>Decorator</a></div>");
+            if (this.Pattern != "dec") output.Content.AppendHtml("<div><a href='/Structural/Decorator'><i class='fa-solid fa-chart-line mr-2 ml-5'></i>Decorator</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-chart-line mr-2'></i>Decorator</div>");
 
-            if (this.Pattern != "fas") output.Content.AppendHtml("<div><a href='/Structural/Facade'><i class='fa-solid fa-igloo mr-2'></i>Facade</a></div>");
+            if (this.Pattern != "fas") output.Content.AppendHtml("<div><a href='/Structural/Facade'><i class='fa-solid fa-igloo mr-2 ml-5'></i>Facade</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-igloo mr-2'></i>Facade</div>");
             
-            if (this.Pattern != "fly") output.Content.AppendHtml("<div><a href='/Structural/Flyweight'><i class='fa-solid fa-bowl-rice mr-2'></i>Flyweight</a></div>");
+            if (this.Pattern != "fly") output.Content.AppendHtml("<div><a href='/Structural/Flyweight'><i class='fa-solid fa-bowl-rice mr-2 ml-5'></i>Flyweight</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-bowl-rice mr-2'></i>Flyweight</div>");
             
-            if (this.Pattern != "proxy") output.Content.AppendHtml("<div><a href='/Structural/Proxy'><i class='fa-solid fa-door-open mr-2'></i>Proxy</a></div>");
+            if (this.Pattern != "proxy") output.Content.AppendHtml("<div><a href='/Structural/Proxy'><i class='fa-solid fa-door-open mr-2 ml-5'></i>Proxy</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-door-open mr-2'></i>Proxy</div>");
 
             output.Content.AppendHtml("</div></div>");
