@@ -10,25 +10,25 @@ namespace DesignPatternsRepo1.TagHelpers
         {
             output.TagName = "div";
             output.Attributes.SetAttribute("class", "container is-flex is-flex-direction-row is-justify-content-space-evenly mt-6 ");
-            output.Content.AppendHtml($@"<div><span class='is-uppercase has-text-weight-semibold'>Creational</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
+            output.Content.AppendHtml($@"<div><span class='is-uppercase has-text-weight-semibold ml-5'>Creational</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
-            if (this.Pattern != "fac") output.Content.AppendHtml("<div><a href='/Creational/Factory'><i class='fa-solid fa-industry mr-2'></i>Factory</a></div>");
+            if (this.Pattern != "fac") output.Content.AppendHtml("<div><a href='/Creational/Factory'><i class='fa-solid fa-industry mr-2 ml-5'></i>Factory</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-industry mr-2'></i>Factory</div>");
 
-            if (this.Pattern != "abs") output.Content.AppendHtml("<div><a href='/Creational/Abstract'><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</a></div>");
-            else output.Content.AppendHtml("<div><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</div>");
+            if (this.Pattern != "abs") output.Content.AppendHtml("<div><a href='/Creational/Abstract'><i class='fa-solid fa-cube ml-5'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</a></div>");
+            else output.Content.AppendHtml("<div><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2 ml-5'></i>Abstract Factory</div>");
 
             if (this.Pattern != "bui") output.Content.AppendHtml("<div><a href='/Creational/Builder'><i class='fa-solid fa-helmet-safety mr-2'></i>Builder</a></div>");
-            else output.Content.AppendHtml("<div><i class='fa-solid fa-helmet-safety mr-2'></i>Builder</div>");
+            else output.Content.AppendHtml("<div><i class='fa-solid fa-arrow-right'></i><i class='fa-solid fa-helmet-safety mr-1 ml-3'></i>Builder</div>");
 
-            if (this.Pattern != "proto") output.Content.AppendHtml("<div><a href='/Creational/Prototype'><i class='fa-regular fa-clone mr-2'></i>&nbsp;Prototype</a></div>"); 
+            if (this.Pattern != "proto") output.Content.AppendHtml("<div><a href='/Creational/Prototype'><i class='fa-regular fa-clone mr-2 ml-5'></i>&nbsp;Prototype</a></div>"); 
             else output.Content.AppendHtml("<div><i class='fa-regular fa-clone mr-2'></i>&nbsp;Prototype</div>");
 
-            if (this.Pattern != "sin") output.Content.AppendHtml("<div><a href='/Creational/Singleton'><i class='fa-solid fa-atom mr-2'></i>&nbsp;Singleton</a></div>");
+            if (this.Pattern != "sin") output.Content.AppendHtml("<div><a href='/Creational/Singleton'><i class='fa-solid fa-atom mr-2 ml-5'></i>&nbsp;Singleton</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-atom mr-2'></i>&nbsp;Singleton</div>");
 
             output.Content.AppendHtml("</div></div>");
-            output.Content.AppendHtml(@"<div><span class='is-uppercase has-text-weight-semibold'>Structural</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
+            output.Content.AppendHtml(@"<div><span class='is-uppercase has-text-weight-semibold ml-5'>Structural</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
             if (this.Pattern != "ada") output.Content.AppendHtml("<div><a href='/Structural/Adapter'><i class='fa-solid fa-plug mr-2'></i>Adapter</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-plug mr-2'></i>Adapter</div>");
