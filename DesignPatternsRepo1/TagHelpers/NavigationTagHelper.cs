@@ -16,9 +16,9 @@ namespace DesignPatternsRepo1.TagHelpers
             else output.Content.AppendHtml("<div><i class='fa-solid fa-industry mr-2'></i>Factory</div>");
 
             if (this.Pattern != "abs") output.Content.AppendHtml("<div><a href='/Creational/Abstract'><i class='fa-solid fa-cube ml-5'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</a></div>");
-            else output.Content.AppendHtml("<div><i class='fa-solid fa-cube'></i><i class='fa-solid fa-industry mr-2 ml-5'></i>Abstract Factory</div>");
+            else output.Content.AppendHtml("<div><i class='fa-solid fa-arrow-right'></i><i class='fa-solid fa-cube mr-1 ml-3'></i><i class='fa-solid fa-industry mr-2'></i>Abstract Factory</div>");
 
-            if (this.Pattern != "bui") output.Content.AppendHtml("<div><a href='/Creational/Builder'><i class='fa-solid fa-helmet-safety mr-2'></i>Builder</a></div>");
+            if (this.Pattern != "bui") output.Content.AppendHtml("<div><a href='/Creational/Builder'><i class='fa-solid fa-helmet-safety mr-2 ml-5'></i>Builder</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-arrow-right'></i><i class='fa-solid fa-helmet-safety mr-1 ml-3'></i>Builder</div>");
 
             if (this.Pattern != "proto") output.Content.AppendHtml("<div><a href='/Creational/Prototype'><i class='fa-regular fa-clone mr-2 ml-5'></i>&nbsp;Prototype</a></div>"); 
