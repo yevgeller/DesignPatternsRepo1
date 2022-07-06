@@ -10,6 +10,8 @@ namespace DesignPatternsRepo1.TagHelpers
         {
             output.TagName = "div";
             output.Attributes.SetAttribute("class", "container is-flex is-flex-direction-row is-justify-content-space-evenly mt-6 ");
+            output.Content.AppendHtml($@"<div><span class='is-uppercase has-text-weight-semibold ml-5'>Home</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'><div><a href='/'><i class='fa-solid fa-house-user mr-2 ml-5'></i>Home</a></div></div></div>");
+
             output.Content.AppendHtml($@"<div><span class='is-uppercase has-text-weight-semibold ml-5'>Creational</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
 
             if (this.Pattern != "fac") output.Content.AppendHtml("<div><a href='/Creational/Factory'><i class='fa-solid fa-industry mr-2 ml-5'></i>Factory</a></div>");
