@@ -51,7 +51,7 @@ namespace DesignPatternsRepo1.TagHelpers
             if (this.Pattern != "proxy") output.Content.AppendHtml("<div><a href='/Structural/Proxy'><i class='fa-solid fa-door-open mr-2 ml-5'></i>Proxy</a></div>");
             else output.Content.AppendHtml("<div><i class='fa-solid fa-arrow-right'></i><i class='fa-solid fa-door-open mr-1 ml-3'></i>Proxy</div>");
 
-            output.Content.AppendHtml("<div>&nbsp;</div><div><i class='fa-solid fa-house-user mr-2 ml-5'></i>Home</div>");
+            output.Content.AppendHtml("<div>&nbsp;</div><div><a href='/'><i class='fa-solid fa-house-user mr-2 ml-5'></i>Home</a></div>");
 
             output.Content.AppendHtml("</div></div>");
             output.Content.AppendHtml(@"<div><span class='is-uppercase has-text-weight-semibold ml-5'>Behavioral</span><div class='is-flex is-flex-direction-column is-justify-content-space-evenly'>");
