@@ -1,6 +1,8 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Creational.AbstractModel
 @{
+    var pageName = "Abstract Factory";
+    var groupName = "Creational";
 }
 
 
@@ -10,7 +12,7 @@
     Abstract Factory
 </h1>
 <h2 class="subtitle">Organization while creating groups of related objects without explicitly specifying their concrete classes</h2>
-
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 
 <script>hljs.highlightAll();</script>
 <div class="content">
@@ -66,7 +68,7 @@
     </ol>
 
     <div class="block">Let's get into it. First, declare interfaces for the "pieces" that comprise a unit:</div>
-    
+
 <pre><code class="language-ts">
   interface Chief {
     command(): string;
@@ -81,7 +83,7 @@
   }
   </code></pre>
     <div class="block">Then, declare abstract factory interface:</div>
-    
+
 <pre><code class="language-ts">
   interface ResponderFactory {
     chief: Chief;
@@ -93,7 +95,7 @@
   }
   </code></pre>
     <div class="block">Then, declare concrete implementations of the pieces comprising units:</div>
-    
+
 <pre><code class="language-ts">
   class FireChief implements Chief {
     command(): string {
@@ -132,7 +134,7 @@
   }
   </code></pre>
     <div class="block">Finally, implement concrete factories creating specific variants of families of products:</div>
-    
+
 <pre><code class="language-ts">
   class FiremenUnitFactory implements ResponderFactory {
     chief: Chief;
@@ -183,7 +185,7 @@
   }
   </code></pre>
     <div class="block">Test:</div>
-    
+
 <pre><code class="language-ts">
   let policeUnit = new PoliceUnitFactory();
   console.log(policeUnit.chief.command());
@@ -206,5 +208,5 @@
   */
   </code></pre>
 </div>
-
-  <div class="content"><navigation pattern="abs"></navigation> </div>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<div class="content"><navigation pattern="abs"></navigation> </div>
