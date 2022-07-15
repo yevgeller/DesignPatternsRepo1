@@ -1,6 +1,8 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Creational.BuilderModel
 @{
+    var pageName = "Builder";
+    var groupName = "Creational";
 }
 
 
@@ -10,7 +12,7 @@
     the steps and centralizing the control of what happens at each step. It
     also allows for easier customization.
 </h2>
-
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 
 <script>hljs.highlightAll();</script>
 
@@ -276,7 +278,7 @@ namespace NoBuilderPattern
     </code>
 </pre>
 </div>
-
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
         <div class="content">
             <navigation pattern="bui"></navigation>
         </div>
