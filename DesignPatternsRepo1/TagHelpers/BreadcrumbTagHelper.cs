@@ -4,15 +4,14 @@ namespace DesignPatternsRepo1.TagHelpers
 {
     public class BreadcrumbTagHelper : TagHelper
     {
-        /*
-         * <nav class="breadcrumb" aria-label="breadcrumbs">
+ /*
+ <nav class="breadcrumb" aria-label="breadcrumbs">
   <ul>
     <li><a href="/">Creational</a></li>
     <li class="is-active"><a href="#" aria-current="page">Factory</a></li>
   </ul>
 </nav>
-        */
-
+ */
         public string Group { get; set; } = "Behavioral";
         public string PageName { get; set; } = "Factory";
 
