@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.CommandModel
 @{
+    var pageName = "Command";
+    var groupName = "Behavioral";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-bullhorn mr-2"></i>Command</h1>
 <h2 class="subtitle">Abstracting callable actions such that they can be assigned to multiple callers and support undoing </h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">  
 
 Command becomes a self-sufficient unit that knows how to do everything and knows how to undo itself too.
@@ -220,7 +223,6 @@ Truck 2, 0 shipments, 0/5 filled</code></pre>
 </div>
 </div>
 
-
-
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="com"></navigation></div>
 <script>hljs.highlightAll();</script>
