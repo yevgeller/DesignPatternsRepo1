@@ -1,12 +1,15 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.ChainOfResponsibilityModel
 @{
+    var pageName = "Chain of Responsibility";
+    var groupName = "Behavioral";
 }
 
 
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-link mr-2"></i>Chain of Responsibility</h1>
 <h2 class="subtitle">Standardizing similar separate functionality</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -169,9 +172,6 @@ car TOYCAR004 was found to have the following issues during the inspection:
     </div>
 </div>
 
-
-
-
-
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="cha"></navigation></div>
 <script>hljs.highlightAll();</script>
