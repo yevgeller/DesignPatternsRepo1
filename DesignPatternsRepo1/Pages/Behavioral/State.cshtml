@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.StateModel
 @{
+    var pageName = "State";
+    var groupName = "Behavioral";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-wand-sparkles mr-2"></i>State</h1>
 <h2 class="subtitle">Changing functionality of a class in a maintainable and scalable way</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">  
 
 <div class="block">This pattern is just borderline magic. It is a way to change how a class works in such a way that
@@ -298,5 +301,6 @@ Support ticket 12345 is now in 'Resolved' state. Resolved successfully: true, co
 </div>
 
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="sta"></navigation></div>
 <script>hljs.highlightAll();</script>
