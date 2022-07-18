@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.ObserverModel
 @{
+    var pageName = "Observer";
+    var groupName = "Behavioral";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-eye mr-2"></i>Observer</h1>
 <h2 class="subtitle">Providing a choice for entities to subscribe/unsubscribe from notification.</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">  
 
 <div class="block"><a asp-area="" asp-page="/Behavioral/Mediator"><i class="fa-solid fa-tower-cell mr-2"></i>Mediator</a> pattern provides a centralized system
@@ -171,5 +174,6 @@ Police Squad 2 has been notified about Parade</code></pre>
 </div>
 
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="obs"></navigation></div>
 <script>hljs.highlightAll();</script>
