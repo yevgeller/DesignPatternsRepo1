@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.MediatorModel
 @{
+    var pageName = "Mediator";
+    var groupName = "Behavioral";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-tower-cell mr-2"></i>Mediator</h1>
 <h2 class="subtitle">Abstracting communication function to a dedicated entity</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">  
 
 <div class="block">The idea behind this design pattern is pretty simple: instead of everyone having a way to talk to everyone,
@@ -197,5 +200,6 @@ daughter Jill received a PRIVATE message Hey! from Mary</code></pre>
 </div>
 
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="med"></navigation></div>
 <script>hljs.highlightAll();</script>
