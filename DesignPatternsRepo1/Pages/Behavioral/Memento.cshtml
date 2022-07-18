@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.MementoModel
 @{
+    var pageName = "Memento";
+    var groupName = "Behavioral";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-gift mr-2"></i>Memento</h1>
 <h2 class="subtitle">An ability to provide and consume internal state via a predefined channel</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">  
 
 <div class="block">The gist of the Memento pattern is that it allows to restore to a previous state of an object
@@ -161,5 +164,6 @@ while (!g2.gameIsOver()) {
 </div>
 
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="mem"></navigation></div>
 <script>hljs.highlightAll();</script>
