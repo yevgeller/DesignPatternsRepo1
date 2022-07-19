@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.TemplateMethodModel
 @{
+    var pageName = "Template Method";
+    var groupName = "Behavioral";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-train-tram mr-3"></i>Template Method</h1>
 <h2 class="subtitle">Allowing subclasses to vary a common algorithm</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">  
 
 <div class="block">Imagine a workday morning. You get up, go through the regular routine, but put on nice clothes today
@@ -118,5 +121,6 @@ let's have a party!</code></pre>
 </div>
 
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="tem"></navigation></div>
 <script>hljs.highlightAll();</script>
