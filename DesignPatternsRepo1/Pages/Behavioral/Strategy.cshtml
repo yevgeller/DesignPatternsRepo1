@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.StrategyModel
 @{
+    var pageName = "Strategy";
+    var groupName = "Behavioral";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-chess-knight mr-2"></i>Strategy</h1>
 <h2 class="subtitle">Flexibility in actions based on circumstances</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">  
 
 <div class="block">Strategy pattern allows to change the internal behavior of a class based on input. Sounds, familiar, right?
@@ -95,5 +98,6 @@ Notification via email:  Notified via an e-mail via an e-mail relay.</code></pre
 </div>
 
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="str"></navigation></div>
 <script>hljs.highlightAll();</script>
