@@ -2,10 +2,13 @@
 @model DesignPatternsRepo1.Pages.Behavioral.VisitorModel
 @{
     ViewData["Title"] = "Visitor Software Design Pattern";
+    var pageName = "Visitor";
+    var groupName = "Behavioral";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-person-circle-question mr-2"></i>Visitor</h1>
 <h2 class="subtitle">Separating algorithms from objects on which they operate</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">  
 
 <div class="block">This pattern allows for introducing a new behavior without modifying a class. The new behavior 
@@ -102,5 +105,6 @@ Oh, seems like it was unplugeed. Easy repair!
 Oven is working</code></pre>
 </div>
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="vis"></navigation></div>
 <script>hljs.highlightAll();</script>
