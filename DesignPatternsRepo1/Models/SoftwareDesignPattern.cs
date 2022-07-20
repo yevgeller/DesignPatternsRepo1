@@ -40,122 +40,122 @@
                 case "proto": //Prototype
                     this.Name = "Prototype";
                     this.Group = "Creational";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Copying of existing objects without a dependency on a concrete class that needs to be copied";
+                    this.Icon = "fa-clone";
                     break;
                 case "sin": //Singleton
                     this.Name = "Singleton";
                     this.Group = "Creational";
                     this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Icon = "fa-atom";
                     break;
                 case "ada": //Adapter
                     this.Name = "Adapter";
                     this.Group = "Structural";
                     this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Icon = "fa-plug";
                     break;
                 case "bri": //Bridge
-                    this.Name = "";
+                    this.Name = "Bridge";
                     this.Group = "Structural";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Decoupling Abstraction from Implementation";
+                    this.Icon = "fa-left-right";
                     break;
                 case "sit": //Composite
-                    this.Name = "";
+                    this.Name = "Composite";
                     this.Group = "Structural";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Working with tree-like components in a uniform way regardless of whether it's a leaf or a container";
+                    this.Icon = "fa-magnifying-glass-arrow-right";
                     break;
                 case "dec": //Decorator
-                    this.Name = "";
+                    this.Name = "Decorator";
                     this.Group = "Structural";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Enhancing functionality while ensuring single responsibility";
+                    this.Icon = "fa-chart-line";
                     break;
                 case "fas": //Facade
-                    this.Name = "";
+                    this.Name = "Facade";
                     this.Group = "Structural";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Hiding complex procedures behind a wall and providing a push-button interface";
+                    this.Icon = "fa-igloo";
                     break;
                 case "fly": //Flyweight
-                    this.Name = "";
+                    this.Name = "Flyweight";
                     this.Group = "Structural";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Creating a large number of similar objects while sharing some of their state to save memory";
+                    this.Icon = "fa-bowl-rice";
                     break;
                 case "proxy": //Proxy
-                    this.Name = "";
+                    this.Name = "Proxy";
                     this.Group = "Structural";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "A placeholder for another object for a few reasons";
+                    this.Icon = "fa-door-open";
                     break;
                 case "cha": //Chain of Responsibility
-                    this.Name = "";
+                    this.Name = "Chain of Responsibility";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "com": //Command
-                    this.Name = "";
+                    this.Name = "Command";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "int": //Interpreter
-                    this.Name = "";
+                    this.Name = "Interpreter";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "ite": //Iterator
-                    this.Name = "";
+                    this.Name = "Iterator";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "med": //Mediator
-                    this.Name = "";
+                    this.Name = "Mediator";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "obs": //Observer
-                    this.Name = "";
+                    this.Name = "Observer";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "sta": //State
-                    this.Name = "";
+                    this.Name = "State";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "str": //Strategy
-                    this.Name = "";
+                    this.Name = "Strategy";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "tem": //Template Method
-                    this.Name = "";
+                    this.Name = "Template Method";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 case "vis": //Visitor
-                    this.Name = "";
+                    this.Name = "Visitor";
                     this.Group = "Behavioral";
                     this.Summary = "";
                     this.Icon = "fa-";
                     break;
                 default:
-                    this.Name = "Abstract Factory";
-                    this.Group = "Creational";
-                    this.Summary = "Same as Factory (Creation of objects that conform to the same interface without specifying concrete classes) but to 'families' of objects";
-                    this.Icon = "fa-boxes-stacked";
+                    this.Name = "No name";
+                    this.Group = "No group";
+                    this.Summary = "Pattern summary";
+                    this.Icon = "fa-folder-open";
                     break;
             }
         }
