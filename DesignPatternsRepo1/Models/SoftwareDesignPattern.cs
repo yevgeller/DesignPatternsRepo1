@@ -94,32 +94,38 @@
                 case "cha": //Chain of Responsibility
                     this.Name = "Chain of Responsibility";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Standardizing similar separate functionality";
+                    this.Icon = "fa-link";
                     break;
                 case "com": //Command
                     this.Name = "Command";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Abstracting callable actions such that they can be assigned to multiple callers and support undoing";
+                    this.Icon = "fa-bullhorn";
                     break;
                 case "int": //Interpreter
                     this.Name = "Interpreter";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Setting up grammar, sentence structure, and mechanism(s) for translating";
+                    this.Icon = "fa-language";
                     break;
                 case "ite": //Iterator
                     this.Name = "Iterator";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Setting up a way to traverse a collection without exposing its inner structure";
+                    this.Icon = "fa-arrow-up-right-dots";
                     break;
                 case "med": //Mediator
                     this.Name = "Mediator";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Abstracting communication function to a dedicated entity";
+                    this.Icon = "fa-tower-cell";
+                    break;
+                case "mem": //Memento
+                    this.Name = "Memento";
+                    this.Group = "Behavioral";
+                    this.Summary = "An ability to provide and consume internal state via a predefined channel";
+                    this.Icon = "fa-gift";
                     break;
                 case "obs": //Observer
                     this.Name = "Observer";
