@@ -130,32 +130,32 @@
                 case "obs": //Observer
                     this.Name = "Observer";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Providing a choice for entities to subscribe/unsubscribe from notification";
+                    this.Icon = "fa-eye";
                     break;
                 case "sta": //State
                     this.Name = "State";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Changing functionality of a class in a maintainable and scalable way";
+                    this.Icon = "fa-wand-sparkles";
                     break;
                 case "str": //Strategy
                     this.Name = "Strategy";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Flexibility in actions based on circumstances";
+                    this.Icon = "fa-chess-knight";
                     break;
                 case "tem": //Template Method
                     this.Name = "Template Method";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Allowing subclasses to vary a common algorithm";
+                    this.Icon = "fa-train-tram";
                     break;
                 case "vis": //Visitor
                     this.Name = "Visitor";
                     this.Group = "Behavioral";
-                    this.Summary = "";
-                    this.Icon = "fa-";
+                    this.Summary = "Separating algorithms from objects on which they operate";
+                    this.Icon = "fa-person-circle-question";
                     break;
                 default:
                     this.Name = "No name";
