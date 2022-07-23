@@ -3,16 +3,12 @@
 @{
     var pageName = "Abstract Factory";
     var groupName = "Creational";
+    var pattern = new SoftwareDesignPattern("abs");
 }
 
-
-
-<h1 class="title is-1 is-spaced">
-    <i class="fa-solid fa-boxes-stacked mr-3"></i>
-    Abstract Factory
-</h1>
-<h2 class="subtitle">Organization while creating groups of related objects without explicitly specifying their concrete classes</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<br />
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 
 <script>hljs.highlightAll();</script>
 <div class="content">
@@ -208,5 +204,5 @@
   */
   </code></pre>
 </div>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="abs"></navigation> </div>
