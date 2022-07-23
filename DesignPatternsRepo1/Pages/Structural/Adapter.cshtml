@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.Adapter_problemModel
 @{
+    var pageName = "Adapter";
+    var groupName = "Structural";
 }
 
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-plug mr-1"></i>Adapter</h1>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -18,7 +21,7 @@
         use data from CSVProvider in JSONProcessor, an adapter is required.
     </div>
     <div class="block">
-        The following class, CSVProvider returns some data in CSV format. 
+        The following class, CSVProvider returns some data in CSV format.
     </div>
     <pre><code class="hljs language-ts">class CSVProvider {
   public getColumnHeaders(): string {
@@ -35,9 +38,10 @@
     return res;
   }
 }</code></pre>
-<div class="block">The following class, JSONProcessor, needs to work with data that is provided by the CSVProvider,
-    but JSONProcessor can only work with JSON data. The formats are not quite compatible.
-</div>
+    <div class="block">
+        The following class, JSONProcessor, needs to work with data that is provided by the CSVProvider,
+        but JSONProcessor can only work with JSON data. The formats are not quite compatible.
+    </div>
 <pre><code class="hljs language-ts">class JSONProcessor {
   public doSomethingWithJSON(json: string): void {
     console.log(JSON.stringify(json, null, 2));
@@ -107,9 +111,13 @@ jp.showJSON(adapter1.ConvertCsvToJson());
 │    2    │  'Jacob'  │ 'Smith'  │ '3'  │
 └─────────┴───────────┴──────────┴──────┘
 
-    </code></pre></div>
-    
+    </code></pre>
+</div>
 
-<div class="content"><navigation pattern="ada"></navigation></div>
 
-    <script>hljs.highlightAll();</script>
+<div class="content">
+    <breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+    <navigation pattern="ada"></navigation>
+</div>
+
+<script>hljs.highlightAll();</script>
