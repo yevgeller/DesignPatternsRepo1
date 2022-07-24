@@ -1,9 +1,12 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.DecoratorModel
 @{
+    var pageName = "Decorator";
+    var groupName = "Structural";
 }
 <h1 class="title is-1 is-spaced"><i class="fa-solid  fa-chart-line mr-2"></i>Decorator</h1>
 <h2 class="subtitle">Providing more functionality while ensuring single responsibility</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -152,5 +155,6 @@ data (from cache): [
 </div>
 
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="dec"></navigation></div>
 <script>hljs.highlightAll();</script>
