@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.FlyweightModel
 @{
+    var pageName = "Flyweight";
+    var groupName = "Structural";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-bowl-rice mr-2"></i>Flyweight</h1>
 <h2 class="subtitle">Creating a large number of similar objects while sharing some of their state to save memory</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -292,5 +295,6 @@ Total number of records in the factory: 3
     </code></pre>
 </div>
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="fly"></navigation></div>
 <script>hljs.highlightAll();</script>
