@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.ProxyModel
 @{
+    var pageName = "Proxy";
+    var groupName = "Structural";
 }
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-door-open mr-2"></i>Proxy</h1>
 <h2 class="subtitle">A placeholder for another object for a few reasons</h2>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -122,9 +125,6 @@ Here you go!*/</code></pre>
     </div>
 </div>
 
-
-
-
-
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="proxy"></navigation></div>
 <script>hljs.highlightAll();</script>
