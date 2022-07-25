@@ -1,10 +1,13 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Creational.SingletonModel
 @{
+    var pageName = "Singleton";
+    var groupName = "Creational";
 }
 
 
 <h1 class="title is-1 is-spaced"><i class="fa-solid fa-atom mr-1"></i>Singleton</h1>
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -136,6 +139,7 @@ Are ticket checkers point to the same instance? Is tc2 === tc3? true
     <p>The code above demonstrates how a simple toy factory can make the only toy they know about -- a car. But what if they learned to create other toys?</p>
 </div>
 
+<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
 <div class="content"><navigation pattern="sin"></navigation></div>
 
 <script>hljs.highlightAll();</script>
