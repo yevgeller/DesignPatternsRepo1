@@ -1,15 +1,14 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Creational.FactoryModel
 @{
-    var pageName = "Factory";
-    var groupName = "Creational";
+    var pattern = new SoftwareDesignPattern("fac");
 }
 
 <script>hljs.highlightAll();</script>
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-industry mr-2"></i>Factory</h1>
-<h2 class="subtitle">A pattern used to differentiate between items that have something in common</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<h1 class="title is-1 is-spaced"><i class="fa-solid @pattern.Icon mr-2"></i>@pattern.Name</h1>
+<h2 class="subtitle">@pattern.Summary</h2>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 
 <div class="content">
 
@@ -173,5 +172,5 @@ vroom!!
     </div>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="fac"></navigation></div>
