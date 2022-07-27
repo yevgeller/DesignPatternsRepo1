@@ -17,7 +17,7 @@ namespace DesignPatternsRepo1.TagHelpers
         {
             output.Content.AppendHtml($@"<h1 class='title is-1 is-spaced'><i class='fa-solid {SoftwareDesignPattern.Icon} mr-2'></i>");
             output.Content.AppendHtml($@"{SoftwareDesignPattern.Name}</h1>");
-            output.Content.AppendHtml($@"<h2 class='subtitle'>{SoftwareDesignPattern.Summary}</h2><br />");
+            output.Content.AppendHtml($@"<h2 class='subtitle mb-3'>{SoftwareDesignPattern.Summary}</h2>");
         }
     }
 }
