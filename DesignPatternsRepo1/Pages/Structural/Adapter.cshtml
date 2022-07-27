@@ -1,13 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.Adapter_problemModel
 @{
-    var pageName = "Adapter";
-    var groupName = "Structural";
+    var pattern = new SoftwareDesignPattern("ada");
 }
 
-
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-plug mr-1"></i>Adapter</h1>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -116,7 +114,7 @@ jp.showJSON(adapter1.ConvertCsvToJson());
 
 
 <div class="content">
-    <breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+    <breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
     <navigation pattern="ada"></navigation>
 </div>
 
