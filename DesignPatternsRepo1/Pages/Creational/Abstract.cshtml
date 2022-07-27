@@ -1,13 +1,10 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Creational.AbstractModel
 @{
-    var pageName = "Abstract Factory";
-    var groupName = "Creational";
     var pattern = new SoftwareDesignPattern("abs");
 }
 
 <page-header software-design-pattern="@pattern"></page-header>
-<br />
 <breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 
 <script>hljs.highlightAll();</script>
