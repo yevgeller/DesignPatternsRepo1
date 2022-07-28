@@ -1,13 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Creational.PrototypeModel
 @{
-    var pageName = "Prototype";
-    var groupName = "Creational";
+    var pattern = new SoftwareDesignPattern("proto");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-regular fa-clone mr-2"></i>Prototype</h1>
-<h2 class="subtitle">This pattern enables copying of existing objects without a dependency on a concrete class that needs to be copied</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -57,9 +55,9 @@
   size: 1; color: red
   </code>
   </pre>
-   
+
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="proto"></navigation></div>
 <script>hljs.highlightAll();</script>
