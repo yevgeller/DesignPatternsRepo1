@@ -1,13 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.CompositeModel
 @{
-    var pageName = "Composite";
-    var groupName = "Structural";
+    var pattern = new SoftwareDesignPattern("sit");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-magnifying-glass-arrow-right mr-2"></i>Composite</h1>
-<h2 class="subtitle">Working with tree-like components in a uniform way regardless of whether it's a leaf or a container</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -45,14 +43,14 @@
     this.name = name;
   }
 }</code></pre>
-<div class="block">
-    The next piece of code defines Leaf and Branch classes. Branch class can have many leaves (hence the container for 
-    leaves called "components" and is of type Component[]). Also, it is worth noting the different implementation
-    of the "primaryOperation" method between the two classes. In the Leaf class, it returns the identifier for the 
-    object it is in. For the Branch class, it also returns an identifier, but it also calls the same method for all
-    items in its' components container. This is how the pattern is working, method is the same among both types 
-    of objects, but it acts differently between the two types of objects.
-</div>
+    <div class="block">
+        The next piece of code defines Leaf and Branch classes. Branch class can have many leaves (hence the container for
+        leaves called "components" and is of type Component[]). Also, it is worth noting the different implementation
+        of the "primaryOperation" method between the two classes. In the Leaf class, it returns the identifier for the
+        object it is in. For the Branch class, it also returns an identifier, but it also calls the same method for all
+        items in its' components container. This is how the pattern is working, method is the same among both types
+        of objects, but it acts differently between the two types of objects.
+    </div>
 
 <pre>
     <code class="language-ts">class Leaf extends Component {
@@ -184,7 +182,7 @@ root
     builder.addLeaf("sub-center branch, leaf 1");
     builder.rootComponent.primaryOperation(1);
 
-    
+
     /* output:
     root
     --left branch
@@ -207,6 +205,6 @@ root
     </div>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="sit"></navigation></div>
 <script>hljs.highlightAll();</script>
