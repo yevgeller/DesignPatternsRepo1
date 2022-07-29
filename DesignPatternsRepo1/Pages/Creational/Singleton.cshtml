@@ -1,13 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Creational.SingletonModel
 @{
-    var pageName = "Singleton";
-    var groupName = "Creational";
+    var pattern = new SoftwareDesignPattern("sin");
 }
 
-
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-atom mr-1"></i>Singleton</h1>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -28,17 +26,17 @@
 
     </div>
     <div class="block">
-        The following example illustrates a ticket checker. Imagine you came to see a show, 
+        The following example illustrates a ticket checker. Imagine you came to see a show,
         and you give your ticket to any attendants in a booth to verify that your ticket is legitimate
         &mdash; haven't been used yet. And for some reasons there is no database available for use.
-        Whoever shows up first and shows a ticket with a certain number, can come in. Anyone else who 
+        Whoever shows up first and shows a ticket with a certain number, can come in. Anyone else who
         tries to come in using a ticket that's already been verified cannot come in.
     </div>
     <div class="block">
-        When a ticket is validated, it's being stored in an internal store (an array of strings), 
+        When a ticket is validated, it's being stored in an internal store (an array of strings),
         and if there is more than one machine checking the tickets, they need to operate on the same
-        subset of data. A singleton is handy in this matter because it maintains one store, and 
-        "opening" any other line would not help the matter because they all work with the same 
+        subset of data. A singleton is handy in this matter because it maintains one store, and
+        "opening" any other line would not help the matter because they all work with the same
         data store.
     </div>
 <pre><code class="hljs language-ts">class TicketChecker {
@@ -77,7 +75,7 @@
 }
   </code>
 </pre>
-<div class="block">And here's some test code:</div>
+    <div class="block">And here's some test code:</div>
 <pre><code class="hljs language-ts">const tc1 = TicketChecker.getInstance();
 console.log("--- Using TicketChecker1: ---");
 console.log("Attempting to use ticket 'abc': ", tc1.validateTicket("abc"));
@@ -139,7 +137,7 @@ Are ticket checkers point to the same instance? Is tc2 === tc3? true
     <p>The code above demonstrates how a simple toy factory can make the only toy they know about -- a car. But what if they learned to create other toys?</p>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="sin"></navigation></div>
 
 <script>hljs.highlightAll();</script>
