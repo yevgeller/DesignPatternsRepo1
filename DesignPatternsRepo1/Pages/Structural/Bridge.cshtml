@@ -1,13 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.BridgeModel
 @{
-    var pageName = "Bridge";
-    var groupName = "Structural";
+    var pattern = new SoftwareDesignPattern("bri");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-left-right mr-2"></i>Bridge</h1>
-<h2 class="subtitle">Decoupling Abstraction from Implementation</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <h3 class="subtitle is-3">Problem</h3>
 <div class="content">
     <div class="block">
@@ -244,6 +242,6 @@ interface InteriorMaterial {
     </div>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="bri"></navigation></div>
 <script>hljs.highlightAll();</script>
