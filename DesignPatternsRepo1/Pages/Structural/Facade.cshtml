@@ -1,26 +1,23 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.FacadeModel
 @{
-    var pageName = "Facade";
-    var groupName = "Structural";
+    var pattern = new SoftwareDesignPattern("fas");
 }
 
-
-<h1 class="title is-1 is-spaced"><i class="fa-solid  fa-igloo mr-2"></i>Facade</h1>
-<h2 class="subtitle">Hiding complex procedures behind a wall and providing a push-button interface</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
-        The idea behind the Facade software design principle is quite simple. If you 
+        The idea behind the Facade software design principle is quite simple. If you
         can simplify calling a complex scenario, then create a Facade class, expose
         one method that can call the complex scenario for you and have the Facade class
         do all the heavy lifting and/or orchestration.
     </div>
     <div class="block">
         The code below is somewhat confusing, but the main point is that there are some
-        scenarios that require complex and perplexing actions to make things happen. The 
-        idea of the Facade pattern is to "shove" those actions "under the hood" and give 
+        scenarios that require complex and perplexing actions to make things happen. The
+        idea of the Facade pattern is to "shove" those actions "under the hood" and give
         a key that would start the machine with one simple action.
     </div>
     <pre><code class="language-ts">class SoundBooth {
@@ -95,9 +92,9 @@ class Orchestra {
   prepare = (): void => console.log("orchestra is ready");
 }
 </code></pre>
-<div class='block'>
-In order to start the performance, the following code would need to be typed each time:
-</div>
+    <div class='block'>
+        In order to start the performance, the following code would need to be typed each time:
+    </div>
 <pre><code class="language-ts">
 let soundBooth = new SoundBooth();
 soundBooth.setUpSound();
@@ -114,11 +111,11 @@ choir.prepare();
 let orchestra = new Orchestra();
 orchestra.prepare();
 auditorium.dimLights();</code></pre>
-<div class="block">
-    This is very error-prone and repetitive. So instead, another class is created,
-    which has a sole responsibility of running this code.
-</div>
- <pre><code class="language-ts">class PerformanceStarter {
+    <div class="block">
+        This is very error-prone and repetitive. So instead, another class is created,
+        which has a sole responsibility of running this code.
+    </div>
+    <pre><code class="language-ts">class PerformanceStarter {
   startPerformance(): void {
     let soundBooth = new SoundBooth();
     soundBooth.setUpSound();
@@ -137,15 +134,15 @@ auditorium.dimLights();</code></pre>
     auditorium.dimLights();
   }
 }</code></pre>
-<div class="block">
-    And then running the code looks almost trivial:
-</div>
- <pre><code class="language-ts">let performanceStarter = new PerformanceStarter();
+    <div class="block">
+        And then running the code looks almost trivial:
+    </div>
+    <pre><code class="language-ts">let performanceStarter = new PerformanceStarter();
 performanceStarter.startPerformance();</code></pre>
-<div class="block">
-    And the results are the same:
-</div>
- <pre><code class="language-ts">sound booth here
+    <div class="block">
+        And the results are the same:
+    </div>
+    <pre><code class="language-ts">sound booth here
 sound set up
 stage microphones set up
 Lighting Provider initialized
@@ -162,6 +159,6 @@ orchestra is ready
 lights dimmed</code></pre>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="fas"></navigation></div>
 <script>hljs.highlightAll();</script>
