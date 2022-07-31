@@ -1,13 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.FlyweightModel
 @{
-    var pageName = "Flyweight";
-    var groupName = "Structural";
+    var pattern = new SoftwareDesignPattern("fly");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-bowl-rice mr-2"></i>Flyweight</h1>
-<h2 class="subtitle">Creating a large number of similar objects while sharing some of their state to save memory</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -16,9 +14,9 @@
     </div>
 
     <div class="block">
-        The idea behind this pattern is to separate the common parts among all types of objects (intrinsic data) 
+        The idea behind this pattern is to separate the common parts among all types of objects (intrinsic data)
         and their differences (extrinsic data). Then create a dictionary of some sort to store just one copy of
-        each type and provide a way to set extrinsic data. 
+        each type and provide a way to set extrinsic data.
     </div>
     <div class="block">
         The reasoning behind such separation is to save on memory by not storing same data over and over again.
@@ -26,14 +24,14 @@
 
     <div class="block">
         The following code imitates drawing various plants for a game background. Assumption is that there will need to be
-        many plants in the background and the game needs to run smoothly on systems with even limited resources. 
-        The current choice of background plants is grass, fern, or pine trees, and name and description will be the same among 
+        many plants in the background and the game needs to run smoothly on systems with even limited resources.
+        The current choice of background plants is grass, fern, or pine trees, and name and description will be the same among
         each type of plant, but each of the plants will have some individual trait that will be shown in the display method.
     </div>
 
     <div class="block">
-        First, an interface shared by the plants. It shows which items are intrinsic, specific to each class, repetitive items 
-        and kind of "baked in" to each of the classes. It also shows which items are extrinsic, size can vary, and another 
+        First, an interface shared by the plants. It shows which items are intrinsic, specific to each class, repetitive items
+        and kind of "baked in" to each of the classes. It also shows which items are extrinsic, size can vary, and another
         extrinsic item. This can be anything specific to each class, something that is not the cookie-cutter item.
     </div>
     <pre><code class="language-ts">interface IFloraItem {
@@ -45,7 +43,7 @@
   ): void; //extrinsic
     </code></pre>
 
-    
+
     <div class="block">
         Next, a parent class that implements the display method, in this particular implementation it is the same among all three classes:
     </div>
@@ -94,9 +92,9 @@ class GrassBlade extends FloraItemParent {
 }
     </code></pre>
     <div class="block">
-        The final piece of the puzzle is a 
+        The final piece of the puzzle is a
         <a asp-area="" asp-page="/Creational/Factory-problem"><i class="fa-solid fa-industry mr-2"></i>factory</a>
-        that checks the dictionary if a type has already been instantiated, and if not, create a new class of 
+        that checks the dictionary if a type has already been instantiated, and if not, create a new class of
         that type and add it to the dictionary. The factory has extra method showDictionary that will show
         that regardless of how many various classes are created, only one type of each class is actually
         stored in that dictionary.
@@ -158,7 +156,7 @@ class GrassBlade extends FloraItemParent {
 
     </code></pre>
     <div class="block">
-        Next, test code. The following code initializes 3 large items of each kind, then 3 medium, then 3 small, 
+        Next, test code. The following code initializes 3 large items of each kind, then 3 medium, then 3 small,
         then 3 random items.  After each item is initialized, there is a check that shows how many items
         are in the dictionary.
     </div>
@@ -295,6 +293,6 @@ Total number of records in the factory: 3
     </code></pre>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="fly"></navigation></div>
 <script>hljs.highlightAll();</script>
