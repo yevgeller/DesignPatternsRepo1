@@ -10,13 +10,14 @@ namespace DesignPatternsRepo1.TagHelpers
         {
             output.TagName = "div";
             output.Attributes.SetAttribute("class", "card");
+            output.Attributes.SetAttribute("style", "max-width:375px");
 
-            string patternHeader = "<i class='fa-solid fa-industry mr-2'></i>Factory";
-            string subtitle = "Creational";
+            //string patternHeader = "<i class='fa-solid fa-industry mr-2'></i>Factory";
+            //string subtitle = "Creational";
 
-            output.Content.AppendHtml($@"<div class='card-content'><p class='title'>{SoftwareDesignPattern.Name}</p>");
+            output.Content.AppendHtml($@"<div class='card-content'><p class='title'><i class='fa-solid {SoftwareDesignPattern.Icon} mr-2'></i>{SoftwareDesignPattern.Name}</p>");
             output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.Summary}</p>");
-            output.Content.AppendHtml($@"<div class='content'><div class='card-content'>Some content here...<div><a href='/Creational/Factory'>More...</a></div></div>");
+            output.Content.AppendHtml($@"<div class='content'><div class='card-content'>Some content here...</div><a href='{SoftwareDesignPattern.Hyperlink}'>More...</a></div></div>");
 
             //if (this.TheEnd.ToLower() == "yes")
             //{
