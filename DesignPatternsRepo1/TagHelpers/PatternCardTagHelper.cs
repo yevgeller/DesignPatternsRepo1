@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using DesignPatternsRepo1.Models;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace DesignPatternsRepo1.TagHelpers
 {
     public class PatternCardTagHelper : TagHelper
     {
-        public string PatternName { get; set; }
+        public SoftwareDesignPattern SoftwareDesignPattern { get; set; } = new SoftwareDesignPattern("fac");
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";
@@ -13,21 +14,8 @@ namespace DesignPatternsRepo1.TagHelpers
             string patternHeader = "<i class='fa-solid fa-industry mr-2'></i>Factory";
             string subtitle = "Creational";
 
-            switch(PatternName)
-            {
-                case "Abstract":
-                    patternHeader = "<i class='fa-solid fa-boxes-stacked mr-3'></i>Abstract Factory";
-                    subtitle = "Creational";
-
-                    break;
-                default:
-                    patternHeader = "<i class='fa-solid fa-boxes-stacked mr-3'></i>Abstract Factory";
-                    subtitle = "Creational";
-                    break;
-            }
-
-            output.Content.AppendHtml($@"<div class='card-content'><p class='title'>{patternHeader}</p>");
-            output.Content.AppendHtml($@"<p class='subtitle'>{subtitle}</p>");
+            output.Content.AppendHtml($@"<div class='card-content'><p class='title'>{SoftwareDesignPattern.Name}</p>");
+            output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.Summary}</p>");
             output.Content.AppendHtml($@"<div class='content'><div class='card-content'>Some content here...<div><a href='/Creational/Factory'>More...</a></div></div>");
 
             //if (this.TheEnd.ToLower() == "yes")
