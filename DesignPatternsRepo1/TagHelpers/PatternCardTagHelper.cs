@@ -9,8 +9,7 @@ namespace DesignPatternsRepo1.TagHelpers
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";
-            output.Attributes.SetAttribute("class", "card");
-            output.Attributes.SetAttribute("class", "mw375");
+            output.Attributes.SetAttribute("class", "card mw375");
 
             output.Content.AppendHtml($@"<div class='card-content'><p class='title'><i class='fa-solid {SoftwareDesignPattern.Icon} mr-2'></i>{SoftwareDesignPattern.Name}</p>");
             output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.Summary}</p>");
