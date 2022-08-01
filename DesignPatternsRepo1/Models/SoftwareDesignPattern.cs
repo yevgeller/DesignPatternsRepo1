@@ -2,18 +2,22 @@
 {
     public class SoftwareDesignPattern
     {
-        public string Name { get; set; }
-        public string Group { get; set; }
-        public string Summary { get; set; }
-        public string Icon { get; set; }
+        public string Name { get; set; } = "No name";
+        public string Group { get; set; } = "No group";
+        public string Summary { get; set; } = "Pattern summary";
+        public string Icon { get; set; } = "fa-folder-open";
+        public string Hyperlink { get; set; } = "/index";
 
-        public SoftwareDesignPattern()
-        {
-            this.Name = "No name";
-            this.Group = "No group";
-            this.Summary = "Pattern summary";
-            this.Icon = "fa-folder-open";
-        }
+        //public SoftwareDesignPattern()
+        //{
+        //    this.Name = "No name";
+        //    this.Group = "No group";
+        //    this.Summary = "Pattern summary";
+        //    this.Icon = "fa-folder-open";
+        //    this.Hyperlink = "/Index";
+        //}
+
+        //add hyperlinks
 
         public SoftwareDesignPattern(string code)
         {
@@ -24,6 +28,7 @@
                     this.Group = "Creational";
                     this.Summary = "Creation of objects that conform to the same interface without specifying concrete classes";
                     this.Icon = "fa-industry";
+                    this.Hyperlink = "/Creational/Factory";
                     break;
                 case "abs":
                     this.Name = "Abstract Factory";
