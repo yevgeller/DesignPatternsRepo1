@@ -37,3 +37,11 @@ pre code.hljs {
 .image {
     width: 75%;
 }
+
+.gap24 {
+    gap: 24px;
+}
+
+.mw375 {
+    max-width: 375px;
+}
