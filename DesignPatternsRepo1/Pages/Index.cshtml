@@ -2,6 +2,14 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Software design patterns overview";
+    List<SoftwareDesignPattern> patterns = new List<SoftwareDesignPattern>();
+    patterns.Add(new SoftwareDesignPattern("fac"));
+    patterns.Add(new SoftwareDesignPattern("abs"));
+    patterns.Add(new SoftwareDesignPattern("bri"));
+    patterns.Add(new SoftwareDesignPattern("proto"));
+    patterns.Add(new SoftwareDesignPattern("sin"));
+    patterns.Add(new SoftwareDesignPattern("ada"));
+
 }
 
 <div class="notification is-primary mt-6">
@@ -91,36 +99,11 @@
     <navigation></navigation>
 </div>*@
 
-<div class="is-flex flex-wrap is-flex-direction-row">
-    <div class="card">
-        <div class="card-content">
-            <p class="title">
-                <i class="fa-solid fa-industry mr-2"></i>Factory
-            </p>
-            <p class="subtitle">
-                Creational
-            </p>
+<div class="is-flex is-flex-wrap-wrap is-flex-direction-row gap24">
+    @foreach(var p in patterns)
+    {
+        <div>
+            <pattern-card software-design-pattern="@p"></pattern-card>
         </div>
-        <div class="content">
-            <div class="card-content">Some content here... 
-                <a href="/Creational/Factory">More...</a>
-                @*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-                <a href="#">bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-                <br>
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>*@
-            </div>
-        </div>
-    </div>
-    <div>
-        <pattern-card></pattern-card>
-    </div>
-    <div>
-        Third column
-    </div>
-    <div>
-        Fourth column
-    </div>
-    <div>
-        <pattern-card pattern-name="Abstract"></pattern-card>
-    </div>
+    }
 </div>
