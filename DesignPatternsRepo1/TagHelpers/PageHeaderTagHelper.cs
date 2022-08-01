@@ -12,7 +12,7 @@ namespace DesignPatternsRepo1.TagHelpers
             </h1>
             <h2 class="subtitle">Organization ... classes</h2>
         */
-        public SoftwareDesignPattern SoftwareDesignPattern { get; set; } = new SoftwareDesignPattern();
+        public SoftwareDesignPattern SoftwareDesignPattern { get; set; } = new SoftwareDesignPattern("fac");
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.Content.AppendHtml($@"<h1 class='title is-1 is-spaced'><i class='fa-solid {SoftwareDesignPattern.Icon} mr-2'></i>");
