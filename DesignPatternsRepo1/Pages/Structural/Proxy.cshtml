@@ -1,13 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Structural.ProxyModel
 @{
-    var pageName = "Proxy";
-    var groupName = "Structural";
+    var pattern = new SoftwareDesignPattern("proxy");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-door-open mr-2"></i>Proxy</h1>
-<h2 class="subtitle">A placeholder for another object for a few reasons</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -30,8 +28,8 @@
         </ul>
     </div>
     <div class="block">
-        The difference between <a asp-area="" asp-page="/Structural/Decorator"><i class="fa-solid fa-chart-line mr-2"></i>Decorator</a> and Proxy is that 
-        Proxy controls the lifecycle of an object that it contains, while Decorator is controlled by the execution flow. Also, Proxy controls access 
+        The difference between <a asp-area="" asp-page="/Structural/Decorator"><i class="fa-solid fa-chart-line mr-2"></i>Decorator</a> and Proxy is that
+        Proxy controls the lifecycle of an object that it contains, while Decorator is controlled by the execution flow. Also, Proxy controls access
         to an object, while <a asp-area="" asp-page="/Structural/Decorator"><i class="fa-solid fa-chart-line mr-2"></i>Decorator</a> focuses on adding functionality.
     </div>
     <div class="block">
@@ -74,7 +72,7 @@ class Resource {
   }
 }</code></pre>
 
-<div class="block">The following class is an example of a Protection Proxy:</div>
+    <div class="block">The following class is an example of a Protection Proxy:</div>
 
 <pre><code class="language-ts">class ResourceControllerByPermissions implements IResourceProvider {
   resource: Resource;
@@ -93,9 +91,9 @@ class Resource {
   }
 }</code></pre>
 
-<div class="block">
-Here is what it looks like when run:
-</div>
+    <div class="block">
+        Here is what it looks like when run:
+    </div>
 
 <pre><code class="language-ts">/*
 whim:  7
@@ -125,6 +123,6 @@ Here you go!*/</code></pre>
     </div>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="proxy"></navigation></div>
 <script>hljs.highlightAll();</script>
