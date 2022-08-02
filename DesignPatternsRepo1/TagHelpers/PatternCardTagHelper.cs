@@ -12,7 +12,7 @@ namespace DesignPatternsRepo1.TagHelpers
             output.Attributes.SetAttribute("class", "card mw375");
 
             output.Content.AppendHtml($@"<div class='card-content'><p class='title'><i class='fa-solid {SoftwareDesignPattern.Icon} mr-2'></i>{SoftwareDesignPattern.Name}</p>");
-            output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.Summary}</p>");
+            output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.Header}</p>");
             output.Content.AppendHtml($@"<div class='content'><div class='card-content'>Some content here...</div><a href='{SoftwareDesignPattern.Hyperlink}'>More...</a></div></div>");
 
             //if (this.TheEnd.ToLower() == "yes")
