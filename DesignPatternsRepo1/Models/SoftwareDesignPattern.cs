@@ -18,6 +18,24 @@
         public List<string> RecipeSteps { get; set; } = new List<string>();
         public PatternGroup GroupEnum { get; set; } = PatternGroup.Creational;
 
+        public string RecipeForDisplay()
+        {
+            string ret = "Recipe pending";
+            if(RecipeSteps.Count == 1) 
+                ret = "Recipe: " + RecipeSteps[0];
+            else
+            {
+                ret = "<h6 class='has-text-centered'>Recipe</h6> <ul>";
+                foreach(string r in this.RecipeSteps)
+                {
+                    ret += "<li>" + r + "</li>";
+                }
+                ret += "</ul>";
+            }
+
+            return ret;
+        }
+
         public SoftwareDesignPattern(string code)
         {
             switch (code.ToLower())
@@ -28,6 +46,10 @@
                     this.Header = "Creation of objects that conform to the same interface without specifying concrete classes";
                     this.Icon = "fa-industry";
                     this.Hyperlink = "/Creational/Factory";
+                    this.InformalDescription = "Centralize creation of different types of objects as long as they" +
+                        " conform to the same interface. Create a separate 'factory' class, pass parameters differentiating " +
+                        "what object needs to be created, return an object of an interface.";
+                    this.RecipeSteps = new List<string> { "Extract interface from objects", "Create a 'Factory' class", "Put in a switch case or other logic to create objects of different type (but same interface) into the factory class. " };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
                 case "abs":
