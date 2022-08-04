@@ -16,7 +16,7 @@ namespace DesignPatternsRepo1.TagHelpers
             output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.GroupEnum}</p>");
             output.Content.AppendHtml($@"<div class='content'><div class='card-content'>{SoftwareDesignPattern.InformalDescription}</div>");
             output.Content.AppendHtml($@"<div class='small'>{SoftwareDesignPattern.RecipeForDisplay()}</div>");
-            output.Content.AppendHtml($@"<a href='{SoftwareDesignPattern.Hyperlink}'>More...</a></div></div>");
+            output.Content.AppendHtml($@"<div class='mt-2 has-text-right'><a href='{SoftwareDesignPattern.Hyperlink}'><i class='fas fa-arrow-right mr-3'></i>Details</a></div></div></div>");
 
             //if (this.TheEnd.ToLower() == "yes")
             //{
