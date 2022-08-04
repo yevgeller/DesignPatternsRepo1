@@ -12,11 +12,11 @@ namespace DesignPatternsRepo1.TagHelpers
             output.Attributes.SetAttribute("class", "card mw375");
 
             output.Content.AppendHtml($@"<div class='card-content'><p class='title'><i class='fa-solid {SoftwareDesignPattern.Icon} mr-2'></i>{SoftwareDesignPattern.Name}</p>");
+            output.Content.AppendHtml($@"<p class='subtitle is-size-6'>{SoftwareDesignPattern.GroupEnum}</p>");
             output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.Header}</p>");
-            output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.GroupEnum}</p>");
             output.Content.AppendHtml($@"<div class='content'><div class='card-content'>{SoftwareDesignPattern.InformalDescription}</div>");
             output.Content.AppendHtml($@"<div class='small'>{SoftwareDesignPattern.RecipeForDisplay()}</div>");
-            output.Content.AppendHtml($@"<div class='mt-2 has-text-right'><a href='{SoftwareDesignPattern.Hyperlink}'><i class='fas fa-arrow-right mr-3'></i>Details</a></div></div></div>");
+            output.Content.AppendHtml($@"<div class='mt-2 has-text-right'><a href='{SoftwareDesignPattern.Hyperlink}'><i class='fas {SoftwareDesignPattern.Icon} mr-1'></i>{SoftwareDesignPattern.Name}<i class='fas fa-arrow-right ml-3'></i></a></div></div></div>");
 
             //if (this.TheEnd.ToLower() == "yes")
             //{
