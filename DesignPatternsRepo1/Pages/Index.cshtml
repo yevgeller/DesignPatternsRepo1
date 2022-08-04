@@ -2,13 +2,18 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Software design patterns overview";
-    List<SoftwareDesignPattern> patterns = new List<SoftwareDesignPattern>();
-    patterns.Add(new SoftwareDesignPattern("fac"));
-    patterns.Add(new SoftwareDesignPattern("abs"));
-    patterns.Add(new SoftwareDesignPattern("bri"));
-    patterns.Add(new SoftwareDesignPattern("proto"));
-    patterns.Add(new SoftwareDesignPattern("sin"));
-    patterns.Add(new SoftwareDesignPattern("ada"));
+    List<SoftwareDesignPattern> patterns = ModelInitializer.GetAllPatterns();
+
+    IEnumerable<SoftwareDesignPattern> behavioral = ModelInitializer.GetAllPatterns().Where(x => x.Group == "Behavioral");
+    IEnumerable<SoftwareDesignPattern> creational= ModelInitializer.GetAllPatterns().Where(x => x.Group == "Creational");
+    IEnumerable<SoftwareDesignPattern> structural = ModelInitializer.GetAllPatterns().Where(x => x.Group == "Structural");
+
+    //patterns.Add(new SoftwareDesignPattern("fac"));
+    //patterns.Add(new SoftwareDesignPattern("abs"));
+    //patterns.Add(new SoftwareDesignPattern("bri"));
+    //patterns.Add(new SoftwareDesignPattern("proto"));
+    //patterns.Add(new SoftwareDesignPattern("sin"));
+    //patterns.Add(new SoftwareDesignPattern("ada"));
 
 }
 
@@ -64,9 +69,33 @@
 <div class="content">
     <navigation></navigation>
 </div>*@
-@*
-<div class="is-flex is-flex-wrap-wrap is-flex-direction-row gap24">
+@*<div class="columns is-vcentered">*@
+    <div class="content">
+<div class="container is-flex is-flex-wrap-wrap is-flex-direction-row gap24 is-align-content-center" style="max-width:1500px;">
     @foreach(var p in patterns)
+    {
+        <div>
+            <pattern-card software-design-pattern="@p"></pattern-card>
+        </div>
+    }
+</div></div>
+@*</div>*@
+                @*<div class="is-flex is-flex-wrap-wrap is-flex-direction-row gap24">
+    @foreach(var p in behavioral)
+    {
+        <div>
+            <pattern-card software-design-pattern="@p"></pattern-card>
+        </div>
+    }
+</div><div class="is-flex is-flex-wrap-wrap is-flex-direction-row gap24">
+    @foreach(var p in creational)
+    {
+        <div>
+            <pattern-card software-design-pattern="@p"></pattern-card>
+        </div>
+    }
+</div><div class="is-flex is-flex-wrap-wrap is-flex-direction-row gap24">
+    @foreach(var p in structural)
     {
         <div>
             <pattern-card software-design-pattern="@p"></pattern-card>
