@@ -23,7 +23,7 @@
             string ret = "Recipe pending";
             if(RecipeSteps.Count == 1) 
                 ret = "Recipe: " + RecipeSteps[0];
-            else
+            else if(RecipeSteps.Count > 1)
             {
                 ret = "<h6 class='has-text-centered'>Recipe</h6> <ul>";
                 foreach(string r in this.RecipeSteps)
