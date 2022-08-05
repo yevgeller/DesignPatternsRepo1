@@ -1,15 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.ChainOfResponsibilityModel
 @{
-    var pageName = "Chain of Responsibility";
-    var groupName = "Behavioral";
+    var pattern = new SoftwareDesignPattern("cha");
 }
 
-
-
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-link mr-2"></i>Chain of Responsibility</h1>
-<h2 class="subtitle">Standardizing similar separate functionality</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -20,7 +16,7 @@
     </div>
     <div class="block">
         The basic approach is to have an interface that provides two methods: one to chain the next handler (if available) and another one to actually
-        provide code for necessary action. The following example is about a quality control at the North Pole factory that creates toy cars. Each car 
+        provide code for necessary action. The following example is about a quality control at the North Pole factory that creates toy cars. Each car
         needs to have four wheels, wheels need be able to turn, horn needs to honk. Here is the code for the interface followed by the code of the test subject class:
     </div> <pre><code class="language-ts">interface IToyCarQualityControlHandler {
   setNext(handler: IToyCarQualityControlHandler): IToyCarQualityControlHandler;
@@ -46,7 +42,8 @@ class ToyCar {
     this.serialNumber = serialNumber;
   }
 }</code></pre>
-    <div class="block">The following is the parent class for a quality control handler. It abstracts the necessary functionality and acts as a director ensuring
+    <div class="block">
+        The following is the parent class for a quality control handler. It abstracts the necessary functionality and acts as a director ensuring
         that each handler executes in prescribed order.
     </div>
     <pre><code class="language-ts">abstract class AbstractHandler implements IToyCarQualityControlHandler {
@@ -66,7 +63,8 @@ class ToyCar {
   }
 }
 </code></pre>
-    <div class="block">The following is a sample code for three trivial object attribute checks:
+    <div class="block">
+        The following is a sample code for three trivial object attribute checks:
     </div>
 <pre><code class="language-ts">
 class NumberOfWheelsCheckHandler extends AbstractHandler {
@@ -98,7 +96,8 @@ class WheelsTurnCheckHandler extends AbstractHandler {
   }
 }</code></pre>
 
-    <div class="block">Finally, a test harness set up. An item of note is that it's not necessary to start with the very first check. 
+    <div class="block">
+        Finally, a test harness set up. An item of note is that it's not necessary to start with the very first check.
         However, checks are executed successfully at and after whichever one started the chain.
     </div>
 
@@ -133,7 +132,8 @@ wheelsTurnCheck.handle(badCar3);
 processResult(badCar3);
 </code></pre>
 
-    <div class="block">Here are the results of the code executed above:
+    <div class="block">
+        Here are the results of the code executed above:
     </div>
 
 <pre><code class="language-ts">car TOYCAR001 processed inspection without issues
@@ -172,6 +172,6 @@ car TOYCAR004 was found to have the following issues during the inspection:
     </div>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="cha"></navigation></div>
 <script>hljs.highlightAll();</script>
