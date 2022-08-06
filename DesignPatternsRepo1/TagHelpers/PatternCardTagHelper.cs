@@ -16,33 +16,7 @@ namespace DesignPatternsRepo1.TagHelpers
             output.Content.AppendHtml($@"<p class='subtitle'>{SoftwareDesignPattern.Header}</p>");
             output.Content.AppendHtml($@"<div class='content'><div class='card-content'>{SoftwareDesignPattern.InformalDescription}</div>");
             output.Content.AppendHtml($@"<div class='small'>{SoftwareDesignPattern.RecipeForDisplay()}</div>");
-            output.Content.AppendHtml($@"<div class='mt-2 has-text-right'><a href='{SoftwareDesignPattern.Hyperlink}'><i class='fas {SoftwareDesignPattern.Icon} mr-1'></i>{SoftwareDesignPattern.Name}<i class='fas fa-arrow-right ml-3'></i></a></div></div></div>");
-
-            //if (this.TheEnd.ToLower() == "yes")
-            //{
-            //    output.Content.AppendHtml(@$"
-            //    <div class='column is-2'> 
-            //        <a class='navbar-item' href='/Index'> 
-            //            <i class='fa-solid fa-house-user fa-2x mr-1'></i>Back 
-            //        </a> 
-            //    </div>");
-            //}
-            //else
-            //{
-            //    output.Content.AppendHtml(@$"
-            //    <div class='column is-2'> 
-            //        <a class='navbar-item' href='/Index'> 
-            //            <i class='fa-solid fa-house-user fa-2x mr-1'></i>Back 
-            //        </a> 
-            //    </div> 
-            //    <div class='column is-3'> 
-            //        <a class='navbar-item' href='/{NextLink.Replace('|', '/')}'> 
-            //            {nextIcon1}{nextIcon2}
-            //            {NextPointerWord}: {NextName}
-            //            {nextIcon3}
-            //        </a>
-            //    </div>");
-            //}
+            output.Content.AppendHtml($@"<div class='mt-2 has-text-right'><a href='{SoftwareDesignPattern.Hyperlink}'><i class='fas {SoftwareDesignPattern.Icon} mr-1'></i>{SoftwareDesignPattern.Name}<i class='fas fa-arrow-right ml-3'></i></a></div></div></div>");          
         }
     }
 }
