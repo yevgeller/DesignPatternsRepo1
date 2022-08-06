@@ -49,7 +49,10 @@
                     this.InformalDescription = "Centralize creation of different types of objects as long as they" +
                         " conform to the same interface. Create a separate 'factory' class, pass parameters differentiating " +
                         "what object needs to be created, return an object of an interface.";
-                    this.RecipeSteps = new List<string> { "Extract interface from objects", "Create a 'Factory' class", "Put in a switch case or other logic to create objects of different type (but same interface) into the factory class. " };
+                    this.RecipeSteps = new List<string> { "Extract interface from objects", 
+                        "Create a 'Factory' class", 
+                        "Put in a switch case or other logic to create objects of different type (but same interface) into the factory class. " 
+                    };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
                 case "abs":
@@ -58,6 +61,16 @@
                     this.Header = "Same as Factory (Creation of objects that conform to the same interface without specifying concrete classes) but to 'families' of objects";
                     this.Icon = "fa-boxes-stacked";
                     this.Hyperlink = "/Creational/Abstract";
+                    this.InformalDescription = "A \"layer\" above the factory, where creation is centralized, but for groups of objects at a time. Essentially a factory squared, where " +
+                        "a created item consists of a set of items that also conform to an interface. Like a soccer team, for example, there's a goalie, defenders, attackers. " +
+                        "They may be on different teams (Factory), but in order to create a league, each team must be instantiated. Abstract factory to the rescue.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Extract and declare an interface for each piece of a \"family\" of items",
+                        "Extract and declare an interface for the \"family\" of items",
+                        "Create an interface with methods that can instantiate a family of items",
+                        "Create a factory that call an interface to create a family of items"
+                    };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
                 case "bui": //Builder
