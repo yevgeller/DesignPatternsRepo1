@@ -6,12 +6,11 @@ namespace DesignPatternsRepo1.TagHelpers
     public class PatternCardTagHelper : TagHelper
     {
         public SoftwareDesignPattern SoftwareDesignPattern { get; set; } = new SoftwareDesignPattern("fac");
-        public bool a { get; set; } = true;
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
             output.TagName = "div";
 
-            string classAttributes = "card " + (a ? "mw375" : "");
+            string classAttributes = "card ";
 
            output.Attributes.SetAttribute("class", classAttributes);
 
