@@ -64,12 +64,12 @@
         </div>
     </div>
 </div>
-
+@* style="max-width:1500px;">*@
     <div class="content">
-<div class="container is-flex is-flex-wrap-wrap is-flex-direction-row gap24 is-align-content-center" style="max-width:1500px;">
+<div class="is-flex is-flex-wrap-wrap is-flex-direction-row gap24 is-align-content-center">
     @foreach(var p in patterns)
     {
-        <div>
+        <div class="mw375">
             <pattern-card software-design-pattern="@p"></pattern-card>
         </div>
     }
