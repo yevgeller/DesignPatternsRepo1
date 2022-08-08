@@ -1,0 +1,15 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.RandomModel
+@{
+    List<SoftwareDesignPattern> patterns = ModelInitializer.GetAllPatterns();
+    var rnd = new Random();
+    SoftwareDesignPattern p = patterns[rnd.Next(patterns.Count)];
+}
+
+<div class="content">
+    <div class="container is-align-content-center mt-5">
+        <div>
+            <pattern-card software-design-pattern="@p" a="false"></pattern-card>
+        </div>
+    </div>
+</div>
