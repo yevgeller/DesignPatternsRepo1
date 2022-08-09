@@ -1,26 +1,25 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.CommandModel
 @{
-    var pageName = "Command";
-    var groupName = "Behavioral";
+    var pattern = new SoftwareDesignPattern("com");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-bullhorn mr-2"></i>Command</h1>
-<h2 class="subtitle">Abstracting callable actions such that they can be assigned to multiple callers and support undoing </h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
-<div class="content">  
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
+<div class="content">
 
-Command becomes a self-sufficient unit that knows how to do everything and knows how to undo itself too.
+    Command becomes a self-sufficient unit that knows how to do everything and knows how to undo itself too.
 
-<div class="block">Command pattern is essentially abstracting an action into its own self-sufficient object that knows how to 
-    do one thing and one thing alone. Well, maybe more than one thing -- commands may also know how to undo what they did. The 
-    following example simulates a warehouse that loads trucks. This example intends to show that a command can be a standalone
-    object -- when a foreman tells to put one pallet of bananas in truck number one, he does not need to explain what forklift 
-    to take or where to find the pallet or how to put it in the truck, he/she relies on professionals to know exactly what 
-    needs to be done.    
-</div> 
+    <div class="block">
+        Command pattern is essentially abstracting an action into its own self-sufficient object that knows how to
+        do one thing and one thing alone. Well, maybe more than one thing -- commands may also know how to undo what they did. The
+        following example simulates a warehouse that loads trucks. This example intends to show that a command can be a standalone
+        object -- when a foreman tells to put one pallet of bananas in truck number one, he does not need to explain what forklift
+        to take or where to find the pallet or how to put it in the truck, he/she relies on professionals to know exactly what
+        needs to be done.
+    </div>
 <pre><code class="language-ts"></code></pre>
-<div class="block">First, let's define details, Truck class that has describes a truck and its capacity along with the currently loaded weight:</div> 
+    <div class="block">First, let's define details, Truck class that has describes a truck and its capacity along with the currently loaded weight:</div>
 <pre><code class="language-ts">class Truck {
     id: number;
     weightCapacity: number;
@@ -38,7 +37,7 @@ Command becomes a self-sufficient unit that knows how to do everything and knows
       return runningTotal;
     }
   }</code></pre>
-<div class="block">Shipment describes goods that go in the truck. Id, weight, description, nothing special, just another container for information.</div> 
+    <div class="block">Shipment describes goods that go in the truck. Id, weight, description, nothing special, just another container for information.</div>
 <pre><code class="language-ts">  class Shipment {
     id: number;
     weight: number;
@@ -49,10 +48,11 @@ Command becomes a self-sufficient unit that knows how to do everything and knows
       this.description = description;
     }
   }</code></pre>
-<div class="block">Next, repository. This is the team of Teamsters that know how to load and unload a Shipment from a Truck. This class also
-    keeps track of trucks in bays, and can provide status on each truck's available capacity. It implements an interface for a possible 
-    future expansion.
-</div> 
+    <div class="block">
+        Next, repository. This is the team of Teamsters that know how to load and unload a Shipment from a Truck. This class also
+        keeps track of trucks in bays, and can provide status on each truck's available capacity. It implements an interface for a possible
+        future expansion.
+    </div>
 <pre><code class="language-ts">interface ITruckLoaderRepository {
     addShipment(shipment: Shipment, truckId: number);
     removeShipment(shipment: Shipment, truckId: number);
@@ -102,19 +102,21 @@ Command becomes a self-sufficient unit that knows how to do everything and knows
       });
     }
   }</code></pre>
-<div class="block">Now that the toy objects are out of the way, let's get to the Command itself. First, the interface. It implements the "execute" 
-    method that does the work. It also provides a "canExecute" method, that signals whether it is possible to execute the Command safely. Also,
-    there is the "undo" method.
-</div> 
+    <div class="block">
+        Now that the toy objects are out of the way, let's get to the Command itself. First, the interface. It implements the "execute"
+        method that does the work. It also provides a "canExecute" method, that signals whether it is possible to execute the Command safely. Also,
+        there is the "undo" method.
+    </div>
 <pre><code class="language-ts">  interface ICommand {
     execute(): void;
     canExecute(): boolean;
     undo(): void;
   }</code></pre>
-<div class="block">Here is the definition of a Command. As you can see, the class has everything it needs to perform the required action. It
-    knows about what truck to load a shipment into (truckId field), what shipment to load (shipment property), and it knows how to do it 
-    (repository).
-</div> 
+    <div class="block">
+        Here is the definition of a Command. As you can see, the class has everything it needs to perform the required action. It
+        knows about what truck to load a shipment into (truckId field), what shipment to load (shipment property), and it knows how to do it
+        (repository).
+    </div>
 <pre><code class="language-ts">  class LoadShipment implements ICommand {
     private readonly truckId: number;
     private readonly shipment: Shipment;
@@ -145,10 +147,11 @@ Command becomes a self-sufficient unit that knows how to do everything and knows
       this.repository.removeShipment(this.shipment, this.truckId);
     }
   }</code></pre>
-<div class="block">A command can be assigned to a button or another control element. Moreover, several different control elements
-    can implement the same command. In our case though, the harness will be a class that invokes commands and keeps track of their 
-    order for the undo capabilities.
-</div> 
+    <div class="block">
+        A command can be assigned to a button or another control element. Moreover, several different control elements
+        can implement the same command. In our case though, the harness will be a class that invokes commands and keeps track of their
+        order for the undo capabilities.
+    </div>
 <pre><code class="language-ts">class CommandManager {
     //since there is no UI, this will be a way to "click" "buttons"
 
@@ -170,7 +173,7 @@ Command becomes a self-sufficient unit that knows how to do everything and knows
       }
     }
   }</code></pre>
-<div class="block">Finally, that is how it all comes together.</div> 
+    <div class="block">Finally, that is how it all comes together.</div>
 <pre><code class="language-ts">  let cmdMgr = new CommandManager();
   let repository = new TruckLoaderRepository();
   let shipmentOfBananas = new Shipment(1, 1, "bananas");
@@ -191,7 +194,7 @@ Command becomes a self-sufficient unit that knows how to do everything and knows
   console.log("loading mangoes to truck 1 for weight of 1");
   cmdMgr.invoke(new LoadShipment(1, shipmentOfMangoes, repository));
   repository.provideStatus();</code></pre>
-<div class="block">And here is the result:</div> 
+    <div class="block">And here is the result:</div>
 <pre><code class="language-ts">Initial repository state:
 Truck 1, 0 shipments, 0/3 filled
 Truck 2, 0 shipments, 0/5 filled
@@ -218,11 +221,11 @@ Truck contents:
 Shipment 1, weight: 1, contents: bananas
 Shipment 2, weight: 1, contents: mangoes
 Truck 2, 0 shipments, 0/5 filled</code></pre>
-<div class="block">
-    As you can see, a command of type LoadShipment is an example of how an object can do stuff and undo stuff as well.
-</div>
+    <div class="block">
+        As you can see, a command of type LoadShipment is an example of how an object can do stuff and undo stuff as well.
+    </div>
 </div>
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="com"></navigation></div>
 <script>hljs.highlightAll();</script>
