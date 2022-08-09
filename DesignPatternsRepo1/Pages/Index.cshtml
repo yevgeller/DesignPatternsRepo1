@@ -3,18 +3,6 @@
 @{
     ViewData["Title"] = "Software design patterns overview";
     List<SoftwareDesignPattern> patterns = ModelInitializer.GetAllPatterns();
-
-    IEnumerable<SoftwareDesignPattern> behavioral = ModelInitializer.GetAllPatterns().Where(x => x.Group == "Behavioral");
-    IEnumerable<SoftwareDesignPattern> creational= ModelInitializer.GetAllPatterns().Where(x => x.Group == "Creational");
-    IEnumerable<SoftwareDesignPattern> structural = ModelInitializer.GetAllPatterns().Where(x => x.Group == "Structural");
-
-    //patterns.Add(new SoftwareDesignPattern("fac"));
-    //patterns.Add(new SoftwareDesignPattern("abs"));
-    //patterns.Add(new SoftwareDesignPattern("bri"));
-    //patterns.Add(new SoftwareDesignPattern("proto"));
-    //patterns.Add(new SoftwareDesignPattern("sin"));
-    //patterns.Add(new SoftwareDesignPattern("ada"));
-
 }
 
 <div class="notification is-primary mt-6">
@@ -64,13 +52,13 @@
         </div>
     </div>
 </div>
-@* style="max-width:1500px;">*@
-    <div class="content">
-<div class="is-flex is-flex-wrap-wrap is-flex-direction-row gap24 is-align-content-center">
-    @foreach(var p in patterns)
-    {
-        <div class="mw375">
-            <pattern-card software-design-pattern="@p"></pattern-card>
-        </div>
-    }
-</div></div>
+<div class="content">
+    <div class="is-flex is-flex-wrap-wrap is-flex-direction-row gap24 is-align-content-center">
+        @foreach (var p in patterns)
+        {
+            <div class="mw375">
+                <pattern-card software-design-pattern="@p"></pattern-card>
+            </div>
+        }
+    </div>
+</div>
