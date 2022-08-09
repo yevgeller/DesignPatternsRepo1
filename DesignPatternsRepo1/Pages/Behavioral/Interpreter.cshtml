@@ -1,26 +1,26 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.InterpreterModel
 @{
-    var pageName = "Interpreter";
-    var groupName = "Behavioral";
+    var pattern = new SoftwareDesignPattern("int");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-language mr-2"></i>Interpreter</h1>
-<h2 class="subtitle">Translating using provided grammar and sentence structure</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
-<div class="content">  
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
+<div class="content">
 
-<div class="block">This pattern is used to translate something from one representation into another given the rules.
-    The benefits come with scalability of the solution. An item can be translated into many
-    representations using the same mechanism. That is quite convenient. The drawback of the pattern also comes with
-    the increase of translation mechanisms: maintaining grammar and rules may become tedious. 
-</div> 
+    <div class="block">
+        This pattern is used to translate something from one representation into another given the rules.
+        The benefits come with scalability of the solution. An item can be translated into many
+        representations using the same mechanism. That is quite convenient. The drawback of the pattern also comes with
+        the increase of translation mechanisms: maintaining grammar and rules may become tedious.
+    </div>
 
-<div class="block">The pattern implementation requires two things: first a <code>Context</code> class that provides
-    input, the original representation, and a placeholder for output, the end result. The second required thing is 
-    a set of rules, and it can be any class as long as it implements the <code>Interpret</code> method. The code
-    example below shows a Context and an abstract class that specifies the <code>Interpret</code> method.
-</div> 
+    <div class="block">
+        The pattern implementation requires two things: first a <code>Context</code> class that provides
+        input, the original representation, and a placeholder for output, the end result. The second required thing is
+        a set of rules, and it can be any class as long as it implements the <code>Interpret</code> method. The code
+        example below shows a Context and an abstract class that specifies the <code>Interpret</code> method.
+    </div>
 <pre><code class="language-ts">class Context {
     input: string;
     output: string;
@@ -34,18 +34,19 @@ abstract class Expression {
     Interpret(context: Context): void { }
 }
 </code></pre>
-<div class="block">Next, the set of rules, the meat of the pattern. The following implementation converts Oracle
-    Data Definition Language into C# class code. This program helps convert an existing Oracle database into
-    a code-first Entity Framework project. So an item like  <code>"STRING_FIELD" VARCHAR2(6 BYTE)</code> is 
-    converted to <code>public string String_Field {get; set;} = string.Empty;</code>, and a field declared as, say, 
-    <code>"ID" NUMBER(15,0)</code> needs to be translated to <code>public int Id {get; set;}</code> and so on. The 
-    class listed below, <code></code> has one method, <code>Interpret</code>, that takes an item of type 
-    <code>Context</code>, then consumes that Context's <code>input</code> field and appends translation to 
-    <code>output</code> field. Input/output could be properties, but the type <code>Context</code> in this 
-    case acts as a container, and the <code>OracleToEFExpression</code> class knows what to do with it. If another
-    translation is needed, a different class can do that as long as it implements the <code>Expression</code> interface
-    and uses <code>input</code> to provide a useful <code>output</code>.
-</div> 
+    <div class="block">
+        Next, the set of rules, the meat of the pattern. The following implementation converts Oracle
+        Data Definition Language into C# class code. This program helps convert an existing Oracle database into
+        a code-first Entity Framework project. So an item like  <code>"STRING_FIELD" VARCHAR2(6 BYTE)</code> is
+        converted to <code>public string String_Field {get; set;} = string.Empty;</code>, and a field declared as, say,
+        <code>"ID" NUMBER(15,0)</code> needs to be translated to <code>public int Id {get; set;}</code> and so on. The
+        class listed below, <code></code> has one method, <code>Interpret</code>, that takes an item of type
+        <code>Context</code>, then consumes that Context's <code>input</code> field and appends translation to
+        <code>output</code> field. Input/output could be properties, but the type <code>Context</code> in this
+        case acts as a container, and the <code>OracleToEFExpression</code> class knows what to do with it. If another
+        translation is needed, a different class can do that as long as it implements the <code>Expression</code> interface
+        and uses <code>input</code> to provide a useful <code>output</code>.
+    </div>
 <pre><code class="language-ts">class OracleToEFExpression implements Expression {
     Interpret(context: Context): void {
         let properties = context.input.split('\n');
@@ -124,7 +125,7 @@ abstract class Expression {
 }
 
 </code></pre>
-<div class="block">The following code is used to call the interpreter mechanism described above:</div> 
+    <div class="block">The following code is used to call the interpreter mechanism described above:</div>
 <pre><code class="language-ts">let c = new Context(`
 "ID" NUMBER(15,0), 
     "EMPLOYEE_CODE" VARCHAR2(6 BYTE), 
@@ -137,7 +138,7 @@ abstract class Expression {
 
 let oef = new OracleToEFExpression();
 oef.Interpret(c)</code></pre>
-<div class="block">And this is what we get back:</div> 
+    <div class="block">And this is what we get back:</div>
 <pre><code class="language-ts">public int Id { get; set; }
 public string Employee_Code { get; set; } = string.Empty;
 public int Company_Id { get; set; }
@@ -145,11 +146,11 @@ public string First_Name { get; set; } = string.Empty;
 public string Last_Name { get; set; } = string.Empty;    
 public bool Is_Active { get; set; }
 public DateTime Hire_Date { get; set; }</code></pre>
-<div class="block">Definitely useful for large conversions.</div> 
+    <div class="block">Definitely useful for large conversions.</div>
 
 </div>
 
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="int"></navigation></div>
 <script>hljs.highlightAll();</script>
