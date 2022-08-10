@@ -1,23 +1,22 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.MementoModel
 @{
-    var pageName = "Memento";
-    var groupName = "Behavioral";
+    var pattern = new SoftwareDesignPattern("mem");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-gift mr-2"></i>Memento</h1>
-<h2 class="subtitle">An ability to provide and consume internal state via a predefined channel</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
-<div class="content">  
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
+<div class="content">
 
-<div class="block">The gist of the Memento pattern is that it allows to restore to a previous state of an object
-    by providing state differences in a predetermined format and being able to process those differences. Sounds complex,
-    let's dive right into an example. The code below is a Hangman game and you have three attempts to guess the word "SECRET"
-    correctly. As you enter each guess, assuming it passes validation, a stack of "undos" gets another fragment. Then, if you
-    enter "-" instead of a character, the game jumps back one character, and it keeps jumping back as long as the user keeps
-    entering "-" at the prompt. At the same time, all methods and properties are private, the game is closed for modification.
-</div> 
-<div class="block">This is the main Game class. It can only process letters: </div>
+    <div class="block">
+        The gist of the Memento pattern is that it allows to restore to a previous state of an object
+        by providing state differences in a predetermined format and being able to process those differences. Sounds complex,
+        let's dive right into an example. The code below is a Hangman game and you have three attempts to guess the word "SECRET"
+        correctly. As you enter each guess, assuming it passes validation, a stack of "undos" gets another fragment. Then, if you
+        enter "-" instead of a character, the game jumps back one character, and it keeps jumping back as long as the user keeps
+        entering "-" at the prompt. At the same time, all methods and properties are private, the game is closed for modification.
+    </div>
+    <div class="block">This is the main Game class. It can only process letters: </div>
 <pre><code class="language-ts">class Game {
   private word: string;
   guesses: string[];
@@ -89,9 +88,10 @@
     return this.gameOver;
   }
 }</code></pre>
-<div class="block">The following simple class defines what we can save/restore to manipulate the game's internal state. I only need to keep
-    the previously entered letters and a number of incorrect attempts.
-</div> 
+    <div class="block">
+        The following simple class defines what we can save/restore to manipulate the game's internal state. I only need to keep
+        the previously entered letters and a number of incorrect attempts.
+    </div>
 <pre><code class="language-ts">class Memento {
   guesses: string[];
   numberOfErrors: number;
@@ -100,7 +100,7 @@
     this.numberOfErrors = numberOfErrors;
   }
 }</code></pre>
-<div class="block">The following class extends the Game class, it can create and process a state checkpoint. </div> 
+    <div class="block">The following class extends the Game class, it can create and process a state checkpoint. </div>
 <pre><code class="language-ts">class GameWithUndo extends Game {
   constructor() {
     super();
@@ -117,7 +117,7 @@
     this.numberOfErrors = checkPoint.numberOfErrors;
   }
 }</code></pre>
-<div class="block">Finally, the "Caretaker" component of the game, the code that runs it all:</div> 
+    <div class="block">Finally, the "Caretaker" component of the game, the code that runs it all:</div>
 <pre><code class="language-ts">
 let input = ".";
 let g2 = new GameWithUndo(); //originator
@@ -149,21 +149,24 @@ while (!g2.gameIsOver()) {
     console.log(g2.currentPuzzleState());
   }
 }</code></pre>
-<div class="block">As you can see above, at each turn, a Memento object is created and stored, unless a user enters a "-". In that
-    case, a Memento object is popped from the array that stores it and is processed.
-</div> 
-<div class="block">This pattern follows the same principle as the Prototype pattern, which is the Open-Closed principle. Instead of opening a class
-    for modification, provide a way to extract/consume required state. That way the class is still closed for modification, yet it provides a way 
-    to manipulate its internal state.</div> 
-<div class="block">
-        Source/Inspiration: 
-                <a href="https://www.pluralsight.com/courses/c-sharp-design-patterns-memento">
-                    Pluralsight
-                </a>
+    <div class="block">
+        As you can see above, at each turn, a Memento object is created and stored, unless a user enters a "-". In that
+        case, a Memento object is popped from the array that stores it and is processed.
+    </div>
+    <div class="block">
+        This pattern follows the same principle as the Prototype pattern, which is the Open-Closed principle. Instead of opening a class
+        for modification, provide a way to extract/consume required state. That way the class is still closed for modification, yet it provides a way
+        to manipulate its internal state.
+    </div>
+    <div class="block">
+        Source/Inspiration:
+        <a href="https://www.pluralsight.com/courses/c-sharp-design-patterns-memento">
+            Pluralsight
+        </a>
     </div>
 </div>
 
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="mem"></navigation></div>
 <script>hljs.highlightAll();</script>
