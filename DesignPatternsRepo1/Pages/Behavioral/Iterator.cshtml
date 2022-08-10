@@ -1,14 +1,11 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.IteratorModel
 @{
-    var pageName = "Iterator";
-    var groupName = "Behavioral";
+    var pattern = new SoftwareDesignPattern("ite");
 }
 
-
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-arrow-up-right-dots mr-3"></i>Iterator</h1>
-<h2 class="subtitle">Setting up a way to traverse a collection without exposing its inner structure</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content">
 
     <div class="block">
@@ -286,6 +283,6 @@ console.log(output);
 </div>
 
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="ite"></navigation></div>
 <script>hljs.highlightAll();</script>
