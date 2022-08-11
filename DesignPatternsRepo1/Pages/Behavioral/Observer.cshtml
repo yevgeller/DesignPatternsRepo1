@@ -1,27 +1,28 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.ObserverModel
 @{
-    var pageName = "Observer";
-    var groupName = "Behavioral";
+    var pattern = new SoftwareDesignPattern("obs");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-eye mr-2"></i>Observer</h1>
-<h2 class="subtitle">Providing a choice for entities to subscribe/unsubscribe from notification.</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
-<div class="content">  
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
+<div class="content">
 
-<div class="block"><a asp-area="" asp-page="/Behavioral/Mediator"><i class="fa-solid fa-tower-cell mr-2"></i>Mediator</a> pattern provides a centralized system
-    of notifications to entities. All communications go through that one single point. That pattern automatically assumes conversation participants,
-    a choice of who gets what messages is not the focus of Mediator. It is the focus of observer though. Observer provides an opportunity for subscribers to
-    select the messages that they are listening to. 
-    </div> 
-<div class="block">In the following example discusses response to three types of emergency events: Fire, Party, and Parade. Police does not care about fires, 
-    firemen don't bother with parties, and ambulances are too busy to participate in parades. The code below sets up a notification system that allows each
-    of the services to unsubscribe from notifications they don't need to respond to and then resubscribe again after.
-</div> 
-<div class="block">The following code sets up general infrastructure, an enum to specify disaster types, a class to hold information about a Disaster and then
-    a <a asp-area="" asp-page="/Creational/Factory-problem"><i class="fa-solid fa-industry mr-2"></i>Factory</a> that lets us create disasters arbitrarily.
-</div> 
+    <div class="block">
+        <a asp-area="" asp-page="/Behavioral/Mediator"><i class="fa-solid fa-tower-cell mr-2"></i>Mediator</a> pattern provides a centralized system
+        of notifications to entities. All communications go through that one single point. That pattern automatically assumes conversation participants,
+        a choice of who gets what messages is not the focus of Mediator. It is the focus of observer though. Observer provides an opportunity for subscribers to
+        select the messages that they are listening to.
+    </div>
+    <div class="block">
+        In the following example discusses response to three types of emergency events: Fire, Party, and Parade. Police does not care about fires,
+        firemen don't bother with parties, and ambulances are too busy to participate in parades. The code below sets up a notification system that allows each
+        of the services to unsubscribe from notifications they don't need to respond to and then resubscribe again after.
+    </div>
+    <div class="block">
+        The following code sets up general infrastructure, an enum to specify disaster types, a class to hold information about a Disaster and then
+        a <a asp-area="" asp-page="/Creational/Factory-problem"><i class="fa-solid fa-industry mr-2"></i>Factory</a> that lets us create disasters arbitrarily.
+    </div>
 <pre><code class="language-ts">  enum DisasterType {
     Fire = 1, //fire trucks and ambulance
     Party, //police and ambulance
@@ -53,7 +54,7 @@
       }
     }
   }</code></pre>
-<div class="block">The following class is a container for the array of emergency services. It also abstracts add/remove listener methods and notification mechanism. </div> 
+    <div class="block">The following class is a container for the array of emergency services. It also abstracts add/remove listener methods and notification mechanism. </div>
 <pre><code class="language-ts">  abstract class GeneralDisasterNotifier {
     private emergencyServices: Array<IDisasterNotificationListener>;
     constructor() {
@@ -76,7 +77,7 @@
       );
     }
   }</code></pre>
-<div class="block">The following class extends the class above adding a concrete method to create a disaster and notify all known responders:</div> 
+    <div class="block">The following class extends the class above adding a concrete method to create a disaster and notify all known responders:</div>
 <pre><code class="language-ts">  class ConcreteDisasterNotifier extends GeneralDisasterNotifier {
     callEmergencyServices(
       disasterType: "fire" | "party" | "parade",
@@ -91,9 +92,10 @@
     }
   }
 </code></pre>
-<div class="block">Next, the code that declare interface for emergency services to be able to receive notifications and boilerplate implementations
-    of the three types of emergency services with methods that output that they are notified about a disaster.
-</div> 
+    <div class="block">
+        Next, the code that declare interface for emergency services to be able to receive notifications and boilerplate implementations
+        of the three types of emergency services with methods that output that they are notified about a disaster.
+    </div>
 <pre><code class="language-ts">  interface IDisasterNotificationListener {
     id: number;
     receiveDisasterNotification(disaster: Disaster): void;
@@ -138,8 +140,10 @@
       this.id = 3;
     }
   }</code></pre>
-<div class="block">Finally, code that brings it all together. First, we instantiate emergency services, then we create the service notify them all, 
-    record all emergency services as listeners, and then customize addressees by adding and removing notification subscribers as needed:</div> 
+    <div class="block">
+        Finally, code that brings it all together. First, we instantiate emergency services, then we create the service notify them all,
+        record all emergency services as listeners, and then customize addressees by adding and removing notification subscribers as needed:
+    </div>
 <pre><code class="language-ts">
   let f = new FireBrigade();
   let p = new PoliceSquad();
@@ -158,7 +162,7 @@
   n.removeListener(a);
   n.addListener(p);
   n.callEmergencyServices("parade", 2);</code></pre>
-<div class="block">Result:</div> 
+    <div class="block">Result:</div>
 <pre><code class="language-ts">Attention! There is a party in the area, affecting 1 sq. miles. Dispatching appropriate services...
 Police Squad 2 has been notified about Party
 Ambulance Crew 3 has been notified about Party
@@ -168,12 +172,13 @@ Fire Brigade 1 has been notified about Fire
 Attention! There is a parade in the area, affecting 2 sq. miles. Dispatching appropriate services...
 Fire Brigade 1 has been notified about Parade
 Police Squad 2 has been notified about Parade</code></pre>
-<div class="block">This pattern is about the choice of subscribers to be included or excluded in notifications. Hopefully the code above shows how it is possible
-    to do from the level of notification service.
-</div> 
+    <div class="block">
+        This pattern is about the choice of subscribers to be included or excluded in notifications. Hopefully the code above shows how it is possible
+        to do from the level of notification service.
+    </div>
 </div>
 
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="obs"></navigation></div>
 <script>hljs.highlightAll();</script>
