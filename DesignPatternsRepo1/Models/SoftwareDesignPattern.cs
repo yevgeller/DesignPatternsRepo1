@@ -158,6 +158,11 @@
                     this.Header = "Standardizing similar separate functionality";
                     this.Icon = "fa-link";
                     this.Hyperlink = "/Behavioral/ChainOfResponsibility";
+                    this.InformalDescription = "A set up for series of checks on an item. Checks must happen sequentially, but not necessarily from the beginning.";
+                    this.RecipeSteps = new List<string>
+                    {
+
+                    };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "com": //Command
