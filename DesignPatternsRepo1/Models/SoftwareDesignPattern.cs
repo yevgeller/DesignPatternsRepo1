@@ -174,6 +174,11 @@
                     this.Header = "Abstracting callable actions such that they can be assigned to multiple callers and support undoing";
                     this.Icon = "fa-bullhorn";
                     this.Hyperlink = "/Behavioral/Command";
+                    this.InformalDescription = "Approach a task from the other way around -- empower an object with methods and resources it needs to perform and undo actions. Inject access to databases, external resources -- whatever it takes. Then use the command object as a standalone unit that can do stuff.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Create an object and make it implement methods in ICommand interface: void execute(), boolean canExecute() (optional), void undo() (optional)"
+                    };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "int": //Interpreter
