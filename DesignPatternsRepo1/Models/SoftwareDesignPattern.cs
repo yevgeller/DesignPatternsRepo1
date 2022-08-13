@@ -187,6 +187,17 @@
                     this.Header = "Setting up grammar, sentence structure, and mechanism(s) for translating";
                     this.Icon = "fa-language";
                     this.Hyperlink = "/Behavioral/Interpreter";
+                    this.InformalDescription = "Rails for converting something into another format";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Declare a Context -- a reusable template class",
+                        "Set context's input to what needs to be translated",
+                        "Output does not need to be set, or start with some initial value",
+                        "Declare an abstract class (usually called Expression) and declare one method -- Interpret, takes a Context as input and does the magic inside",
+                        "Then create another class inheriting from Expression and flesh out implementation for the Interpret method",
+                        "Then create as many other classes as needed to convert into other things",
+                        "Need to identify if context has non-terminal expressions and handle those accordingly"
+                    };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "ite": //Iterator
