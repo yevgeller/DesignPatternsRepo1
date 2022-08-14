@@ -1,31 +1,31 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.StrategyModel
 @{
-    var pageName = "Strategy";
-    var groupName = "Behavioral";
+    var pattern = new SoftwareDesignPattern("str");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-chess-knight mr-2"></i>Strategy</h1>
-<h2 class="subtitle">Flexibility in actions based on circumstances</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
-<div class="content">  
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
+<div class="content">
 
-<div class="block">Strategy pattern allows to change the internal behavior of a class based on input. Sounds, familiar, right?
-    The <a asp-area="" asp-page="/Behavioral/State"><i class="fa-solid fa-wand-sparkles mr-2"></i>State</a> pattern helps us
-    with pretty much the same problem, it changes internal state of a class based on circumstances. There are differences though.
-    <a asp-area="" asp-page="/Behavioral/State"><i class="fa-solid fa-wand-sparkles mr-2"></i>State</a> has different
-    behaviors that are somewhat aware of each other, and the pattern allows for flexibility, such that in the 
-    example shown on the <a asp-area="" asp-page="/Behavioral/State"><i class="fa-solid fa-wand-sparkles mr-2"></i>State</a>
-    pattern page, the internal status of a work item could have been switched back and forth many times. Strategy is about 
-    something else. Strategy is more of a fire-and-forget, "guns or missiles" type of thing. 
-</div> 
-<div class="block">The example below illustrates Strategy pattern as it is applied to a selected type of notification. Someone
-    is notified via their preferred method. That method (strategy) is selected once and used once. None of the methods are aware
-    of each other and you cannot switch them on the fly. Well, you can, but the context class needs to figure out that the main 
-    method failed and backup needs to be called, but then again, that would be another "fire-and-forget" strategy that is not 
-    aware of alternatives.
-</div> 
-<div class="block">Now, to code. This first interface and set of classes imitate notification services</div> 
+    <div class="block">
+        Strategy pattern allows to change the internal behavior of a class based on input. Sounds, familiar, right?
+        The <a asp-area="" asp-page="/Behavioral/State"><i class="fa-solid fa-wand-sparkles mr-2"></i>State</a> pattern helps us
+        with pretty much the same problem, it changes internal state of a class based on circumstances. There are differences though.
+        <a asp-area="" asp-page="/Behavioral/State"><i class="fa-solid fa-wand-sparkles mr-2"></i>State</a> has different
+        behaviors that are somewhat aware of each other, and the pattern allows for flexibility, such that in the
+        example shown on the <a asp-area="" asp-page="/Behavioral/State"><i class="fa-solid fa-wand-sparkles mr-2"></i>State</a>
+        pattern page, the internal status of a work item could have been switched back and forth many times. Strategy is about
+        something else. Strategy is more of a fire-and-forget, "guns or missiles" type of thing.
+    </div>
+    <div class="block">
+        The example below illustrates Strategy pattern as it is applied to a selected type of notification. Someone
+        is notified via their preferred method. That method (strategy) is selected once and used once. None of the methods are aware
+        of each other and you cannot switch them on the fly. Well, you can, but the context class needs to figure out that the main
+        method failed and backup needs to be called, but then again, that would be another "fire-and-forget" strategy that is not
+        aware of alternatives.
+    </div>
+    <div class="block">Now, to code. This first interface and set of classes imitate notification services</div>
 <pre><code class="language-ts">  interface Strategy {
     notify(): string;
   }
@@ -48,7 +48,7 @@
     }
   }
 </code></pre>
-<div class="block">The next class, Context, acts as a container implementing a notification strategy:</div> 
+    <div class="block">The next class, Context, acts as a container implementing a notification strategy:</div>
 <pre><code class="language-ts">  class Context {
     strategy: Strategy;
     setStrategy(strategy: Strategy) {
@@ -59,7 +59,7 @@
       return this.strategy.notify();
     }
   }</code></pre>
-<div class="block">Finally, the service that sets the strategy at the time of creation depending on the choice and is able to perform a notification.</div> 
+    <div class="block">Finally, the service that sets the strategy at the time of creation depending on the choice and is able to perform a notification.</div>
 <pre><code class="language-ts">  class NotificationService {
     private context: Context;
     constructor(preferredNotificationMethod: string) {
@@ -81,7 +81,7 @@
       return this.context.executeStrategy();
     }
   }</code></pre>
-<div class="block">Here is some test code:</div> 
+    <div class="block">Here is some test code:</div>
 <pre><code class="language-ts">  let text = new NotificationService("sms");
   console.log("Notification via SMS: ", text.notify());
 
@@ -90,7 +90,7 @@
 
   let email = new NotificationService("email");
   console.log("Notification via email: ", email.notify());</code></pre>
-<div class="block">Results:</div> 
+    <div class="block">Results:</div>
 <pre><code class="language-ts">Notification via SMS:  Notified via Short Message Service (SMS) using Twilio.
 Notification via a call:  Notified via a phone call using some robot service.
 Notification via email:  Notified via an e-mail via an e-mail relay.</code></pre>
@@ -98,6 +98,6 @@ Notification via email:  Notified via an e-mail via an e-mail relay.</code></pre
 </div>
 
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="str"></navigation></div>
 <script>hljs.highlightAll();</script>

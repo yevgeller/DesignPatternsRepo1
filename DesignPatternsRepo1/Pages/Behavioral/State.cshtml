@@ -1,43 +1,45 @@
 ﻿@page
 @model DesignPatternsRepo1.Pages.Behavioral.StateModel
 @{
-    var pageName = "State";
-    var groupName = "Behavioral";
+    var pattern = new SoftwareDesignPattern("sta");
 }
 
-<h1 class="title is-1 is-spaced"><i class="fa-solid fa-wand-sparkles mr-2"></i>State</h1>
-<h2 class="subtitle">Changing functionality of a class in a maintainable and scalable way</h2>
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
-<div class="content">  
+<page-header software-design-pattern="@pattern"></page-header>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
+<div class="content">
 
-<div class="block">This pattern is just borderline magic. It is a way to change how a class works in such a way that
-    encapsulation is not broken, private fields stay private, and class' internal state is not violated. The following
-    code example describes what actions are possible to be performed on a work item depending on what situation it is in.
-</div> 
-<div class="block">A work item can be in one of the following statuses:
-    <ol>
-        <li>New</li>
-        <li>Technician Assigned</li>
-        <li>Quality Assurance (QA) review</li>
-        <li>Resolved</li>
-    </ol>
-    A work item can go back and forth between statuses, but it cannot skip statuses. Each status dictates what can be done 
-    to the work item. For example:
-    <ul>
-        <li>In "New", the only possible thing is to assign technician.</li>
-        <li>In "Technician Assigned", work item can be rolled back to "New" (technician needs to be unassigned) or moved forward
-            to "QA review," assigning a QA specialist to the work item.
-        </li>
-        <li>In "QA review", work item may be resolved, adding an optional comment, or rolled back to "Technician Assigned", unassigning
-            the QA specialist from the item.
-        </li>
-        <li>In "Resolved", a work item can only be rolled back to "QA review," removing the completion status and comment.</li>
-    </ul><br />
-    Seems like it can be solved by a giant <code>if</code> statement in each of the methods, checking status each time an action needs to be 
-    performed, and acting accordingly. And it's not wrong, for certain cases, this pattern may be an overkill. The State pattern though solves 
-    this problem by another layer of indirection, and outsourcing all movement actions to a <code>currentState</code> variable that is of type
-    <code>SupportTicketState</code>, that uses the following abstract class:
-</div> 
+    <div class="block">
+        This pattern is just borderline magic. It is a way to change how a class works in such a way that
+        encapsulation is not broken, private fields stay private, and class' internal state is not violated. The following
+        code example describes what actions are possible to be performed on a work item depending on what situation it is in.
+    </div>
+    <div class="block">
+        A work item can be in one of the following statuses:
+        <ol>
+            <li>New</li>
+            <li>Technician Assigned</li>
+            <li>Quality Assurance (QA) review</li>
+            <li>Resolved</li>
+        </ol>
+        A work item can go back and forth between statuses, but it cannot skip statuses. Each status dictates what can be done
+        to the work item. For example:
+        <ul>
+            <li>In "New", the only possible thing is to assign technician.</li>
+            <li>
+                In "Technician Assigned", work item can be rolled back to "New" (technician needs to be unassigned) or moved forward
+                to "QA review," assigning a QA specialist to the work item.
+            </li>
+            <li>
+                In "QA review", work item may be resolved, adding an optional comment, or rolled back to "Technician Assigned", unassigning
+                the QA specialist from the item.
+            </li>
+            <li>In "Resolved", a work item can only be rolled back to "QA review," removing the completion status and comment.</li>
+        </ul><br />
+        Seems like it can be solved by a giant <code>if</code> statement in each of the methods, checking status each time an action needs to be
+        performed, and acting accordingly. And it's not wrong, for certain cases, this pattern may be an overkill. The State pattern though solves
+        this problem by another layer of indirection, and outsourcing all movement actions to a <code>currentState</code> variable that is of type
+        <code>SupportTicketState</code>, that uses the following abstract class:
+    </div>
 <pre><code class="language-ts">abstract class SupportTicketState {
   state: string;
   ticket: SupportTicket;
@@ -46,11 +48,12 @@
   abstract resolve(result: boolean, resolutionComment: string);
   abstract moveBack(): void;
 }</code></pre>
-<div class="block">So then the trick is that at each state, the state is replaced with a object of a different class that knows how to do things 
-    differently. Let's get to it. Below is the <code>SupportTicket</code> class, it logs what's happening at creation time for visibility, and then it has 
-    four methods that are used to perform actions, but in reality all actions are outsourced to a variable of type <code>SupportTicketState</code>. When
-    a situation changes, that variable is reassigned to an instance of a class that knows how to act under new circumstances.
-</div> 
+    <div class="block">
+        So then the trick is that at each state, the state is replaced with a object of a different class that knows how to do things
+        differently. Let's get to it. Below is the <code>SupportTicket</code> class, it logs what's happening at creation time for visibility, and then it has
+        four methods that are used to perform actions, but in reality all actions are outsourced to a variable of type <code>SupportTicketState</code>. When
+        a situation changes, that variable is reassigned to an instance of a class that knows how to act under new circumstances.
+    </div>
 <pre><code class="language-ts">class SupportTicket {
   id: string;
   description: string;
@@ -79,10 +82,11 @@
     this.currentState.moveBack();
   }
 }</code></pre>
-<div class="block">The following class can instantiate object of "New" state. Constructor explains that the state is new. Then <code>assignTechnician</code>
-method sets technician name on the ticket, and then modifies the ticket such that its state is an instance of a <code>SupportTicketState_TechnicianAssigned</code>    
-class, essentialy removing itself from the equation. All other methods are just stubs telling the user that those actions are not possible at the moment.
-</div> 
+    <div class="block">
+        The following class can instantiate object of "New" state. Constructor explains that the state is new. Then <code>assignTechnician</code>
+        method sets technician name on the ticket, and then modifies the ticket such that its state is an instance of a <code>SupportTicketState_TechnicianAssigned</code>
+        class, essentialy removing itself from the equation. All other methods are just stubs telling the user that those actions are not possible at the moment.
+    </div>
 <pre><code class="language-ts">class SupportTicketState_New extends SupportTicketState {
   constructor(ticket: SupportTicket) {
     super();
@@ -112,11 +116,12 @@ class, essentialy removing itself from the equation. All other methods are just 
     );
   }
 }</code></pre>
-<div class="block">Here is the code for the other states. Similar ideas as above. If the ticket is at the state where something
-    can be done, then it is done. If not, user is warned about it. If the ticket is moved back, outdated information is wiped out.
-    If conditions change, then the ticket's <code>currentState</code> variable is changed to an instance of another, more appropriate
-    class.
-</div> 
+    <div class="block">
+        Here is the code for the other states. Similar ideas as above. If the ticket is at the state where something
+        can be done, then it is done. If not, user is warned about it. If the ticket is moved back, outdated information is wiped out.
+        If conditions change, then the ticket's <code>currentState</code> variable is changed to an instance of another, more appropriate
+        class.
+    </div>
 <pre><code class="language-ts">
     //Technician assigned, can either move back or assign QA
 class SupportTicketState_TechnicianAssigned extends SupportTicketState {
@@ -223,9 +228,10 @@ class SupportTicketState_Resolved extends SupportTicketState {
     this.ticket.currentState = new SupportTicketState_QAReview(this.ticket);
   }
 }</code></pre>
-<div class="block">Here is the code that runs the example above. Some methods are commented out because they are the ones that 
-    can actually work at each stage, so they are not called to show all the edge cases.
-</div> 
+    <div class="block">
+        Here is the code that runs the example above. Some methods are commented out because they are the ones that
+        can actually work at each stage, so they are not called to show all the edge cases.
+    </div>
 <pre><code class="language-ts">let supportTicket1 = new SupportTicket("12345", "test ticket");
 
 supportTicket1.moveBack(); //error
@@ -258,7 +264,7 @@ console.log("--- Moving all the way forward without errors:  ---");
 supportTicket1.assignTechnician("Jeff the Tech");
 supportTicket1.assignQA("Jane the QA");
 supportTicket1.resolve(true, "Finished successfully again!");</code></pre>
-<div class="block">End result:</div> 
+    <div class="block">End result:</div>
 <pre><code class="language-ts">
 Created support ticket 12345.
 Support ticket 12345 is now in New state.
@@ -291,16 +297,17 @@ Support ticket 12345 is now in 'Technician Assigned' state.
 Ticket 12345 has been assigned a QA tech: Jane the QA.
 Support ticket 12345 is now in 'QA Review' state.
 Support ticket 12345 is now in 'Resolved' state. Resolved successfully: true, comment: Finished successfully again!.</code></pre>
-<div class="block">This pattern may seem similar to the <a asp-area="" asp-page="/Behavioral/ChainOfResponsibility"><i class="fa-solid fa-link mr-2"></i>Chain of Responsibility</a> pattern.
-    The only similarity is that an item is undergoing some process changes moving from one stage to another. However, the idea behind the 
-    <a asp-area="" asp-page="/Behavioral/ChainOfResponsibility"><i class="fa-solid fa-link mr-2"></i>Chain of Responsibility</a> is that 
-    those states are objects foreign to the subject item. And they are also chained, so no way to go back and forth. The idea in this pattern
-    is that the object reacts to changes in the environment and acts differently. State pattern is meant to separate concerns of a "state machine"
-    into aspects that are easier to maintain.
-</div> 
+    <div class="block">
+        This pattern may seem similar to the <a asp-area="" asp-page="/Behavioral/ChainOfResponsibility"><i class="fa-solid fa-link mr-2"></i>Chain of Responsibility</a> pattern.
+        The only similarity is that an item is undergoing some process changes moving from one stage to another. However, the idea behind the
+        <a asp-area="" asp-page="/Behavioral/ChainOfResponsibility"><i class="fa-solid fa-link mr-2"></i>Chain of Responsibility</a> is that
+        those states are objects foreign to the subject item. And they are also chained, so no way to go back and forth. The idea in this pattern
+        is that the object reacts to changes in the environment and acts differently. State pattern is meant to separate concerns of a "state machine"
+        into aspects that are easier to maintain.
+    </div>
 </div>
 
 
-<breadcrumb page-name="@pageName" group="@groupName"></breadcrumb>
+<breadcrumb page-name="@pattern.Name" group="@pattern.Group"></breadcrumb>
 <div class="content"><navigation pattern="sta"></navigation></div>
 <script>hljs.highlightAll();</script>

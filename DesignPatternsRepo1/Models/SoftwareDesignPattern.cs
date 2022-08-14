@@ -223,6 +223,13 @@
                     this.Header = "Abstracting communication function to a dedicated entity";
                     this.Icon = "fa-tower-cell";
                     this.Hyperlink = "/Behavioral/Mediator";
+                    this.InformalDescription = "Offload communication among objects to a central entity";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Identify the need",
+                        "Declare a communication entity, teach it to communicate to all parties involved",
+                        "Explain objects the new way of communicating to each other"
+                    };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "mem": //Memento
