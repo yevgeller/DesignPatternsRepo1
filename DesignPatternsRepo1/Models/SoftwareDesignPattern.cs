@@ -206,6 +206,15 @@
                     this.Header = "Setting up a way to traverse a collection without exposing its inner structure";
                     this.Icon = "fa-arrow-up-right-dots";
                     this.Hyperlink = "/Behavioral/Iterator";
+                    this.InformalDescription = "Another layer of indirection ensuring control over how elements of the collection are traversed";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Step 1, think long and hard if a custom iterator is really needed",
+                        "Declare an interface that outlines how the collection is traversed",
+                        "Declare another class that implements one method, getIterator(). Use that class to ensure the collection is iterable.",
+                        "Alternatively, skip this class and implement checks in the constructor of the class that returns iterator.",
+                        "In the actual iterator class, implement the methods declared in the interface from step 2"
+                    };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "med": //Mediator
