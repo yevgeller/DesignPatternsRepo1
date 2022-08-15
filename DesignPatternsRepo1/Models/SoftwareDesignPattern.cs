@@ -91,7 +91,7 @@
                 case "sin": //Singleton
                     this.Name = "Singleton";
                     this.Group = "Creational";
-                    this.Header = "Ensuring one same copy is available at any and all times.";
+                    this.Header = "Ensuring one same copy of a resource is available at any and all times.";
                     this.Icon = "fa-atom";
                     this.Hyperlink = "/Creational/Singleton";
                     this.GroupEnum = PatternGroup.Creational;
