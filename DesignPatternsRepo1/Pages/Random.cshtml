@@ -1,9 +1,17 @@
-﻿@page
+﻿@page "{pattern?}"
 @model DesignPatternsRepo1.Pages.RandomModel
 @{
     List<SoftwareDesignPattern> patterns = ModelInitializer.GetAllPatterns();
-    var rnd = new Random();
-    SoftwareDesignPattern p = patterns[rnd.Next(patterns.Count)];
+    SoftwareDesignPattern p = new SoftwareDesignPattern("fac");
+    if (Model.Pattern != null)
+    {
+        p = patterns.Where(x => x.Name.ToLower().StartsWith(Model.Pattern.ToLower())).FirstOrDefault();
+    }
+    if (p == null)
+    {
+        var rnd = new Random();
+        p = patterns[rnd.Next(patterns.Count)];
+    }
 }
 
 <div class="content">
