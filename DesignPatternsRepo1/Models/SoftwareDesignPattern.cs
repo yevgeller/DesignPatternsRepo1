@@ -99,7 +99,7 @@
                 case "ada": //Adapter
                     this.Name = "Adapter";
                     this.Group = "Structural";
-                    this.Header = "";
+                    this.Header = "A way to translate one format into another.";
                     this.Icon = "fa-plug";
                     this.Hyperlink = "/Structural/Adapter";
                     this.GroupEnum = PatternGroup.Structural;
