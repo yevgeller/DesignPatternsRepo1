@@ -238,7 +238,13 @@
                     this.Header = "An ability to provide and consume internal state via a predefined channel";
                     this.Icon = "fa-gift";
                     this.Hyperlink = "/Behavioral/Memento";
-                    this.InformalDescription = "Extracting state of an object on each change in such a way that the object can, if the mechanism is set up, be restored to previous state."
+                    this.InformalDescription = "Extracting state of an object on each change in such a way that the object can, if the mechanism is set up, be restored to previous state.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Identify all elements of the state that need to be serialized/deserialized for successful state transfer",
+                        "Provide a way to save those elements",
+                        "Provide a way to process an entity containing those elements such that the state of the object is restored"
+                    };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "obs": //Observer
