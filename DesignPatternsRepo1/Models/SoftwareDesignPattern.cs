@@ -253,6 +253,13 @@
                     this.Header = "Providing a choice for entities to subscribe/unsubscribe from notification";
                     this.Icon = "fa-eye";
                     this.Hyperlink = "/Behavioral/Observer";
+                    this.InformalDescription = "A way to control who receives notifications.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Set up entities",
+                        "Provide a notification hub",
+                        "Provide a way for the hub to unsubscribe entities from notifications"
+                    };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "sta": //State
