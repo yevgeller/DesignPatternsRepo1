@@ -287,6 +287,7 @@
                     this.Header = "Flexibility in actions based on circumstances";
                     this.Icon = "fa-chess-knight";
                     this.Hyperlink = "/Behavioral/Strategy";
+                    this.InformalDescription = "Like \"State\", abstracting different functionality, but here it's a one-time deal and functionalities are not aware of each other",
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "tem": //Template Method
