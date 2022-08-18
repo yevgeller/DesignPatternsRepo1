@@ -268,6 +268,7 @@
                     this.Header = "Changing functionality of a class in a maintainable and scalable way";
                     this.Icon = "fa-wand-sparkles";
                     this.Hyperlink = "/Behavioral/State";
+                    this.InformalDescription = "Abstracting changing state into an interface, working with different objects of the same interface depending on circumstances."
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "str": //Strategy
