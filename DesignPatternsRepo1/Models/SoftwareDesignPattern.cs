@@ -296,12 +296,13 @@
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
-                case "tem": //Template Method //Setting up a roadmap of actions, while making arbitrary actions optional
+                case "tem": //Template Method
                     this.Name = "Template Method";
                     this.Group = "Behavioral";
                     this.Header = "Allowing subclasses to vary a common algorithm";
                     this.Icon = "fa-train-tram";
                     this.Hyperlink = "/Behavioral/TemplateMethod";
+                    this.InformalDescription = "Setting up a roadmap of actions, while making arbitrary actions optional";
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "vis": //Visitor
