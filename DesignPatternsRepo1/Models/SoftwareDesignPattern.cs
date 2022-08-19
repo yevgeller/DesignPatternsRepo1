@@ -318,6 +318,7 @@
                     this.Header = "Separating algorithms from objects on which they operate";
                     this.Icon = "fa-person-circle-question";
                     this.Hyperlink = "/Behavioral/Visitor";
+                    this.InformalDescription = "Passing items back and forth instead of making a mess in an existing item.";
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 default:
