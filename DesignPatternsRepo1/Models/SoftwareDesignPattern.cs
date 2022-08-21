@@ -78,6 +78,7 @@
                     this.Header = "Construction of complex objects by extracting the steps and centralizing the control of what happens at each step";
                     this.Icon = "fa-helmet-safety";
                     this.Hyperlink = "/Creational/Builder";
+                    this.InformalDescription = "Fine-grained control over a complex process.";
                     this.GroupEnum = PatternGroup.Creational;
                     break;
                 case "proto": //Prototype
