@@ -78,7 +78,7 @@
                     this.Header = "Construction of complex objects by extracting the steps and centralizing the control of what happens at each step";
                     this.Icon = "fa-helmet-safety";
                     this.Hyperlink = "/Creational/Builder";
-                    this.InformalDescription = "Fine-grained control over a complex process.";
+                    this.InformalDescription = "Fine-grained control over a complex process. Different from Visitor because can vary methods and order of execution.";
                     this.RecipeSteps = new List<string>
                     {
                         "Extract method steps into an interface",
