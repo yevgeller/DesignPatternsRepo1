@@ -107,7 +107,7 @@
                     this.Header = "Ensuring one same copy of a resource is available at any and all times.";
                     this.Icon = "fa-atom";
                     this.Hyperlink = "/Creational/Singleton";
-                    this.InformalDescription = "When only one of something is needed."
+                    this.InformalDescription = "When only one of something is needed.";
                     this.GroupEnum = PatternGroup.Creational;
                     break;
                 case "ada": //Adapter
