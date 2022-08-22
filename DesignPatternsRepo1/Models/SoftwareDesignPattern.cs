@@ -93,6 +93,12 @@
                     this.Header = "Copying of existing objects without a dependency on a concrete class that needs to be copied";
                     this.Icon = "fa-clone";
                     this.Hyperlink = "/Creational/Prototype";
+                    this.InformalDescription = "Just a neat trick to enable object copying.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Provide a method to clone the current object and control what the cloned version can and can't do.",
+                        "Profit"
+                    };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
                 case "sin": //Singleton
