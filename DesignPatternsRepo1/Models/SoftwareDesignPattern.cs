@@ -1,4 +1,6 @@
-﻿namespace DesignPatternsRepo1.Models
+﻿using System.Runtime.Intrinsics.X86;
+
+namespace DesignPatternsRepo1.Models
 {
     public enum PatternGroup
     {
@@ -21,12 +23,12 @@
         public string RecipeForDisplay()
         {
             string ret = "Recipe pending";
-            if(RecipeSteps.Count == 1) 
+            if (RecipeSteps.Count == 1)
                 ret = "Recipe: " + RecipeSteps[0];
-            else if(RecipeSteps.Count > 1)
+            else if (RecipeSteps.Count > 1)
             {
                 ret = "<h6 class='has-text-centered'>Recipe</h6> <ul>";
-                foreach(string r in this.RecipeSteps)
+                foreach (string r in this.RecipeSteps)
                 {
                     ret += "<li>" + r + "</li>";
                 }
@@ -49,9 +51,9 @@
                     this.InformalDescription = "Centralize creation of different types of objects as long as they" +
                         " conform to the same interface. Create a separate 'factory' class, pass parameters differentiating " +
                         "what object needs to be created, return an object of an interface.";
-                    this.RecipeSteps = new List<string> { "Extract interface from objects", 
-                        "Create a 'Factory' class", 
-                        "Put in a switch case or other logic to create objects of different type (but same interface) into the factory class. " 
+                    this.RecipeSteps = new List<string> { "Extract interface from objects",
+                        "Create a 'Factory' class",
+                        "Put in a switch case or other logic to create objects of different type (but same interface) into the factory class. "
                     };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
@@ -108,6 +110,13 @@
                     this.Icon = "fa-atom";
                     this.Hyperlink = "/Creational/Singleton";
                     this.InformalDescription = "When only one of something is needed.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Add a private static field to hold the instance of the object",
+                        "Make the constructor of the class private",
+                        "Create a public static method to(create if does not exist and then) return the instance of the object.",
+                        "Replace all calls in existing code use the method to get the instance of an object"
+                    };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
                 case "ada": //Adapter
@@ -293,7 +302,7 @@
                         "Give states reference to the master object",
                         "Teach master object about its new state mechanism, set up initial state"
                     };
-                        this.GroupEnum = PatternGroup.Behavioral;
+                    this.GroupEnum = PatternGroup.Behavioral;
                     break;
                 case "str": //Strategy
                     this.Name = "Strategy";
