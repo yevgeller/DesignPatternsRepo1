@@ -51,8 +51,10 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Centralize creation of different types of objects as long as they" +
                         " conform to the same interface. Create a separate 'factory' class, pass parameters differentiating " +
                         "what object needs to be created, return an object of an interface.";
-                    this.RecipeSteps = new List<string> { "Extract interface from objects",
-                        "Create a 'Factory' class",
+                    this.RecipeSteps = new List<string> 
+                    { 
+                        "Extract interface from objects,",
+                        "Create a 'Factory' class,",
                         "Put in a switch case or other logic to create objects of different type (but same interface) into the factory class. "
                     };
                     this.GroupEnum = PatternGroup.Creational;
