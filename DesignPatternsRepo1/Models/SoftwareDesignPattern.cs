@@ -125,6 +125,13 @@ namespace DesignPatternsRepo1.Models
                     this.Header = "A way to translate one format into another.";
                     this.Icon = "fa-plug";
                     this.Hyperlink = "/Structural/Adapter";
+                    this.InformalDescription = "Mechanism connecting two incompatible entities.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Create another entity,",
+                        "Provide references to the two (or more) entities that need to be interoperated,",
+                        "Provide functionality that makes the two (or more) entities work together."
+                    };
                     this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "bri": //Bridge
