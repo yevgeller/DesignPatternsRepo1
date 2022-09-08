@@ -85,9 +85,9 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Fine-grained control over a complex process. Different from Visitor because can vary methods and order of execution.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Extract method steps into an interface",
-                        "Customize what methods do and create various objects",
-                        "Optional: have a Director class orchestrate the order of events"
+                        "Extract method steps into an interface,",
+                        "Customize what methods do and create various objects,",
+                        "Optional: have a Director class orchestrate the order of events."
                     };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
