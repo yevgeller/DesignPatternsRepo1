@@ -70,9 +70,9 @@ namespace DesignPatternsRepo1.Models
                         "They may be on different teams (Factory), but in order to create a league, each team must be instantiated. Abstract factory to the rescue.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Extract and declare an interface for each piece of a \"family\" of items (blueprint of a type of player: defender, attacker, quarter back).",
-                        "Extract and declare an interface for the \"family\" of items (blueprint of a team: Barcelona, Washington Capitals, New England Patriots)",
-                        "Create a factory that can create a family of items -- step towards creating a league"
+                        "Extract and declare an interface for each piece of a \"family\" of items (blueprint of a type of player: defender, attacker, quarter back),",
+                        "Extract and declare an interface for the \"family\" of items (blueprint of a team: Barcelona, Washington Capitals, New England Patriots),",
+                        "Create a factory that can create a family of items -- step towards creating a league."
                     };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
