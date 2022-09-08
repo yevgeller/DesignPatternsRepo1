@@ -100,7 +100,7 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Just a neat trick to enable object copying.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Provide a method to clone the current object and control what the cloned version can and can't do.",
+                        "Provide a method to clone the current object and control what the cloned version can and can't do,",
                         "Profit"
                     };
                     this.GroupEnum = PatternGroup.Creational;
