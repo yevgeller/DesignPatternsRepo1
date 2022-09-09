@@ -142,6 +142,14 @@ namespace DesignPatternsRepo1.Models
                     this.Header = "Decoupling Abstraction from Implementation";
                     this.Icon = "fa-left-right";
                     this.Hyperlink = "/Structural/Bridge";
+                    this.InformalDescription = "When something seems to be increasingly complex as it is being developed, think about abstracting it.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Identify an item that can be split into independent pieces,",
+                        "Extract interfaces,",
+                        "Develop classes implementing interfaces,",
+                        "Re-assemble pieces."
+                    };
                     this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "sit": //Composite
