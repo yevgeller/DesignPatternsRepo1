@@ -114,10 +114,10 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "When only one of something is needed.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Add a private static field to hold the instance of the object",
-                        "Make the constructor of the class private",
-                        "Create a public static method to(create if does not exist and then) return the instance of the object.",
-                        "Replace all calls in existing code use the method to get the instance of an object"
+                        "Add a private static field to hold the instance of the object,",
+                        "Make the constructor of the class private,",
+                        "Create a public static method to(create if does not exist and then) return the instance of the object,",
+                        "Replace all calls in existing code use the method to get the instance of an object."
                     };
                     this.GroupEnum = PatternGroup.Creational;
                     break;
