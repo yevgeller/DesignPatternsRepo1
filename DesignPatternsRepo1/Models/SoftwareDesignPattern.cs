@@ -158,6 +158,7 @@ namespace DesignPatternsRepo1.Models
                     this.Header = "Working with tree-like components in a uniform way regardless of whether it's a leaf or a container";
                     this.Icon = "fa-magnifying-glass-arrow-right";
                     this.Hyperlink = "/Structural/Composite";
+                    this.InformalDescription = "Setting up classes such that calling the same method works differently on two different classes that implement the same interface."
                     this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "dec": //Decorator
