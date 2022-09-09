@@ -51,8 +51,8 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Centralize creation of different types of objects as long as they" +
                         " conform to the same interface. Create a separate 'factory' class, pass parameters differentiating " +
                         "what object needs to be created, return an object of an interface.";
-                    this.RecipeSteps = new List<string> 
-                    { 
+                    this.RecipeSteps = new List<string>
+                    {
                         "Extract interface from objects,",
                         "Create a 'Factory' class,",
                         "Put in a switch case or other logic to create objects of different type (but same interface) into the factory class. "
@@ -159,8 +159,13 @@ namespace DesignPatternsRepo1.Models
                     this.Icon = "fa-magnifying-glass-arrow-right";
                     this.Hyperlink = "/Structural/Composite";
                     this.InformalDescription = "Setting up classes such that calling the same method works differently on two different classes that implement the same interface.";
-                    
-                        this.GroupEnum = PatternGroup.Structural;
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Extract an interface with a method,",
+                        "Create two classes that implement that interface, but implement the method differently,",
+                        "Ensure that the class that is the container with multiple elements calls that method on each element of the container."
+                    };
+                    this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "dec": //Decorator
                     this.Name = "Decorator";
