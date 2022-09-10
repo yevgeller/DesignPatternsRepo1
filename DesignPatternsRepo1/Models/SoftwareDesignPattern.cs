@@ -193,7 +193,8 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Sweep a mess under one big rug.";
                     this.RecipeSteps = new List<string>
                     {
-
+                        "Create a new class with one method that pushes all needed buttons in a required sequence,",
+                        "Expose one method from that class that does everything."
                     };
                     this.GroupEnum = PatternGroup.Structural;
                     break;
