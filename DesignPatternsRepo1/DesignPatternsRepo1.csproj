@@ -37,4 +37,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Pages\page1.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

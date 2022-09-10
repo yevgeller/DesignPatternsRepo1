@@ -1,0 +1,31 @@
+﻿@page
+@model DesignPatternsRepo1.Pages.Test1Model
+@{
+}
+
+
+<div id="div1">Testing Shmesting</div>
+
+<table>
+    <tr><td>1-1</td><td>1-2</td></tr>
+    <tr><td>2-1</td><td>2-2</td></tr>
+</table>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById('div1').addEventListener('click', one);
+    });
+
+    function one() {
+        alert('Hi!');
+    }
+
+</script>
+
+<style>
+    td {
+        border: 1px solid red;
+        padding: 1px;
+        margin: 3px;
+    }
+</style>
