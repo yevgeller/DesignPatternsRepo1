@@ -173,6 +173,15 @@ namespace DesignPatternsRepo1.Models
                     this.Header = "Enhancing functionality while ensuring single responsibility";
                     this.Icon = "fa-chart-line";
                     this.Hyperlink = "/Structural/Decorator";
+                    this.InformalDescription = "Keep wrapping that burrito in more functionality one tortilla at a time.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Create an interface with a method that has the functionality that needs to be enhanced,",
+                        "Create a new class with extra functionality,",
+                        "Inject the source class into the new class,",
+                        "Provide more functionality as needed, preferrably without violating the Single Responsibility Principle,",
+                        "Repeat steps as needed until desired functionality is achieved."
+                    };
                     this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "fas": //Facade
