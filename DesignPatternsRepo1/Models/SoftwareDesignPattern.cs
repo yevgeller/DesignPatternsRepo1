@@ -190,6 +190,11 @@ namespace DesignPatternsRepo1.Models
                     this.Header = "Hiding complex procedures behind a wall and providing a push-button interface";
                     this.Icon = "fa-igloo";
                     this.Hyperlink = "/Structural/Facade";
+                    this.InformalDescription = "Sweep a mess under one big rug.";
+                    this.RecipeSteps = new List<string>
+                    {
+
+                    };
                     this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "fly": //Flyweight
