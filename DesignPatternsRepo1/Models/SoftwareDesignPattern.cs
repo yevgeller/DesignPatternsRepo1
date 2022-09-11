@@ -204,6 +204,7 @@ namespace DesignPatternsRepo1.Models
                     this.Header = "Creating a large number of similar objects while sharing some of their state to save memory";
                     this.Icon = "fa-bowl-rice";
                     this.Hyperlink = "/Structural/Flyweight";
+                    this.InformalDescription = "Meh, don't worry about it, memory is cheap.";
                     this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "proxy": //Proxy
