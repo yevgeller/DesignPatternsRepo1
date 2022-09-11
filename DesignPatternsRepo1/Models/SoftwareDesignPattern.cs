@@ -205,6 +205,12 @@ namespace DesignPatternsRepo1.Models
                     this.Icon = "fa-bowl-rice";
                     this.Hyperlink = "/Structural/Flyweight";
                     this.InformalDescription = "Meh, don't worry about it, memory is cheap.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Figure out what varies among the many pieces and what can stay the same,",
+                        "Create a fast way that can check for and create if needed the classes with constant pieces of information,",
+                        "Provide a way to work with properties that vary."
+                    };
                     this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "proxy": //Proxy
