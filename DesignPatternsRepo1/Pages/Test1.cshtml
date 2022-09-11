@@ -6,6 +6,8 @@
 
 <div id="div1">Testing Shmesting</div>
 
+<div id="tbl"></div>
+<br /><br />
 <table>
     <tr><td>1-1</td><td>1-2</td></tr>
     <tr><td>2-1</td><td>2-2</td></tr>
@@ -14,10 +16,31 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('div1').addEventListener('click', one);
+        createTable();
     });
 
     function one() {
         alert('Hi!');
+    }
+
+    function createTable() {
+        const rows = 10;
+        let container = document.getElementById("tbl");
+        let tbl = document.createElement('table');
+        let tbody = document.createElement('tbody')
+        for (let i = 0; i < rows; i++) {
+            let tr = document.createElement('tr');
+            for (let j = 0; j < rows; j++) {
+                let td = document.createElement('td');
+                td.setAttribute('data-row', i);
+                td.setAttribute('data-col', j);
+                td.appendChild(document.createTextNode(i + ' - ' + j));
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        }
+        tbl.appendChild(tbody);
+        container.appendChild(tbl);
     }
 
 </script>
