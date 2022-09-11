@@ -17,6 +17,11 @@
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('div1').addEventListener('click', one);
         createTable();
+        document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', function() {
+            let row = el.getAttribute('data-row');
+            let col = el.getAttribute('data-col');
+            console.log('row-col:', row + ' - ' + col);
+        }));
     });
 
     function one() {
@@ -27,6 +32,7 @@
         const rows = 10;
         let container = document.getElementById("tbl");
         let tbl = document.createElement('table');
+        tbl.setAttribute('id', 'field');
         let tbody = document.createElement('tbody')
         for (let i = 0; i < rows; i++) {
             let tr = document.createElement('tr');
