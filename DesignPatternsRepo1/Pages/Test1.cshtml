@@ -18,6 +18,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('div1').addEventListener('click', one);
         createTable();
+        createField();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', function () {
             let row = el.getAttribute('data-row');
             let col = el.getAttribute('data-col');
@@ -27,6 +28,22 @@
 
     function one() {
         alert('Hi!');
+    }
+
+    function createField() {
+        const field = Array.from(Array(10), () => new Array(10));
+        console.log(field);
+        let mineCount = 10;
+
+        while (mineCount > 0) {
+            rndRow = randomNumber();
+            rndCol = randomNumber();
+            if (field[rndRow][rndCol] !== 'X') {
+                field[rndRow][rndCol] = 'X';
+                mineCount--;
+            }
+        }
+        console.log(field);
     }
 
     function createTable() {
@@ -43,23 +60,18 @@
                 let td = document.createElement('td');
                 td.setAttribute('data-row', i);
                 td.setAttribute('data-col', j);
-                let nodeContent = i + ' - ' + j;
-                if (mineCount > 0) {
-                    let rnd = Math.floor(Math.random() * 10);
-                    if (rnd == 1) {
-                        nodeContent += ' X';
-                        mineCount--;
-                    }
-                    td.appendChild(document.createTextNode(nodeContent));
-                    tr.appendChild(td);
-                }
+                td.appendChild(document.createTextNode(i + ' - ' + j));
+                tr.appendChild(td);
                 tbody.appendChild(tr);
             }
             tbl.appendChild(tbody);
             container.appendChild(tbl);
         }
+    }
 
-        console.log('mineCount: ', mineCount);
+    function randomNumber() {
+        const upperBound = 10;
+        return Math.floor(Math.random() * upperBound);
     }
 
 </script>
