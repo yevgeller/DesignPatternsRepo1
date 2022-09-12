@@ -219,7 +219,11 @@ namespace DesignPatternsRepo1.Models
                     this.Header = "A placeholder for another object for a few reasons";
                     this.Icon = "fa-door-open";
                     this.Hyperlink = "/Structural/Proxy";
-                    this.InformalDescription = "Kind of a Decorator";
+                    this.InformalDescription = "Kind of a Decorator, but with more distinct purposes.";
+                    this.RecipeSteps = new List<string>
+                    {
+                        "Same as decorator: create an interface, extract functionality, create new entity implementing the interface with new functionality, and so on..."
+                    };
                     this.GroupEnum = PatternGroup.Structural;
                     break;
                 case "cha": //Chain of Responsibility
