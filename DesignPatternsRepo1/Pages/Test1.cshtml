@@ -15,14 +15,17 @@
 </table>
 
 <script>
+    const field = Array.from(Array(10), () => new Array(10).fill('.'));
+
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('div1').addEventListener('click', one);
-        createTable();
         createField();
+        createTable();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', function () {
             let row = el.getAttribute('data-row');
             let col = el.getAttribute('data-col');
             console.log('row-col:', row + ' - ' + col);
+            console.log('field value:', field[row][col]);
         }));
     });
 
@@ -31,7 +34,6 @@
     }
 
     function createField() {
-        const field = Array.from(Array(10), () => new Array(10));
         console.log(field);
         let mineCount = 10;
 
@@ -47,7 +49,6 @@
     }
 
     function createTable() {
-        let mineCount = 10;
 
         const rows = 10;
         let container = document.getElementById("tbl");
@@ -60,7 +61,13 @@
                 let td = document.createElement('td');
                 td.setAttribute('data-row', i);
                 td.setAttribute('data-col', j);
-                td.appendChild(document.createTextNode(i + ' - ' + j));
+                let textNode = i + ' - ' + j;
+
+                if(field[i][j]=='X') {
+                
+                    textNode = 'X';
+                }
+                td.appendChild(document.createTextNode(textNode));
                 tr.appendChild(td);
                 tbody.appendChild(tr);
             }
