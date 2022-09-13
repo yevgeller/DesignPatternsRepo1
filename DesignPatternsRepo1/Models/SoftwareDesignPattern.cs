@@ -235,10 +235,10 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "A set up for series of checks on an item. Checks must happen sequentially, but not necessarily from the beginning.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Set up a special interface for steps needing to be performed",
-                        "Flesh out concrete steps",
-                        "Connect steps in a chain",
-                        "Work an item through the chain"
+                        "Set up a special interface for steps needing to be performed,",
+                        "Flesh out concrete steps,",
+                        "Connect steps in a chain,",
+                        "Work an item through the chain."
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
