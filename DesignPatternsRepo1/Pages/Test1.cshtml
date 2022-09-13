@@ -16,6 +16,7 @@
 
 <script>
     const field = Array.from(Array(10), () => new Array(10).fill('.'));
+    const MINEMARKER = 'X';
 
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('div1').addEventListener('click', one);
@@ -40,12 +41,20 @@
         while (mineCount > 0) {
             rndRow = randomNumber();
             rndCol = randomNumber();
-            if (field[rndRow][rndCol] !== 'X') {
-                field[rndRow][rndCol] = 'X';
+            if (field[rndRow][rndCol] !== MINEMARKER) {
+                field[rndRow][rndCol] = MINEMARKER;
                 mineCount--;
             }
         }
         console.log(field);
+    }
+
+    function calculateMarkers() {
+        for (let i = 0; i < field.length; i++) {
+            for (let j = 0; j < field[i].length; j++) {
+
+            }
+        }
     }
 
     function createTable() {
@@ -63,9 +72,9 @@
                 td.setAttribute('data-col', j);
                 let textNode = i + ' - ' + j;
 
-                if(field[i][j]=='X') {
-                
-                    textNode = 'X';
+                if (field[i][j] == MINEMARKER) {
+
+                    textNode = MINEMARKER;
                 }
                 td.appendChild(document.createTextNode(textNode));
                 tr.appendChild(td);
