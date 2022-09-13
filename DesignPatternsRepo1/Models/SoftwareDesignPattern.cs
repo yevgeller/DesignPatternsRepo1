@@ -251,7 +251,7 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Approach a task from the other way around -- empower an object with methods and resources it needs to perform and undo actions. Inject access to databases, external resources -- whatever it takes. Then use the command object as a standalone unit that can do stuff.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Create an object and make it implement methods in ICommand interface: void execute(), boolean canExecute() (optional), void undo() (optional)"
+                        "Create an object and make it implement methods in ICommand interface: void execute(), boolean canExecute() (optional), void undo() (optional)."
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
@@ -264,13 +264,13 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Rails for converting something into another format";
                     this.RecipeSteps = new List<string>
                     {
-                        "Declare a Context -- a reusable template class",
-                        "Set context's input to what needs to be translated",
-                        "Output does not need to be set, or start with some initial value",
-                        "Declare an abstract class (usually called Expression) and declare one method -- Interpret, takes a Context as input and does the magic inside",
-                        "Then create another class inheriting from Expression and flesh out implementation for the Interpret method",
-                        "Then create as many other classes as needed to convert into other things",
-                        "Need to identify if context has non-terminal expressions and handle those accordingly"
+                        "Declare a Context -- a reusable template class,",
+                        "Set context's input to what needs to be translated,",
+                        "Output does not need to be set, or start with some initial value,",
+                        "Declare an abstract class (usually called Expression) and declare one method -- Interpret, takes a Context as input and does the magic inside,",
+                        "Then create another class inheriting from Expression and flesh out implementation for the Interpret method,",
+                        "Then create as many other classes as needed to convert into other things,",
+                        "Need to identify if context has non-terminal expressions and handle those accordingly."
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
