@@ -21,6 +21,7 @@
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('div1').addEventListener('click', one);
         createField();
+        calculateMarkers();
         createTable();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', function () {
             let row = el.getAttribute('data-row');
@@ -35,7 +36,6 @@
     }
 
     function createField() {
-        console.log(field);
         let mineCount = 10;
 
         while (mineCount > 0) {
@@ -52,10 +52,25 @@
     function calculateMarkers() {
         for (let i = 0; i < field.length; i++) {
             for (let j = 0; j < field[i].length; j++) {
-                if(field[i][j]=== MINEMARKER) return;
-
+                if(field[i][j]=== MINEMARKER) continue;
+                let marker = calcFieldMarker(i, j);
+                //if(marker > 0) debugger;
+                field[i][j] = marker.toString();
             }
         }
+        console.log(field);
+    }
+
+    function calcFieldMarker(row, col) {
+        let n = calcN(row, col);
+        let ne = calcNE(row, col);
+        let e = calcE(row, col);
+        let se = calcSE(row, col);
+        let s = calcS(row, col);
+        let sw = calcSW(row, col);
+        let w = calcW(row, col);
+        let nw = calcNW(row, col);
+        return n + ne + e + se + s + sw + w + nw;
     }
 
     function calcN(row, col) {
@@ -75,18 +90,18 @@
     }
 
     function calcSE(row, col) {
-        if(row === field.length || col === field[row].length) return 0;
+        if(row === field.length-1 || col === field[row].length) return 0;
         return field[row+1][col+1] === MINEMARKER ? 1 : 0;
     }
 
     function calcS(row, col) {
-        if(row === field.length) return 0;
+        if(row === field.length-1) return 0;
         return field[row+1][col] === MINEMARKER ? 1 : 0;
     }
 
     function calcSW(row, col) {
-        if(row === field.length || col === 0) return 0;
-        return field[row-1][col-1] === MINEMARKER ? 1 : 0;
+        if(row === field.length-1 || col === 0) return 0;
+        return field[row+1][col-1] === MINEMARKER ? 1 : 0;
     }
 
     function calcW(row, col) {
@@ -100,7 +115,6 @@
     }
 
     function createTable() {
-
         const rows = 10;
         let container = document.getElementById("tbl");
         let tbl = document.createElement('table');
@@ -115,7 +129,6 @@
                 let textNode = i + ' - ' + j;
 
                 if (field[i][j] == MINEMARKER) {
-
                     textNode = MINEMARKER;
                 }
                 td.appendChild(document.createTextNode(textNode));
