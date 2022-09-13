@@ -52,10 +52,11 @@
     function calculateMarkers() {
         for (let i = 0; i < field.length; i++) {
             for (let j = 0; j < field[i].length; j++) {
-                if(field[i][j]=== MINEMARKER) continue;
+                if (field[i][j] === MINEMARKER) continue;
                 let marker = calcFieldMarker(i, j);
-                //if(marker > 0) debugger;
-                field[i][j] = marker.toString();
+                if (marker > 0) {
+                    field[i][j] = marker.toString();
+                }
             }
         }
         console.log(field);
@@ -74,44 +75,44 @@
     }
 
     function calcN(row, col) {
-        if(row === 0) return 0;
-        if(field[row-1][col]=== MINEMARKER) return 1;
+        if (row === 0) return 0;
+        if (field[row - 1][col] === MINEMARKER) return 1;
         return 0;
     }
 
     function calcNE(row, col) {
-        if(row === 0 || col === field[row].length) return 0;
-        return field[row-1][col+1] === MINEMARKER ? 1 : 0;
+        if (row === 0 || col === field[row].length) return 0;
+        return field[row - 1][col + 1] === MINEMARKER ? 1 : 0;
     }
 
     function calcE(row, col) {
-        if(col === field[row].length) return 0;
-        return field[row][col+1] === MINEMARKER ? 1 : 0;
+        if (col === field[row].length) return 0;
+        return field[row][col + 1] === MINEMARKER ? 1 : 0;
     }
 
     function calcSE(row, col) {
-        if(row === field.length-1 || col === field[row].length) return 0;
-        return field[row+1][col+1] === MINEMARKER ? 1 : 0;
+        if (row === field.length - 1 || col === field[row].length) return 0;
+        return field[row + 1][col + 1] === MINEMARKER ? 1 : 0;
     }
 
     function calcS(row, col) {
-        if(row === field.length-1) return 0;
-        return field[row+1][col] === MINEMARKER ? 1 : 0;
+        if (row === field.length - 1) return 0;
+        return field[row + 1][col] === MINEMARKER ? 1 : 0;
     }
 
     function calcSW(row, col) {
-        if(row === field.length-1 || col === 0) return 0;
-        return field[row+1][col-1] === MINEMARKER ? 1 : 0;
+        if (row === field.length - 1 || col === 0) return 0;
+        return field[row + 1][col - 1] === MINEMARKER ? 1 : 0;
     }
 
     function calcW(row, col) {
-        if(col === 0) return 0;
-        return field[row][col-1] === MINEMARKER ? 1 : 0;
+        if (col === 0) return 0;
+        return field[row][col - 1] === MINEMARKER ? 1 : 0;
     }
 
     function calcNW(row, col) {
-        if(row === 0 || col === 0) return 0;
-        return field[row-1][col-1] === MINEMARKER ? 1 : 0;
+        if (row === 0 || col === 0) return 0;
+        return field[row - 1][col - 1] === MINEMARKER ? 1 : 0;
     }
 
     function createTable() {
