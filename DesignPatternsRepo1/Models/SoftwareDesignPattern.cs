@@ -330,9 +330,9 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "A way to control who receives notifications.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Set up entities",
-                        "Provide a notification hub",
-                        "Provide a way for the hub to unsubscribe entities from notifications"
+                        "Set up entities,",
+                        "Provide a notification hub,",
+                        "Provide a way for the hub to unsubscribe entities from notifications."
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
