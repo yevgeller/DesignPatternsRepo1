@@ -300,7 +300,7 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Offload communication among objects to a central entity";
                     this.RecipeSteps = new List<string>
                     {
-                        "Identify the need",
+                        "Identify the need,",
                         "Declare a communication entity, teach it to communicate to all parties involved,",
                         "Explain objects the new way of communicating to each other."
                     };
