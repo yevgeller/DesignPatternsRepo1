@@ -18,6 +18,15 @@
     const field = Array.from(Array(10), () => new Array(10).fill('.'));
     const MINEMARKER = 'X';
 
+    let toProcess = [];
+
+    class Cell {
+        constructor(row, col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('div1').addEventListener('click', one);
         createField();
@@ -42,12 +51,16 @@
         let row = el.currentTarget.getAttribute('data-row');
         let col = el.currentTarget.getAttribute('data-col');
         console.log('row-col:', row + ' - ' + col);
-        console.log('field value:', field[row][col]);
+        //console.log('field value:', field[row][col]);
         let data = field[row][col];
+        el.currentTarget.innerText = data;
         if (data === 'X') {
             gameOver();
-        }
-        el.currentTarget.innerText = field[row][col];
+        } else if (data === '.') {
+            toProcess.push(new Cell(row, col));
+            
+            console.log(toProcess);
+        } 
     }
 
     function gameOver() {
