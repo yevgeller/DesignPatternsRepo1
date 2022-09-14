@@ -23,13 +23,37 @@
         createField();
         calculateMarkers();
         createTable();
-        document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', function () {
-            let row = el.getAttribute('data-row');
-            let col = el.getAttribute('data-col');
-            console.log('row-col:', row + ' - ' + col);
-            console.log('field value:', field[row][col]);
-        }));
+        document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
+
+        //document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', function () {
+        //    let row = el.getAttribute('data-row');
+        //    let col = el.getAttribute('data-col');
+        //    console.log('row-col:', row + ' - ' + col);
+        //    console.log('field value:', field[row][col]);
+        //    let data = field[row][col];
+        //    if(data === 'X') {
+        //        gameOver();
+        //    }
+        //    el.innerText = field[row][col];
+        //}));
     });
+
+    function clickCell(el) {
+        let row = el.currentTarget.getAttribute('data-row');
+        let col = el.currentTarget.getAttribute('data-col');
+        console.log('row-col:', row + ' - ' + col);
+        console.log('field value:', field[row][col]);
+        let data = field[row][col];
+        if (data === 'X') {
+            gameOver();
+        }
+        el.currentTarget.innerText = field[row][col];
+    }
+
+    function gameOver() {
+        alert('game over! Refresh page to start again.');
+        document.querySelectorAll('#field td').forEach(el => el.removeEventListener('click', clickCell));
+    }
 
     function one() {
         alert('Hi!');
