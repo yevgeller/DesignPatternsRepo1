@@ -70,6 +70,36 @@
         }
     }
 
+    function getSurroundingCells(row, col) {
+        let result = [];
+        
+        let firstRow = row === 0;
+        let firstCol = col === 0;
+        let lastRow = row === field.length -1;
+        let lastCol = col === field[row].length -1;
+        let midRow = !firstRow && row < field.length -1;
+        let midCol = !firstCol && col < field[row].length -1;
+
+
+        if(row === 0 && col === 0) {
+            result.push(new Cell(row, col+1));
+            result.push(new Cell(row+1, col));
+            result.push(new Cell(row+1, col+1));
+        } else if(row === 0 && col < field[row].length -1) {
+
+        } else if(row === 0 && col === field[row].length-1) {
+
+        } else if(row > 0 && row < field.length-1 && col === 0) {
+
+        } else if(row === field.length -1 && col === 0) {
+
+        } else if(row > 0 && row < field.length-1 && col < field[row].length -1) {
+            //most popular
+        } else if(row === field.length - 1 && col < field[row].length -1) {
+
+        }
+    }
+
     function processCells() {
         while(toProcess.length > 0) {
             let first = toProcess.shift();
@@ -83,6 +113,10 @@
         if(data == '1') return true;
 
         return false;
+    }
+
+    function setRevealed(el) {
+        el.setAttribute('data-hidden', 0);
     }
 
     function gameOver() {
