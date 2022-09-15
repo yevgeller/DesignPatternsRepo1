@@ -47,9 +47,14 @@
     });
 
     function clickCell(el) {
+        let hidden = el.currentTarget.getAttribute('data-hidden');
+        if(hidden == '0') {
+            //console.log('hidden: ', hidden);
+            return;
+        }
         let row = el.currentTarget.getAttribute('data-row');
         let col = el.currentTarget.getAttribute('data-col');
-        //console.log('row-col:', row + ' - ' + col);
+        console.log('row-col:', row + ' - ' + col);
         //console.log('field value:', field[row][col]);
         let data = field[row][col];
         el.currentTarget.innerText = data;
@@ -63,6 +68,21 @@
 
             console.log(toProcess);
         }
+    }
+
+    function processCells() {
+        while(toProcess.length > 0) {
+            let first = toProcess.shift();
+            if(isRevealed(first)) continue;
+        }
+    }
+
+    function isRevealed(el) {
+        let data = el.getAttribute('data-hidden');
+        if(!data) return false;
+        if(data == '1') return true;
+
+        return false;
     }
 
     function gameOver() {
