@@ -52,34 +52,38 @@
             return;
         }
         revealCell(el.currentTarget);
-        let row = el.currentTarget.getAttribute('data-row');
-        let col = el.currentTarget.getAttribute('data-col');
-        //console.log('row-col:', row + ' - ' + col);
-        ////console.log('field value:', field[row][col]);
-        let data = field[row][col];
-        //el.currentTarget.innerText = data;
-        //el.currentTarget.style.backgroundColor = "yellow";
-        //el.currentTarget.style.color = "black";
-        //el.currentTarget.setAttribute('data-hidden', 0);
-        if (data === 'X') {
-            gameOver();
-        } else if (data === '.') {
-            toProcess.push(...getSurroundingCells(row, col));
-
-            console.log(toProcess);
-        }
+        //let row = el.currentTarget.getAttribute('data-row');
+        //let col = el.currentTarget.getAttribute('data-col');
+        //let data = field[row][col];
+        //if (data === 'X') {
+        //    gameOver();
+        //} else if (data === '.') {
+        //    toProcess.push(...getSurroundingCells(row, col));
+        //    console.log(toProcess);
+        //}
     }
 
     function revealCell(el) {
         let row = el.getAttribute('data-row');
         let col = el.getAttribute('data-col');
         console.log('row-col:', row + ' - ' + col);
-        //console.log('field value:', field[row][col]);
-        let data = field[row][col];
+        let data = getCellData(row, col);
         el.innerText = data;
         el.style.backgroundColor = "yellow";
         el.style.color = "black";
         el.setAttribute('data-hidden', 0);
+        if (data === 'X') {
+            gameOver();
+        } else if (data === '.') {
+            toProcess.push(...getSurroundingCells(row, col));
+            console.log(toProcess);
+            processCells();
+        }
+    }
+
+    function getCellData(row, col) {
+        console.log('checking row:' + row + ' col: ' + col);
+        return field[row][col];
     }
 
     function getSurroundingCells(rowStr, colStr) {
@@ -149,24 +153,42 @@
         let result = [];
 
         interimResult.forEach(x => {
-            let cell = document.querySelector('[data-cell="cell-' + x.row + '-' + x.col + '"]');
+            let cell = getCell(x);
             if (cell) {
                 let ishidden = this.isHidden(cell);
-                if (ishidden)
+                let alreadyIn = alreadyInQueue(x);
+                if (ishidden && !alreadyIn)
                     result.push(x);
-                else
-                    console.log('cell ' + x.row + '-' + x.col + ' is already revealed.');
-                console.log(cell);
+                //else
+                //    console.log('cell ' + x.row + '-' + x.col + ' is already revealed.');
+                //console.log(cell);
             } else console.log('Cell not found with coordinates: ', x.row, x.col);
         });
 
         return result;
     }
 
+    function getCell(x) {
+        return document.querySelector('[data-cell="cell-' + x.row + '-' + x.col + '"]');
+    }
+
+    function alreadyInQueue(cell) {
+        if (toProcess.some(x => x.row === cell.row && x.col === cell.col)) {
+            return true;
+        }
+        return false;
+    }
+
     function processCells() {
         while (toProcess.length > 0) {
+            debugger;
             let first = toProcess.shift();
-            //HERE ADD RECURSIVE CALL
+            let data = getCellData(first.row, first.col);
+            let cell = getCell(first);
+            revealCell(cell);
+            if (data === '.') {
+                toProcess.push(getSurroundingCells(first.row, first.col));
+            }
         }
     }
 
