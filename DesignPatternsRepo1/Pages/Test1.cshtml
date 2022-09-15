@@ -49,18 +49,18 @@
     function clickCell(el) {
         let hidden = el.currentTarget.getAttribute('data-hidden');
         if (hidden == '0') {
-            //console.log('hidden: ', hidden);
             return;
         }
+        revealCell(el.currentTarget);
         let row = el.currentTarget.getAttribute('data-row');
         let col = el.currentTarget.getAttribute('data-col');
-        console.log('row-col:', row + ' - ' + col);
-        //console.log('field value:', field[row][col]);
+        //console.log('row-col:', row + ' - ' + col);
+        ////console.log('field value:', field[row][col]);
         let data = field[row][col];
-        el.currentTarget.innerText = data;
-        el.currentTarget.style.backgroundColor = "yellow";
-        el.currentTarget.style.color = "black";
-        el.currentTarget.setAttribute('data-hidden', 0);
+        //el.currentTarget.innerText = data;
+        //el.currentTarget.style.backgroundColor = "yellow";
+        //el.currentTarget.style.color = "black";
+        //el.currentTarget.setAttribute('data-hidden', 0);
         if (data === 'X') {
             gameOver();
         } else if (data === '.') {
@@ -68,6 +68,18 @@
 
             console.log(toProcess);
         }
+    }
+
+    function revealCell(el) {
+        let row = el.getAttribute('data-row');
+        let col = el.getAttribute('data-col');
+        console.log('row-col:', row + ' - ' + col);
+        //console.log('field value:', field[row][col]);
+        let data = field[row][col];
+        el.innerText = data;
+        el.style.backgroundColor = "yellow";
+        el.style.color = "black";
+        el.setAttribute('data-hidden', 0);
     }
 
     function getSurroundingCells(rowStr, colStr) {
@@ -154,7 +166,7 @@
     function processCells() {
         while (toProcess.length > 0) {
             let first = toProcess.shift();
-            if (isHidden(first)) continue;
+            //HERE ADD RECURSIVE CALL
         }
     }
 
