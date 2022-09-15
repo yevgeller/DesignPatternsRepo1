@@ -28,7 +28,6 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById('div1').addEventListener('click', one);
         createField();
         calculateMarkers();
         createTable();
@@ -66,10 +65,6 @@
     function gameOver() {
         alert('game over! Refresh page to start again.');
         document.querySelectorAll('#field td').forEach(el => el.removeEventListener('click', clickCell));
-    }
-
-    function one() {
-        alert('Hi!');
     }
 
     function createField() {
