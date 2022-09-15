@@ -53,18 +53,25 @@
         //console.log('field value:', field[row][col]);
         let data = field[row][col];
         el.currentTarget.innerText = data;
+        el.currentTarget.style.backgroundColor = "yellow";
+        el.currentTarget.style.color = "black";
+        el.currentTarget.setAttribute('data-hidden', 0);
         if (data === 'X') {
             gameOver();
         } else if (data === '.') {
             toProcess.push(new Cell(row, col));
-            
+
             console.log(toProcess);
-        } 
+        }
     }
 
     function gameOver() {
         alert('game over! Refresh page to start again.');
-        document.querySelectorAll('#field td').forEach(el => el.removeEventListener('click', clickCell));
+        document.querySelectorAll('#field td').forEach(el => {
+            el.removeEventListener('click', clickCell);
+            if (el.innerText === 'X')
+                el.style.backgroundColor = "red";
+        });
     }
 
     function createField() {
@@ -159,6 +166,7 @@
                 let td = document.createElement('td');
                 td.setAttribute('data-row', i);
                 td.setAttribute('data-col', j);
+                td.setAttribute('data-hidden', 1);
                 let textNode = i + ' - ' + j;
 
                 if (field[i][j] == MINEMARKER) {
