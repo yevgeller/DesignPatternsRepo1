@@ -364,9 +364,9 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Like \"State\", abstracting different functionality, but here it's a one-time deal and functionalities are not aware of each other";
                     this.RecipeSteps = new List<string>
                     {
-                        "Create an interface for desired functionality",
-                        "Provide a property of that interface to the implementing object",
-                        "Set up a way (using a Factory, for example) to provide different functionality based on circumstances"
+                        "Create an interface for desired functionality,",
+                        "Provide a property of that interface to the implementing object,",
+                        "Set up a way (using a Factory, for example) to provide different functionality based on circumstances."
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
