@@ -345,13 +345,13 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Abstracting changing state into an interface, working with different objects of the same interface depending on circumstances.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Figure out everything that needs to change about an object.",
-                        "Figure out rules on how changes occur",
-                        "Create an interface for objects containing different functionalities",
-                        "Create objects encompassing all possible states",
-                        "Enable states to replace each other as needed",
-                        "Give states reference to the master object",
-                        "Teach master object about its new state mechanism, set up initial state"
+                        "Figure out everything that needs to change about an object,",
+                        "Figure out rules on how changes occur,",
+                        "Create an interface for objects containing different functionalities,",
+                        "Create objects encompassing all possible states,",
+                        "Enable states to replace each other as needed,",
+                        "Give states reference to the master object,",
+                        "Teach master object about its new state mechanism, set up initial state."
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
