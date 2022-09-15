@@ -89,15 +89,84 @@
             result.push(new Cell(row + 1, col - 1));
             result.push(new Cell(row, col - 1));
             result.push(new Cell(row - 1, col - 1));
-        } else if (midRow && firstCol) { }
-        else if (midRow && lastCol) { }
-        else if (firstRow && midCol) { }
-        else if (lastRow && midCol) { }
-        else if (firstRow && firstCol) { }
-        else if (firstRow && lastCol) { }
-        else if (lastRow && firstCol) { }
-        else if (lastRow && lastCol) { }
-        else { alert('should not be here, row: ' + row + ', col: ' + col); }
+        } else if (midRow && firstCol) {
+            result.push(new Cell(row - 1, col));
+            result.push(new Cell(row - 1, col + 1));
+            result.push(new Cell(row, col + 1));
+            result.push(new Cell(row + 1, col + 1));
+            result.push(new Cell(row + 1, col));
+            result.push(new Cell(row + 1, col - 1));
+            result.push(new Cell(row, col - 1));
+            result.push(new Cell(row - 1, col - 1));
+        } else if (midRow && lastCol) {
+            result.push(new Cell(row - 1, col));
+            result.push(new Cell(row - 1, col + 1));
+            result.push(new Cell(row, col + 1));
+            result.push(new Cell(row + 1, col + 1));
+            result.push(new Cell(row + 1, col));
+            result.push(new Cell(row + 1, col - 1));
+            result.push(new Cell(row, col - 1));
+            result.push(new Cell(row - 1, col - 1));
+        } else if (firstRow && midCol) {
+            result.push(new Cell(row - 1, col));
+            result.push(new Cell(row - 1, col + 1));
+            result.push(new Cell(row, col + 1));
+            result.push(new Cell(row + 1, col + 1));
+            result.push(new Cell(row + 1, col));
+            result.push(new Cell(row + 1, col - 1));
+            result.push(new Cell(row, col - 1));
+            result.push(new Cell(row - 1, col - 1));
+        }
+        else if (lastRow && midCol) {
+            result.push(new Cell(row - 1, col));
+            result.push(new Cell(row - 1, col + 1));
+            result.push(new Cell(row, col + 1));
+            result.push(new Cell(row + 1, col + 1));
+            result.push(new Cell(row + 1, col));
+            result.push(new Cell(row + 1, col - 1));
+            result.push(new Cell(row, col - 1));
+            result.push(new Cell(row - 1, col - 1));
+        }
+        else if (firstRow && firstCol) {
+            result.push(new Cell(row - 1, col));
+            result.push(new Cell(row - 1, col + 1));
+            result.push(new Cell(row, col + 1));
+            result.push(new Cell(row + 1, col + 1));
+            result.push(new Cell(row + 1, col));
+            result.push(new Cell(row + 1, col - 1));
+            result.push(new Cell(row, col - 1));
+            result.push(new Cell(row - 1, col - 1));
+        } else if (firstRow && lastCol) {
+            result.push(new Cell(row - 1, col));
+            result.push(new Cell(row - 1, col + 1));
+            result.push(new Cell(row, col + 1));
+            result.push(new Cell(row + 1, col + 1));
+            result.push(new Cell(row + 1, col));
+            result.push(new Cell(row + 1, col - 1));
+            result.push(new Cell(row, col - 1));
+            result.push(new Cell(row - 1, col - 1));
+        }
+        else if (lastRow && firstCol) {
+            result.push(new Cell(row - 1, col));
+            result.push(new Cell(row - 1, col + 1));
+            result.push(new Cell(row, col + 1));
+            result.push(new Cell(row + 1, col + 1));
+            result.push(new Cell(row + 1, col));
+            result.push(new Cell(row + 1, col - 1));
+            result.push(new Cell(row, col - 1));
+            result.push(new Cell(row - 1, col - 1));
+        } else if (lastRow && lastCol) {
+            result.push(new Cell(row - 1, col));
+            result.push(new Cell(row - 1, col + 1));
+            result.push(new Cell(row, col + 1));
+            result.push(new Cell(row + 1, col + 1));
+            result.push(new Cell(row + 1, col));
+            result.push(new Cell(row + 1, col - 1));
+            result.push(new Cell(row, col - 1));
+            result.push(new Cell(row - 1, col - 1));
+        } else {
+            alert('should not be here, row: ' + row + ', col: ' + col);
+        }
 
         //if firstRow && firstCol
         //if firstRow && midCol
