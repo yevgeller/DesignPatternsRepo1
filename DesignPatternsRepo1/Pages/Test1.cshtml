@@ -80,6 +80,30 @@
         let midRow = !firstRow && row < field.length -1;
         let midCol = !firstCol && col < field[row].length -1;
 
+        if(midRow && midCol) {
+            result.push(new Cell(row-1, col));
+            result.push(new Cell(row-1, col+1));
+            result.push(new Cell(row, col+1));
+            result.push(new Cell(row+1, col+1));
+            result.push(new Cell(row+1, col));
+            result.push(new Cell(row+1, col-1));
+            result.push(new Cell(row, col-1));
+            result.push(new Cell(row-1, col-1));
+        } else if(firstRow && midCol){}
+        else if()
+        else if(firstRow && firstCol) {}
+        else if(lastRow && lastCol) {}
+        else {alert('should not be here, row: ' + row + ', col: ' + col);}
+
+        //if firstRow && firstCol
+        //if firstRow && midCol
+        //if firstRow && lastCol
+        //if midRow && firstCol
+        //if(midRow && midCol)
+        //if(midRow && lastCol)
+        //if(lastRow && firstCol)
+        //if(lastRow && midCol)
+        //if(lastRow && lastCol)
 
         if(row === 0 && col === 0) {
             result.push(new Cell(row, col+1));
