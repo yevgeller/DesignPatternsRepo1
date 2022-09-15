@@ -64,112 +64,101 @@
         if (data === 'X') {
             gameOver();
         } else if (data === '.') {
-            toProcess.push(new Cell(row, col));
+            toProcess.push(...getSurroundingCells(row, col));
 
             console.log(toProcess);
         }
     }
 
-    function getSurroundingCells(row, col) {
-        let result = [];
-
+    function getSurroundingCells(rowStr, colStr) {
+        let interimResult = [];
+        let row = Number(rowStr);
+        let col = Number(colStr);
         let firstRow = row === 0;
         let firstCol = col === 0;
-        let lastRow = row === field.length - 1;
-        let lastCol = col === field[row].length - 1;
-        let midRow = !firstRow && row < field.length - 1;
-        let midCol = !firstCol && col < field[row].length - 1;
+        let lastRow = row === (field.length - 1);
+        let lastCol = col === (field[row].length - 1);
+        let midRow = !firstRow && (row < field.length - 1);
+        let midCol = !firstCol && (col < field[row].length - 1);
 
         if (midRow && midCol) {
-            result.push(new Cell(row - 1, col)); //N
-            result.push(new Cell(row - 1, col + 1)); //NE
-            result.push(new Cell(row, col + 1)); //E
-            result.push(new Cell(row + 1, col + 1)); //SE
-            result.push(new Cell(row + 1, col)); //S
-            result.push(new Cell(row + 1, col - 1)); //SW
-            result.push(new Cell(row, col - 1)); //W
-            result.push(new Cell(row - 1, col - 1)); //NW
+            interimResult.push(new Cell(row - 1, col)); //N
+            interimResult.push(new Cell(row - 1, col + 1)); //NE
+            interimResult.push(new Cell(row, col + 1)); //E
+            interimResult.push(new Cell(row + 1, col + 1)); //SE
+            interimResult.push(new Cell(row + 1, col)); //S
+            interimResult.push(new Cell(row + 1, col - 1)); //SW
+            interimResult.push(new Cell(row, col - 1)); //W
+            interimResult.push(new Cell(row - 1, col - 1)); //NW
         } else if (midRow && firstCol) {
-            result.push(new Cell(row - 1, col)); //N
-            result.push(new Cell(row - 1, col + 1)); //NE
-            result.push(new Cell(row, col + 1)); //E
-            result.push(new Cell(row + 1, col + 1)); //SE
-            result.push(new Cell(row + 1, col)); //S
+            interimResult.push(new Cell(row - 1, col)); //N
+            interimResult.push(new Cell(row - 1, col + 1)); //NE
+            interimResult.push(new Cell(row, col + 1)); //E
+            interimResult.push(new Cell(row + 1, col + 1)); //SE
+            interimResult.push(new Cell(row + 1, col)); //S
         } else if (midRow && lastCol) {
-            result.push(new Cell(row - 1, col)); //N
-            result.push(new Cell(row - 1, col - 1)); //NW
-            result.push(new Cell(row, col - 1)); //W
-            result.push(new Cell(row + 1, col - 1)); //SW
-            result.push(new Cell(row + 1, col)); //S
+            interimResult.push(new Cell(row - 1, col)); //N
+            interimResult.push(new Cell(row - 1, col - 1)); //NW
+            interimResult.push(new Cell(row, col - 1)); //W
+            interimResult.push(new Cell(row + 1, col - 1)); //SW
+            interimResult.push(new Cell(row + 1, col)); //S
         } else if (firstRow && midCol) {
-            result.push(new Cell(row, col + 1)); //E
-            result.push(new Cell(row + 1, col + 1)); //SE
-            result.push(new Cell(row + 1, col)); //S
-            result.push(new Cell(row + 1, col - 1)); //SW
-            result.push(new Cell(row, col - 1)); //W
+            interimResult.push(new Cell(row, col + 1)); //E
+            interimResult.push(new Cell(row + 1, col + 1)); //SE
+            interimResult.push(new Cell(row + 1, col)); //S
+            interimResult.push(new Cell(row + 1, col - 1)); //SW
+            interimResult.push(new Cell(row, col - 1)); //W
         } else if (lastRow && midCol) {
-            result.push(new Cell(row - 1, col)); //N
-            result.push(new Cell(row - 1, col + 1)); //NE
-            result.push(new Cell(row, col + 1)); //E
-            result.push(new Cell(row, col - 1)); //W
-            result.push(new Cell(row - 1, col - 1)); //NW
+            interimResult.push(new Cell(row - 1, col)); //N
+            interimResult.push(new Cell(row - 1, col + 1)); //NE
+            interimResult.push(new Cell(row, col + 1)); //E
+            interimResult.push(new Cell(row, col - 1)); //W
+            interimResult.push(new Cell(row - 1, col - 1)); //NW
         } else if (firstRow && firstCol) { //top left
-            result.push(new Cell(row, col + 1)); //E
-            result.push(new Cell(row + 1, col + 1)); //SE
-            result.push(new Cell(row + 1, col)); //S
+            interimResult.push(new Cell(row, col + 1)); //E
+            interimResult.push(new Cell(row + 1, col + 1)); //SE
+            interimResult.push(new Cell(row + 1, col)); //S
         } else if (firstRow && lastCol) { //top right
-            result.push(new Cell(row + 1, col)); //S
-            result.push(new Cell(row + 1, col - 1)); //SW
-            result.push(new Cell(row, col - 1)); //W
+            interimResult.push(new Cell(row + 1, col)); //S
+            interimResult.push(new Cell(row + 1, col - 1)); //SW
+            interimResult.push(new Cell(row, col - 1)); //W
         } else if (lastRow && firstCol) { //bottom left
-            result.push(new Cell(row - 1, col)); //N
-            result.push(new Cell(row - 1, col + 1)); //NE
-            result.push(new Cell(row, col + 1)); //E
+            interimResult.push(new Cell(row - 1, col)); //N
+            interimResult.push(new Cell(row - 1, col + 1)); //NE
+            interimResult.push(new Cell(row, col + 1)); //E
         } else if (lastRow && lastCol) { //bottom right
-            result.push(new Cell(row - 1, col)); //N
-            result.push(new Cell(row, col - 1)); //W
-            result.push(new Cell(row - 1, col - 1)); //NW
+            interimResult.push(new Cell(row - 1, col)); //N
+            interimResult.push(new Cell(row, col - 1)); //W
+            interimResult.push(new Cell(row - 1, col - 1)); //NW
         } else {
             alert('should not be here, row: ' + row + ', col: ' + col);
         }
 
-        //if firstRow && firstCol
-        //if firstRow && midCol
-        //if firstRow && lastCol
-        //if midRow && firstCol
-        //if(midRow && midCol)
-        //if(midRow && lastCol)
-        //if(lastRow && firstCol)
-        //if(lastRow && midCol)
-        //if(lastRow && lastCol)
+        let result = [];
 
-        if (row === 0 && col === 0) {
-            result.push(new Cell(row, col + 1));
-            result.push(new Cell(row + 1, col));
-            result.push(new Cell(row + 1, col + 1));
-        } else if (row === 0 && col < field[row].length - 1) {
+        interimResult.forEach(x => {
+            let cell = document.querySelector('[data-cell="cell-' + x.row + '-' + x.col + '"]');
+            if (cell) {
+                let ishidden = this.isHidden(cell);
+                if (ishidden)
+                    result.push(x);
+                else
+                    console.log('cell ' + x.row + '-' + x.col + ' is already revealed.');
+                console.log(cell);
+            } else console.log('Cell not found with coordinates: ', x.row, x.col);
+        });
 
-        } else if (row === 0 && col === field[row].length - 1) {
-
-        } else if (row > 0 && row < field.length - 1 && col === 0) {
-
-        } else if (row === field.length - 1 && col === 0) {
-
-        } else if (row > 0 && row < field.length - 1 && col < field[row].length - 1) {
-            //most popular
-        } else if (row === field.length - 1 && col < field[row].length - 1) {
-
-        }
+        return result;
     }
 
     function processCells() {
         while (toProcess.length > 0) {
             let first = toProcess.shift();
-            if (isRevealed(first)) continue;
+            if (isHidden(first)) continue;
         }
     }
 
-    function isRevealed(el) {
+    function isHidden(el) {
         let data = el.getAttribute('data-hidden');
         if (!data) return false;
         if (data == '1') return true;
@@ -283,6 +272,7 @@
                 td.setAttribute('data-row', i);
                 td.setAttribute('data-col', j);
                 td.setAttribute('data-hidden', 1);
+                td.setAttribute('data-cell', 'cell-' + i + '-' + j);
                 let textNode = i + ' - ' + j;
 
                 if (field[i][j] == MINEMARKER) {
