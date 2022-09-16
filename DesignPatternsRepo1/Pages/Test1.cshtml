@@ -15,6 +15,9 @@
 </table>
 
 <script>
+    const FIELDWIDTH = 5;
+    const FIELDHEIGHT = 5;
+    const MINECOUNT = 7;
     const field = Array.from(Array(10), () => new Array(10).fill('.'));
     const MINEMARKER = 'X';
 
@@ -214,7 +217,7 @@
     }
 
     function createField() {
-        let mineCount = 10;
+        let mineCount = MINECOUNT;
 
         while (mineCount > 0) {
             rndRow = randomNumber();
@@ -294,14 +297,14 @@
     }
 
     function createTable() {
-        const rows = 10;
+        //const rows = FIELDHEIGHT;
         let container = document.getElementById("tbl");
         let tbl = document.createElement('table');
         tbl.setAttribute('id', 'field');
         let tbody = document.createElement('tbody')
-        for (let i = 0; i < rows; i++) {
+        for (let i = 0; i < FIELDHEIGHT; i++) {
             let tr = document.createElement('tr');
-            for (let j = 0; j < rows; j++) {
+            for (let j = 0; j < FIELDHEIGHT; j++) {
                 let td = document.createElement('td');
                 td.setAttribute('data-row', i);
                 td.setAttribute('data-col', j);
@@ -333,5 +336,6 @@
         border: 1px solid red;
         padding: 1px;
         margin: 3px;
+        width:35px;
     }
 </style>
