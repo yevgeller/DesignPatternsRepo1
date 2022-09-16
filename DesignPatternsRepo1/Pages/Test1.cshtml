@@ -15,9 +15,9 @@
 </table>
 
 <script>
-    const FIELDWIDTH = 5;
-    const FIELDHEIGHT = 5;
-    const MINECOUNT = 7;
+    const FIELDWIDTH = 10;
+    const FIELDHEIGHT = 10;
+    const MINECOUNT = 3;
     const field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
     const MINEMARKER = 'X';
 
@@ -167,7 +167,7 @@
                 //console.log(cell);
             } else console.log('Cell not found with coordinates: ', x.row, x.col);
         });
-
+        let j = result.length;
         return result;
     }
 
@@ -183,15 +183,17 @@
     }
 
     function processCells() {
-        if(toProcess.length === 0) return;
+        if (toProcess.length === 0) return;
         while (toProcess.length > 0) {
             debugger;
             let first = toProcess.shift();
-            let data = getCellData(first.row, first.col);
-            let cell = getCell(first);
-            revealCell(cell);
-            if (data === '.') {
-                toProcess.push(getSurroundingCells(first.row, first.col));
+            if (first && first.hasOwnProperty('row')) {
+                let data = getCellData(first.row, first.col);
+                let cell = getCell(first);
+                revealCell(cell);
+                if (data === '.') {
+                    toProcess.push(getSurroundingCells(first.row, first.col));
+                }
             }
         }
     }
@@ -337,6 +339,6 @@
         border: 1px solid red;
         padding: 1px;
         margin: 3px;
-        width:35px;
+        width: 35px;
     }
 </style>
