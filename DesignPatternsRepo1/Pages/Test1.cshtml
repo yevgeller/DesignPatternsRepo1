@@ -18,7 +18,7 @@
     const FIELDWIDTH = 5;
     const FIELDHEIGHT = 5;
     const MINECOUNT = 7;
-    const field = Array.from(Array(10), () => new Array(10).fill('.'));
+    const field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
     const MINEMARKER = 'X';
 
     let toProcess = [];
@@ -183,6 +183,7 @@
     }
 
     function processCells() {
+        if(toProcess.length === 0) return;
         while (toProcess.length > 0) {
             debugger;
             let first = toProcess.shift();
@@ -325,7 +326,7 @@
     }
 
     function randomNumber() {
-        const upperBound = 10;
+        const upperBound = FIELDWIDTH;
         return Math.floor(Math.random() * upperBound);
     }
 
