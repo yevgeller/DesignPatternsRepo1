@@ -395,8 +395,8 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Passing items back and forth instead of making a mess in an existing item.";
                     this.RecipeSteps = new List<string>
                     {
-                        "Introduce a place to accept a new functionality",
-                        "Provide a way for a container with new functionality to consume an object"
+                        "Introduce a place to accept a new functionality,",
+                        "Provide a way for a container with new functionality to consume an object."
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
