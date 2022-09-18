@@ -78,9 +78,11 @@
         if (data === 'X') {
             gameOver();
         } else if (data === '.') {
-            toProcess.push(...getSurroundingCells(row, col));
+            let surroundingUnrevealedCells = getSurroundingCells(row, col);
+            toProcess.push(...surroundingUnrevealedCells);
             console.log(toProcess);
-            processCells();
+            //processCells();
+            processCells2(surroundingUnrevealedCells);
         }
     }
 
@@ -193,6 +195,22 @@
                 revealCell(cell);
                 if (data === '.') {
                     toProcess.push(getSurroundingCells(first.row, first.col));
+                }
+            }
+        }
+    }
+
+    function processCells2(cells) {
+        debugger;
+        //if (cells.length === 0) return;
+        while (cells.length > 0) {
+            let first = cells.shift();
+            if (first && first.hasOwnProperty('row')) {
+                let data = getCellData(first.row, first.col);
+                let cell = getCell(first);
+                revealCell(cell);
+                if (data === '.') {
+                    processCells2(getSurroundingCells(first.row, first.col));
                 }
             }
         }
