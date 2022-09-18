@@ -57,18 +57,20 @@
         el.style.color = "black";
         el.setAttribute('data-hidden', 0);
         if (data === 'X') {
-            gameOver();
+            gameOver(false);
         } else if (data === '.') {
             let surroundingUnrevealedCells = getSurroundingCells(row, col);
             toProcess.push(...surroundingUnrevealedCells);
             console.log(toProcess);
             //processCells();
             processCells2(surroundingUnrevealedCells);
+        } else if(revealedCellsCount + MINECOUNT === FIELDHEIGHT * FIELDWIDTH) {
+            gameOver(true);
         }
     }
 
     function getCellData(row, col) {
-        console.log('checking row:' + row + ' col: ' + col);
+        //console.log('checking row:' + row + ' col: ' + col);
         return field[row][col];
     }
 
@@ -165,21 +167,21 @@
         return false;
     }
 
-    function processCells() {
-        if (toProcess.length === 0) return;
-        while (toProcess.length > 0) {
-            debugger;
-            let first = toProcess.shift();
-            if (first && first.hasOwnProperty('row')) {
-                let data = getCellData(first.row, first.col);
-                let cell = getCell(first);
-                revealCell(cell);
-                if (data === '.') {
-                    toProcess.push(getSurroundingCells(first.row, first.col));
-                }
-            }
-        }
-    }
+    //function processCells() {
+    //    if (toProcess.length === 0) return;
+    //    while (toProcess.length > 0) {
+    //        debugger;
+    //        let first = toProcess.shift();
+    //        if (first && first.hasOwnProperty('row')) {
+    //            let data = getCellData(first.row, first.col);
+    //            let cell = getCell(first);
+    //            revealCell(cell);
+    //            if (data === '.') {
+    //                toProcess.push(getSurroundingCells(first.row, first.col));
+    //            }
+    //        }
+    //    }
+    //}
 
     function processCells2(cells) {
         debugger;
@@ -209,12 +211,12 @@
         el.setAttribute('data-hidden', 0);
     }
 
-    function gameOver() {
-        alert('game over! Refresh page to start again.');
+    function gameOver(win) {
+        console.error('game over! Refresh page to start again.');
         document.querySelectorAll('#field td').forEach(el => {
             el.removeEventListener('click', clickCell);
             if (el.innerText === 'X')
-                el.style.backgroundColor = "red";
+                el.style.backgroundColor = (win ? "green" : "red");
         });
     }
 
