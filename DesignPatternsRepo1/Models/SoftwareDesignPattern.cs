@@ -379,10 +379,10 @@ namespace DesignPatternsRepo1.Models
                     this.InformalDescription = "Setting up a roadmap of actions, while making arbitrary actions optional";
                     this.RecipeSteps = new List<string>
                     {
-                        "Declare a parent class",
-                        "Create a common procedure that calls on all other subprocedures",
-                        "Extend the class, alter subprocedures as needed",
-                        "Call on the parent class' method to execute the main method"
+                        "Declare a parent class,",
+                        "Create a common procedure that calls on all other subprocedures,",
+                        "Extend the class, alter subprocedures as needed,",
+                        "Call on the parent class' method to execute the main method."
                     };
                     this.GroupEnum = PatternGroup.Behavioral;
                     break;
