@@ -10,7 +10,7 @@ use map for field
 
 <div id="tbl"></div>
 
-<button class="btn" onclick="resetGame()">Reset</button>
+<button class="btn" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
 
 <script>
     const FIELDWIDTH = 10;
@@ -21,8 +21,6 @@ use map for field
     let revealedCellsCount = 0;
     let map = new Map();
     let won = false;
-
-    //let toProcess = [];
 
     class Cell {
         constructor(row, col) {
@@ -44,7 +42,64 @@ use map for field
         calculateMarkers();
         createTable();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
-        document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextMenu', toggleDanger));
+        document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
+    } 
+    
+    function createField() {
+        let mineCount = MINECOUNT;
+
+        while (mineCount > 0) {
+            rndRow = randomNumber();
+            rndCol = randomNumber();
+            if (field[rndRow][rndCol] !== MINEMARKER) {
+                field[rndRow][rndCol] = MINEMARKER;
+                mineCount--;
+            }
+        }
+        console.log(field);
+    }
+
+    function calculateMarkers() {
+        for (let i = 0; i < field.length; i++) {
+            for (let j = 0; j < field[i].length; j++) {
+                if (field[i][j] === MINEMARKER) continue;
+                let marker = calcFieldMarker(i, j);
+                if (marker > 0) {
+                    field[i][j] = marker.toString();
+                }
+            }
+        }
+        console.log(field);
+    }
+
+     function createTable() {
+        let container = document.getElementById("tbl");
+        container.innerHTML = '';
+        let tbl = document.createElement('table');
+        tbl.setAttribute('id', 'field');
+        let tbody = document.createElement('tbody')
+        for (let i = 0; i < FIELDHEIGHT; i++) {
+            let tr = document.createElement('tr');
+            for (let j = 0; j < FIELDHEIGHT; j++) {
+                let td = document.createElement('td');
+                td.setAttribute('data-row', i);
+                td.setAttribute('data-col', j);
+                td.setAttribute('data-hidden', 1);
+                td.setAttribute('data-cell', 'cell-' + i + '-' + j);
+                td.classList.add('field');
+                let textNode = i + ' - ' + j;
+
+                if (field[i][j] == MINEMARKER) {
+                    textNode = MINEMARKER;
+                }
+                //td.appendChild(document.createTextNode(textNode));
+                td.appendChild(document.createTextNode('?'));
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+            }
+            tbl.appendChild(tbody);
+            container.appendChild(tbl);
+        }
     }
 
     function clickCell(el, a, b, c) {
@@ -211,39 +266,18 @@ use map for field
     function toggleDanger(el, a, b, c) {
         debugger;
         el.preventDefault;
-        if(el.classList.contains('danger')) {
-            el.classList.remove('danger');
+        if(el.target.classList.contains('danger')) {
+            el.target.classList.remove('danger');
         } else {
-            el.classList.add('danger');
+            el.target.classList.add('danger');
         }
+
+        return false;
     }
 
-    function createField() {
-        let mineCount = MINECOUNT;
+   
 
-        while (mineCount > 0) {
-            rndRow = randomNumber();
-            rndCol = randomNumber();
-            if (field[rndRow][rndCol] !== MINEMARKER) {
-                field[rndRow][rndCol] = MINEMARKER;
-                mineCount--;
-            }
-        }
-        console.log(field);
-    }
-
-    function calculateMarkers() {
-        for (let i = 0; i < field.length; i++) {
-            for (let j = 0; j < field[i].length; j++) {
-                if (field[i][j] === MINEMARKER) continue;
-                let marker = calcFieldMarker(i, j);
-                if (marker > 0) {
-                    field[i][j] = marker.toString();
-                }
-            }
-        }
-        console.log(field);
-    }
+    
 
     function calcFieldMarker(row, col) {
         let n = calcN(row, col);
@@ -297,35 +331,7 @@ use map for field
         return field[row - 1][col - 1] === MINEMARKER ? 1 : 0;
     }
 
-    function createTable() {
-        let container = document.getElementById("tbl");
-        container.innerHTML = '';
-        let tbl = document.createElement('table');
-        tbl.setAttribute('id', 'field');
-        let tbody = document.createElement('tbody')
-        for (let i = 0; i < FIELDHEIGHT; i++) {
-            let tr = document.createElement('tr');
-            for (let j = 0; j < FIELDHEIGHT; j++) {
-                let td = document.createElement('td');
-                td.setAttribute('data-row', i);
-                td.setAttribute('data-col', j);
-                td.setAttribute('data-hidden', 1);
-                td.setAttribute('data-cell', 'cell-' + i + '-' + j);
-                td.classList.add('field');
-                let textNode = i + ' - ' + j;
-
-                if (field[i][j] == MINEMARKER) {
-                    textNode = MINEMARKER;
-                }
-                //td.appendChild(document.createTextNode(textNode));
-                td.appendChild(document.createTextNode('?'));
-                tr.appendChild(td);
-                tbody.appendChild(tr);
-            }
-            tbl.appendChild(tbody);
-            container.appendChild(tbl);
-        }
-    }
+   
 
     function randomNumber() {
         const upperBound = FIELDWIDTH;
