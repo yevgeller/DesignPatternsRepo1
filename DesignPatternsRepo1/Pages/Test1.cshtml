@@ -43,8 +43,8 @@ use map for field
         createTable();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
-    } 
-    
+    }
+
     function createField() {
         let mineCount = MINECOUNT;
 
@@ -72,7 +72,7 @@ use map for field
         console.log(field);
     }
 
-     function createTable() {
+    function createTable() {
         let container = document.getElementById("tbl");
         container.innerHTML = '';
         let tbl = document.createElement('table');
@@ -252,13 +252,13 @@ use map for field
         document.querySelectorAll('#field td').forEach(el => {
             let row = el.getAttribute('data-row');
             let col = el.getAttribute('data-col');
-            
+
             let data = getCellData(row, col);
 
             el.removeEventListener('click', clickCell);
             if (data === MINEMARKER) {
                 el.style.backgroundColor = (win ? "green" : "red");
-            el.innerText = MINEMARKER;
+                el.innerText = MINEMARKER;
             }
         });
     }
@@ -266,18 +266,22 @@ use map for field
     function toggleDanger(el, a, b, c) {
         debugger;
         el.preventDefault();
-        if(el.target.classList.contains('danger')) {
+        if (el.target.classList.contains('danger')) {
+            el.target.addEventListener('click', clickCell);
+            el.target.removeEventListener('contextmenu', toggleDanger, false);
             el.target.classList.remove('danger');
         } else {
             el.target.classList.add('danger');
+            el.target.removeEventListener('click', clickCell);
+            el.target.addEventListener('contextmenu', toggleDanger, false);
         }
 
         return false;
     }
 
-   
 
-    
+
+
 
     function calcFieldMarker(row, col) {
         let n = calcN(row, col);
@@ -331,7 +335,7 @@ use map for field
         return field[row - 1][col - 1] === MINEMARKER ? 1 : 0;
     }
 
-   
+
 
     function randomNumber() {
         const upperBound = FIELDWIDTH;
@@ -346,19 +350,19 @@ use map for field
         padding: 1px;
         margin: 3px;
         width: 35px;
-        text-align:center !important;
+        text-align: center !important;
     }
 
     /*.revealed {
-        border: 1px solid red;
-        padding: 1px;
-        margin: 3px;
-        width: 35px;
-        text-align: center;
-    }*/
+            border: 1px solid red;
+            padding: 1px;
+            margin: 3px;
+            width: 35px;
+            text-align: center;
+        }*/
 
     .won {
-        background-color:green;
+        background-color: green;
     }
 
     .lost {
@@ -366,9 +370,9 @@ use map for field
     }
 
     .danger {
-        background-color:aqua;
-        font-weight:bold;
+        background-color: aqua;
+        font-weight: bold;
         content: 'O';
-        font-color:black;
+        font-color: black;
     }
 </style>
