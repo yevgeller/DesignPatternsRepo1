@@ -62,9 +62,6 @@ use map for field
             gameOver(false);
         } else if (data === '.') {
             let surroundingUnrevealedCells = getSurroundingCells(row, col);
-            //toProcess.push(...surroundingUnrevealedCells);
-            //console.log(toProcess);
-            //processCells();
             processCells2(surroundingUnrevealedCells);
         } else if (revealedCellsCount === FIELDHEIGHT * FIELDWIDTH - MINECOUNT) {
             gameOver(true);
@@ -146,12 +143,8 @@ use map for field
             let cell = getCell(x);
             if (cell) {
                 let ishidden = this.isHidden(cell);
-                //let alreadyIn = alreadyInQueue(x);
-                if (ishidden)// && !alreadyIn)
+                if (ishidden)
                     result.push(x);
-                //else
-                //    console.log('cell ' + x.row + '-' + x.col + ' is already revealed.');
-                //console.log(cell);
             } else console.log('Cell not found with coordinates: ', x.row, x.col);
         });
         return result;
@@ -160,29 +153,6 @@ use map for field
     function getCell(x) {
         return document.querySelector('[data-cell="cell-' + x.row + '-' + x.col + '"]');
     }
-
-    //function alreadyInQueue(cell) {
-    //    if (toProcess.some(x => x.row === cell.row && x.col === cell.col)) {
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
-    //function processCells() {
-    //    if (toProcess.length === 0) return;
-    //    while (toProcess.length > 0) {
-    //        debugger;
-    //        let first = toProcess.shift();
-    //        if (first && first.hasOwnProperty('row')) {
-    //            let data = getCellData(first.row, first.col);
-    //            let cell = getCell(first);
-    //            revealCell(cell);
-    //            if (data === '.') {
-    //                toProcess.push(getSurroundingCells(first.row, first.col));
-    //            }
-    //        }
-    //    }
-    //}
 
     function processCells2(cells) {
         debugger;
