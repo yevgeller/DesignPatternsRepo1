@@ -8,8 +8,6 @@ figure out multiple gameovers
 use map for field
 *@
 
-<div id="div1">Testing Shmesting</div>
-
 <div id="tbl"></div>
 
 <button class="btn" onclick="resetGame()">Reset</button>
@@ -17,7 +15,7 @@ use map for field
 <script>
     const FIELDWIDTH = 10;
     const FIELDHEIGHT = 10;
-    const MINECOUNT = 3;
+    const MINECOUNT = 23;
     const MINEMARKER = 'X';
     let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
     let revealedCellsCount = 0;
@@ -46,9 +44,11 @@ use map for field
         calculateMarkers();
         createTable();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
+        document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextMenu', toggleDanger));
     }
 
-    function clickCell(el) {
+    function clickCell(el, a, b, c) {
+        debugger;
         let hidden = el.currentTarget.getAttribute('data-hidden');
         if (hidden == '0') {
             return;
@@ -208,6 +208,16 @@ use map for field
         });
     }
 
+    function toggleDanger(el, a, b, c) {
+        debugger;
+        el.preventDefault;
+        if(el.classList.contains('danger')) {
+            el.classList.remove('danger');
+        } else {
+            el.classList.add('danger');
+        }
+    }
+
     function createField() {
         let mineCount = MINECOUNT;
 
@@ -347,5 +357,12 @@ use map for field
 
     .lost {
         background-color: red;
+    }
+
+    .danger {
+        background-color:aqua;
+        font-weight:bold;
+        content: 'O';
+        font-color:black;
     }
 </style>
