@@ -24,7 +24,7 @@ use map for field
     let map = new Map();
     let won = false;
 
-    let toProcess = [];
+    //let toProcess = [];
 
     class Cell {
         constructor(row, col) {
@@ -32,6 +32,10 @@ use map for field
             this.col = col;
         }
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        resetGame();
+    });
 
     function resetGame() {
         revealedCellsCount = 0;
@@ -43,10 +47,6 @@ use map for field
         createTable();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
     }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        resetGame();
-    });
 
     function clickCell(el) {
         let hidden = el.currentTarget.getAttribute('data-hidden');
@@ -69,7 +69,7 @@ use map for field
         el.style.backgroundColor = "yellow";
         el.style.color = "black";
         el.setAttribute('data-hidden', 0);
-        if (data === 'X') {
+        if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === '.') {
             let surroundingUnrevealedCells = getSurroundingCells(row, col);
@@ -82,6 +82,7 @@ use map for field
 
     function getCellData(row, col) {
         //console.log('checking row:' + row + ' col: ' + col);
+        console.log('cell data is ', field[row][col]);
         return field[row][col];
     }
 
@@ -167,18 +168,15 @@ use map for field
     }
 
     function processCells(cells) {
-        debugger;
-        //if (cells.length === 0) return;
+        //debugger;
         while (cells.length > 0) {
             let first = cells.shift();
-            //if (first && first.hasOwnProperty('row')) {
             let data = getCellData(first.row, first.col);
             let cell = getCell(first);
             revealCell(cell);
             if (data === '.') {
                 processCells(getSurroundingCells(first.row, first.col));
             }
-            //}
         }
     }
 
@@ -197,9 +195,16 @@ use map for field
     function gameOver(win) {
         console.error('game over! Refresh page to start again.');
         document.querySelectorAll('#field td').forEach(el => {
+            let row = el.getAttribute('data-row');
+            let col = el.getAttribute('data-col');
+            
+            let data = getCellData(row, col);
+
             el.removeEventListener('click', clickCell);
-            if (el.innerText === 'X')
+            if (data === MINEMARKER) {
                 el.style.backgroundColor = (win ? "green" : "red");
+            el.innerText = MINEMARKER;
+            }
         });
     }
 
@@ -244,8 +249,7 @@ use map for field
 
     function calcN(row, col) {
         if (row === 0) return 0;
-        if (field[row - 1][col] === MINEMARKER) return 1;
-        return 0;
+        return field[row - 1][col] === MINEMARKER ? 1 : 0;
     }
 
     function calcNE(row, col) {
@@ -287,7 +291,6 @@ use map for field
         let container = document.getElementById("tbl");
         container.innerHTML = '';
         let tbl = document.createElement('table');
-        //tbl.remove();
         tbl.setAttribute('id', 'field');
         let tbody = document.createElement('tbody')
         for (let i = 0; i < FIELDHEIGHT; i++) {
@@ -298,12 +301,14 @@ use map for field
                 td.setAttribute('data-col', j);
                 td.setAttribute('data-hidden', 1);
                 td.setAttribute('data-cell', 'cell-' + i + '-' + j);
+                td.classList.add('field');
                 let textNode = i + ' - ' + j;
 
                 if (field[i][j] == MINEMARKER) {
                     textNode = MINEMARKER;
                 }
-                td.appendChild(document.createTextNode(textNode));
+                //td.appendChild(document.createTextNode(textNode));
+                td.appendChild(document.createTextNode('?'));
                 tr.appendChild(td);
                 tbody.appendChild(tr);
             }
@@ -320,10 +325,27 @@ use map for field
 </script>
 
 <style>
-    td {
+    .field {
         border: 1px solid red;
         padding: 1px;
         margin: 3px;
         width: 35px;
+        text-align:center !important;
+    }
+
+    /*.revealed {
+        border: 1px solid red;
+        padding: 1px;
+        margin: 3px;
+        width: 35px;
+        text-align: center;
+    }*/
+
+    .won {
+        background-color:green;
+    }
+
+    .lost {
+        background-color: red;
     }
 </style>
