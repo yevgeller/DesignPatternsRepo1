@@ -6,11 +6,16 @@
 @*more cleanup
 figure out multiple gameovers
 use map for field
+counter of mines left
+wrongly placed mines
 *@
 
-<div id="tbl"></div>
+<div id="tbl" class="mt-5"></div>
 
-<button class="btn" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
+<div class="mt-5">
+<button class="button" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
+</div>
+
 
 <script>
     const FIELDWIDTH = 10;
@@ -127,6 +132,7 @@ use map for field
         if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === '.') {
+            el.removeEventListener('contextmenu', toggleDanger, false);
             let surroundingUnrevealedCells = getSurroundingCells(row, col);
             processCells(surroundingUnrevealedCells);
         } else if (revealedCellsCount === FIELDHEIGHT * FIELDWIDTH - MINECOUNT && won === false) {
@@ -256,6 +262,7 @@ use map for field
             let data = getCellData(row, col);
 
             el.removeEventListener('click', clickCell);
+            el.removeEventListener('contextmenu', toggleDanger, false);
             if (data === MINEMARKER) {
                 el.style.backgroundColor = (win ? "green" : "red");
                 el.innerText = MINEMARKER;
@@ -268,12 +275,12 @@ use map for field
         el.preventDefault();
         if (el.target.classList.contains('danger')) {
             el.target.addEventListener('click', clickCell);
-            el.target.removeEventListener('contextmenu', toggleDanger, false);
+            //el.target.removeEventListener('contextmenu', toggleDanger, false);
             el.target.classList.remove('danger');
         } else {
-            el.target.classList.add('danger');
             el.target.removeEventListener('click', clickCell);
-            el.target.addEventListener('contextmenu', toggleDanger, false);
+            //el.target.addEventListener('contextmenu', toggleDanger, false);
+            el.target.classList.add('danger');
         }
 
         return false;
