@@ -297,10 +297,12 @@ time elapsed
         time = time / 1000; //seconds
         if (time > 60) {
             m = Math.floor(time / 60);
-            s = time - m * 60;
+            s = Math.round(time - m * 60);
             if (m > 60) {
                 h = m / 24;
             }
+        } else {
+            return time + ' sec';
         }
         let ret = s;
         if (h > 0) ret = h + ' h' + m + ' min ' + s + ' sec';
