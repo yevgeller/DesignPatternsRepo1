@@ -3,18 +3,18 @@
 @{
 }
 
-@*more cleanup
-figure out multiple gameovers
-use map for field
-counter of mines left
+@*
 wrongly placed mines
+time elapsed
 *@
 
 <div id="tbl" class="mt-5"></div>
 
 <div class="mt-5">
     <button class="button" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
-    Mines left: <span id="minesLeft"></span>
+    <div> Mines left: <span id="minesLeft"></span> (probably)</div>
+    <div>Started on: <span id="timeStart"></span></div>
+    <div id="timeEnd"></div>
 </div>
 
 
@@ -28,6 +28,7 @@ wrongly placed mines
     let map = new Map();
     let won = false;
     let minesLeft = 0;
+    let startTime = (new Date).getTime();
 
     class Cell {
         constructor(row, col) {
@@ -50,6 +51,11 @@ wrongly placed mines
         createTable();
         minesLeft = MINECOUNT;
         setMineCountDisplay();
+        let nd = new Date;
+        startTime = nd.getTime();
+
+        document.getElementById('timeStart').innerText = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getMinutes();
+        //document.getElementById('timeEnd').innerText = nd.getTime();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
     }
@@ -65,7 +71,7 @@ wrongly placed mines
                 mineCount--;
             }
         }
-        console.log(field);
+        //console.log(field);
     }
 
     function calculateMarkers() {
@@ -78,7 +84,7 @@ wrongly placed mines
                 }
             }
         }
-        console.log(field);
+        //console.log(field);
     }
 
     function createTable() {
@@ -151,7 +157,7 @@ wrongly placed mines
 
     function getCellData(row, col) {
         //console.log('checking row:' + row + ' col: ' + col);
-        console.log('cell data is ', field[row][col]);
+        //console.log('cell data is ', field[row][col]);
         return field[row][col];
     }
 
@@ -263,6 +269,9 @@ wrongly placed mines
 
     function gameOver(win) {
         console.error('game over! Refresh page to start again.');
+        let endTime = (new Date).getTime();
+        displayTimeTaken(endTime - startTime);
+
         document.querySelectorAll('#field td').forEach(el => {
             let row = el.getAttribute('data-row');
             let col = el.getAttribute('data-col');
@@ -276,6 +285,23 @@ wrongly placed mines
                 el.innerText = MINEMARKER;
             }
         });
+    }
+
+    function displayTimeTaken(time) {
+        document.getElementById('timeStart').innerText = determineTimeSpan(time);
+    }
+
+    function determineTimeSpan(time) {
+        let s = 0, m = 0, h = 0, sec = 0;
+        time = time / 1000; //seconds
+        if(time > 60) {
+        min = Math.floor(time / 60);
+        s = time - min * 60;
+        if(m > 60) {
+            h = m / 24;
+        }
+        }
+        return h + ':' + m + ':' + s + '.';
     }
 
     function toggleDanger(el) {
