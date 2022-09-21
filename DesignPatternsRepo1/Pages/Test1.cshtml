@@ -13,7 +13,8 @@ wrongly placed mines
 <div id="tbl" class="mt-5"></div>
 
 <div class="mt-5">
-<button class="button" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
+    <button class="button" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
+    Mines left:<span id="minesLeft"></span>
 </div>
 
 
@@ -26,6 +27,7 @@ wrongly placed mines
     let revealedCellsCount = 0;
     let map = new Map();
     let won = false;
+    let minesLeft = 0;
 
     class Cell {
         constructor(row, col) {
@@ -46,6 +48,8 @@ wrongly placed mines
         createField();
         calculateMarkers();
         createTable();
+        minesLeft = MINECOUNT;
+        setMineCountDisplay();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
     }
@@ -107,8 +111,8 @@ wrongly placed mines
         }
     }
 
-    function clickCell(el, a, b, c) {
-        debugger;
+    function clickCell(el) {
+        //debugger;
         let hidden = el.currentTarget.getAttribute('data-hidden');
         if (hidden == '0') {
             return;
@@ -270,7 +274,7 @@ wrongly placed mines
         });
     }
 
-    function toggleDanger(el, a, b, c) {
+    function toggleDanger(el) {
         debugger;
         el.preventDefault();
         if (el.target.classList.contains('danger')) {
@@ -285,10 +289,6 @@ wrongly placed mines
 
         return false;
     }
-
-
-
-
 
     function calcFieldMarker(row, col) {
         let n = calcN(row, col);
@@ -342,8 +342,6 @@ wrongly placed mines
         return field[row - 1][col - 1] === MINEMARKER ? 1 : 0;
     }
 
-
-
     function randomNumber() {
         const upperBound = FIELDWIDTH;
         return Math.floor(Math.random() * upperBound);
@@ -380,6 +378,6 @@ wrongly placed mines
         background-color: aqua;
         font-weight: bold;
         content: 'O';
-        font-color: black;
+        color: black;
     }
 </style>
