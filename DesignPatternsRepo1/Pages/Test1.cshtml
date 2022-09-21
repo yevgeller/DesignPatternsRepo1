@@ -14,7 +14,7 @@ wrongly placed mines
 
 <div class="mt-5">
     <button class="button" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
-    Mines left:<span id="minesLeft"></span>
+    Mines left: <span id="minesLeft"></span>
 </div>
 
 
@@ -109,6 +109,10 @@ wrongly placed mines
             tbl.appendChild(tbody);
             container.appendChild(tbl);
         }
+    }
+
+    function setMineCountDisplay() {
+        document.getElementById('minesLeft').innerText = minesLeft;
     }
 
     function clickCell(el) {
@@ -278,15 +282,15 @@ wrongly placed mines
         debugger;
         el.preventDefault();
         if (el.target.classList.contains('danger')) {
+            minesLeft += 1;
             el.target.addEventListener('click', clickCell);
-            //el.target.removeEventListener('contextmenu', toggleDanger, false);
             el.target.classList.remove('danger');
         } else {
+            minesLeft -= 1;
             el.target.removeEventListener('click', clickCell);
-            //el.target.addEventListener('contextmenu', toggleDanger, false);
             el.target.classList.add('danger');
         }
-
+        setMineCountDisplay();
         return false;
     }
 
