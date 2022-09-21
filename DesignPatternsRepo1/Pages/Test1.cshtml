@@ -292,16 +292,20 @@ time elapsed
     }
 
     function determineTimeSpan(time) {
-        let s = 0, m = 0, h = 0, sec = 0;
+        debugger;
+        let s = 0, m = 0, h = 0;
         time = time / 1000; //seconds
-        if(time > 60) {
-        min = Math.floor(time / 60);
-        s = time - min * 60;
-        if(m > 60) {
-            h = m / 24;
+        if (time > 60) {
+            m = Math.floor(time / 60);
+            s = time - m * 60;
+            if (m > 60) {
+                h = m / 24;
+            }
         }
-        }
-        return h + ':' + m + ':' + s + '.';
+        let ret = s;
+        if (h > 0) ret = h + ' h' + m + ' min ' + s + ' sec';
+        else if (m > 0) ret = m + ' min ' + s + ' sec';
+        return ret;
     }
 
     function toggleDanger(el) {
@@ -389,12 +393,12 @@ time elapsed
     }
 
     /*.revealed {
-            border: 1px solid red;
-            padding: 1px;
-            margin: 3px;
-            width: 35px;
-            text-align: center;
-        }*/
+                border: 1px solid red;
+                padding: 1px;
+                margin: 3px;
+                width: 35px;
+                text-align: center;
+            }*/
 
     .won {
         background-color: green;
