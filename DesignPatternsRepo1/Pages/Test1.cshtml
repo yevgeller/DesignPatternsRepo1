@@ -63,9 +63,10 @@ time elapsed
     }
 
     function showTimer() {
+        debugger;
         let currentTime = (new Date).getTime();
-        let timerString = (Math.floor(currentTime - startTime) / 1000) + ' seconds';
-        document.getElementById('elapsedTimeString').innerText = timeString;
+        let timerString = Math.round((Math.floor(currentTime - startTime) / 1000)) + ' seconds';
+        document.getElementById('elapsedTimeString').innerText = timerString;
     }
 
     function createField() {
