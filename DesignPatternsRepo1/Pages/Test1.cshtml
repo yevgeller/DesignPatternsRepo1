@@ -13,7 +13,7 @@ time elapsed
 <div class="mt-5">
     <button class="button" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
     <div> Mines left: <span id="minesLeft"></span> (probably)</div>
-    <div>Started on: <span id="timeStart"></span></div>
+    @*<div>Started on: <span id="timeStart"></span></div>*@
     <div id="timeEnd"></div>
     <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
 </div>
@@ -59,7 +59,8 @@ time elapsed
             timerIntervalId = setInterval(showTimer, 1000);
         } 
 
-        document.getElementById('timeStart').innerText = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getMinutes();
+        document.getElementById('elapsedTimeString').innerText = '...';
+        //document.getElementById('timeStart').innerText = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getMinutes();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
     }
@@ -281,7 +282,6 @@ time elapsed
     function gameOver(win) {
         console.error('game over! Refresh page to start again.');
         let endTime = (new Date).getTime();
-        displayTimeTaken(endTime - startTime);
         clearInterval(timerIntervalId);
         timerIntervalId = null;
         document.querySelectorAll('#field td').forEach(el => {
@@ -297,10 +297,6 @@ time elapsed
                 el.innerText = MINEMARKER;
             }
         });
-    }
-
-    function displayTimeTaken(time) {
-        document.getElementById('timeStart').innerText = determineTimeSpan(time);
     }
 
     function determineTimeSpan(time) {
