@@ -15,7 +15,7 @@ time elapsed
     <div> Mines left: <span id="minesLeft"></span> (probably)</div>
     <div>Started on: <span id="timeStart"></span></div>
     <div id="timeEnd"></div>
-    <div id=""
+    <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
 </div>
 
 
@@ -65,7 +65,7 @@ time elapsed
     function showTimer() {
         let currentTime = (new Date).getTime();
         let timerString = (Math.floor(currentTime - startTime) / 1000) + ' seconds';
-        document.getElementById('')
+        document.getElementById('elapsedTimeString').innerText = timeString;
     }
 
     function createField() {
