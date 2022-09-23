@@ -55,9 +55,11 @@ time elapsed
         setMineCountDisplay();
         let nd = new Date;
         startTime = nd.getTime();
+        if(!timerIntervalId) {
+            timerIntervalId = setInterval(showTimer, 1000);
+        } 
 
         document.getElementById('timeStart').innerText = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getMinutes();
-        //document.getElementById('timeEnd').innerText = nd.getTime();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
     }
@@ -280,7 +282,8 @@ time elapsed
         console.error('game over! Refresh page to start again.');
         let endTime = (new Date).getTime();
         displayTimeTaken(endTime - startTime);
-
+        clearInterval(timerIntervalId);
+        timerIntervalId = null;
         document.querySelectorAll('#field td').forEach(el => {
             let row = el.getAttribute('data-row');
             let col = el.getAttribute('data-col');
