@@ -16,6 +16,7 @@ time elapsed
     @*<div>Started on: <span id="timeStart"></span></div>*@
     <div id="timeEnd"></div>
     <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
+    <div id="elapsedTime2">Elapsed2: <span id="elapsedTimeString2"></span></div>
 </div>
 
 
@@ -71,8 +72,9 @@ time elapsed
     function showTimer() {
         //debugger;
         let currentTime = (new Date).getTime();
+        let seconds = Math.round(Math.floor(currentTime - startTime) / 1000);
         let timerString = Math.round((Math.floor(currentTime - startTime) / 1000)) + ' seconds';
-        document.getElementById('elapsedTimeString').innerText = timerString;
+        document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
     }
 
     function formatSecondsIntoTimeString(secs) {
@@ -86,7 +88,6 @@ time elapsed
         if(totalHours > 0 || totalHours === 0 && totalDays > 0) ret += totalHours.toString() + ' hour' + (totalHours === 1 ? ' ' : 's ');
         if(totalMinutes > 0 || (totalMinutes === 0 && (totalHours > 0 || totalDays > 0))) ret += totalMinutes.toString() + ' minute' + (totalMinutes === 1 ? ' ' : 's ');
         ret += leftoverSeconds.toString() + ' second' + (leftoverSeconds === 1 ? '.' : 's.');
-        console.log(ret);
         return ret;
     }
 
