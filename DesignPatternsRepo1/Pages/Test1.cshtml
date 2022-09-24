@@ -31,6 +31,9 @@ time elapsed
     let minesLeft = 0;
     let startTime = (new Date).getTime();
     let timerIntervalId;
+    let secondsInAMinute = 60;
+    let secondsInAnHour = secondsInAMinute * 60;
+    let secondsInADay = secondsInAnHour * 24;
 
     class Cell {
         constructor(row, col) {
@@ -70,6 +73,10 @@ time elapsed
         let currentTime = (new Date).getTime();
         let timerString = Math.round((Math.floor(currentTime - startTime) / 1000)) + ' seconds';
         document.getElementById('elapsedTimeString').innerText = timerString;
+    }
+
+    function formatSecondsIntoTimeString(secs) {
+
     }
 
     function createField() {
