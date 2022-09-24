@@ -16,7 +16,6 @@ time elapsed
     @*<div>Started on: <span id="timeStart"></span></div>*@
     <div id="timeEnd"></div>
     <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
-    <div id="elapsedTime2">Elapsed2: <span id="elapsedTimeString2"></span></div>
 </div>
 
 
@@ -64,13 +63,11 @@ time elapsed
         } 
 
         document.getElementById('elapsedTimeString').innerText = '...';
-        //document.getElementById('timeStart').innerText = nd.getHours() + ':' + nd.getMinutes() + ':' + nd.getMinutes();
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
     }
 
     function showTimer() {
-        //debugger;
         let currentTime = (new Date).getTime();
         let seconds = Math.round(Math.floor(currentTime - startTime) / 1000);
         let timerString = Math.round((Math.floor(currentTime - startTime) / 1000)) + ' seconds';
