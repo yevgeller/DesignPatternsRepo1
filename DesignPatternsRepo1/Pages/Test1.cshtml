@@ -69,14 +69,25 @@ time elapsed
     }
 
     function showTimer() {
-        debugger;
+        //debugger;
         let currentTime = (new Date).getTime();
         let timerString = Math.round((Math.floor(currentTime - startTime) / 1000)) + ' seconds';
         document.getElementById('elapsedTimeString').innerText = timerString;
     }
 
     function formatSecondsIntoTimeString(secs) {
-
+        let totalDays = Math.floor(secs / secondsInADay);
+        let totalHours = Math.floor((secs - totalDays * secondsInADay) / secondsInAnHour);
+        let totalMinutes = Math.floor((secs - totalDays * secondsInADay - totalHours * secondsInAnHour) / secondsInAMinute);
+        let leftoverSeconds = (secs - totalDays * secondsInADay - totalHours * secondsInAnHour - totalMinutes * secondsInAMinute);
+        
+        let ret = '';
+        if(totalDays > 0) ret = totalDays.toString() + ' day' + (totalDays > 1 ? 's ':' ');
+        if(totalHours > 0 || totalHours === 0 && totalDays > 0) ret += totalHours.toString() + ' hour' + (totalHours === 1 ? ' ' : 's ');
+        if(totalMinutes > 0 || (totalMinutes === 0 && (totalHours > 0 || totalDays > 0))) ret += totalMinutes.toString() + ' minute' + (totalMinutes === 1 ? ' ' : 's ');
+        ret += leftoverSeconds.toString() + ' second' + (leftoverSeconds === 1 ? '.' : 's.');
+        console.log(ret);
+        return ret;
     }
 
     function createField() {
