@@ -5,7 +5,6 @@
 
 @*
 wrongly placed mines
-time elapsed
 *@
 
 <div id="tbl" class="mt-5"></div>
@@ -13,7 +12,6 @@ time elapsed
 <div class="mt-5">
     <button class="button" onclick="resetGame()" oncontextmenu="preventDefault();alert('hi')">Reset</button>
     <div> Mines left: <span id="minesLeft"></span> (probably)</div>
-    @*<div>Started on: <span id="timeStart"></span></div>*@
     <div id="timeEnd"></div>
     <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
 </div>
@@ -311,7 +309,7 @@ time elapsed
             if (data === MINEMARKER) {
                 el.style.backgroundColor = (win ? "green" : "red");
                 el.innerText = MINEMARKER;
-            }
+            } //if data !== minemarker and cell has class danger set content to X
         });
     }
 
@@ -437,7 +435,7 @@ time elapsed
     .danger {
         background-color: aqua;
         font-weight: bold;
-        content: 'O';
+        /*content: "O";*/
         color: black;
     }
 </style>
