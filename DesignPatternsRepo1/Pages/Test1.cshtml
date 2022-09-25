@@ -3,9 +3,6 @@
 @{
 }
 
-@*
-wrongly placed mines
-*@
 <div class="is-flex flex-direction-horizontal">
 <div class="m-6">
 <div id="tbl"></div>
@@ -105,7 +102,6 @@ wrongly placed mines
                 mineCount--;
             }
         }
-        //console.log(field);
     }
 
     function calculateMarkers() {
@@ -118,7 +114,6 @@ wrongly placed mines
                 }
             }
         }
-        //console.log(field);
     }
 
     function createTable() {
@@ -141,7 +136,6 @@ wrongly placed mines
                 if (field[i][j] == MINEMARKER) {
                     textNode = MINEMARKER;
                 }
-                //td.appendChild(document.createTextNode(textNode));
                 td.appendChild(document.createTextNode('?'));
                 tr.appendChild(td);
                 tbody.appendChild(tr);
