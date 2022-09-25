@@ -165,11 +165,8 @@
             map.set(row + '-' + col, 1);
             revealedCellsCount++;
         }
-        //console.log('row-col:', row + ' - ' + col);
         let data = getCellData(row, col);
         el.innerText = data !== '.' ? data : '';
-        //el.style.backgroundColor = "yellow";
-        //el.style.color = "black";
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         if (data === MINEMARKER) {
@@ -185,8 +182,6 @@
     }
 
     function getCellData(row, col) {
-        //console.log('checking row:' + row + ' col: ' + col);
-        //console.log('cell data is ', field[row][col]);
         return field[row][col];
     }
 
