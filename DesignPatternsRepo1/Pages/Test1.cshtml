@@ -56,9 +56,9 @@ wrongly placed mines
         setMineCountDisplay();
         let nd = new Date;
         startTime = nd.getTime();
-        if(!timerIntervalId) {
+        if (!timerIntervalId) {
             timerIntervalId = setInterval(showTimer, 1000);
-        } 
+        }
 
         document.getElementById('elapsedTimeString').innerText = '...';
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
@@ -77,11 +77,11 @@ wrongly placed mines
         let totalHours = Math.floor((secs - totalDays * secondsInADay) / secondsInAnHour);
         let totalMinutes = Math.floor((secs - totalDays * secondsInADay - totalHours * secondsInAnHour) / secondsInAMinute);
         let leftoverSeconds = (secs - totalDays * secondsInADay - totalHours * secondsInAnHour - totalMinutes * secondsInAMinute);
-        
+
         let ret = '';
-        if(totalDays > 0) ret = totalDays.toString() + ' day' + (totalDays > 1 ? 's ':' ');
-        if(totalHours > 0 || totalHours === 0 && totalDays > 0) ret += totalHours.toString() + ' hour' + (totalHours === 1 ? ' ' : 's ');
-        if(totalMinutes > 0 || (totalMinutes === 0 && (totalHours > 0 || totalDays > 0))) ret += totalMinutes.toString() + ' minute' + (totalMinutes === 1 ? ' ' : 's ');
+        if (totalDays > 0) ret = totalDays.toString() + ' day' + (totalDays > 1 ? 's ' : ' ');
+        if (totalHours > 0 || totalHours === 0 && totalDays > 0) ret += totalHours.toString() + ' hour' + (totalHours === 1 ? ' ' : 's ');
+        if (totalMinutes > 0 || (totalMinutes === 0 && (totalHours > 0 || totalDays > 0))) ret += totalMinutes.toString() + ' minute' + (totalMinutes === 1 ? ' ' : 's ');
         ret += leftoverSeconds.toString() + ' second' + (leftoverSeconds === 1 ? '.' : 's.');
         return ret;
     }
@@ -165,9 +165,10 @@ wrongly placed mines
         }
         //console.log('row-col:', row + ' - ' + col);
         let data = getCellData(row, col);
-        el.innerText = data;
-        el.style.backgroundColor = "yellow";
-        el.style.color = "black";
+        el.innerText = data !== '.' ? data : '';
+        //el.style.backgroundColor = "yellow";
+        //el.style.color = "black";
+        el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         if (data === MINEMARKER) {
             gameOver(false);
@@ -309,7 +310,11 @@ wrongly placed mines
             if (data === MINEMARKER) {
                 el.style.backgroundColor = (win ? "green" : "red");
                 el.innerText = MINEMARKER;
-            } //if data !== minemarker and cell has class danger set content to X
+            } else if (data !== MINEMARKER && el.classList.contains('danger')) {
+                el.classList.remove('danger');
+                el.classList.add('wrong');
+                el.innerText = 'W';
+            }
         });
     }
 
@@ -416,13 +421,15 @@ wrongly placed mines
         text-align: center !important;
     }
 
-    /*.revealed {
-                border: 1px solid red;
-                padding: 1px;
-                margin: 3px;
-                width: 35px;
-                text-align: center;
-            }*/
+    .revealed {
+                   /* border: 1px solid red;
+                    padding: 1px;
+                    margin: 3px;
+                    width: 35px;
+                    text-align: center;*/
+                    background-color: white;
+                    color:black;
+                }
 
     .won {
         background-color: green;
@@ -437,5 +444,9 @@ wrongly placed mines
         font-weight: bold;
         /*content: "O";*/
         color: black;
+    }
+
+    .wrong {
+        background-color: darkorange;
     }
 </style>
