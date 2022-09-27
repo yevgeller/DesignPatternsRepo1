@@ -17,7 +17,7 @@
     <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
 </div>
 <div class="m-6">
-    <div><strong>Scoreboard:</strong></div>
+    <div><strong>Scoreboard:</strong><ol id="results"></ol></div>
 </div>
 </div>
 
@@ -315,24 +315,24 @@
         });
     }
 
-    function determineTimeSpan(time) {
-        debugger;
-        let s = 0, m = 0, h = 0;
-        time = time / 1000; //seconds
-        if (time > 60) {
-            m = Math.floor(time / 60);
-            s = Math.round(time - m * 60);
-            if (m > 60) {
-                h = m / 24;
-            }
-        } else {
-            return time + ' sec';
-        }
-        let ret = s;
-        if (h > 0) ret = h + ' h' + m + ' min ' + s + ' sec';
-        else if (m > 0) ret = m + ' min ' + s + ' sec';
-        return ret;
-    }
+    //function determineTimeSpan(time) {
+    //    debugger;
+    //    let s = 0, m = 0, h = 0;
+    //    time = time / 1000; //seconds
+    //    if (time > 60) {
+    //        m = Math.floor(time / 60);
+    //        s = Math.round(time - m * 60);
+    //        if (m > 60) {
+    //            h = m / 24;
+    //        }
+    //    } else {
+    //        return time + ' sec';
+    //    }
+    //    let ret = s;
+    //    if (h > 0) ret = h + ' h' + m + ' min ' + s + ' sec';
+    //    else if (m > 0) ret = m + ' min ' + s + ' sec';
+    //    return ret;
+    //}
 
     function toggleDanger(el) {
         debugger;
