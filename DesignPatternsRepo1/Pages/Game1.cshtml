@@ -73,7 +73,7 @@
     function showTimer() {
         let currentTime = (new Date).getTime();
         let seconds = Math.round(Math.floor(currentTime - startTime) / 1000);
-        let timerString = Math.round((Math.floor(currentTime - startTime) / 1000)) + ' seconds';
+        //let timerString = Math.round((Math.floor(currentTime - startTime) / 1000)) + ' seconds';
         document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
     }
 
