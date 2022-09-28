@@ -293,7 +293,7 @@
 
     function gameOver(win) {
         console.error('game over! Refresh page to start again.');
-        let endTime = (new Date).getTime();
+        //let endTime = (new Date).getTime();
         clearInterval(timerIntervalId);
         timerIntervalId = null;
         document.querySelectorAll('#field td').forEach(el => {
@@ -311,8 +311,13 @@
                 el.classList.remove('danger');
                 el.classList.add('wrong');
                 el.innerText = WRONGMINEMARKER;
+                minesLeft += 1;
             }
         });
+
+        let li = document.createElement('li');
+        li.innerHTML = document.getElementById('elapsedTimeString').innerText + ', ' + minesLeft + ' out of ' + MINECOUNT + ' revealed';
+        document.getElementById('results').appendChild(li);
     }
 
     //function determineTimeSpan(time) {
