@@ -3,6 +3,12 @@
 @{
 }
 
+@*hints
+    23 out of 23 revealed correctly
+    best time
+    set parameters for mines, field width
+*@
+
 <div class="is-flex flex-direction-horizontal">
 <div class="m-6">
 <div id="tbl"></div>
@@ -12,7 +18,7 @@
     </div>
 <div class="m-6" style="min-width:300px;">
     <div class="mb-6"><strong>Current game:</strong></div>
-    <div> Mines left: <span id="minesLeft"></span> (probably)</div>
+    <div> Mines left: <span id="minesLeft"></span> (if calculations are correct)</div>
     <div id="timeEnd"></div>
     <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
 </div>
@@ -65,7 +71,7 @@
             timerIntervalId = setInterval(showTimer, 1000);
         }
 
-        document.getElementById('elapsedTimeString').innerText = '...';
+        document.getElementById('elapsedTimeString').innerText = '0 seconds.'
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
     }
@@ -316,7 +322,8 @@
         });
 
         let li = document.createElement('li');
-        li.innerHTML = document.getElementById('elapsedTimeString').innerText + ', ' + minesLeft + ' out of ' + MINECOUNT + ' revealed';
+        li.classList.add(win ? 'win' : 'loss');
+        li.innerHTML = document.getElementById('elapsedTimeString').innerText.replace('.', '') + ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' revealed correctly.';
         document.getElementById('results').appendChild(li);
     }
 
@@ -432,8 +439,16 @@
         background-color: green;
     }
 
+    .win {
+        color:green;
+    }
+
     .lost {
         background-color: red;
+    }
+
+    .loss {
+        color: red;
     }
 
     .danger {
