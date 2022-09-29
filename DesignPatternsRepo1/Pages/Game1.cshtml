@@ -10,23 +10,23 @@
 *@
 
 <div class="is-flex flex-direction-horizontal">
-<div class="m-6">
-<div id="tbl"></div>
-<div class="mt-6">
-    <button class="button" onclick="resetGame()">Reset</button>
-    <button class="button ml-5" onclick="giveHint(false)">Small Hint</button>
-    <button class="button ml-5" onclick="giveHint(true)">Big Hint</button>
+    <div class="m-6">
+        <div id="tbl"></div>
+        <div class="mt-6">
+            <button class="button" onclick="resetGame()">Reset</button>
+            <button class="button ml-5" onclick="giveHint(false)">Small Hint</button>
+            <button class="button ml-5" onclick="giveHint(true)">Big Hint</button>
         </div>
     </div>
-<div class="m-6" style="min-width:300px;">
-    <div class="mb-6"><strong>Current game:</strong></div>
-    <div> Mines left: <span id="minesLeft"></span> (if calculations are correct)</div>
-    <div id="timeEnd"></div>
-    <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
-</div>
-<div class="m-6">
-    <div><strong>Scoreboard:</strong><ol id="results"></ol></div>
-</div>
+    <div class="m-6" style="min-width:300px;">
+        <div class="mb-6"><strong>Current game:</strong></div>
+        <div> Mines left: <span id="minesLeft"></span> (if calculations are correct)</div>
+        <div id="timeEnd"></div>
+        <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
+    </div>
+    <div class="m-6">
+        <div><strong>Scoreboard:</strong><ol id="results"></ol></div>
+    </div>
 </div>
 
 <script>
@@ -301,7 +301,6 @@
 
     function gameOver(win) {
         console.error('game over! Refresh page to start again.');
-        //let endTime = (new Date).getTime();
         clearInterval(timerIntervalId);
         timerIntervalId = null;
         document.querySelectorAll('#field td').forEach(el => {
@@ -325,37 +324,17 @@
 
         let li = document.createElement('li');
         li.classList.add(win ? 'win' : 'loss');
-        li.innerHTML = document.getElementById('elapsedTimeString').innerText.replace('.', '') + ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' revealed correctly.';
+        li.innerHTML = document.getElementById('elapsedTimeString').innerText.replace('.', '') + ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct.';
         document.getElementById('results').appendChild(li);
     }
 
     function giveHint(isBig) {
-
         let a = document.querySelectorAll("#field td[data-hidden='1']");
-    debugger;
+        debugger;
     }
 
-    //function determineTimeSpan(time) {
-    //    debugger;
-    //    let s = 0, m = 0, h = 0;
-    //    time = time / 1000; //seconds
-    //    if (time > 60) {
-    //        m = Math.floor(time / 60);
-    //        s = Math.round(time - m * 60);
-    //        if (m > 60) {
-    //            h = m / 24;
-    //        }
-    //    } else {
-    //        return time + ' sec';
-    //    }
-    //    let ret = s;
-    //    if (h > 0) ret = h + ' h' + m + ' min ' + s + ' sec';
-    //    else if (m > 0) ret = m + ' min ' + s + ' sec';
-    //    return ret;
-    //}
-
     function toggleDanger(el) {
-        debugger;
+        //debugger;
         el.preventDefault();
         if (el.target.classList.contains('danger')) {
             minesLeft += 1;
@@ -448,7 +427,7 @@
     }
 
     .win {
-        color:green;
+        color: green;
     }
 
     .lost {
