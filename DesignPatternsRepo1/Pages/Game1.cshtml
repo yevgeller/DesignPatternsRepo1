@@ -4,7 +4,7 @@
 }
 
 @*hints
-    23 out of 23 revealed correctly
+    
     best time
     set parameters for mines, field width
 *@
@@ -36,7 +36,7 @@
     const MINEMARKER = 'O';
     const WRONGMINEMARKER = 'X';
     let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
-    let revealedCellsCount = 0;
+    //let revealedCellsCount = 0;
     let map = new Map();
     let won = false;
     let minesLeft = 0;
@@ -58,7 +58,7 @@
     });
 
     function resetGame() {
-        revealedCellsCount = 0;
+        //revealedCellsCount = 0;
         map = new Map();
         won = false;
         field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
@@ -171,7 +171,7 @@
         let col = el.getAttribute('data-col');
         if (!map.get(row + '-' + col)) {
             map.set(row + '-' + col, 1);
-            revealedCellsCount++;
+            //revealedCellsCount++;
         }
         let data = getCellData(row, col);
         el.innerText = data !== '.' ? data : '';
@@ -184,7 +184,7 @@
             el.removeEventListener('contextmenu', toggleDanger, false);
             let surroundingUnrevealedCells = getSurroundingCells(row, col);
             processCells(surroundingUnrevealedCells);
-        } else if (revealedCellsCount === FIELDHEIGHT * FIELDWIDTH - MINECOUNT && won === false) {
+        } else if (map.size === FIELDHEIGHT * FIELDWIDTH - MINECOUNT && won === false) {
             won = true;
             gameOver(true);
         }
@@ -338,7 +338,6 @@
     }
 
     function toggleDanger(el) {
-        //debugger;
         el.preventDefault();
         if (el.target.classList.contains('danger')) {
             minesLeft += 1;
