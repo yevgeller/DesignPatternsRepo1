@@ -4,9 +4,11 @@
 }
 
 @*hints
-    
+    can right-click on cell with numbers
     best time
     set parameters for mines, field width
+    replace data-row and data-col usage with data-cell
+    replace all occurences of '.' as empty field without mines around with a constant
 *@
 
 <div class="is-flex flex-direction-horizontal">
@@ -35,7 +37,8 @@
     const MINECOUNT = 20;
     const MINEMARKER = 'O';
     const WRONGMINEMARKER = 'X';
-    let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
+    const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
+    let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR)); 
     //let revealedCellsCount = 0;
     let map = new Map();
     let won = false;
@@ -103,8 +106,8 @@
         let mineCount = MINECOUNT;
 
         while (mineCount > 0) {
-            rndRow = randomNumber();
-            rndCol = randomNumber();
+            rndRow = randomNumber(FIELDWIDTH);
+            rndCol = randomNumber(FIELDHEIGHT);
             if (field[rndRow][rndCol] !== MINEMARKER) {
                 field[rndRow][rndCol] = MINEMARKER;
                 mineCount--;
@@ -138,6 +141,9 @@
                 td.setAttribute('data-col', j);
                 td.setAttribute('data-hidden', 1);
                 td.setAttribute('data-cell', 'cell-' + i + '-' + j);
+                td.setAttribute('data-hint', determineHint(field[i][j]));
+                //let cellData = field[i][j];
+                //debugger;
                 td.classList.add('field');
                 let textNode = i + ' - ' + j;
 
@@ -151,6 +157,21 @@
             tbl.appendChild(tbody);
             container.appendChild(tbl);
         }
+    }
+
+    function determineHint(cellContents){
+        let ret = 'S';
+        switch(cellContents)         {
+            case CELLWITHNOMINESAROUNDDESIGNATOR:
+            ret = 'L';
+            break;
+            case MINEMARKER:
+            ret = MINEMARKER;
+            break;
+        }
+
+        console.log(`Received {cellContents}, returning {ret}`);
+        return ret;
     }
 
     function setMineCountDisplay() {
@@ -334,7 +355,9 @@
 
     function giveHint(isBig) {
         let a = document.querySelectorAll("#field td[data-hidden='1']");
+        //let b = a.filter(x=>x.attributes)
         hintCount++;
+        //let = 
         debugger;
     }
 
@@ -407,8 +430,8 @@
         return field[row - 1][col - 1] === MINEMARKER ? 1 : 0;
     }
 
-    function randomNumber() {
-        const upperBound = FIELDWIDTH;
+    function randomNumber(upperBound) {
+        //const upperBound = FIELDWIDTH;
         return Math.floor(Math.random() * upperBound);
     }
 
