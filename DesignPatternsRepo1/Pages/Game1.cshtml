@@ -208,6 +208,8 @@
         } else if (map.size === FIELDHEIGHT * FIELDWIDTH - MINECOUNT && won === false) {
             won = true;
             gameOver(true);
+        } else {
+            el.removeEventListener('contextmenu', toggleDanger, false);
         }
     }
 
