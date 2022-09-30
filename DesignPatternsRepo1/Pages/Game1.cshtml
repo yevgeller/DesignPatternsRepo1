@@ -42,6 +42,7 @@
     let minesLeft = 0;
     let startTime = (new Date).getTime();
     let timerIntervalId;
+    let hintCount = 0;
     let secondsInAMinute = 60;
     let secondsInAnHour = secondsInAMinute * 60;
     let secondsInADay = secondsInAnHour * 24;
@@ -72,7 +73,7 @@
         if (!timerIntervalId) {
             timerIntervalId = setInterval(showTimer, 1000);
         }
-
+        hintCount = 0;
         document.getElementById('elapsedTimeString').innerText = '0 seconds.'
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
@@ -81,7 +82,6 @@
     function showTimer() {
         let currentTime = (new Date).getTime();
         let seconds = Math.round(Math.floor(currentTime - startTime) / 1000);
-        //let timerString = Math.round((Math.floor(currentTime - startTime) / 1000)) + ' seconds';
         document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
     }
 
@@ -334,6 +334,7 @@
 
     function giveHint(isBig) {
         let a = document.querySelectorAll("#field td[data-hidden='1']");
+        hintCount++;
         debugger;
     }
 
