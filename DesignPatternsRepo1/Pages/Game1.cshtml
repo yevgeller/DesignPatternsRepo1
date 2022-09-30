@@ -29,7 +29,7 @@
     </div>
 </div>
 
-<script>
+<script type="text/javascript">
     const FIELDWIDTH = 10;
     const FIELDHEIGHT = 10;
     const MINECOUNT = 20;
@@ -177,6 +177,7 @@
         el.innerText = data !== '.' ? data : '';
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
+        field[row][col] = '-';
         if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === '.') {
@@ -340,10 +341,12 @@
             minesLeft += 1;
             el.target.addEventListener('click', clickCell);
             el.target.classList.remove('danger');
+            el.target.innerText = 'X';
         } else {
             minesLeft -= 1;
             el.target.removeEventListener('click', clickCell);
             el.target.classList.add('danger');
+            el.target.innerText = '?';
         }
         setMineCountDisplay();
         return false;
