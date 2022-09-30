@@ -177,7 +177,7 @@
         el.innerText = data !== '.' ? data : '';
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
-        field[row][col] = '-';
+        // field[row][col] = '-';
         if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === '.') {
@@ -325,7 +325,10 @@
 
         let li = document.createElement('li');
         li.classList.add(win ? 'win' : 'loss');
-        li.innerHTML = document.getElementById('elapsedTimeString').innerText.replace('.', '') + ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct.';
+        li.innerHTML = document.getElementById('elapsedTimeString').innerText.replace('.', '');
+        if (!win) li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
+        li.innerHTML += '.';
+
         document.getElementById('results').appendChild(li);
     }
 
@@ -341,12 +344,12 @@
             minesLeft += 1;
             el.target.addEventListener('click', clickCell);
             el.target.classList.remove('danger');
-            el.target.innerText = 'X';
+            el.target.innerText = '?';
         } else {
             minesLeft -= 1;
             el.target.removeEventListener('click', clickCell);
             el.target.classList.add('danger');
-            el.target.innerText = '?';
+            el.target.innerText = 'X';
         }
         setMineCountDisplay();
         return false;
