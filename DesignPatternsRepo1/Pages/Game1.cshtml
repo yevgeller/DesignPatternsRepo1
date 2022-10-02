@@ -198,6 +198,7 @@
         el.innerText = data !== '.' ? data : '';
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
+        el.setAttribute('data-hint', 'X');
         // field[row][col] = '-';
         if (data === MINEMARKER) {
             gameOver(false);
@@ -356,7 +357,7 @@
     }
 
     function giveHint(isBig) {
-        let a = document.querySelectorAll("#field td[data-hint='" + isBig ? "L" : "S" + "']", "#field td[data-hidden='1']");
+        let a = document.querySelectorAll("#field td[data-hint='" + (isBig ? "L" : "S") + "'], #field td[data-hidden='1']");
         //let b = a.filter(x=>x.attributes)
         hintCount++;
         //let = 
