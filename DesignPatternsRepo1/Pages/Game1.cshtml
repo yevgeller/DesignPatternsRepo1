@@ -80,6 +80,8 @@
         document.getElementById('elapsedTimeString').innerText = '0 seconds.'
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
+        document.getElementById("largeHintButton").disabled = getHintCandidates(true).length;
+        document.getElementById("smallHintButton").disabled = getHintCandidates(false).length;        
     }
 
     function showTimer() {
@@ -357,7 +359,7 @@
     }
 
     function giveHint(isBig) {
-        
+        let hintCandidates = getHintCandidates(isBig);
         let hintCandidatesCount = hintCandidates.length;
 
         if(hintCandidatesCount > 0) {
@@ -369,7 +371,6 @@
             document.getElementById(isBig ? "largeHintButton" : "smallHintButton").disabled = true;
         }
 
-        //let b = a.filter(x=>x.attributes)
         hintCount++;
         //console.log('nodes returned: ', hintCandidates.length);
         //let = 
@@ -377,7 +378,7 @@
     }
 
     function getHintCandidates(isBigHint) {
-        return document.querySelectorAll("#field td[data-hint='" + (isBig ? "L" : "S") + "']");
+        return document.querySelectorAll("#field td[data-hint='" + (isBigHint ? "L" : "S") + "']");
     }
 
     function toggleDanger(el) {
