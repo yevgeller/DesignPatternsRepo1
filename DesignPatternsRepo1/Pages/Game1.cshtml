@@ -357,8 +357,7 @@
     }
 
     function giveHint(isBig) {
-        let searchExpression = "#field td[data-hint='" + (isBig ? "L" : "S") + "']";
-        let hintCandidates = document.querySelectorAll(searchExpression);
+        
         let hintCandidatesCount = hintCandidates.length;
 
         if(hintCandidatesCount > 0) {
@@ -367,7 +366,7 @@
         }
 
         if(hintCandidatesCount <= 1) {
-            document.getElementById()
+            document.getElementById(isBig ? "largeHintButton" : "smallHintButton").disabled = true;
         }
 
         //let b = a.filter(x=>x.attributes)
@@ -375,6 +374,10 @@
         //console.log('nodes returned: ', hintCandidates.length);
         //let = 
 
+    }
+
+    function getHintCandidates(isBigHint) {
+        return document.querySelectorAll("#field td[data-hint='" + (isBig ? "L" : "S") + "']");
     }
 
     function toggleDanger(el) {
