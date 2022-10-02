@@ -357,12 +357,18 @@
     }
 
     function giveHint(isBig) {
-        let a = document.querySelectorAll("#field td[data-hint='" + (isBig ? "L" : "S") + "'], #field td[data-hidden='1']");
+        let searchExpression = "#field td[data-hint='" + (isBig ? "L" : "S") + "']";
+        let hintCandidates = document.querySelectorAll(searchExpression);
+
+        if(hintCandidates.length > 0) {
+            let rnd = randomNumber(hintCandidates.length);
+            hintCandidates[rnd].classList.add('hinted');
+        }
         //let b = a.filter(x=>x.attributes)
         hintCount++;
-        console.log('nodes returned: ', a.length);
+        //console.log('nodes returned: ', hintCandidates.length);
         //let = 
-        debugger;
+
     }
 
     function toggleDanger(el) {
@@ -442,6 +448,10 @@
 </script>
 
 <style>
+    .hinted {
+        background-color: maroon;
+    }
+
     .field {
         border: 1px solid red;
         padding: 1px;
@@ -481,4 +491,5 @@
     .wrong {
         background-color: darkorange;
     }
+
 </style>
