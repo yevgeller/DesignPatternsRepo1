@@ -348,7 +348,7 @@
     }
 
     function gameOver(win) {
-        console.error('game over! Refresh page to start again.');
+        //console.error('game over! Refresh page to start again.');
         clearInterval(timerIntervalId);
         timerIntervalId = null;
         document.querySelectorAll('#field td').forEach(el => {
@@ -376,7 +376,8 @@
         if (!win) { li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct'; }
         else {
             if (hintCount > 0) {
-                li.innerHTML += `${hintCount} hints used for a total penalty time of ${penaltyTime} seconds`; //TODO: convert this into mins/seconds
+                let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTime);
+                li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}`; //TODO: convert this into mins/seconds
             }
         }
         li.innerHTML += '.';
@@ -394,7 +395,7 @@
             let rnd = randomNumber(hintCandidates.length);
             hintCandidates[rnd].classList.add('hinted');
         }
-
+        penaltyTime += (isBig ? 30 : 10);
         hintCount++;
     }
 
