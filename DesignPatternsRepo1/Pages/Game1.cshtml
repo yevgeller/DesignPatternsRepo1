@@ -369,9 +369,10 @@
             hintCandidates[rnd].classList.add('hinted');
         }
 
-        if(hintCandidatesCount <= 1) {
-            document.getElementById(isBig ? "largeHintButton" : "smallHintButton").disabled = true;
-        }
+        let largeHintCandidatesNumber = getHintCandidates(true).length;
+        //save this, and ensure that the large hints button is disabled if 
+        //nvm, large hints button needs to be disabled after a button is pressed or all buttons are revealed
+        document.getElementById("largeHintButton").disabled = largeHintCandidatesNumber === 0;
 
         hintCount++;
         //console.log('nodes returned: ', hintCandidates.length);
