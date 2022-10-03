@@ -81,7 +81,7 @@
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
         document.getElementById("largeHintButton").disabled = !getHintCandidates(true).length;
-        document.getElementById("smallHintButton").disabled = !getHintCandidates(false).length;        
+        document.getElementById("smallHintButton").disabled = false;        
     }
 
     function showTimer() {
@@ -356,6 +356,8 @@
         li.innerHTML += '.';
 
         document.getElementById('results').appendChild(li);
+        document.getElementById("smallHintButton").disabled = true;        
+        document.getElementById("largeHintButton").disabled = true;        
     }
 
     function giveHint(isBig) {
