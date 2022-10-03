@@ -4,6 +4,7 @@
 }
 
 @*hints
+    abstract timers
     can right-click on cell with numbers
     best time
     set parameters for mines, field width
@@ -65,6 +66,7 @@
 
     function resetGame() {
         //revealedCellsCount = 0;
+        let start = (new Date()).getTime();
         map = new Map();
         won = false;
         field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
@@ -83,7 +85,10 @@
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
         document.getElementById("largeHintButton").disabled = !getHintCandidates(true).length;
-        document.getElementById("smallHintButton").disabled = false;
+        document.getElementById("smallHintButton").disabled = false; 
+        let end = (new Date()).getTime();
+        let diff = end - start;
+        console.log('Game is set and ready in ' + diff + ' ms');
     }
 
     function showTimer() {
