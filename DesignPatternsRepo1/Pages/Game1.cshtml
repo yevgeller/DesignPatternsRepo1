@@ -80,8 +80,8 @@
         document.getElementById('elapsedTimeString').innerText = '0 seconds.'
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
-        document.getElementById("largeHintButton").disabled = getHintCandidates(true).length;
-        document.getElementById("smallHintButton").disabled = getHintCandidates(false).length;        
+        document.getElementById("largeHintButton").disabled = !getHintCandidates(true).length;
+        document.getElementById("smallHintButton").disabled = !getHintCandidates(false).length;        
     }
 
     function showTimer() {
