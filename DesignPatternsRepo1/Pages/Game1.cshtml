@@ -10,6 +10,7 @@
     replace data-row and data-col usage with data-cell
     replace all occurences of '.' as empty field without mines around with a constant
     make hinted cells glow
+    reformat code for a better reading
 *@
 
 <div class="is-flex flex-direction-horizontal">
@@ -40,7 +41,6 @@
     const WRONGMINEMARKER = 'X';
     const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
     let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
-    //let revealedCellsCount = 0;
     let map = new Map();
     let won = false;
     let minesLeft = 0;
@@ -108,7 +108,8 @@
 
     function createField() {
         let mineCount = MINECOUNT;
-
+        //TODO: stopwatch here
+        let start = (new Date()).getTime();
         while (mineCount > 0) {
             rndRow = randomNumber(FIELDWIDTH);
             rndCol = randomNumber(FIELDHEIGHT);
@@ -117,9 +118,13 @@
                 mineCount--;
             }
         }
+        let end = (new Date()).getTime();
+        let diff = end - start;
+        console.log('Field created in ' + diff + ' ms');
     }
 
     function calculateMarkers() {
+        let start = (new Date()).getTime();
         for (let i = 0; i < field.length; i++) {
             for (let j = 0; j < field[i].length; j++) {
                 if (field[i][j] === MINEMARKER) continue;
@@ -129,9 +134,14 @@
                 }
             }
         }
+        let end = (new Date()).getTime();
+        let diff = end-start;
+        console.log('Field markers calculated in ' + diff + ' ms');
     }
 
     function createTable() {
+
+        let start = (new Date()).getTime();
         let container = document.getElementById("tbl");
         container.innerHTML = '';
         let tbl = document.createElement('table');
@@ -161,6 +171,9 @@
             tbl.appendChild(tbody);
             container.appendChild(tbl);
         }
+        let end = (new Date()).getTime();
+        let diff = end-start;
+        console.log('Table created in ' + diff + ' ms');
     }
 
     function determineHint(cellContents) {
@@ -174,7 +187,7 @@
                 break;
         }
 
-        console.log(`Received ${cellContents}, returning ${ret}`);
+        //console.log(`Received ${cellContents}, returning ${ret}`);
         return ret;
     }
 
