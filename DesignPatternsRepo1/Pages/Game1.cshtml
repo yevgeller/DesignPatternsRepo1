@@ -15,7 +15,7 @@
 *@
 
 <div class="is-flex flex-direction-horizontal">
-    <div class="m-6">
+    <div class="m-6" style="min-width:450px;">
         <div id="tbl"></div>
         <div class="mt-6">
             <button class="button" onclick="resetGame()">Reset</button>
@@ -26,7 +26,7 @@
     <div class="m-6" style="min-width:300px;">
         <div class="mb-6"><strong>Current game:</strong></div>
         <div> Mines left: <span id="minesLeft"></span> (if calculations are correct)</div>
-        <div id="timeEnd"></div>
+        @*<div id="timeEnd"></div>*@
         <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
     </div>
     <div class="m-6">
@@ -332,6 +332,7 @@
                 processCells(getSurroundingCells(first.row, first.col));
             }
         }
+        reassessWhetherCanGiveBigHint();
     }
 
     function isHidden(el) {
