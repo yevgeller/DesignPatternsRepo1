@@ -9,6 +9,7 @@
     set parameters for mines, field width
     replace data-row and data-col usage with data-cell
     replace all occurences of '.' as empty field without mines around with a constant
+    make hinted cells glow
 *@
 
 <div class="is-flex flex-direction-horizontal">
@@ -38,7 +39,7 @@
     const MINEMARKER = 'O';
     const WRONGMINEMARKER = 'X';
     const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
-    let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR)); 
+    let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
     //let revealedCellsCount = 0;
     let map = new Map();
     let won = false;
@@ -46,6 +47,7 @@
     let startTime = (new Date).getTime();
     let timerIntervalId;
     let hintCount = 0;
+    let penaltyTime = 0; //30 seconds for large hint, 10 seconds for a small hint
     let secondsInAMinute = 60;
     let secondsInAnHour = secondsInAMinute * 60;
     let secondsInADay = secondsInAnHour * 24;
@@ -81,7 +83,7 @@
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
         document.getElementById("largeHintButton").disabled = !getHintCandidates(true).length;
-        document.getElementById("smallHintButton").disabled = false;        
+        document.getElementById("smallHintButton").disabled = false;
     }
 
     function showTimer() {
@@ -161,15 +163,15 @@
         }
     }
 
-    function determineHint(cellContents){
+    function determineHint(cellContents) {
         let ret = 'S';
-        switch(cellContents)         {
+        switch (cellContents) {
             case CELLWITHNOMINESAROUNDDESIGNATOR:
-            ret = 'L';
-            break;
+                ret = 'L';
+                break;
             case MINEMARKER:
-            ret = MINEMARKER;
-            break;
+                ret = MINEMARKER;
+                break;
         }
 
         console.log(`Received ${cellContents}, returning ${ret}`);
@@ -352,32 +354,34 @@
         let li = document.createElement('li');
         li.classList.add(win ? 'win' : 'loss');
         li.innerHTML = document.getElementById('elapsedTimeString').innerText.replace('.', '');
-        if (!win) li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
+        if (!win) { li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct'; }
+        else {
+            if (hintCount > 0) {
+                li.innerHTML += `${hintCount} hints used for a total penalty time of ${penaltyTime} seconds`; //TODO: convert this into mins/seconds
+            }
+        }
         li.innerHTML += '.';
 
         document.getElementById('results').appendChild(li);
-        document.getElementById("smallHintButton").disabled = true;        
-        document.getElementById("largeHintButton").disabled = true;        
+        document.getElementById("smallHintButton").disabled = true;
+        document.getElementById("largeHintButton").disabled = true;
     }
 
     function giveHint(isBig) {
         let hintCandidates = getHintCandidates(isBig);
         let hintCandidatesCount = hintCandidates.length;
 
-        if(hintCandidatesCount > 0) {
+        if (hintCandidatesCount > 0) {
             let rnd = randomNumber(hintCandidates.length);
             hintCandidates[rnd].classList.add('hinted');
         }
 
-        let largeHintCandidatesNumber = getHintCandidates(true).length;
-        //save this, and ensure that the large hints button is disabled if 
-        //nvm, large hints button needs to be disabled after a button is pressed or all buttons are revealed
-        document.getElementById("largeHintButton").disabled = largeHintCandidatesNumber === 0;
-
         hintCount++;
-        //console.log('nodes returned: ', hintCandidates.length);
-        //let = 
+    }
 
+    function reassessWhetherCanGiveBigHint() {
+        let largeHintCandidatesNumber = getHintCandidates(true).length;
+        document.getElementById("largeHintButton").disabled = largeHintCandidatesNumber === 0;
     }
 
     function getHintCandidates(isBigHint) {
