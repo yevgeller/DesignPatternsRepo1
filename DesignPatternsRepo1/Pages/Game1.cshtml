@@ -48,7 +48,7 @@
     let startTime = (new Date).getTime();
     let timerIntervalId;
     let hintCount = 0;
-    let penaltyTime = 0; //30 seconds for large hint, 10 seconds for a small hint
+    let penaltyTimeInSeconds = 0; //30 seconds for large hint, 10 seconds for a small hint
     let secondsInAMinute = 60;
     let secondsInAnHour = secondsInAMinute * 60;
     let secondsInADay = secondsInAnHour * 24;
@@ -69,7 +69,7 @@
         let start = (new Date()).getTime();
         map = new Map();
         won = false;
-        penaltyTime = 0;
+        penaltyTimeInSeconds = 0;
         field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
         createField();
         calculateMarkers();
@@ -86,15 +86,25 @@
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
         document.getElementById("largeHintButton").disabled = !getHintCandidates(true).length;
-        document.getElementById("smallHintButton").disabled = false; 
+        document.getElementById("smallHintButton").disabled = false;
         let end = (new Date()).getTime();
         let diff = end - start;
         console.log('Game is set and ready in ' + diff + ' ms');
     }
 
-    function showTimer() {
+    function getElapsedSeconds() {
         let currentTime = (new Date).getTime();
-        let seconds = Math.round(Math.floor(currentTime - startTime) / 1000);
+        let secondsElapsedWithoutPenalties = Math.round(Math.floor(currentTime - startTime) / 1000);
+        return secondsElapsedWithoutPenalties;
+    }
+
+    function getElapsedSecondsAdjustedForPenalties() {
+        let secondsElapsedWithoutPenalties = getElapsedSeconds();
+        return secondsElapsedWithoutPenalties + penaltyTimeInSeconds;
+    }
+
+    function showTimer() {
+        let seconds = getElapsedSecondsAdjustedForPenalties();
         document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
     }
 
@@ -141,7 +151,7 @@
             }
         }
         let end = (new Date()).getTime();
-        let diff = end-start;
+        let diff = end - start;
         console.log('Field markers calculated in ' + diff + ' ms');
     }
 
@@ -178,7 +188,7 @@
             container.appendChild(tbl);
         }
         let end = (new Date()).getTime();
-        let diff = end-start;
+        let diff = end - start;
         console.log('Table created in ' + diff + ' ms');
     }
 
@@ -377,7 +387,7 @@
         if (!win) { li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct'; }
         else {
             if (hintCount > 0) {
-                let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTime);
+                let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
                 li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}`;
             }
         }
@@ -396,7 +406,7 @@
             let rnd = randomNumber(hintCandidates.length);
             hintCandidates[rnd].classList.add('hinted');
         }
-        penaltyTime += (isBig ? 30 : 10);
+        penaltyTimeInSeconds += (isBig ? 30 : 10);
         hintCount++;
     }
 
