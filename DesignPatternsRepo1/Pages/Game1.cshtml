@@ -14,23 +14,23 @@
     reformat code for a better reading
 *@
 
-<div class="is-flex flex-direction-horizontal">
-    <div class="m-6" style="min-width:450px;">
+<div class="is-flex flex-direction-vertical">
+    <div class="m-6 container" style="min-width:450px;">
         <div id="tbl"></div>
         <div class="mt-6">
-            <button class="button" onclick="resetGame()">Reset</button>
-            <button id="smallHintButton" class="button ml-5" onclick="giveHint(false)">Small Hint</button>
-            <button id="largeHintButton" class="button ml-5" onclick="giveHint(true)">Big Hint</button>
+            <button class="button" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>
+            <button id="smallHintButton" class="button ml-5" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
+            <button id="largeHintButton" class="button ml-5" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
     </div>
-    <div class="m-6" style="min-width:300px;">
-        <div class="mb-6"><strong>Current game:</strong></div>
+    <div class="m-6 container" style="min-width:300px;">
+        <div class="mb-6"><i class="fa-solid fa-chess-bishop mr-3"></i><strong>Current game:</strong></div>
         <div> Mines left: <span id="minesLeft"></span> (if calculations are correct)</div>
         @*<div id="timeEnd"></div>*@
         <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
     </div>
-    <div class="m-6">
-        <div><strong>Scoreboard:</strong><ol id="results"></ol></div>
+    <div class="m-6 container">
+        <div><i class="fa-solid fa-flag-checkered mr-3"></i><strong>Scoreboard:</strong><ol id="results"></ol></div>
     </div>
 </div>
 
