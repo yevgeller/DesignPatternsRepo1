@@ -69,6 +69,7 @@
         let start = (new Date()).getTime();
         map = new Map();
         won = false;
+        penaltyTime = 0;
         field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
         createField();
         calculateMarkers();
@@ -377,7 +378,7 @@
         else {
             if (hintCount > 0) {
                 let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTime);
-                li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}`; //TODO: convert this into mins/seconds
+                li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}`;
             }
         }
         li.innerHTML += '.';
