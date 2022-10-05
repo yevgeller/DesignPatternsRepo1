@@ -3,7 +3,7 @@
 @{
 }
 
-@*hints
+@*
     abstract timers
     change layout to vertical
     best time
@@ -11,26 +11,26 @@
     replace data-row and data-col usage with data-cell
     replace all occurences of '.' as empty field without mines around with a constant
     make hinted cells glow
-    reformat code for a better reading
     bug when bottom row is all empty, it shrinks
+    reformat code for a better reading
 *@
 
-<div class="is-flex flex-direction-vertical">
-    <div class="m-6 container" style="min-width:450px;">
+<div class="is-flex is-flex-direction-column">
+    <div class="m-6 container is-flex-direction-column" style="min-width:450px;">
         <div id="tbl"></div>
-        <div class="mt-6">
+        <div class="mt-6 container">
             <button class="button" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>
             <button id="smallHintButton" class="button ml-5" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button ml-5" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
     </div>
-    <div class="m-6 container" style="min-width:300px;">
+    <div class="m-6 container flex-direction-vertical" style="min-width:300px;">
         <div class="mb-6"><i class="fa-solid fa-chess-bishop mr-3"></i><strong>Current game:</strong></div>
         <div> Mines left: <span id="minesLeft"></span></div>
         @*<div id="timeEnd"></div>*@
         <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
     </div>
-    <div class="m-6 container">
+    <div class="m-6 container flex-direction-vertical">
         <div><i class="fa-solid fa-flag-checkered mr-3"></i><strong>Scoreboard:</strong><ol id="results"></ol></div>
     </div>
 </div>
