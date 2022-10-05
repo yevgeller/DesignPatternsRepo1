@@ -12,6 +12,7 @@
     replace all occurences of '.' as empty field without mines around with a constant
     make hinted cells glow
     reformat code for a better reading
+    bug when bottom row is all empty, it shrinks
 *@
 
 <div class="is-flex flex-direction-vertical">
@@ -25,7 +26,7 @@
     </div>
     <div class="m-6 container" style="min-width:300px;">
         <div class="mb-6"><i class="fa-solid fa-chess-bishop mr-3"></i><strong>Current game:</strong></div>
-        <div> Mines left: <span id="minesLeft"></span> (if calculations are correct)</div>
+        <div> Mines left: <span id="minesLeft"></span></div>
         @*<div id="timeEnd"></div>*@
         <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
     </div>
@@ -388,6 +389,9 @@
             li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
         }
         else {
+            minesLeft = 0;
+            setMineCountDisplay();
+
             if (hintCount > 0) {
                 let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
                 li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}`;
@@ -395,7 +399,6 @@
                 li.innerHTML += '. No hints used! Impressive!';
             }
         }
-        li.innerHTML += '.';
 
         document.getElementById('results').appendChild(li);
         document.getElementById("smallHintButton").disabled = true;
