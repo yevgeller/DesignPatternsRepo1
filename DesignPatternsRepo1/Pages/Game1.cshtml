@@ -383,7 +383,7 @@
 
         let li = document.createElement('li');
         li.classList.add(win ? 'win' : 'loss');
-        li.innerHTML = formatSecondsIntoTimeString(getElapsedSecondsAdjustedForPenalties); //< 5 seconds, do something that doesn't count
+        li.innerHTML = formatSecondsIntoTimeString(getElapsedSecondsAdjustedForPenalties()); //< 5 seconds, do something that doesn't count
         if (!win) {
             li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
         }
