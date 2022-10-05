@@ -5,7 +5,7 @@
 
 @*hints
     abstract timers
-    can right-click on cell with numbers
+    change layout to vertical
     best time
     set parameters for mines, field width
     replace data-row and data-col usage with data-cell
@@ -383,12 +383,16 @@
 
         let li = document.createElement('li');
         li.classList.add(win ? 'win' : 'loss');
-        li.innerHTML = document.getElementById('elapsedTimeString').innerText.replace('.', '');
-        if (!win) { li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct'; }
+        li.innerHTML = formatSecondsIntoTimeString(getElapsedSecondsAdjustedForPenalties); //< 5 seconds, do something that doesn't count
+        if (!win) {
+            li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
+        }
         else {
             if (hintCount > 0) {
                 let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
                 li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}`;
+            } else {
+                li.innerHTML += '. No hints used! Impressive!';
             }
         }
         li.innerHTML += '.';
