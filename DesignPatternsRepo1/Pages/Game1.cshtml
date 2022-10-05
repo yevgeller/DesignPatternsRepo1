@@ -213,7 +213,7 @@
     }
 
     function clickCell(el) {
-        //debugger;
+        el.target.classList.remove('hinted');
         let hidden = el.currentTarget.getAttribute('data-hidden');
         if (hidden == '0') {
             return;
@@ -226,14 +226,12 @@
         let col = el.getAttribute('data-col');
         if (!map.get(row + '-' + col)) {
             map.set(row + '-' + col, 1);
-            //revealedCellsCount++;
         }
         let data = getCellData(row, col);
         el.innerText = data !== '.' ? data : '';
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         el.setAttribute('data-hint', 'X');
-        // field[row][col] = '-';
         if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === '.') {
@@ -368,7 +366,7 @@
             let col = el.getAttribute('data-col');
 
             let data = getCellData(row, col);
-
+            el.classList.remove('hinted');
             el.removeEventListener('click', clickCell);
             el.removeEventListener('contextmenu', toggleDanger, false);
             if (data === MINEMARKER) {
@@ -504,7 +502,9 @@
 
 <style>
     .hinted {
-        background-color: maroon;
+        animation-name: hintAnimation;
+        animation-duration:3s;
+        animation-iteration-count: infinite;
     }
 
     .field {
@@ -545,6 +545,15 @@
 
     .wrong {
         background-color: darkorange;
+    }
+
+    @@keyframes hintAnimation {
+        0% {background-color: #1c1b1b;}
+        50% {background-color: #00ff00;}
+
+        100% {
+            background-color: #1c1b1b;
+        }
     }
 
 </style>
