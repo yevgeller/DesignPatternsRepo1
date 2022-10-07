@@ -244,6 +244,7 @@
         }
         let data = getCellData(row, col);
         el.innerText = data !== '.' ? data : '';
+        el.className = "field";
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         el.setAttribute('data-hint', 'X');
