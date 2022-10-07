@@ -248,6 +248,7 @@
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         el.setAttribute('data-hint', 'X');
+        el.addEventListener('dblClick', dblClick);
         if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === '.') {
@@ -260,6 +261,10 @@
         } else {
             el.removeEventListener('contextmenu', toggleDanger, false);
         }
+    }
+
+    function dblClick(a, b, c) {
+        debugger;
     }
 
     function getCellData(row, col) {
