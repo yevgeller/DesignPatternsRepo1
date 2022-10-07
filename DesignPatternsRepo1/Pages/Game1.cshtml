@@ -243,7 +243,7 @@
             map.set(row + '-' + col, 1);
         }
         let data = getCellData(row, col);
-        el.innerText = data !== '.' ? data : '';
+        el.innerText = data !== '.' ? data : ''; //TODO: Bug: when a field is marked as danger, but is a ., it should not be revealed
         el.className = "field";
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
