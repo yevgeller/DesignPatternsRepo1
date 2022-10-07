@@ -88,6 +88,7 @@
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
         document.getElementById("largeHintButton").disabled = !getHintCandidates(true).length;
         document.getElementById("smallHintButton").disabled = false;
+        document.getElementById('minesLeft').style.fontSize = 'inherit';
         let end = (new Date()).getTime();
         let diff = end - start;
         console.log('Game is set and ready in ' + diff + ' ms');
@@ -209,7 +210,19 @@
     }
 
     function setMineCountDisplay() {
-        document.getElementById('minesLeft').innerText = minesLeft;
+        let el = document.getElementById('minesLeft');
+        el.innerText = minesLeft;
+        let ratio = minesLeft / MINECOUNT;
+        debugger;
+
+        if(ratio <= 0.25) {
+            el.style.fontSize = 'xxx-large';
+        } else if (ratio <= 0.5) {
+            el.style.fontSize = 'xx-large';
+        } else if (ratio <= 0.75) {
+            el.style.fontSize = 'large';
+        } 
+
     }
 
     function clickCell(el) {
@@ -554,5 +567,7 @@
             background-color: #1c1b1b;
         }
     }
+
+
 
 </style>
