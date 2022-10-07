@@ -88,7 +88,7 @@
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
         document.getElementById("largeHintButton").disabled = !getHintCandidates(true).length;
         document.getElementById("smallHintButton").disabled = false;
-        document.getElementById('minesLeft').style.fontSize = 'inherit';
+        document.getElementById('minesLeft').className = "";
         let end = (new Date()).getTime();
         let diff = end - start;
         console.log('Game is set and ready in ' + diff + ' ms');
@@ -216,12 +216,14 @@
         debugger;
 
         if(ratio <= 0.25) {
-            el.style.fontSize = 'xxx-large';
+            el.classList = ['almostWon'];
         } else if (ratio <= 0.5) {
-            el.style.fontSize = 'xx-large';
+            el.classList = ['continuingToWin'];
         } else if (ratio <= 0.75) {
-            el.style.fontSize = 'large';
-        } 
+            el.classList = ['startingToWin'];
+        } else {
+            el.className = "";
+        }
 
     }
 
