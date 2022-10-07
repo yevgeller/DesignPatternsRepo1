@@ -248,7 +248,7 @@
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         el.setAttribute('data-hint', 'X');
-        el.addEventListener('dblClick', dblClick);
+        el.addEventListener('dblclick', dblClick);
         if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === '.') {
@@ -263,7 +263,7 @@
         }
     }
 
-    function dblClick(a, b, c) {
+    function dblClick() {
         debugger;
     }
 
