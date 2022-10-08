@@ -24,9 +24,10 @@
             <button id="smallHintButton" class="button mb-1" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button mb-1" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
-        <div class="m-6 container flex-direction-vertical">
+        <div class="mt-6 container flex-direction-vertical">
             <div>
-                <h2><i class="fa-solid fa-flag-checkered mr-3"></i>Scoreboard2:</h2><ol id="results"></ol>
+                <h2><i class="fa-solid fa-flag-checkered mr-3"></i>Scoreboard:</h2>
+                <ol id="results" class="ml-3 mt-2"></ol>
             </div>
         </div>
     </div>
@@ -34,14 +35,9 @@
         <div class="mb-2">
             <h2><i class="fa-solid fa-chess-bishop mr-3"></i>Current game:</h2>
         </div>
-        <div> Mines left: <span id="minesLeft"></span></div>
-        <div id="elapsedTime">Elapsed: <span id="elapsedTimeString"></span></div>
+        <div id="elapsedTime"><i class="fa-regular fa-clock mr-2"></i>Elapsed: <span id="elapsedTimeString"></span></div>
+        <div><i class="fa-solid fa-asterisk mr-2"></i> Mines left: <span id="minesLeft"></span></div>
     </div>
-    @*<div class="m-6 container flex-direction-vertical">
-        <div>
-            <h2><i class="fa-solid fa-flag-checkered mr-3"></i>Scoreboard:</h2><ol id="results"></ol>
-        </div>
-    </div>*@
 </div>
 
 <script type="text/javascript">
