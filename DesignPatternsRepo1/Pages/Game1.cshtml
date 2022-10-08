@@ -14,6 +14,7 @@
     make hinted cells glow
     bug when bottom row is all empty, it shrinks
     reformat code for a better reading
+    prevent mines 
 *@
 
 <div class="is-flex">
@@ -21,7 +22,7 @@
         <div id="tbl"></div>
         <div class="mt-6 container is-flex is-flex-direction-column is-align-items-flex-start">
             <button class="button mb-1" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>
-            <button id="smallHintButton" class="button mb-1" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
+            <button id="smallHintButton" class="button mb-1 mt-5" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button mb-1" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
         <div class="mt-6 container flex-direction-vertical">
@@ -45,7 +46,7 @@
     const FIELDHEIGHT = 10;
     const MINECOUNT = 20;
     const MINEMARKER = 'O';
-    const WRONGMINEMARKER = 'X';
+    const WRONGMINEMARKER = 'W';
     const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
     let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
     let map = new Map();
@@ -568,7 +569,8 @@
     }
 
     .wrong {
-        background-color: darkorange;
+        background-color: white;
+        color:  red;
     }
 
     @@keyframes hintAnimation {
