@@ -216,8 +216,7 @@
         let el = document.getElementById('minesLeft');
         el.innerText = minesLeft;
         let ratio = minesLeft / MINECOUNT;
-        debugger;
-
+        
         if(ratio <= 0.25) {
             el.classList = ['almostWon'];
         } else if (ratio <= 0.5) {
@@ -379,10 +378,14 @@
         let interimResult = getSurroundingCells(rowStr, colStr);
         //debugger;
         let result = [];
+        let numberOfSurroundingCellsShouldBeMarkedAsDanger = getCellData(rowStr, colStr);
+        
         interimResult.forEach(x => {
             let cell = getCell(x);
-            let isHidden = this.isReferenceHidden(cell);
+            let isHidden = this.isHidden(cell);
             let isDanger = cell.classList.contains('danger');
+            let data = this.getCellData(x.row, x.col);
+            
             debugger;
         })
         
