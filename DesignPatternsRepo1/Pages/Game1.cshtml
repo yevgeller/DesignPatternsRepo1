@@ -73,7 +73,6 @@
     });
 
     function resetGame() {
-        //revealedCellsCount = 0;
         let start = (new Date()).getTime();
         map = new Map();
         won = false;
@@ -102,9 +101,8 @@
     }
 
     function getElapsedSeconds() {
-        let currentTime = (new Date).getTime();
-        let secondsElapsedWithoutPenalties = Math.round(Math.floor(currentTime - startTime) / 1000);
-        return secondsElapsedWithoutPenalties;
+        let currentTime = (new Date).getTime();        
+        return Math.round(Math.floor(currentTime - startTime) / 1000);
     }
 
     function getElapsedSecondsAdjustedForPenalties() {
@@ -181,12 +179,10 @@
                 td.setAttribute('data-hidden', 1);
                 td.setAttribute('data-cell', 'cell-' + i + '-' + j);
                 td.setAttribute('data-hint', determineHint(field[i][j]));
-                //let cellData = field[i][j];
-                //debugger;
                 td.classList.add('field');
                 let textNode = i + ' - ' + j;
 
-                if (field[i][j] == MINEMARKER) {
+                if (field[i][j] === MINEMARKER) {
                     textNode = MINEMARKER;
                 }
                 td.appendChild(document.createTextNode('?'));
