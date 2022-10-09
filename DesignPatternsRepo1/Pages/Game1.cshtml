@@ -384,9 +384,10 @@
         interimResult.forEach(x => {
             let cell = getCell(x);
             let isHidden = this.isHidden(cell);
-            // let data = this.getCellData(x.row, x.col);
-            if (cell.classList.contains('danger') && !isHidden) numberMarked++; 
-            if (isHidden) result.push(x);
+            let isDanger = cell.classList.contains('danger');
+             let data = this.getCellData(x.row, x.col);
+            if (isDanger && !isHidden) numberMarked++; 
+            if (!isDanger && isHidden) result.push(x);
             //debugger;
         })
         debugger;
