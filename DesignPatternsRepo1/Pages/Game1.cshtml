@@ -11,10 +11,10 @@
     set parameters for mines, field width
     replace data-row and data-col usage with data-cell
     replace all occurences of '.' as empty field without mines around with a constant
-    make hinted cells glow
     bug when bottom row is all empty, it shrinks
     reformat code for a better reading
-    prevent mines 
+   change up "Impressive" to also include "wow", "way to go", or nothing
+   bug: extra dot after time in scoreboard
 *@
 
 <div class="is-flex">
@@ -48,6 +48,7 @@
     const MINEMARKER = 'O';
     const WRONGMINEMARKER = 'W';
     const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
+    const SUPPOSEDMINEMARKER = 'X';
     let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
     let map = new Map();
     let won = false;
@@ -253,13 +254,13 @@
         el.className = "field";
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
-        el.setAttribute('data-hint', 'X');
+        el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
         el.addEventListener('dblclick', dblClick, el);
         if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === '.') {
             el.removeEventListener('contextmenu', toggleDanger, false);
-            let surroundingUnrevealedCells = getSurroundingCells(row, col);
+            let surroundingUnrevealedCells = getSurroundingHiddenCells(row, col);
             processCells(surroundingUnrevealedCells);
         } else if (map.size === FIELDHEIGHT * FIELDWIDTH - MINECOUNT && won === false) {
             won = true;
@@ -340,9 +341,25 @@
         } else {
             alert('should not be here, row: ' + row + ', col: ' + col);
         }
+        return interimResult;
+       /* let result = [];
 
+        interimResult.forEach(x => {
+            let cell = getCell(x);
+            if (cell) {
+                let ishidden = this.isHidden(cell);
+                if (ishidden)
+                    result.push(x);
+            } else console.log('Cell not found with coordinates: ', x.row, x.col);
+        });
+        return result;*/
+    }
+    
+    function getSurroundingHiddenCells(rowStr, colStr) {
+        let interimResult = getSurroundingCells(rowStr, colStr);
+        
         let result = [];
-
+        
         interimResult.forEach(x => {
             let cell = getCell(x);
             if (cell) {
@@ -366,7 +383,7 @@
             let cell = getCell(first);
             revealCell(cell);
             if (data === '.') {
-                processCells(getSurroundingCells(first.row, first.col));
+                processCells(getSurroundingHiddenCells(first.row, first.col));
             }
         }
         reassessWhetherCanGiveBigHint();
@@ -462,7 +479,7 @@
             minesLeft -= 1;
             el.target.removeEventListener('click', clickCell);
             el.target.classList.add('danger');
-            el.target.innerText = 'X';
+            el.target.innerText = SUPPOSEDMINEMARKER;
         }
         setMineCountDisplay();
         return false;
