@@ -386,7 +386,7 @@
             let isHidden = this.isHidden(cell);
             let isDanger = cell.classList.contains('danger');
              let data = this.getCellData(x.row, x.col);
-            if (isDanger && !isHidden) numberMarked++; 
+            if (isDanger) numberMarked++; 
             if (!isDanger && isHidden) result.push(x);
             //debugger;
         })
