@@ -245,15 +245,15 @@
             map.set(row + '-' + col, 1);
         }
         let data = getCellData(row, col);
-        el.innerText = data !== '.' ? data : ''; //TODO: Bug: when a field is marked as danger, but is a ., it should not be revealed
+        el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : ''; //TODO: Bug: when a field is marked as danger, but is a ., it should not be revealed
         el.className = "field";
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
-        el.addEventListener('dblclick', dblClick, el);
+        
         if (data === MINEMARKER) {
             gameOver(false);
-        } else if (data === '.') {
+        } else if (data === CELLWITHNOMINESAROUNDDESIGNATOR) {
             el.removeEventListener('contextmenu', toggleDanger, false);
             let surroundingUnrevealedCells = getSurroundingHiddenCells(row, col);
             processCells(surroundingUnrevealedCells);
@@ -261,6 +261,7 @@
             won = true;
             gameOver(true);
         } else {
+            el.addEventListener('dblclick', dblClick, el);
             el.removeEventListener('contextmenu', toggleDanger, false);
         }
     }
@@ -268,9 +269,9 @@
     function dblClick(el) {
         let row = el.target.getAttribute('data-row');
         let col = el.target.getAttribute('data-col');
-        debugger;
+        //debugger;
         getsomethingcomeupwithnamelater(row,  col);
-        debugger;
+        //debugger;
     }
 
     function getCellData(row, col) {
