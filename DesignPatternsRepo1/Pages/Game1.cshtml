@@ -379,15 +379,15 @@
         let interimResult = getSurroundingCells(rowStr, colStr);
         //debugger;
         let result = [];
-        let numberOfSurroundingCellsShouldBeMarkedAsDanger = getCellData(rowStr, colStr);
+        let numberOfSurroundingCellsShouldBeMarkedAsDanger = parseInt(getCellData(rowStr, colStr));
         let numberMarked = 0;
         interimResult.forEach(x => {
             let cell = getCell(x);
             let isHidden = this.isHidden(cell);
             // let data = this.getCellData(x.row, x.col);
-            if (cell.classList.contains('danger')) numberMarked++; 
+            if (cell.classList.contains('danger') && !isHidden) numberMarked++; 
             if (isHidden) result.push(x);
-            debugger;
+            //debugger;
         })
         debugger;
         if (numberMarked === numberOfSurroundingCellsShouldBeMarkedAsDanger) return result;
