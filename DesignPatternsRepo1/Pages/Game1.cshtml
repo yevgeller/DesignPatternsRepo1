@@ -377,8 +377,15 @@
 
     function getsomethingcomeupwithnamelater(rowStr, colStr) {
         let interimResult = getSurroundingCells(rowStr, colStr);
-        debugger;
+        //debugger;
         let result = [];
+        interimResult.forEach(x => {
+            let cell = getCell(x);
+            let isHidden = this.isReferenceHidden(cell);
+            let isDanger = cell.classList.contains('danger');
+            debugger;
+        })
+        
         }
     
     function processCells(cells) {
