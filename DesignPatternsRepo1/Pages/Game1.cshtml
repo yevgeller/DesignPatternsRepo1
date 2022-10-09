@@ -266,7 +266,11 @@
         }
     }
 
-    function dblClick(a, b, c) {
+    function dblClick(el) {
+        let row = el.target.getAttribute('data-row');
+        let col = el.target.getAttribute('data-col');
+        debugger;
+        getsomethingcomeupwithnamelater(row,  col);
         debugger;
     }
 
@@ -371,6 +375,12 @@
         return document.querySelector('[data-cell="cell-' + x.row + '-' + x.col + '"]');
     }
 
+    function getsomethingcomeupwithnamelater(rowStr, colStr) {
+        let interimResult = getSurroundingCells(rowStr, colStr);
+        debugger;
+        let result = [];
+        }
+    
     function processCells(cells) {
         //debugger;
         while (cells.length > 0) {
