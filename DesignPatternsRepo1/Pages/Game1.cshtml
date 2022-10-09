@@ -270,7 +270,10 @@
         let row = el.target.getAttribute('data-row');
         let col = el.target.getAttribute('data-col');
         //debugger;
-        getsomethingcomeupwithnamelater(row,  col);
+        let toProcess = getsomethingcomeupwithnamelater(row,  col);
+        if (toProcess.length) {
+            processCells(toProcess);
+            }
         //debugger;
     }
 
@@ -385,12 +388,12 @@
             let cell = getCell(x);
             let isHidden = this.isHidden(cell);
             let isDanger = cell.classList.contains('danger');
-             let data = this.getCellData(x.row, x.col);
+            //let data = this.getCellData(x.row, x.col);
             if (isDanger) numberMarked++; 
             if (!isDanger && isHidden) result.push(x);
             //debugger;
         })
-        debugger;
+        //debugger;
         if (numberMarked === numberOfSurroundingCellsShouldBeMarkedAsDanger) return result;
         return [];
         }
