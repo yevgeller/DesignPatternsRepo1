@@ -10,11 +10,12 @@
     set parameters for mines, field width
     replace data-row and data-col usage with data-cell
     replace all occurences of '.' as empty field without mines around with a constant
-    bug when bottom row is all empty, it shrinks
     reformat code for a better reading
    change up "Impressive" to also include "wow", "way to go", or nothing
    bug: extra dot after time in scoreboard
    bug: inconsistent text color after gameOver
+   maybe: small hint can be any hint, but big hint only big
+   add gap between flexbox items
 *@
 
 <div class="is-flex">
@@ -626,6 +627,11 @@
     .almostWon {
         font-size:xx-large;
         color:greenyellow;
+    }
+    
+    #tbl td {
+        height: 27px;
+        width: 35px;
     }
 
 </style>
