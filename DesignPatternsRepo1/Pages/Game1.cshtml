@@ -14,6 +14,7 @@
     reformat code for a better reading
    change up "Impressive" to also include "wow", "way to go", or nothing
    bug: extra dot after time in scoreboard
+   bug: inconsistent text color after gameOver
 *@
 
 <div class="is-flex">
@@ -259,16 +260,16 @@
                 won = true;
                 gameOver(true);
             } else {
-                el.addEventListener('dblclick', dblClick, el);
+                el.addEventListener('dblclick', revealSurroundingCells, el);
                 el.removeEventListener('contextmenu', toggleDanger, false);
             }
         }
     }
 
-    function dblClick(el) {
+    function revealSurroundingCells(el) {
         let row = el.target.getAttribute('data-row');
         let col = el.target.getAttribute('data-col');
-        let toProcess = getsomethingcomeupwithnamelater(row,  col);
+        let toProcess = getSurroundingCellsThatCanBeRevealedBecauseAllDangerCellsAreMarked(row,  col);
         if (toProcess.length) {
             processCells(toProcess);
         }
@@ -376,7 +377,7 @@
         return document.querySelector('[data-cell="cell-' + x.row + '-' + x.col + '"]');
     }
 
-    function getsomethingcomeupwithnamelater(rowStr, colStr) {
+    function getSurroundingCellsThatCanBeRevealedBecauseAllDangerCellsAreMarked(rowStr, colStr) {
         let interimResult = getSurroundingCells(rowStr, colStr);
         
         let result = [];
