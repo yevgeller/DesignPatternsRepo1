@@ -237,31 +237,31 @@
     function revealCell(el) {
         let isDanger = el.classList.contains('danger');
         if (!isDanger) {
-        let row = el.getAttribute('data-row');
-        let col = el.getAttribute('data-col');
-        if (!map.get(row + '-' + col)) {
-            map.set(row + '-' + col, 1);
-        }
-        let data = getCellData(row, col);
-        el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : ''; //TODO: Bug: when a field is marked as danger, but is a ., it should not be revealed
-        el.className = "field";
-        el.classList.add('revealed');
-        el.setAttribute('data-hidden', 0);
-        el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
-        
-        if (data === MINEMARKER) {
-            gameOver(false);
-        } else if (data === CELLWITHNOMINESAROUNDDESIGNATOR) {
-            el.removeEventListener('contextmenu', toggleDanger, false);
-            let surroundingUnrevealedCells = getSurroundingHiddenCells(row, col);
-            processCells(surroundingUnrevealedCells);
-        } else if (map.size === FIELDHEIGHT * FIELDWIDTH - MINECOUNT && won === false) {
-            won = true;
-            gameOver(true);
-        } else {
-            el.addEventListener('dblclick', dblClick, el);
-            el.removeEventListener('contextmenu', toggleDanger, false);
-        }
+            let row = el.getAttribute('data-row');
+            let col = el.getAttribute('data-col');
+            if (!map.get(row + '-' + col)) {
+                map.set(row + '-' + col, 1);
+            }
+            let data = getCellData(row, col);
+            el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : ''; //TODO: Bug: when a field is marked as danger, but is a ., it should not be revealed
+            el.className = "field";
+            el.classList.add('revealed');
+            el.setAttribute('data-hidden', 0);
+            el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
+            
+            if (data === MINEMARKER) {
+                gameOver(false);
+            } else if (data === CELLWITHNOMINESAROUNDDESIGNATOR) {
+                el.removeEventListener('contextmenu', toggleDanger, false);
+                let surroundingUnrevealedCells = getSurroundingHiddenCells(row, col);
+                processCells(surroundingUnrevealedCells);
+            } else if (map.size === FIELDHEIGHT * FIELDWIDTH - MINECOUNT && won === false) {
+                won = true;
+                gameOver(true);
+            } else {
+                el.addEventListener('dblclick', dblClick, el);
+                el.removeEventListener('contextmenu', toggleDanger, false);
+            }
         }
     }
 
@@ -363,8 +363,9 @@
         interimResult.forEach(x => {
             let cell = getCell(x);
             if (cell) {
-                let ishidden = this.isHidden(cell);
-                if (ishidden)
+                let isHidden = this.isHidden(cell);
+                let isDanger = cell.classList.contains('danger');
+                if (isHidden && !isDanger)
                     result.push(x);
             } else console.log('Cell not found with coordinates: ', x.row, x.col);
         });
