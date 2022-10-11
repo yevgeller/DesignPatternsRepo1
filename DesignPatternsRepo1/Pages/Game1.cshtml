@@ -6,7 +6,6 @@
 @*
     abstract state
     abstract timers
-    change layout to vertical
     best time
     set parameters for mines, field width
     replace data-row and data-col usage with data-cell
@@ -176,7 +175,7 @@
                 let td = document.createElement('td');
                 td.setAttribute('data-row', i);
                 td.setAttribute('data-col', j);
-                td.setAttribute('data-hidden', 1);
+                td.setAttribute('data-hidden', '1');
                 td.setAttribute('data-cell', 'cell-' + i + '-' + j);
                 td.setAttribute('data-hint', determineHint(field[i][j]));
                 td.classList.add('field');
@@ -207,8 +206,6 @@
                 ret = MINEMARKER;
                 break;
         }
-
-        //console.log(`Received ${cellContents}, returning ${ret}`);
         return ret;
     }
 
@@ -269,12 +266,10 @@
     function dblClick(el) {
         let row = el.target.getAttribute('data-row');
         let col = el.target.getAttribute('data-col');
-        //debugger;
         let toProcess = getsomethingcomeupwithnamelater(row,  col);
         if (toProcess.length) {
             processCells(toProcess);
-            }
-        //debugger;
+        }
     }
 
     function getCellData(row, col) {
@@ -380,26 +375,22 @@
 
     function getsomethingcomeupwithnamelater(rowStr, colStr) {
         let interimResult = getSurroundingCells(rowStr, colStr);
-        //debugger;
+        
         let result = [];
         let numberOfSurroundingCellsShouldBeMarkedAsDanger = parseInt(getCellData(rowStr, colStr));
         let numberMarked = 0;
         interimResult.forEach(x => {
             let cell = getCell(x);
             let isHidden = this.isHidden(cell);
-            let isDanger = cell.classList.contains('danger');
-            //let data = this.getCellData(x.row, x.col);
+            let isDanger = cell.classList.contains('danger');            
             if (isDanger) numberMarked++; 
             if (!isDanger && isHidden) result.push(x);
-            //debugger;
-        })
-        //debugger;
+        });
         if (numberMarked === numberOfSurroundingCellsShouldBeMarkedAsDanger) return result;
         return [];
-        }
+    }
     
     function processCells(cells) {
-        //debugger;
         while (cells.length > 0) {
             let first = cells.shift();
             let data = getCellData(first.row, first.col);
@@ -425,7 +416,6 @@
     }
 
     function gameOver(win) {
-        //console.error('game over! Refresh page to start again.');
         clearInterval(timerIntervalId);
         timerIntervalId = null;
         document.querySelectorAll('#field td').forEach(el => {
