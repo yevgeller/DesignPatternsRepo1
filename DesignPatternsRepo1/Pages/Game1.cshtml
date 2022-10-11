@@ -223,7 +223,6 @@
         } else {
             el.className = "";
         }
-
     }
 
     function clickCell(el) {
@@ -236,6 +235,8 @@
     }
 
     function revealCell(el) {
+        let isDanger = el.classList.contains('danger');
+        if (!isDanger) {
         let row = el.getAttribute('data-row');
         let col = el.getAttribute('data-col');
         if (!map.get(row + '-' + col)) {
@@ -260,6 +261,7 @@
         } else {
             el.addEventListener('dblclick', dblClick, el);
             el.removeEventListener('contextmenu', toggleDanger, false);
+        }
         }
     }
 
