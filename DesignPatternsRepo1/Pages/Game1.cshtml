@@ -68,7 +68,7 @@
         }
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', function () {
         resetGame();
     });
 
@@ -92,9 +92,9 @@
         document.getElementById('elapsedTimeString').innerText = '0 seconds.'
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
         document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
-        document.getElementById("largeHintButton").disabled = !getHintCandidates(true).length;
-        document.getElementById("smallHintButton").disabled = false;
-        document.getElementById('minesLeft').className = "";
+        document.getElementById('largeHintButton').disabled = !getHintCandidates(true).length;
+        document.getElementById('smallHintButton').disabled = false;
+        document.getElementById('minesLeft').className = '';
         let end = (new Date()).getTime();
         let diff = end - start;
         console.log('Game is set and ready in ' + diff + ' ms');
@@ -165,7 +165,7 @@
     function createTable() {
 
         let start = (new Date()).getTime();
-        let container = document.getElementById("tbl");
+        let container = document.getElementById('tbl');
         container.innerHTML = '';
         let tbl = document.createElement('table');
         tbl.setAttribute('id', 'field');
@@ -222,7 +222,7 @@
         } else if (ratio <= 0.75) {
             el.classList = ['startingToWin'];
         } else {
-            el.className = "";
+            el.className = '';
         }
     }
 
@@ -243,7 +243,7 @@
         }
         let data = getCellData(row, col);
         el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : ''; //TODO: Bug: when a field is marked as danger, but is a ., it should not be revealed
-        el.className = "field";
+        el.className = 'field';
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
@@ -426,7 +426,7 @@
             el.removeEventListener('click', clickCell);
             el.removeEventListener('contextmenu', toggleDanger, false);
             if (data === MINEMARKER) {
-                el.style.backgroundColor = (win ? "green" : "red");
+                el.style.backgroundColor = (win ? 'green' : 'red');
                 el.innerText = MINEMARKER;
             } else if (data !== MINEMARKER && el.classList.contains('danger')) {
                 el.classList.remove('danger');
@@ -455,8 +455,8 @@
         }
 
         document.getElementById('results').appendChild(li);
-        document.getElementById("smallHintButton").disabled = true;
-        document.getElementById("largeHintButton").disabled = true;
+        document.getElementById('smallHintButton').disabled = true;
+        document.getElementById('largeHintButton').disabled = true;
     }
 
     function giveHint(isBig) {
@@ -473,7 +473,7 @@
 
     function reassessWhetherCanGiveBigHint() {
         let largeHintCandidatesNumber = getHintCandidates(true).length;
-        document.getElementById("largeHintButton").disabled = largeHintCandidatesNumber === 0;
+        document.getElementById('largeHintButton').disabled = largeHintCandidatesNumber === 0;
     }
 
     function getHintCandidates(isBigHint) {
