@@ -408,9 +408,7 @@
     function isHidden(el) {
         let data = el.getAttribute('data-hidden');
         if (!data) return false;
-        if (data == '1') return true;
-
-        return false;
+        return data === '1';
     }
 
     function setRevealed(el) {
