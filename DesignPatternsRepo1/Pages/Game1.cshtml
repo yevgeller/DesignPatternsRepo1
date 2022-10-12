@@ -12,7 +12,6 @@
     replace all occurences of '.' as empty field without mines around with a constant
     reformat code for a better reading
    change up "Impressive" to also include "wow", "way to go", or nothing
-   bug: extra dot after time in scoreboard
    bug: inconsistent text color after gameOver
    maybe: small hint can be any hint, but big hint only big
    add gap between flexbox items
@@ -126,7 +125,7 @@
         if (totalDays > 0) ret = totalDays.toString() + ' day' + (totalDays > 1 ? 's ' : ' ');
         if (totalHours > 0 || totalHours === 0 && totalDays > 0) ret += totalHours.toString() + ' hour' + (totalHours === 1 ? ' ' : 's ');
         if (totalMinutes > 0 || (totalMinutes === 0 && (totalHours > 0 || totalDays > 0))) ret += totalMinutes.toString() + ' minute' + (totalMinutes === 1 ? ' ' : 's ');
-        ret += leftoverSeconds.toString() + ' second' + (leftoverSeconds === 1 ? '.' : 's.');
+        ret += leftoverSeconds.toString() + ' second' + (leftoverSeconds === 1 ? '' : 's');
         return ret;
     }
 
