@@ -21,11 +21,19 @@
     <div class="m-6 is-flex-direction-column" style="min-width:450px;">
         <div id="tbl"></div>
         <div class="mt-6 container is-flex is-flex-direction-column is-align-items-flex-start gap20px">
+            <div class="field mw200">
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input" type="number" id="minesAmountInput" placeholder="Mines" min="2" max="100">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </span>
+                </p>
+            </div>
             <button class="button" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>
             <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
-        <div class="mt-6 container flex-direction-vertical">gm
+        <div class="mt-6 container flex-direction-vertical">
             <div>
                 <h2><i class="fa-solid fa-flag-checkered mr-3"></i>Scoreboard:</h2>
                 <ol id="results" class="ml-3 mt-2"></ol>
@@ -90,8 +98,8 @@
         }
         hintCount = 0;
         document.getElementById('elapsedTimeString').innerText = '0 seconds.'
-        document.querySelectorAll('#field td').forEach(el => el.addEventListener('click', clickCell));
-        document.querySelectorAll('#field td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
+        document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('click', clickCell));
+        document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
         document.getElementById('largeHintButton').disabled = !getHintCandidates(true).length;
         document.getElementById('smallHintButton').disabled = false;
         document.getElementById('minesLeft').className = '';
@@ -168,7 +176,7 @@
         let container = document.getElementById('tbl');
         container.innerHTML = '';
         let tbl = document.createElement('table');
-        tbl.setAttribute('id', 'field');
+        tbl.setAttribute('id', 'playingField');
         let tbody = document.createElement('tbody')
         for (let i = 0; i < FIELDHEIGHT; i++) {
             let tr = document.createElement('tr');
@@ -179,7 +187,7 @@
                 td.setAttribute('data-hidden', '1');
                 td.setAttribute('data-cell', 'cell-' + i + '-' + j);
                 td.setAttribute('data-hint', determineHint(field[i][j]));
-                td.classList.add('field');
+                td.classList.add('playingField');
                 let textNode = i + ' - ' + j;
 
                 if (field[i][j] === MINEMARKER) {
@@ -242,8 +250,8 @@
             map.set(row + '-' + col, 1);
         }
         let data = getCellData(row, col);
-        el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : ''; //TODO: Bug: when a field is marked as danger, but is a ., it should not be revealed
-        el.className = 'field';
+        el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : ''; 
+        el.className = 'playingField';
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
@@ -417,7 +425,7 @@
     function gameOver(win) {
         clearInterval(timerIntervalId);
         timerIntervalId = null;
-        document.querySelectorAll('#field td').forEach(el => {
+        document.querySelectorAll('#playingField td').forEach(el => {
             let row = el.getAttribute('data-row');
             let col = el.getAttribute('data-col');
 
@@ -477,7 +485,7 @@
     }
 
     function getHintCandidates(isBigHint) {
-        return document.querySelectorAll("#field td[data-hint='" + (isBigHint ? "L" : "S") + "']");
+        return document.querySelectorAll("#playingField td[data-hint='" + (isBigHint ? "L" : "S") + "']");
     }
 
     function toggleDanger(el) {
@@ -567,7 +575,7 @@
         animation-iteration-count: infinite;
     }
 
-    .field {
+    .playingField {
         border: 1px solid red;
         padding: 1px;
         margin: 3px;
@@ -639,4 +647,6 @@
 .gap20px {
 gap: 20px;
 }
+
+.mw200 {min-width: 200px;}
 </style>
