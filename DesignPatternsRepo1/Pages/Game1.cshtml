@@ -29,6 +29,22 @@
                     </span>
                 </p>
             </div>
+            <div class="field mw200">
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input" type="number" id="playingFieldWidth" placeholder="Width" min="2" max="100">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-arrows-left-right"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field mw200">
+                <p class="control has-icons-left has-icons-right">
+                    <input class="input" type="number" id="playingFieldHeight" placeholder="Mines" min="2" max="100">
+                    <span class="icon is-small is-left">
+                        <i class="fa-solid fa-location-crosshairs"></i>
+                    </span>
+                </p>
+            </div>
             <button class="button" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>
             <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
