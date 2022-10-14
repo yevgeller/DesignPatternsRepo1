@@ -20,10 +20,10 @@
 <div class="is-flex">
     <div class="m-6 is-flex-direction-column" style="min-width:450px;">
         <div id="tbl"></div>
-        <div class="mt-6 container is-flex is-flex-direction-column is-align-items-flex-start">
-            <button class="button mb-1" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>
-            <button id="smallHintButton" class="button mb-1 mt-5" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
-            <button id="largeHintButton" class="button mb-1" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
+        <div class="mt-6 container is-flex is-flex-direction-column is-align-items-flex-start gap20px">
+            <button class="button" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>
+            <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
+            <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
         <div class="mt-6 container flex-direction-vertical">gm
             <div>
@@ -636,4 +636,7 @@
         width: 35px;
     }
 
+.gap20px {
+gap: 20px;
+}
 </style>
