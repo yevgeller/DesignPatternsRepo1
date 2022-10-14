@@ -31,7 +31,7 @@
             </div>
             <div class="field mw200">
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input" type="number" id="playingFieldWidth" placeholder="Width" min="5" max="20">
+                    <input class="input" type="number" id="playingFieldWidthInput" placeholder="Width" min="5" max="20">
                     <span class="icon is-small is-left">
                         <i class="fa-solid fa-arrows-left-right"></i>
                     </span>
@@ -39,7 +39,7 @@
             </div>
             <div class="field mw200">
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input" type="number" id="playingFieldHeight" placeholder="Height" min="5" max="20">
+                    <input class="input" type="number" id="playingFieldHeightInput" placeholder="Height" min="5" max="20">
                     <span class="icon is-small is-left">
                         <i class="fa-solid fa-arrows-up-down"></i>
                     </span>
@@ -68,6 +68,11 @@
 <script type="text/javascript">
     const FIELDWIDTH = 10;
     const FIELDHEIGHT = 10;
+    //let widthInputByUser = ...
+    //let heightInputByUser = ...
+    //TODO: move it to reset as well
+    let minesAmountInputByUser =determineUserInputAsInt(5, 50,'minesAmountInput',20);
+    console.log('read: ' + minesAmountInputByUser);
     const MINECOUNT = 20;
     const MINEMARKER = 'O';
     const WRONGMINEMARKER = 'W';
@@ -80,7 +85,7 @@
     let startTime = (new Date).getTime();
     let timerIntervalId;
     let hintCount = 0;
-    let penaltyTimeInSeconds = 0; //30 seconds for large hint, 10 seconds for a small hint
+    let penaltyTimeInSeconds = 0;
     let secondsInAMinute = 60;
     let secondsInAnHour = secondsInAMinute * 60;
     let secondsInADay = secondsInAnHour * 24;
@@ -91,7 +96,16 @@
             this.col = col;
         }
     }
-
+    function determineUserInputAsInt(min, max, fieldName, defaultValue) {
+        let userInput = document.getElementById(fieldName).value;
+            console.log(`Read ${userInput} for field ${fieldName} `);
+            let candidate = parseInt(userInput);
+            if (!candidate) return defaultValue;
+            if (candidate < min) return min;
+            if (candidate > max) return max;
+            
+            return candidate;
+        }
     document.addEventListener('DOMContentLoaded', function () {
         resetGame();
     });
