@@ -25,7 +25,7 @@
             <button id="smallHintButton" class="button mb-1 mt-5" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button mb-1" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
-        <div class="mt-6 container flex-direction-vertical">
+        <div class="mt-6 container flex-direction-vertical">gm
             <div>
                 <h2><i class="fa-solid fa-flag-checkered mr-3"></i>Scoreboard:</h2>
                 <ol id="results" class="ml-3 mt-2"></ol>
@@ -450,7 +450,7 @@
                 let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
                 li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}`;
             } else {
-                li.innerHTML += '. No hints used! Impressive!';
+                li.innerHTML += `. No hints used! ${randomCompliment()}!`;
             }
         }
 
@@ -552,6 +552,11 @@
     function randomNumber(upperBound) {
         return Math.floor(Math.random() * upperBound);
     }
+    
+    function randomCompliment() {
+        const compliments = ['Way to go', 'Impressive', 'Quite a feat', 'Great job', 'Amazing', 'Nice', 'Wonderful', 'Great', 'Incredible', 'Excellent', 'Perfect'];
+        return compliments[randomNumber(compliments.length)];
+        }
 
 </script>
 
