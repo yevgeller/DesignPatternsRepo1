@@ -6,7 +6,7 @@
 @*
 move all JS into another file
     abstract state
-    abstract timers
+    remove timers
     best time
     set parameters for mines, field width
     replace data-row and data-col usage with data-cell
@@ -15,13 +15,13 @@ move all JS into another file
    change up "Impressive" to also include "wow", "way to go", or nothing
    bug: inconsistent text color after gameOver
    maybe: small hint can be any hint, but big hint only big
-   add gap between flexbox items
+   make all mines white if victory
 *@
 
 <div class="is-flex">
     <div class="m-6 is-flex-direction-column" style="min-width:450px;">
         <div id="tbl"></div>
-        <div class="mt-6 container is-flex is-flex-direction-column is-align-items-flex-start gap20px">
+        <div class="mt-6 container is-flex is-flex-direction-row is-align-items-flex-start gap20px">
             <div class="field mw200">
                 <p class="control has-icons-left has-icons-right">
                     <input class="input" type="number" id="minesAmountInput" placeholder="Mines" min="2" max="100">
@@ -46,6 +46,8 @@ move all JS into another file
                     </span>
                 </p>
             </div>
+            </div>
+             <div class="mt-6 container is-flex is-flex-direction-column is-align-items-flex-start gap20px">
             <button class="button" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>
             <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
@@ -77,6 +79,7 @@ move all JS into another file
     const WRONGMINEMARKER = 'W';
     const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
     const SUPPOSEDMINEMARKER = 'X';
+    const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
     let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
     let map = new Map();
     let won = false;
@@ -485,7 +488,7 @@ move all JS into another file
             el.removeEventListener('contextmenu', toggleDanger, false);
             if (data === MINEMARKER) {
                 el.style.backgroundColor = (win ? 'green' : 'red');
-                el.innerText = MINEMARKER;
+                el.innerHTML = REALMINEMARKERHTMLWHENREVEALED;
             } else if (data !== MINEMARKER && el.classList.contains('danger')) {
                 el.classList.remove('danger');
                 el.classList.add('wrong');
