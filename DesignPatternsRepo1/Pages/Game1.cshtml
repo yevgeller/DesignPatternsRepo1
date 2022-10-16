@@ -26,7 +26,7 @@ move all JS into another file
                 <p class="control has-icons-left has-icons-right">
                     <input class="input" type="number" id="minesAmountInput" placeholder="Mines" min="2" max="100">
                     <span class="icon is-small is-left">
-                        <i class="fa-solid fa-location-crosshairs"></i>
+                        <i class="fa-solid fa-asterisk"></i>
                     </span>
                 </p>
             </div>
@@ -67,9 +67,9 @@ move all JS into another file
 </div>
 
 <script type="text/javascript">
-const DEFAULTFIELDWIDTH=10;
-const DEFAULTFIELDHEIGHT=10;
-   readGameParameters();
+    const DEFAULTFIELDWIDTH = 10;
+    const DEFAULTFIELDHEIGHT = 10;
+    readGameParameters();
     const FIELDWIDTH = 10;
     const FIELDHEIGHT = 10;
     const MINECOUNT = 20;
@@ -95,37 +95,37 @@ const DEFAULTFIELDHEIGHT=10;
             this.col = col;
         }
     }
-    
+
     function readGameParameters() {
-         let widthInputByUser = determineUserInputAsInt(5, 20, 'playingFieldWidthInput', DEFAULTFIELDWIDTH);
-            console.log('Read width input: ', widthInputByUser);    
-            let heightInputByUser = determineUserInputAsInt(5, 20, 'playingFieldHeightInput', DEFAULTFIELDHEIGHT);
-            console.log('Read height input: ', heightInputByUser);
-            //TODO: move it to reset as well
-            let minesAmountInputByUser = determineUserInputAsInt(5, 50,'minesAmountInput',20);
-            console.log('read: ' + minesAmountInputByUser);
-            
-            setInputParameter('playingFieldWidthInput', widthInputByUser);
-            setInputParameter('playingFieldHeightInput', heightInputByUser);
-            setInputParameter('minesAmountInput', minesAmountInputByUser);
-            
-        }
-    
+        let widthInputByUser = determineUserInputAsInt(5, 20, 'playingFieldWidthInput', DEFAULTFIELDWIDTH);
+        console.log('Read width input: ', widthInputByUser);
+        let heightInputByUser = determineUserInputAsInt(5, 20, 'playingFieldHeightInput', DEFAULTFIELDHEIGHT);
+        console.log('Read height input: ', heightInputByUser);
+        //TODO: move it to reset as well
+        let minesAmountInputByUser = determineUserInputAsInt(5, 50, 'minesAmountInput', 20);
+        console.log('read: ' + minesAmountInputByUser);
+
+        setInputParameter('playingFieldWidthInput', widthInputByUser);
+        setInputParameter('playingFieldHeightInput', heightInputByUser);
+        setInputParameter('minesAmountInput', minesAmountInputByUser);
+
+    }
+
     function determineUserInputAsInt(min, max, fieldName, defaultValue) {
         let userInput = document.getElementById(fieldName).value;
-        debugger;
-            console.log(`Read ${userInput ? '_nothing_' : userInput} for field ${fieldName} `);
-            let candidate = parseInt(userInput);
-            if (!candidate) return defaultValue;
-            if (candidate < min) return min;
-            if (candidate > max) return max;
-            
-            return candidate;
-        }
-      function setInputParameter(id, val) {
+        console.log(`Read ${userInput ? '_nothing_' : userInput} for field ${fieldName} `);
+        let candidate = parseInt(userInput);
+        if (!candidate) return defaultValue;
+        if (candidate < min) return min;
+        if (candidate > max) return max;
+
+        return candidate;
+    }
+
+    function setInputParameter(id, val) {
         document.getElementById(id).value = val;
-        }
-        
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         resetGame();
     });
@@ -159,7 +159,7 @@ const DEFAULTFIELDHEIGHT=10;
     }
 
     function getElapsedSeconds() {
-        let currentTime = (new Date).getTime();        
+        let currentTime = (new Date).getTime();
         return Math.round(Math.floor(currentTime - startTime) / 1000);
     }
 
@@ -238,11 +238,11 @@ const DEFAULTFIELDHEIGHT=10;
                 td.setAttribute('data-cell', 'cell-' + i + '-' + j);
                 td.setAttribute('data-hint', determineHint(field[i][j]));
                 td.classList.add('playingField');
-                let textNode = i + ' - ' + j;
+                //let textNode = i + ' - ' + j;
 
-                if (field[i][j] === MINEMARKER) {
-                    textNode = MINEMARKER;
-                }
+                //if (field[i][j] === MINEMARKER) {
+                //    textNode = MINEMARKER;
+                //}
                 td.appendChild(document.createTextNode('?'));
                 tr.appendChild(td);
                 tbody.appendChild(tr);
@@ -272,8 +272,8 @@ const DEFAULTFIELDHEIGHT=10;
         let el = document.getElementById('minesLeft');
         el.innerText = minesLeft;
         let ratio = minesLeft / MINECOUNT;
-        
-        if(ratio <= 0.25) {
+
+        if (ratio <= 0.25) {
             el.classList = ['almostWon'];
         } else if (ratio <= 0.5) {
             el.classList = ['continuingToWin'];
@@ -300,12 +300,12 @@ const DEFAULTFIELDHEIGHT=10;
             map.set(row + '-' + col, 1);
         }
         let data = getCellData(row, col);
-        el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : ''; 
+        el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : '';
         el.className = 'playingField';
         el.classList.add('revealed');
         el.setAttribute('data-hidden', 0);
         el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
-        
+
         if (data === MINEMARKER) {
             gameOver(false);
         } else if (data === CELLWITHNOMINESAROUNDDESIGNATOR) {
@@ -324,7 +324,7 @@ const DEFAULTFIELDHEIGHT=10;
     function revealSurroundingCells(el) {
         let row = el.target.getAttribute('data-row');
         let col = el.target.getAttribute('data-col');
-        let toProcess = getSurroundingCellsThatCanBeRevealedBecauseAllDangerCellsAreMarked(row,  col);
+        let toProcess = getSurroundingCellsThatCanBeRevealedBecauseAllDangerCellsAreMarked(row, col);
         if (toProcess.length) {
             processCells(toProcess);
         }
@@ -398,24 +398,24 @@ const DEFAULTFIELDHEIGHT=10;
             alert('should not be here, row: ' + row + ', col: ' + col);
         }
         return interimResult;
-       /* let result = [];
+        /* let result = [];
 
-        interimResult.forEach(x => {
-            let cell = getCell(x);
-            if (cell) {
-                let ishidden = this.isHidden(cell);
-                if (ishidden)
-                    result.push(x);
-            } else console.log('Cell not found with coordinates: ', x.row, x.col);
-        });
-        return result;*/
+         interimResult.forEach(x => {
+             let cell = getCell(x);
+             if (cell) {
+                 let ishidden = this.isHidden(cell);
+                 if (ishidden)
+                     result.push(x);
+             } else console.log('Cell not found with coordinates: ', x.row, x.col);
+         });
+         return result;*/
     }
-    
+
     function getSurroundingHiddenCells(rowStr, colStr) {
         let interimResult = getSurroundingCells(rowStr, colStr);
-        
+
         let result = [];
-        
+
         interimResult.forEach(x => {
             let cell = getCell(x);
             if (cell) {
@@ -434,21 +434,21 @@ const DEFAULTFIELDHEIGHT=10;
 
     function getSurroundingCellsThatCanBeRevealedBecauseAllDangerCellsAreMarked(rowStr, colStr) {
         let interimResult = getSurroundingCells(rowStr, colStr);
-        
+
         let result = [];
         let numberOfSurroundingCellsShouldBeMarkedAsDanger = parseInt(getCellData(rowStr, colStr));
         let numberMarked = 0;
         interimResult.forEach(x => {
             let cell = getCell(x);
             let isHidden = this.isHidden(cell);
-            let isDanger = cell.classList.contains('danger');            
-            if (isDanger) numberMarked++; 
+            let isDanger = cell.classList.contains('danger');
+            if (isDanger) numberMarked++;
             if (!isDanger && isHidden) result.push(x);
         });
         if (numberMarked === numberOfSurroundingCellsShouldBeMarkedAsDanger) return result;
         return [];
     }
-    
+
     function processCells(cells) {
         while (cells.length > 0) {
             let first = cells.shift();
@@ -610,18 +610,18 @@ const DEFAULTFIELDHEIGHT=10;
     function randomNumber(upperBound) {
         return Math.floor(Math.random() * upperBound);
     }
-    
+
     function randomCompliment() {
         const compliments = ['Way to go', 'Impressive', 'Quite a feat', 'Great job', 'Amazing', 'Nice', 'Wonderful', 'Great', 'Incredible', 'Excellent', 'Perfect'];
         return compliments[randomNumber(compliments.length)];
-        }
+    }
 
 </script>
 
 <style>
     .hinted {
         animation-name: hintAnimation;
-        animation-duration:3s;
+        animation-duration: 3s;
         animation-iteration-count: infinite;
     }
 
@@ -662,12 +662,17 @@ const DEFAULTFIELDHEIGHT=10;
 
     .wrong {
         background-color: white;
-        color:  red;
+        color: red;
     }
 
     @@keyframes hintAnimation {
-        0% {background-color: #1c1b1b;}
-        50% {background-color: #00ff00;}
+        0% {
+            background-color: #1c1b1b;
+        }
+
+        50% {
+            background-color: #00ff00;
+        }
 
         100% {
             background-color: #1c1b1b;
@@ -675,28 +680,30 @@ const DEFAULTFIELDHEIGHT=10;
     }
 
     .startingToWin {
-        font-size:large;
-        color:darkgreen;
+        font-size: large;
+        color: darkgreen;
     }
 
     .continuingToWin {
-        font-size:x-large;
-        color:green;
+        font-size: x-large;
+        color: green;
     }
 
     .almostWon {
-        font-size:xx-large;
-        color:greenyellow;
+        font-size: xx-large;
+        color: greenyellow;
     }
-    
+
     #tbl td {
         height: 27px;
         width: 35px;
     }
 
-.gap20px {
-gap: 20px;
-}
+    .gap20px {
+        gap: 20px;
+    }
 
-.mw200 {min-width: 200px;}
+    .mw200 {
+        min-width: 200px;
+    }
 </style>
