@@ -8,11 +8,8 @@ move all JS into another file
     abstract state
     remove timers
     best time
-    set parameters for mines, field width
     replace data-row and data-col usage with data-cell
-    replace all occurrences of '.' as empty field without mines around with a constant
     reformat code for a better reading
-   change up "Impressive" to also include "wow", "way to go", or nothing
    bug: inconsistent text color after gameOver
    maybe: small hint can be any hint, but big hint only big
    make all mines white if victory
@@ -474,6 +471,7 @@ move all JS into another file
             el.removeEventListener('contextmenu', toggleDanger, false);
             if (data === MINEMARKER) {
                 el.style.backgroundColor = (win ? 'green' : 'red');
+                el.style.color = (win ? 'black' : 'white');
                 el.innerHTML = REALMINEMARKERHTMLWHENREVEALED;
             } else if (data !== MINEMARKER && el.classList.contains('danger')) {
                 el.classList.remove('danger');
