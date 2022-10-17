@@ -53,14 +53,14 @@ move all JS into another file
             <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
-        <div class="mt-6 container flex-direction-vertical">
+        <div class="mt-6 container flex-direction-vertical mi-wi-300 is-hidden" id="scoreboardDiv">
             <div>
                 <h2><i class="fa-solid fa-flag-checkered mr-3"></i>Scoreboard:</h2>
                 <ol id="results" class="ml-3 mt-2"></ol>
             </div>
         </div>
     </div>
-    <div class="m-6 container flex-direction-vertical" style="min-width:300px;">
+    <div class="m-6 container flex-direction-vertical mi-wi-300">
         <div class="mb-2">
             <h2><i class="fa-solid fa-chess-bishop mr-3"></i>Current game:</h2>
         </div>
@@ -242,11 +242,7 @@ move all JS into another file
                 td.setAttribute('data-cell', 'cell-' + i + '-' + j);
                 td.setAttribute('data-hint', determineHint(field[i][j]));
                 td.classList.add('playingField');
-                //let textNode = i + ' - ' + j;
 
-                //if (field[i][j] === MINEMARKER) {
-                //    textNode = MINEMARKER;
-                //}
                 td.appendChild(document.createTextNode('?'));
                 tr.appendChild(td);
                 tbody.appendChild(tr);
@@ -402,17 +398,6 @@ move all JS into another file
             alert('should not be here, row: ' + row + ', col: ' + col);
         }
         return interimResult;
-        /* let result = [];
-
-         interimResult.forEach(x => {
-             let cell = getCell(x);
-             if (cell) {
-                 let ishidden = this.isHidden(cell);
-                 if (ishidden)
-                     result.push(x);
-             } else console.log('Cell not found with coordinates: ', x.row, x.col);
-         });
-         return result;*/
     }
 
     function getSurroundingHiddenCells(rowStr, colStr) {
@@ -510,12 +495,12 @@ move all JS into another file
 
             if (hintCount > 0) {
                 let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
-                li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}`;
+                li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}.`;
             } else {
                 li.innerHTML += `. No hints used! ${randomCompliment()}!`;
             }
         }
-
+        document.getElementById('scoreboardDiv').classList.remove('is-hidden');
         document.getElementById('results').appendChild(li);
         document.getElementById('smallHintButton').disabled = true;
         document.getElementById('largeHintButton').disabled = true;
@@ -707,8 +692,8 @@ move all JS into another file
         gap: 20px;
     }
 
-    .mw200 {
-        min-width: 200px;
+    .mi-wi-300 {
+        min-width: 300px;
     }
 
     .ma-w-120 {
