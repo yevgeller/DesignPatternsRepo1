@@ -33,7 +33,6 @@ function readGameParameters() {
     console.log('Read width input: ', widthInputByUser);
     let heightInputByUser = determineUserInputAsInt(5, 20, 'playingFieldHeightInput', DEFAULTFIELDHEIGHT);
     console.log('Read height input: ', heightInputByUser);
-    //TODO: move it to reset as well
     let minesAmountInputByUser = determineUserInputAsInt(5, 50, 'minesAmountInput', 20);
     console.log('read: ' + minesAmountInputByUser);
 
@@ -45,7 +44,7 @@ function readGameParameters() {
 
 function determineUserInputAsInt(min, max, fieldName, defaultValue) {
     let userInput = document.getElementById(fieldName).value;
-    console.log(`Read ${userInput ? '_nothing_' : userInput} for field ${fieldName} `);
+    console.log(`Read ${!userInput ? '_nothing_' : userInput} for field ${fieldName} `);
     let candidate = parseInt(userInput);
     if (!candidate) return defaultValue;
     if (candidate < min) return min;
