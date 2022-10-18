@@ -1,0 +1,92 @@
+﻿.hinted {
+    animation-name: hintAnimation;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+.playingField {
+    border: 1px solid red;
+    padding: 1px;
+    margin: 3px;
+    width: 35px;
+    text-align: center !important;
+}
+
+.revealed {
+    background-color: yellow;
+    color: black;
+}
+
+.won {
+    background-color: green;
+}
+
+.win {
+    color: green;
+}
+
+.lost {
+    background-color: red;
+}
+
+.loss {
+    color: red;
+}
+
+.danger {
+    background-color: aqua;
+    font-weight: bold;
+    color: black;
+}
+
+.wrong {
+    background-color: white;
+    color: red;
+}
+
+@keyframes hintAnimation {
+    0% {
+        background-color: #1c1b1b;
+    }
+
+    50% {
+        background-color: #00ff00;
+    }
+
+    100% {
+        background-color: #1c1b1b;
+    }
+}
+
+.startingToWin {
+    font-size: large;
+    color: darkgreen;
+}
+
+.continuingToWin {
+    font-size: x-large;
+    color: green;
+}
+
+.almostWon {
+    font-size: xx-large;
+    color: greenyellow;
+}
+
+#tbl td {
+    height: 27px;
+    width: 35px;
+}
+
+.gap20px {
+    gap: 20px;
+}
+
+.mi-wi-300 {
+    min-width: 300px;
+}
+
+.ma-w-120 {
+    max-width: 120px;
+}
+
