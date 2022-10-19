@@ -1,11 +1,13 @@
 ﻿const DEFAULTFIELDWIDTH = 10;
 const DEFAULTFIELDHEIGHT = 10;
+const MINDIMENSIONSIZE = 5;
+const MAXDIMENSIONSIZE = 20;
 readGameParameters();
 const FIELDWIDTH = 10;
 const FIELDHEIGHT = 10;
 const MINECOUNT = 20;
 const MINEMARKER = 'O';
-const WRONGMINEMARKER = 'W';
+const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';// 'W';
 const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
 const SUPPOSEDMINEMARKER = 'X';
 const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
@@ -29,11 +31,11 @@ class Cell {
 }
 
 function readGameParameters() {
-    let widthInputByUser = determineUserInputAsInt(5, 20, 'playingFieldWidthInput', DEFAULTFIELDWIDTH);
+    let widthInputByUser = determineUserInputAsInt(MINDIMENSIONSIZE, MAXDIMENSIONSIZE, 'playingFieldWidthInput', DEFAULTFIELDWIDTH);
     console.log('Read width input: ', widthInputByUser);
-    let heightInputByUser = determineUserInputAsInt(5, 20, 'playingFieldHeightInput', DEFAULTFIELDHEIGHT);
+    let heightInputByUser = determineUserInputAsInt(MINDIMENSIONSIZE, MAXDIMENSIONSIZE, 'playingFieldHeightInput', DEFAULTFIELDHEIGHT);
     console.log('Read height input: ', heightInputByUser);
-    let minesAmountInputByUser = determineUserInputAsInt(5, 50, 'minesAmountInput', 20);
+    let minesAmountInputByUser = determineUserInputAsInt(MINDIMENSIONSIZE, MAXDIMENSIONSIZE, 'minesAmountInput', 20);
     console.log('read: ' + minesAmountInputByUser);
 
     setInputParameter('playingFieldWidthInput', widthInputByUser);
@@ -406,7 +408,7 @@ function gameOver(win) {
         } else if (data !== MINEMARKER && el.classList.contains('danger')) {
             el.classList.remove('danger');
             el.classList.add('wrong');
-            el.innerText = WRONGMINEMARKER;
+            el.innerHTML = WRONGMINEMARKER;
             minesLeft += 1;
         }
     });
