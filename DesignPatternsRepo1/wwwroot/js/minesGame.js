@@ -2,10 +2,11 @@
 const DEFAULTFIELDHEIGHT = 10;
 const MINDIMENSIONSIZE = 5;
 const MAXDIMENSIONSIZE = 20;
-readGameParameters();
-const FIELDWIDTH = 10;
-const FIELDHEIGHT = 10;
-const MINECOUNT = 20;
+let gameParams = readGameParameters();
+let FIELDWIDTH = 10;
+let FIELDHEIGHT = 10;
+let MINECOUNT = 20;
+setGameParameters(gameParams);
 const MINEMARKER = 'O';
 const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';// 'W';
 const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
@@ -42,6 +43,10 @@ function readGameParameters() {
 }
 
 function setGameParameters(params) {
+    FIELDWIDTH = params[0];
+    FIELDHEIGHT = params[1];
+    MINECOUNT = params[2];
+
     setInputParameter('playingFieldWidthInput', params[0]);
     setInputParameter('playingFieldHeightInput', params[1]);
     setInputParameter('minesAmountInput', params[2]);
