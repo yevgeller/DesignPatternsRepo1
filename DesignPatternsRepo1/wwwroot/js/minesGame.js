@@ -38,10 +38,13 @@ function readGameParameters() {
     let minesAmountInputByUser = determineUserInputAsInt(MINDIMENSIONSIZE, MAXDIMENSIONSIZE, 'minesAmountInput', 20);
     console.log('read: ' + minesAmountInputByUser);
 
-    setInputParameter('playingFieldWidthInput', widthInputByUser);
-    setInputParameter('playingFieldHeightInput', heightInputByUser);
-    setInputParameter('minesAmountInput', minesAmountInputByUser);
+    return [widthInputByUser, heightInputByUser, minesAmountInputByUser];
+}
 
+function setGameParameters(params) {
+    setInputParameter('playingFieldWidthInput', params[0]);
+    setInputParameter('playingFieldHeightInput', params[1]);
+    setInputParameter('minesAmountInput', params[2]);
 }
 
 function determineUserInputAsInt(min, max, fieldName, defaultValue) {
