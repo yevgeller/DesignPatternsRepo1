@@ -65,11 +65,23 @@ function determineUserInputAsInt(min, max, fieldName, defaultValue) {
     return candidate;
 }
 
+function setGameParams() {
+    setMinMaxParameters('playingFieldWidthInput', MINDIMENSIONSIZE, MAXDIMENSIONSIZE);
+    setMinMaxParameters('playingFieldHeightInput', MINDIMENSIONSIZE, MAXDIMENSIONSIZE);
+    let minMaxMines = calculateMinMaxMines();
+    setMinMaxParameters('minesAmountInput', minMaxMines[0], minMaxMines[1]);
+}
+
+function calculateMinMaxMines() {
+    //TODO
+    return [5, 10];
+}
+
 function setInputParameter(id, val) {
     document.getElementById(id).value = val;
 }
 
-function setMinMaxParameters(id, val, val2) {
+function setMinMaxParameters(id, min, max) {
     document.getElementById(id).min = min;
     document.getElementById(id).max = max;
 }
