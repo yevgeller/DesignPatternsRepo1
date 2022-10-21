@@ -69,10 +69,10 @@ function setInputParameter(id, val) {
     document.getElementById(id).value = val;
 }
 
-//function setMinMaxParameters(id, val, val2) {
-//    document.getElementById(id).min = min;
-//document.getElementById(id).max = max;
-//}
+function setMinMaxParameters(id, val, val2) {
+    document.getElementById(id).min = min;
+    document.getElementById(id).max = max;
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     resetGame();
