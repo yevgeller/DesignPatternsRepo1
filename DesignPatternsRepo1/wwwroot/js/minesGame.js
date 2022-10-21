@@ -2,6 +2,8 @@
 const DEFAULTFIELDHEIGHT = 10;
 const MINDIMENSIONSIZE = 5;
 const MAXDIMENSIONSIZE = 20;
+const MAXMINESCOUNT = 50;
+const MINMINESCOUNT = 5;
 let gameParams = readGameParameters();
 let FIELDWIDTH = 10;
 let FIELDHEIGHT = 10;
@@ -66,6 +68,11 @@ function determineUserInputAsInt(min, max, fieldName, defaultValue) {
 function setInputParameter(id, val) {
     document.getElementById(id).value = val;
 }
+
+//function setMinMaxParameters(id, val, val2) {
+//    document.getElementById(id).min = min;
+//document.getElementById(id).max = max;
+//}
 
 document.addEventListener('DOMContentLoaded', function () {
     resetGame();
