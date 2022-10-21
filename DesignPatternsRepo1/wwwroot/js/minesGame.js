@@ -76,6 +76,7 @@ function resetGame() {
     map = new Map();
     won = false;
     penaltyTimeInSeconds = 0;
+    setGameParameters(readGameParameters());
     field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill('.'));
     createField();
     calculateMarkers();
