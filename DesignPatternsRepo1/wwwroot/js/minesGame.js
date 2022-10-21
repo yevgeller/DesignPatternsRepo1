@@ -134,8 +134,8 @@ function createField() {
     //TODO: stopwatch here
     let start = (new Date()).getTime();
     while (mineCount > 0) {
-        rndRow = randomNumber(FIELDWIDTH);
-        rndCol = randomNumber(FIELDHEIGHT);
+        rndRow = randomNumber(FIELDHEIGHT);
+        rndCol = randomNumber(FIELDWIDTH);
         if (field[rndRow][rndCol] !== MINEMARKER) {
             field[rndRow][rndCol] = MINEMARKER;
             mineCount--;
@@ -172,7 +172,7 @@ function createTable() {
     let tbody = document.createElement('tbody')
     for (let i = 0; i < FIELDHEIGHT; i++) {
         let tr = document.createElement('tr');
-        for (let j = 0; j < FIELDHEIGHT; j++) {
+        for (let j = 0; j < FIELDWIDTH; j++) {
             let td = document.createElement('td');
             td.setAttribute('data-row', i);
             td.setAttribute('data-col', j);
