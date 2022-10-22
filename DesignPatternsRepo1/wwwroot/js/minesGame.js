@@ -65,7 +65,7 @@ function determineUserInputAsInt(min, max, fieldName, defaultValue) {
     return candidate;
 }
 
-function setGameParams() {
+function setGameParameterGuards() {
     setMinMaxParameters('playingFieldWidthInput', MINDIMENSIONSIZE, MAXDIMENSIONSIZE);
     setMinMaxParameters('playingFieldHeightInput', MINDIMENSIONSIZE, MAXDIMENSIONSIZE);
     let minMaxMines = calculateMinMaxMines();
