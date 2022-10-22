@@ -73,8 +73,9 @@ function setGameParams() {
 }
 
 function calculateMinMaxMines() {
-    //TODO
-    return [5, 10];
+    debugger;
+    let maxAllowed = Math.min(MINECOUNT, Math.floor(0.23 * FIELDWIDTH * FIELDHEIGHT));
+    return [MINMINESCOUNT, maxAllowed];
 }
 
 function setInputParameter(id, val) {
