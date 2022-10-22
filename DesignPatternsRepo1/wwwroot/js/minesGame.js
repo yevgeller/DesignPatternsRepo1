@@ -4,11 +4,10 @@ const MINDIMENSIONSIZE = 5;
 const MAXDIMENSIONSIZE = 20;
 const MAXMINESCOUNT = 50;
 const MINMINESCOUNT = 5;
-let gameParams = readGameParameters();
-let FIELDWIDTH = 10;
-let FIELDHEIGHT = 10;
-let MINECOUNT = 20;
-setGameParameters(gameParams);
+let FIELDWIDTH = 0;
+let FIELDHEIGHT = 0;
+let MINECOUNT = 0;
+resetGameParameters();
 const MINEMARKER = 'O';
 const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';// 'W';
 const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
@@ -31,6 +30,13 @@ class Cell {
         this.row = row;
         this.col = col;
     }
+}
+
+function resetGameParameters() {
+    FIELDWIDTH = 10;
+    FIELDHEIGHT = 10;
+    MINECOUNT = 20;
+    setGameParameters([FIELDWIDTH, FIELDHEIGHT, MINECOUNT]);
 }
 
 function readGameParameters() {
