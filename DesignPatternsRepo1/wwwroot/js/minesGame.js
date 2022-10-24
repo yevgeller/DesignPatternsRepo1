@@ -58,6 +58,7 @@ function setGameParameters(params) {
     setInputParameter('playingFieldWidthInput', params[0]);
     setInputParameter('playingFieldHeightInput', params[1]);
     setInputParameter('minesAmountInput', params[2]);
+    setGameParameterGuards();
 }
 
 function determineUserInputAsInt(min, max, fieldName, defaultValue) {
@@ -79,7 +80,6 @@ function setGameParameterGuards() {
 }
 
 function calculateMinMaxMines() {
-    debugger;
     let maxAllowed = Math.min(MINECOUNT, Math.floor(0.23 * FIELDWIDTH * FIELDHEIGHT));
     return [MINMINESCOUNT, maxAllowed];
 }
