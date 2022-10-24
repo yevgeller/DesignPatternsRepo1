@@ -80,7 +80,7 @@ function setGameParameterGuards() {
 }
 
 function calculateMinMaxMines() {
-    let maxAllowed = Math.min(MINECOUNT, Math.floor(0.23 * FIELDWIDTH * FIELDHEIGHT));
+    let maxAllowed = Math.max(MINECOUNT, Math.floor(0.23 * FIELDWIDTH * FIELDHEIGHT));
     return [MINMINESCOUNT, maxAllowed];
 }
 
@@ -572,5 +572,16 @@ function randomCompliment() {
 
 function resetGameParametersAndStartNewGame() {
     resetGameParameters();
+    resetGame();
+}
+
+function smallestAndEasiest() {
+    setGameParameters([5, 5, 5]);
+    resetGame();
+}
+
+function largestAndHardest() {
+    debugger;
+    setGameParameters([20, 20, 50]);
     resetGame();
 }
