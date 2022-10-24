@@ -2,7 +2,7 @@
 const DEFAULTFIELDHEIGHT = 10;
 const MINDIMENSIONSIZE = 5;
 const MAXDIMENSIONSIZE = 20;
-const MAXMINESCOUNT = 50;
+const MAXMINESCOUNT = 101;
 const MINMINESCOUNT = 5;
 let FIELDWIDTH = 0;
 let FIELDHEIGHT = 0;
@@ -44,7 +44,7 @@ function readGameParameters() {
     console.log('Read width input: ', widthInputByUser);
     let heightInputByUser = determineUserInputAsInt(MINDIMENSIONSIZE, MAXDIMENSIONSIZE, 'playingFieldHeightInput', DEFAULTFIELDHEIGHT);
     console.log('Read height input: ', heightInputByUser);
-    let minesAmountInputByUser = determineUserInputAsInt(MINDIMENSIONSIZE, MAXDIMENSIONSIZE, 'minesAmountInput', 20);
+    let minesAmountInputByUser = parseInt(document.getElementById('minesAmountInput').value); // determineUserInputAsInt(MINMINESCOUNT, MAXMINESCOUNT, 'minesAmountInput', 20);
     console.log('read: ' + minesAmountInputByUser);
 
     return [widthInputByUser, heightInputByUser, minesAmountInputByUser];
@@ -159,6 +159,8 @@ function createField() {
     let mineCount = MINECOUNT;
     //TODO: stopwatch here
     let start = (new Date()).getTime();
+
+    //debugger;
     while (mineCount > 0) {
         rndRow = randomNumber(FIELDHEIGHT);
         rndCol = randomNumber(FIELDWIDTH);
@@ -582,6 +584,6 @@ function smallestAndEasiest() {
 
 function largestAndHardest() {
     debugger;
-    setGameParameters([20, 20, 50]);
+    setGameParameters([20, 20, 100]);
     resetGame();
 }
