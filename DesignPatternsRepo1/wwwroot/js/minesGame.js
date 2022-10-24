@@ -570,3 +570,7 @@ function randomCompliment() {
     return compliments[randomNumber(compliments.length)];
 }
 
+function resetGameParametersAndStartNewGame() {
+    resetGameParameters();
+    resetGame();
+}

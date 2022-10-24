@@ -50,6 +50,13 @@
             <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
+        <div class="mt-3 container is-flex is-flex-direction-row is-align-items-flex-start gap20px">
+            @*<button class="button" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset</button>*@
+            <button id="resetGameParams" class="button" onclick="resetGameParametersAndStartNewGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Reset and restart</button>
+            <button id="resetGameParams" class="button" onclick="resetGameParametersAndStartNewGame()"><i class="fa-solid fa-down-left-and-up-right-to-center mr-3"></i>Smallest and easiest</button> 
+            <button id="resetGameParams" class="button" onclick="resetGameParametersAndStartNewGame()"><i class="fa-solid fa-up-right-and-down-left-from-center mr-3"></i>Largest and hardest</button>
+            @*<button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>*@
+        </div>
         <div class="mt-6 container flex-direction-vertical mi-wi-300 is-hidden" id="scoreboardDiv">
             <div>
                 <h2><i class="fa-solid fa-flag-checkered mr-3"></i>Scoreboard:</h2>
