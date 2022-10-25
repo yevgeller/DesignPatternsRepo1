@@ -53,7 +53,7 @@ function readGameParameters() {
 function setGameParameters(params) {
     FIELDWIDTH = params[0];
     FIELDHEIGHT = params[1];
-    MINECOUNT = params[2];
+    MINECOUNT = sanitizeMineCount(params[2]);
 
     mineCountCandidate = 0;
     setInputParameter('playingFieldWidthInput', params[0]);
