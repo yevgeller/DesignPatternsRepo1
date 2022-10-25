@@ -55,10 +55,18 @@ function setGameParameters(params) {
     FIELDHEIGHT = params[1];
     MINECOUNT = params[2];
 
+    mineCountCandidate = 0;
     setInputParameter('playingFieldWidthInput', params[0]);
     setInputParameter('playingFieldHeightInput', params[1]);
     setInputParameter('minesAmountInput', params[2]);
     setGameParameterGuards();
+}
+
+function sanitizeMineCount(val) {
+    let minMaxMines = calculateMinMaxMines();
+    if (val < minMaxMines[0]) return minMaxMines[0];
+    if (val > minMaxMines[1]) return minMaxMines[1];
+    return val;
 }
 
 function determineUserInputAsInt(min, max, fieldName, defaultValue) {
