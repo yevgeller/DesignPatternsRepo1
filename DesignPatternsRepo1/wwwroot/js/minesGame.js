@@ -56,9 +56,9 @@ function setGameParameters(params) {
     MINECOUNT = sanitizeMineCount(params[2]);
 
     mineCountCandidate = 0;
-    setInputParameter('playingFieldWidthInput', params[0]);
-    setInputParameter('playingFieldHeightInput', params[1]);
-    setInputParameter('minesAmountInput', params[2]);
+    setInputParameter('playingFieldWidthInput', FIELDWIDTH);
+    setInputParameter('playingFieldHeightInput', FIELDHEIGHT);
+    setInputParameter('minesAmountInput', MINECOUNT);
     setGameParameterGuards();
 }
 
