@@ -9,7 +9,7 @@ let FIELDHEIGHT = 0;
 let MINECOUNT = 0;
 resetGameParameters();
 const MINEMARKER = 'O';
-const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';// 'W';
+const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';
 const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
 const SUPPOSEDMINEMARKER = 'X';
 const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
@@ -44,7 +44,7 @@ function readGameParameters() {
     console.log('Read width input: ', widthInputByUser);
     let heightInputByUser = determineUserInputAsInt(MINDIMENSIONSIZE, MAXDIMENSIONSIZE, 'playingFieldHeightInput', DEFAULTFIELDHEIGHT);
     console.log('Read height input: ', heightInputByUser);
-    let minesAmountInputByUser = parseInt(document.getElementById('minesAmountInput').value); // determineUserInputAsInt(MINMINESCOUNT, MAXMINESCOUNT, 'minesAmountInput', 20);
+    let minesAmountInputByUser = determineUserInputAsInt(MINMINESCOUNT, widthInputByUser * heightInputByUser - 1, 'minesAmountInput', 20); //<-- replace 20
     console.log('read: ' + minesAmountInputByUser);
 
     return [widthInputByUser, heightInputByUser, minesAmountInputByUser];
@@ -53,21 +53,20 @@ function readGameParameters() {
 function setGameParameters(params) {
     FIELDWIDTH = params[0];
     FIELDHEIGHT = params[1];
-    MINECOUNT = sanitizeMineCount(params[2]);
+    MINECOUNT = params[2];//sanitizeMineCount(params[2]);
 
-    mineCountCandidate = 0;
     setInputParameter('playingFieldWidthInput', FIELDWIDTH);
     setInputParameter('playingFieldHeightInput', FIELDHEIGHT);
     setInputParameter('minesAmountInput', MINECOUNT);
     setGameParameterGuards();
 }
 
-function sanitizeMineCount(val) {
-    let minMaxMines = calculateMinMaxMines();
-    if (val < minMaxMines[0]) return minMaxMines[0];
-    if (val > minMaxMines[1]) return minMaxMines[1];
-    return val;
-}
+//function sanitizeMineCount(val) {
+//    let minMaxMines = calculateMinMaxMines();
+//    if (val < minMaxMines[0]) return minMaxMines[0];
+//    if (val > minMaxMines[1]) return minMaxMines[1];
+//    return val;
+//}
 
 function determineUserInputAsInt(min, max, fieldName, defaultValue) {
     let userInput = document.getElementById(fieldName).value;
@@ -87,10 +86,10 @@ function setGameParameterGuards() {
     setMinMaxParameters('minesAmountInput', MINMINESCOUNT, (FIELDHEIGHT * FIELDWIDTH - 1));
 }
 
-function calculateMinMaxMines() {
-    let maxAllowed = Math.max(MINECOUNT, Math.floor(0.23 * FIELDWIDTH * FIELDHEIGHT));
-    return [MINMINESCOUNT, maxAllowed];
-}
+//function calculateMinMaxMines() {
+//    let maxAllowed = Math.max(MINECOUNT, Math.floor(0.23 * FIELDWIDTH * FIELDHEIGHT));
+//    return [MINMINESCOUNT, maxAllowed];
+//}
 
 function setInputParameter(id, val) {
     document.getElementById(id).value = val;
