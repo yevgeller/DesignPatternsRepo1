@@ -10,6 +10,7 @@
     best time
     replace data-row and data-col usage with data-cell
     reformat code for a better reading
+    timed game
 *@
 <link rel="stylesheet" href="~/css/minesGame.css" />
 <div class="is-flex">
@@ -27,7 +28,7 @@
             </div>
             <div class="field">
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input ma-w-120" type="number" id="playingFieldWidthInput" placeholder="Width">
+                    <input class="input ma-w-120" type="number" id="playingFieldWidthInput" placeholder="Width" min="5" max="20">
                     <span class="icon is-small is-left">
                         <i class="fa-solid fa-arrows-left-right"></i>
                     </span>
@@ -35,7 +36,7 @@
             </div>
             <div class="field">
                 <p class="control has-icons-left has-icons-right">
-                    <input class="input ma-w-120" type="number" id="playingFieldHeightInput" placeholder="Height">
+                    <input class="input ma-w-120" type="number" id="playingFieldHeightInput" placeholder="Height" min="5" max="20">
                     <span class="icon is-small is-left">
                         <i class="fa-solid fa-arrows-up-down"></i>
                     </span>
