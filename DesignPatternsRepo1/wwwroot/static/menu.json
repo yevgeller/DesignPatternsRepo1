@@ -1,0 +1,17 @@
+{
+  "restaurant": "Eugene's tavern",
+  "menuItems": [
+    {
+      "foodType": "appetizer",
+      "name": "nachos",
+      "price": 2.99
+    }
+  ]
+}
+
+/*
+{
+      "foodType": "appetizer",
+      "name": "",
+      "price": ,
+    },*/
