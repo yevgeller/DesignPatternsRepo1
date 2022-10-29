@@ -5,13 +5,83 @@
       "foodType": "appetizer",
       "name": "nachos",
       "price": 2.99
+    },
+    {
+      "foodType": "appetizer",
+      "name": "chips and salsa",
+      "price": 3.55
+    },
+    {
+      "foodType": "appetizer",
+      "name": "edamame",
+      "price": 3.95
+    },
+    {
+      "foodType": "appetizer",
+      "name": "pretzel",
+      "price": 4.95
+    },
+    {
+      "foodType": "appetizer",
+      "name": "onion rings",
+      "price": 4.95
+    },
+    {
+      "foodType": "appetizer",
+      "name": "carpaccio",
+      "price": 7.98
+    },
+    {
+      "foodType": "appetizer",
+      "name": "gyoza",
+      "price": 9.99
+    },
+    {
+      "foodType": "entree",
+      "name": "classic chili",
+      "price": 6.89
+    },
+    {
+      "foodType": "entree",
+      "name": "curried coconut chicken",
+      "price": 16.89
+    },
+    {
+      "foodType": "entree",
+      "name": "small cheese pizza",
+      "price": 7.95
+    },
+    {
+      "foodType": "entree",
+      "name": "deep-dish pizza",
+      "price": 16.65
+    },
+    {
+      "foodType": "entree",
+      "name": "carnitas burrito",
+      "price": 8.00
+    },
+    {
+      "foodType": "entree",
+      "name": "chicken and waffles",
+      "price": 16.60
+    },
+    {
+      "foodType": "entree",
+      "name": "philly roll",
+      "price": 8.95
+    },
+    {
+      "foodType": "entree",
+      "name": "slow cooker pot roast",
+      "price": 16.19
     }
   ]
 }
 
-/*
-{
-      "foodType": "appetizer",
-      "name": "",
-      "price": ,
-    },*/
+
+//{
+//      "foodType": "entree",
+//      "name": "",
+//      "price": ,
+//    },
