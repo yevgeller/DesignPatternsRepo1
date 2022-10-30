@@ -57,20 +57,13 @@ function readGameParameters() {
 function setGameParameters(params) {
     FIELDWIDTH = params[0];
     FIELDHEIGHT = params[1];
-    MINECOUNT = params[2];//sanitizeMineCount(params[2]);
+    MINECOUNT = params[2];
 
     setInputParameter('playingFieldWidthInput', FIELDWIDTH);
     setInputParameter('playingFieldHeightInput', FIELDHEIGHT);
     setInputParameter('minesAmountInput', MINECOUNT);
     setGameParameterGuards();
 }
-
-//function sanitizeMineCount(val) {
-//    let minMaxMines = calculateMinMaxMines();
-//    if (val < minMaxMines[0]) return minMaxMines[0];
-//    if (val > minMaxMines[1]) return minMaxMines[1];
-//    return val;
-//}
 
 function determineUserInputAsInt(min, max, fieldName, defaultValue) {
     let userInput = document.getElementById(fieldName).value;
@@ -84,16 +77,8 @@ function determineUserInputAsInt(min, max, fieldName, defaultValue) {
 }
 
 function setGameParameterGuards() {
-    //setMinMaxParameters('playingFieldWidthInput', MINDIMENSIONSIZE, MAXDIMENSIONSIZE);
-    //setMinMaxParameters('playingFieldHeightInput', MINDIMENSIONSIZE, MAXDIMENSIONSIZE);
-    //let minMaxMines = calculateMinMaxMines();
     setMinMaxParameters('minesAmountInput', MINMINESCOUNT, (FIELDHEIGHT * FIELDWIDTH - 1));
 }
-
-//function calculateMinMaxMines() {
-//    let maxAllowed = Math.max(MINECOUNT, Math.floor(0.23 * FIELDWIDTH * FIELDHEIGHT));
-//    return [MINMINESCOUNT, maxAllowed];
-//}
 
 function setInputParameter(id, val) {
     document.getElementById(id).value = val;
@@ -171,7 +156,6 @@ function createField() {
     //TODO: stopwatch here
     let start = (new Date()).getTime();
 
-    //debugger;
     while (mineCount > 0) {
         rndRow = randomNumber(FIELDHEIGHT);
         rndCol = randomNumber(FIELDWIDTH);
