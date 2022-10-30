@@ -1,8 +1,10 @@
 ﻿const DEFAULTFIELDWIDTH = 10;
 const DEFAULTFIELDHEIGHT = 10;
+const DEFAULTMINECOUNT = 20;
 const MINDIMENSIONSIZE = 5;
 const MAXDIMENSIONSIZE = 20;
-const MAXMINESCOUNT = 101;
+const MAXMINESCOUNT = MAXDIMENSIONSIZE * MAXDIMENSIONSIZE - 1;
+const MINERATIO = 0.23;
 const MINMINESCOUNT = 5;
 let FIELDWIDTH = 0;
 let FIELDHEIGHT = 0;
@@ -33,9 +35,9 @@ class Cell {
 }
 
 function resetGameParameters() {
-    FIELDWIDTH = 10;
-    FIELDHEIGHT = 10;
-    MINECOUNT = 20;
+    FIELDWIDTH = DEFAULTFIELDWIDTH;
+    FIELDHEIGHT = DEFAULTFIELDHEIGHT;
+    MINECOUNT = DEFAULTMINECOUNT;
     setGameParameters([FIELDWIDTH, FIELDHEIGHT, MINECOUNT]);
 }
 
@@ -44,7 +46,9 @@ function readGameParameters() {
     console.log('Read width input: ', widthInputByUser);
     let heightInputByUser = determineUserInputAsInt(MINDIMENSIONSIZE, MAXDIMENSIONSIZE, 'playingFieldHeightInput', DEFAULTFIELDHEIGHT);
     console.log('Read height input: ', heightInputByUser);
-    let minesAmountInputByUser = determineUserInputAsInt(MINMINESCOUNT, widthInputByUser * heightInputByUser - 1, 'minesAmountInput', 20); //<-- replace 20
+
+    let appropriateMineCountForTheseDimensions = Math.floor(widthInputByUser * heightInputByUser * MINERATIO);
+    let minesAmountInputByUser = determineUserInputAsInt(MINMINESCOUNT, widthInputByUser * heightInputByUser - 1, 'minesAmountInput', appropriateMineCountForTheseDimensions); 
     console.log('read: ' + minesAmountInputByUser);
 
     return [widthInputByUser, heightInputByUser, minesAmountInputByUser];
