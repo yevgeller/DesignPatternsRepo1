@@ -254,9 +254,29 @@ function clickCell(el) {
     revealCell(el.currentTarget);
 }
 
+function determineRowAndCol(attrData) {
+    //attrData is expected to be 'cell-X-Y' where X is row and Y is column
+    let ret = attrData.replace('cell-', '').split('-');
+    if (ret.length !== 2) {
+        console.error(`Cannot extract row/col from ${attrData}`);
+        throw 'Improper format for data-cell attribute';
+    }
+
+    return ret;
+}
+
+function helperLogRowColDifferences(row, col, rowColArr) {
+    console.assert(row === rowColArr[0], 'data-row !== rowColArr[0]');
+    console.assert(col === rowColArr[1], 'data-col !== rowColArr[1]');
+    console.log(`Row is ${row}, rowColArr[0] is ${rowColArr[0]}, col is ${col}, rowColArr[1] is ${rowColArr[1]}`);
+}
+
 function revealCell(el) {
     let row = el.getAttribute('data-row');
     let col = el.getAttribute('data-col');
+    let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
+    helperLogRowColDifferences(row, col, rowCol);
+
     if (!map.get(row + '-' + col)) {
         map.set(row + '-' + col, 1);
     }
