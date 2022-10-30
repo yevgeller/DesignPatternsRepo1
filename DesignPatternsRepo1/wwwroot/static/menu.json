@@ -75,13 +75,106 @@
       "foodType": "entree",
       "name": "slow cooker pot roast",
       "price": 16.19
+    },
+    {
+      "foodType": "entree",
+      "name": "cuban sandwich",
+      "price": 9.80
+    },
+    {
+      "foodType": "entree",
+      "name": "biscuits and gravy",
+      "price": 15.09
+    },
+    {
+      "foodType": "entree",
+      "name": "fried chicken",
+      "price": 9.90
+    },
+    {
+      "foodType": "entree",
+      "name": "lasagna with meat sauce",
+      "price": 15.00
+    },
+    {
+      "foodType": "entree",
+      "name": "spaghetti and meatballs",
+      "price": 9.95
+    },
+    {
+      "foodType": "entree",
+      "name": "chicken marsala",
+      "price": 13.30
+    },
+    {
+      "foodType": "entree",
+      "name": "cheeseburger",
+      "price": 11.06
+    },
+    {
+      "foodType": "entree",
+      "name": "margherita Pizza",
+      "price": 13.09
+    },
+    {
+      "foodType": "entree",
+      "name": "pasta carbonara",
+      "price": 11.79
+    },
+    {
+      "foodType": "entree",
+      "name": "fettuccine alfredo",
+      "price": 13.05
+    },
+    {
+      "foodType": "entree",
+      "name": "fish and chips",
+      "price": 12.05
+    },
+    {
+      "foodType": "entree",
+      "name": "bacon cheeseburger",
+      "price": 12.95
+    },
+    {
+      "foodType": "entree",
+      "name": "beef stroganoff",
+      "price": 12.15
+    },
+    {
+      "foodType": "dessert",
+      "name": "apple pie",
+      "price": 5.25
+    },
+    {
+      "foodType": "dessert",
+      "name": "ice cream scoop",
+      "price": 1.95
+    },
+    {
+      "foodType": "dessert",
+      "name": "flan",
+      "price": 4.75
+    },
+    {
+      "foodType": "dessert",
+      "name": "chocolate mousse",
+      "price": 3.95
+    },
+    {
+      "foodType": "dessert",
+      "name": "gelato",
+      "price": 4.45
+    },
+    {
+      "foodType": "dessert",
+      "name": "big ice cream",
+      "price": 5.36
+    },
+    {
+      "foodType": "dessert",
+      "name": "huge ice cream",
+      "price": 7.03
     }
   ]
 }
-
-
-//{
-//      "foodType": "entree",
-//      "name": "",
-//      "price": ,
-//    },
