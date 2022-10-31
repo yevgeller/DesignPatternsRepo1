@@ -62,22 +62,18 @@ function setGameParameters(params) {
     setInputParameter('playingFieldWidthInput', FIELDWIDTH);
     setInputParameter('playingFieldHeightInput', FIELDHEIGHT);
     setInputParameter('minesAmountInput', MINECOUNT);
-    setGameParameterGuards();
+    setMinMaxParameters('minesAmountInput', MINMINESCOUNT, (FIELDHEIGHT * FIELDWIDTH - 1));
 }
 
 function determineUserInputAsInt(min, max, fieldName, defaultValue) {
     let userInput = document.getElementById(fieldName).value;
-    console.log(`Read ${!userInput ? '_nothing_' : userInput} for field ${fieldName} `);
+    //console.log(`Read ${!userInput ? '_nothing_' : userInput} for field ${fieldName} `);
     let candidate = parseInt(userInput);
     if (!candidate) return defaultValue;
     if (candidate < min) return min;
     if (candidate > max) return max;
 
     return candidate;
-}
-
-function setGameParameterGuards() {
-    setMinMaxParameters('minesAmountInput', MINMINESCOUNT, (FIELDHEIGHT * FIELDWIDTH - 1));
 }
 
 function setInputParameter(id, val) {
@@ -265,17 +261,16 @@ function determineRowAndCol(attrData) {
     return ret;
 }
 
-function helperLogRowColDifferences(row, col, rowColArr) {
-    console.assert(row === rowColArr[0], 'data-row !== rowColArr[0]');
-    console.assert(col === rowColArr[1], 'data-col !== rowColArr[1]');
-    console.log(`Row is ${row}, rowColArr[0] is ${rowColArr[0]}, col is ${col}, rowColArr[1] is ${rowColArr[1]}`);
-}
+//function helperLogRowColDifferences(row, col, rowColArr) {
+//    console.assert(row === rowColArr[0], 'data-row !== rowColArr[0]');
+//    console.assert(col === rowColArr[1], 'data-col !== rowColArr[1]');
+//    console.log(`Row is ${row}, rowColArr[0] is ${rowColArr[0]}, col is ${col}, rowColArr[1] is ${rowColArr[1]}`);
+//}
 
 function revealCell(el) {    
     let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
     let row = rowCol[0];// el.getAttribute('data-row');
     let col = rowCol[1];// el.getAttribute('data-col');
-    helperLogRowColDifferences(row, col, rowCol);
 
     if (!map.get(row + '-' + col)) {
         map.set(row + '-' + col, 1);
@@ -303,8 +298,11 @@ function revealCell(el) {
 }
 
 function revealSurroundingCells(el) {
-    let row = el.target.getAttribute('data-row');
-    let col = el.target.getAttribute('data-col');
+    let rowCol = determineRowAndCol(el.target.getAttribute('data-cell'));
+    let row = rowCol[0];
+    let col = rowCol[1];
+    //let row = el.target.getAttribute('data-row');
+    //let col = el.target.getAttribute('data-col');
     let toProcess = getSurroundingCellsThatCanBeRevealedBecauseAllDangerCellsAreMarked(row, col);
     if (toProcess.length) {
         processCells(toProcess);
@@ -446,8 +444,11 @@ function gameOver(win) {
     clearInterval(timerIntervalId);
     timerIntervalId = null;
     document.querySelectorAll('#playingField td').forEach(el => {
-        let row = el.getAttribute('data-row');
-        let col = el.getAttribute('data-col');
+        let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
+        let row = rowCol[0];// el.getAttribute('data-row');
+        let col = rowCol[1];// el.getAttribute('data-col');
+        //let row = el.getAttribute('data-row');
+        //let col = el.getAttribute('data-col');
 
         let data = getCellData(row, col);
         el.classList.remove('hinted');
