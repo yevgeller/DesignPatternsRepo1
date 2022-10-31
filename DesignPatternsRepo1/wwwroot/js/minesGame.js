@@ -271,10 +271,10 @@ function helperLogRowColDifferences(row, col, rowColArr) {
     console.log(`Row is ${row}, rowColArr[0] is ${rowColArr[0]}, col is ${col}, rowColArr[1] is ${rowColArr[1]}`);
 }
 
-function revealCell(el) {
-    let row = el.getAttribute('data-row');
-    let col = el.getAttribute('data-col');
+function revealCell(el) {    
     let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
+    let row = rowCol[0];// el.getAttribute('data-row');
+    let col = rowCol[1];// el.getAttribute('data-col');
     helperLogRowColDifferences(row, col, rowCol);
 
     if (!map.get(row + '-' + col)) {
