@@ -193,8 +193,8 @@ function createTable() {
         let tr = document.createElement('tr');
         for (let j = 0; j < FIELDWIDTH; j++) {
             let td = document.createElement('td');
-            td.setAttribute('data-row', i);
-            td.setAttribute('data-col', j);
+            //td.setAttribute('data-row', i);
+            //td.setAttribute('data-col', j);
             td.setAttribute('data-hidden', '1');
             td.setAttribute('data-cell', 'cell-' + i + '-' + j);
             td.setAttribute('data-hint', determineHint(field[i][j]));
