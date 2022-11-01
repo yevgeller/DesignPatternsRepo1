@@ -599,7 +599,6 @@ function smallestAndEasiest() {
 }
 
 function largestAndHardest() {
-    debugger;
     setGameParameters([20, 20, 100]);
     resetGame();
 }
