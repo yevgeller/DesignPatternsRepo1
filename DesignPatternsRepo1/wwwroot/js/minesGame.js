@@ -133,6 +133,7 @@ function showTimer() {
     document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
 }
 
+//Timed mode
 function getRemainingSeconds() {
     let currentTime = (new Date).getTime();
     return Math.round(Math.floor(gameStartedAtSeconds - startTime) / 1000);
