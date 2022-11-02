@@ -133,6 +133,11 @@ function showTimer() {
     document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
 }
 
+function getRemainingSeconds() {
+    let currentTime = (new Date).getTime();
+    return Math.round(Math.floor(gameStartedAtSeconds - startTime) / 1000);
+}
+
 function formatSecondsIntoTimeString(secs) {
     let totalDays = Math.floor(secs / secondsInADay);
     let totalHours = Math.floor((secs - totalDays * secondsInADay) / secondsInAnHour);
