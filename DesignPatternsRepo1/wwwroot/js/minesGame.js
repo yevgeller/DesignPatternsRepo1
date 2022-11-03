@@ -26,6 +26,7 @@ let penaltyTimeInSeconds = 0;
 let secondsInAMinute = 60;
 let secondsInAnHour = secondsInAMinute * 60;
 let secondsInADay = secondsInAnHour * 24;
+let timedMode = false;
 
 class Cell {
     constructor(row, col) {
@@ -107,7 +108,24 @@ function resetGame() {
         timerIntervalId = setInterval(showTimer, 1000);
     }
     hintCount = 0;
-    document.getElementById('elapsedTimeString').innerText = '0 seconds.'
+    if (timedMode) {
+        let timerDisplay = document.getElementById('remainingTimeString'); 
+        timerDisplay.innerText = '0 seconds.';
+        document.getElementById('remainingTime').style.visibility = 'visible';
+
+        let unneededTimerDisplay = document.getElementById('elapsedTime');
+        unneededTimerDisplay.style.visibility = 'collapsed';
+        //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
+    } else {
+        let timerDiv = document.getElementById('elapsedTime');
+        timerDiv.style.visibility = 'visible';
+        let timerDisplay = document.getElementById('elapsedTimeString');
+        timerDisplay.innerText = '0 seconds.';
+
+        let unneededTimerDisplay = document.getElementById('remainingTime');
+        unneededTimerDisplay.style.visibility = 'collapsed';
+        //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
+    }
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('click', clickCell));
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
     document.getElementById('largeHintButton').disabled = !getHintCandidates(true).length;
@@ -142,7 +160,14 @@ function getRemainingSeconds() {
 function timedModeChange() {
     debugger;
     let el = document.getElementById('timedModeSwitch');
+    timedMode = el.checked;
+    resetGame();
+
     if (el.checked) {
+        //hide elapsed time
+        //stop elapsed time?
+        //start countdown on click in a field
+        //start timer to lose game if time is out
         console.log('checked');
     } else {
         console.log('unchecked');
