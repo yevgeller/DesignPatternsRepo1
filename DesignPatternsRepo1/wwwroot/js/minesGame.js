@@ -9,6 +9,7 @@ const MINMINESCOUNT = 5;
 let FIELDWIDTH = 0;
 let FIELDHEIGHT = 0;
 let MINECOUNT = 0;
+let COUNTDOWNSECONDS = 60;
 resetGameParameters();
 const MINEMARKER = 'O';
 const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';
@@ -27,6 +28,7 @@ let secondsInAMinute = 60;
 let secondsInAnHour = secondsInAMinute * 60;
 let secondsInADay = secondsInAnHour * 24;
 let timedMode = false;
+let countdownSeconds = COUNTDOWNSECONDS;
 
 class Cell {
     constructor(row, col) {
@@ -91,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function stopAndClearAllGameTimers() {
-        clearInterval(timerIntervalId);
+    clearInterval(timerIntervalId);
     timerIntervalId = null;
     clearInterval(timedModeTimerIntervalId);
     timedModeTimerIntervalId = null;
@@ -115,13 +117,15 @@ function resetGame() {
     hintCount = 0;
     stopAndClearAllGameTimers();
     if (timedMode) {
-
+        countdownSeconds = COUNTDOWNSECONDS;
         let timerDisplay = document.getElementById('remainingTimeString');
         timerDisplay.innerText = '0 seconds.';
         document.getElementById('remainingTime').style.visibility = 'visible';
 
         let unneededTimerDisplay = document.getElementById('elapsedTime');
-        debugger;
+        if (!timedModeTimerIntervalId) {
+            timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
+        }
         //unneededTimerDisplay.style.visibility = 'hidden'; //none
         //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
     } else {
@@ -160,6 +164,11 @@ function getElapsedSecondsAdjustedForPenalties() {
 function showTimer() {
     let seconds = getElapsedSecondsAdjustedForPenalties();
     document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
+}
+
+function showTimedModeCountdown() {
+    countdownSeconds -= 1;
+    document.getElementById('remainingTimeString').innerText = formatSecondsIntoTimeString(seconds);
 }
 
 //Timed mode
