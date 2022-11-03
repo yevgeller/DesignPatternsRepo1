@@ -49,7 +49,7 @@ function readGameParameters() {
     console.log('Read height input: ', heightInputByUser);
 
     let appropriateMineCountForTheseDimensions = Math.floor(widthInputByUser * heightInputByUser * MINERATIO);
-    let minesAmountInputByUser = determineUserInputAsInt(MINMINESCOUNT, widthInputByUser * heightInputByUser - 1, 'minesAmountInput', appropriateMineCountForTheseDimensions); 
+    let minesAmountInputByUser = determineUserInputAsInt(MINMINESCOUNT, widthInputByUser * heightInputByUser - 1, 'minesAmountInput', appropriateMineCountForTheseDimensions);
     console.log('read: ' + minesAmountInputByUser);
 
     return [widthInputByUser, heightInputByUser, minesAmountInputByUser];
@@ -104,18 +104,16 @@ function resetGame() {
     setMineCountDisplay();
     let nd = new Date;
     startTime = nd.getTime();
-    if (!timerIntervalId) {
-        timerIntervalId = setInterval(showTimer, 1000);
-    }
+
     hintCount = 0;
     if (timedMode) {
-        let timerDisplay = document.getElementById('remainingTimeString'); 
+        let timerDisplay = document.getElementById('remainingTimeString');
         timerDisplay.innerText = '0 seconds.';
         document.getElementById('remainingTime').style.visibility = 'visible';
 
         let unneededTimerDisplay = document.getElementById('elapsedTime');
         debugger;
-        unneededTimerDisplay.style.visibility = 'hidden'; //none
+        //unneededTimerDisplay.style.visibility = 'hidden'; //none
         //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
     } else {
         let timerDiv = document.getElementById('elapsedTime');
@@ -124,8 +122,11 @@ function resetGame() {
         timerDisplay.innerText = '60 seconds.';
 
         let unneededTimerDisplay = document.getElementById('remainingTime');
-        unneededTimerDisplay.style.visibility = 'hidden'; //none
+        //unneededTimerDisplay.style.visibility = 'hidden'; //none
         //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
+        if (!timerIntervalId) {
+            timerIntervalId = setInterval(showTimer, 1000);
+        }
     }
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('click', clickCell));
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
@@ -309,7 +310,7 @@ function determineRowAndCol(attrData) {
 //    console.log(`Row is ${row}, rowColArr[0] is ${rowColArr[0]}, col is ${col}, rowColArr[1] is ${rowColArr[1]}`);
 //}
 
-function revealCell(el) {    
+function revealCell(el) {
     let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
     let row = rowCol[0];// el.getAttribute('data-row');
     let col = rowCol[1];// el.getAttribute('data-col');
