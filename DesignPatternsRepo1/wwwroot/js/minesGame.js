@@ -114,16 +114,17 @@ function resetGame() {
         document.getElementById('remainingTime').style.visibility = 'visible';
 
         let unneededTimerDisplay = document.getElementById('elapsedTime');
-        unneededTimerDisplay.style.visibility = 'collapsed';
+        debugger;
+        unneededTimerDisplay.style.visibility = 'hidden'; //none
         //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
     } else {
         let timerDiv = document.getElementById('elapsedTime');
         timerDiv.style.visibility = 'visible';
         let timerDisplay = document.getElementById('elapsedTimeString');
-        timerDisplay.innerText = '0 seconds.';
+        timerDisplay.innerText = '60 seconds.';
 
         let unneededTimerDisplay = document.getElementById('remainingTime');
-        unneededTimerDisplay.style.visibility = 'collapsed';
+        unneededTimerDisplay.style.visibility = 'hidden'; //none
         //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
     }
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('click', clickCell));
@@ -158,7 +159,7 @@ function getRemainingSeconds() {
 }
 
 function timedModeChange() {
-    debugger;
+    //debugger;
     let el = document.getElementById('timedModeSwitch');
     timedMode = el.checked;
     resetGame();
@@ -168,9 +169,9 @@ function timedModeChange() {
         //stop elapsed time?
         //start countdown on click in a field
         //start timer to lose game if time is out
-        console.log('checked');
+        console.log('timed mode selected');
     } else {
-        console.log('unchecked');
+        console.log('take all the time you need');
     }
 }
 
