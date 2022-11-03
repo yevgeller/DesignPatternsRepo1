@@ -20,7 +20,7 @@ let map = new Map();
 let won = false;
 let minesLeft = 0;
 let startTime = (new Date).getTime();
-let timerIntervalId;
+let timerIntervalId, timedModeTimerIntervalId;
 let hintCount = 0;
 let penaltyTimeInSeconds = 0;
 let secondsInAMinute = 60;
@@ -90,6 +90,13 @@ document.addEventListener('DOMContentLoaded', function () {
     resetGame();
 });
 
+function stopAndClearAllGameTimers() {
+        clearInterval(timerIntervalId);
+    timerIntervalId = null;
+    clearInterval(timedModeTimerIntervalId);
+    timedModeTimerIntervalId = null;
+}
+
 function resetGame() {
     let start = (new Date()).getTime();
     map = new Map();
@@ -106,7 +113,9 @@ function resetGame() {
     startTime = nd.getTime();
 
     hintCount = 0;
+    stopAndClearAllGameTimers();
     if (timedMode) {
+
         let timerDisplay = document.getElementById('remainingTimeString');
         timerDisplay.innerText = '0 seconds.';
         document.getElementById('remainingTime').style.visibility = 'visible';
