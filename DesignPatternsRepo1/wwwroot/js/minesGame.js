@@ -139,6 +139,16 @@ function getRemainingSeconds() {
     return Math.round(Math.floor(gameStartedAtSeconds - startTime) / 1000);
 }
 
+function timedModeChange() {
+    debugger;
+    let el = document.getElementById('timedModeSwitch');
+    if (el.checked) {
+        console.log('checked');
+    } else {
+        console.log('unchecked');
+    }
+}
+
 function formatSecondsIntoTimeString(secs) {
     let totalDays = Math.floor(secs / secondsInADay);
     let totalHours = Math.floor((secs - totalDays * secondsInADay) / secondsInAnHour);
