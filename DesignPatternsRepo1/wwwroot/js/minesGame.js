@@ -122,9 +122,9 @@ function resetGame() {
         document.getElementById('timerHeaderString').innerText = 'Remaining time';
         document.getElementById('timerValue').innerText = `${countdownSeconds} seconds timer will start as soon as any cell on the field is clicked.`;
 
-        document.getElementById('remainingTimeString').innerText = '60 seconds timer will start as soon as any cell on the field is clicked.';
-        document.getElementById('remainingTime').classList.remove('is-hidden');
-        document.getElementById('elapsedTime').classList.add('is-hidden');
+        //document.getElementById('remainingTimeString').innerText = '60 seconds timer will start as soon as any cell on the field is clicked.';
+        //document.getElementById('remainingTime').classList.remove('is-hidden');
+        //document.getElementById('elapsedTime').classList.add('is-hidden');
         //if (!timedModeTimerIntervalId) {
         //    timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
         //}
@@ -132,9 +132,9 @@ function resetGame() {
         document.getElementById('timerHeaderString').innerText = 'Elapsed time';
         document.getElementById('timerValue').innerText = `Timer will start as soon as any cell on the field is clicked.`;
 
-        document.getElementById('elapsedTime').classList.remove('is-hidden');
-        document.getElementById('elapsedTimeString').innerText = 'Timer will start as soon as the game is started.';
-        document.getElementById('remainingTime').classList.add('is-hidden');
+        //document.getElementById('elapsedTime').classList.remove('is-hidden');
+        //document.getElementById('elapsedTimeString').innerText = 'Timer will start as soon as the game is started.';
+        //document.getElementById('remainingTime').classList.add('is-hidden');
 
         //if (!timerIntervalId) {
         //    timerIntervalId = setInterval(showTimer, 1000);
@@ -162,13 +162,13 @@ function getElapsedSecondsAdjustedForPenalties() {
 
 function showTimer() {
     let seconds = getElapsedSecondsAdjustedForPenalties();
-    document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
+    document.getElementById('timerValue').innerText = formatSecondsIntoTimeString(seconds);
 
 }
 
 function showTimedModeCountdown() {
     countdownSeconds -= 1;
-    document.getElementById('remainingTimeString').innerText = formatSecondsIntoTimeString(countdownSeconds);
+    document.getElementById('timerValue').innerText = formatSecondsIntoTimeString(countdownSeconds);
     if (countdownSeconds <= 0) {
         gameOver(false);
     }
