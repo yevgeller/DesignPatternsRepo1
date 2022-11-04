@@ -119,11 +119,14 @@ function resetGame() {
     stopAndClearAllGameTimers();
     if (timedMode) {
         countdownSeconds = COUNTDOWNSECONDS;
-        let timerDisplay = document.getElementById('remainingTimeString');
-        timerDisplay.innerText = '0 seconds.';
-        document.getElementById('remainingTime').style.visibility = 'visible';
+        //let timerDisplay =
+            document.getElementById('remainingTimeString').innerText = '60 seconds.';
+        //timerDisplay;
+        document.getElementById('remainingTime').classList.remove('is-hidden');
 
-        let unneededTimerDisplay = document.getElementById('elapsedTime');
+        //let unneededTimerDisplay =
+            document.getElementById('elapsedTime').classList.add('is-hidden');
+        //unneededTimerDisplay.;
         if (!timedModeTimerIntervalId) {
             timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
         }
