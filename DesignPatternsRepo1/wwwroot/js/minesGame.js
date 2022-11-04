@@ -164,11 +164,15 @@ function getElapsedSecondsAdjustedForPenalties() {
 function showTimer() {
     let seconds = getElapsedSecondsAdjustedForPenalties();
     document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
+    
 }
 
 function showTimedModeCountdown() {
     countdownSeconds -= 1;
-    document.getElementById('remainingTimeString').innerText = formatSecondsIntoTimeString(seconds);
+    document.getElementById('remainingTimeString').innerText = formatSecondsIntoTimeString(countdownSeconds);
+    if (countdownSeconds <= 0) {
+        gameOver(false);
+    }
 }
 
 //Timed mode
@@ -502,8 +506,8 @@ function setRevealed(el) {
 }
 
 function gameOver(win) {
-    clearInterval(timerIntervalId);
-    timerIntervalId = null;
+    debugger;
+    stopAndClearAllGameTimers();
     document.querySelectorAll('#playingField td').forEach(el => {
         let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
         let row = rowCol[0];// el.getAttribute('data-row');
