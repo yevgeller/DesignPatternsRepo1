@@ -119,31 +119,20 @@ function resetGame() {
     stopAndClearAllGameTimers();
     if (timedMode) {
         countdownSeconds = COUNTDOWNSECONDS;
-        //let timerDisplay =
-            document.getElementById('remainingTimeString').innerText = '60 seconds.';
-        //timerDisplay;
+        document.getElementById('remainingTimeString').innerText = '60 seconds timer will start as soon as any cell on the field is clicked.';
         document.getElementById('remainingTime').classList.remove('is-hidden');
-
-        //let unneededTimerDisplay =
-            document.getElementById('elapsedTime').classList.add('is-hidden');
-        //unneededTimerDisplay.;
-        if (!timedModeTimerIntervalId) {
-            timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
-        }
-        //unneededTimerDisplay.style.visibility = 'hidden'; //none
-        //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
+        document.getElementById('elapsedTime').classList.add('is-hidden');
+        //if (!timedModeTimerIntervalId) {
+        //    timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
+        //}
     } else {
-        let timerDiv = document.getElementById('elapsedTime');
-        timerDiv.style.visibility = 'visible';
-        let timerDisplay = document.getElementById('elapsedTimeString');
-        timerDisplay.innerText = '60 seconds.';
+        document.getElementById('elapsedTime').classList.remove('is-hidden');
+        document.getElementById('elapsedTimeString').innerText = 'Timer will start as soon as the game is started.';
+        document.getElementById('remainingTime').classList.add('is-hidden');
 
-        let unneededTimerDisplay = document.getElementById('remainingTime');
-        //unneededTimerDisplay.style.visibility = 'hidden'; //none
-        //document.getElementById('elapsedTimeString').innerText = '0 seconds.';
-        if (!timerIntervalId) {
-            timerIntervalId = setInterval(showTimer, 1000);
-        }
+        //if (!timerIntervalId) {
+        //    timerIntervalId = setInterval(showTimer, 1000);
+        //}
     }
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('click', clickCell));
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
@@ -168,7 +157,7 @@ function getElapsedSecondsAdjustedForPenalties() {
 function showTimer() {
     let seconds = getElapsedSecondsAdjustedForPenalties();
     document.getElementById('elapsedTimeString').innerText = formatSecondsIntoTimeString(seconds);
-    
+
 }
 
 function showTimedModeCountdown() {
@@ -311,6 +300,14 @@ function setMineCountDisplay() {
 }
 
 function clickCell(el) {
+    if (timedMode && !timedModeTimerIntervalId) {
+        console.log('timed mode timer started');
+        timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
+    }
+    if (!timedMode && !timerIntervalId) {
+        console.log('count up started');
+        timerIntervalId = setInterval(showTimer, 1000);
+    }
     el.target.classList.remove('hinted');
     let hidden = el.currentTarget.getAttribute('data-hidden');
     if (hidden == '0') {
@@ -567,6 +564,7 @@ function giveHint(isBig) {
         hintCandidates[rnd].classList.add('hinted');
     }
     penaltyTimeInSeconds += (isBig ? 30 : 10);
+    if (timedMode) countdownSeconds -= (isBig ? 30 : 10);
     hintCount++;
 }
 
