@@ -53,6 +53,7 @@
             <button id="setSmallEasy" class="button" onclick="smallestAndEasiest()"><i class="fa-solid fa-x"></i><i class="fa-solid fa-s mr-3"></i>Smallest and easiest</button>
             <button id="resetGameParams" class="button" onclick="resetGameParametersAndStartNewGame()"><i class="fa-solid fa-m mr-3"></i>Default game settings</button>
             <button id="setLargeHard" class="button" onclick="largestAndHardest()"><i class="fa-solid fa-x"></i><i class="fa-solid fa-l mr-3"></i>Largest and hardest</button>
+            <button id="timedModeSwitch" class="button" onclick="timedModeChange();"><i class="fa-solid fa-stopwatch mr-3"></i>Timed Mode</button>
         </div>
         <div class="mt-6 container flex-direction-vertical mi-wi-300 is-hidden" id="scoreboardDiv">
             <div>
@@ -67,10 +68,10 @@
         </div>
        @* <div id="elapsedTime"><i class="fa-regular fa-clock mr-2"></i>Elapsed: <span id="elapsedTimeString"></span></div>
         <div id="remainingTime"><i class="fa-regular fa-clock mr-2"></i>Remaining time: <span id="remainingTimeString"></span></div>*@
-        <div id="timerArea"><i class="fa-regular fa-clock mr-2"></i><span id="timerHeaderString"></span>: <span id="timerValue"></span></div>
-
-        <label class="checkbox">
-            <input id="timedModeSwitch" type="checkbox" onclick="timedModeChange();"/>Timed mode</label>
+        <div id="timerArea"><i class="fa-regular fa-clock mr-2"></i><span id="timerHeaderString"></span>: <div id="timerValue" style="min-height:60px;"></div></div>
+        
+        @*<label class="checkbox">
+            <input id="timedModeSwitch" type="checkbox" onclick="timedModeChange();"/>Timed mode</label>*@
         <div><i class="fa-solid fa-asterisk mr-2 mt-3"></i> Mines left: <span id="minesLeft"></span></div>
     </div>
 </div>

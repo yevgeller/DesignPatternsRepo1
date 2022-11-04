@@ -112,8 +112,7 @@ function resetGame() {
     createTable();
     minesLeft = MINECOUNT;
     setMineCountDisplay();
-    let nd = new Date;
-    startTime = nd.getTime();
+     
 
     hintCount = 0;
     stopAndClearAllGameTimers();
@@ -121,24 +120,9 @@ function resetGame() {
         countdownSeconds = COUNTDOWNSECONDS;
         document.getElementById('timerHeaderString').innerText = 'Remaining time';
         document.getElementById('timerValue').innerText = `${countdownSeconds} seconds timer will start as soon as any cell on the field is clicked.`;
-
-        //document.getElementById('remainingTimeString').innerText = '60 seconds timer will start as soon as any cell on the field is clicked.';
-        //document.getElementById('remainingTime').classList.remove('is-hidden');
-        //document.getElementById('elapsedTime').classList.add('is-hidden');
-        //if (!timedModeTimerIntervalId) {
-        //    timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
-        //}
     } else {
         document.getElementById('timerHeaderString').innerText = 'Elapsed time';
         document.getElementById('timerValue').innerText = `Timer will start as soon as any cell on the field is clicked.`;
-
-        //document.getElementById('elapsedTime').classList.remove('is-hidden');
-        //document.getElementById('elapsedTimeString').innerText = 'Timer will start as soon as the game is started.';
-        //document.getElementById('remainingTime').classList.add('is-hidden');
-
-        //if (!timerIntervalId) {
-        //    timerIntervalId = setInterval(showTimer, 1000);
-        //}
     }
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('click', clickCell));
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
@@ -182,19 +166,26 @@ function showTimedModeCountdown() {
 
 function timedModeChange() {
     //debugger;
+    timedMode = !timedMode;
     let el = document.getElementById('timedModeSwitch');
-    timedMode = el.checked;
+    if (timedMode) {
+        el.innerHTML = '<i class="fa-regular fa-clock mr-3"></i>Timeless';
+    } else {
+        el.innerHTML = '<i class="fa-solid fa-stopwatch mr-3"></i>Timed Mode';
+    }
+   
+    //timedMode = el.checked;
     resetGame();
 
-    if (el.checked) {
-        //hide elapsed time
-        //stop elapsed time?
-        //start countdown on click in a field
-        //start timer to lose game if time is out
-        console.log('timed mode selected');
-    } else {
-        console.log('take all the time you need');
-    }
+    //if (el.checked) {
+    //    //hide elapsed time
+    //    //stop elapsed time?
+    //    //start countdown on click in a field
+    //    //start timer to lose game if time is out
+    //    console.log('timed mode selected');
+    //} else {
+    //    console.log('take all the time you need');
+    //}
 }
 
 function formatSecondsIntoTimeString(secs) {
@@ -312,6 +303,7 @@ function clickCell(el) {
     }
     if (!timedMode && !timerIntervalId) {
         console.log('count up started');
+        startTime = (new Date).getTime();   
         timerIntervalId = setInterval(showTimer, 1000);
     }
     el.target.classList.remove('hinted');
