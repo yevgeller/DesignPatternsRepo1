@@ -16,6 +16,7 @@ const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';
 const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
 const SUPPOSEDMINEMARKER = 'X';
 const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
+const REVEALEDCORRECTMINEMARKER = '<i class="fa-solid fa-circle-check"></i>';
 let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
 let map = new Map();
 let won = false;
@@ -522,7 +523,7 @@ function gameOver(win) {
         if (data === MINEMARKER) {
             el.style.backgroundColor = (win ? 'green' : 'red');
             el.style.color = (win ? 'black' : 'white');
-            el.innerHTML = REALMINEMARKERHTMLWHENREVEALED;
+            el.innerHTML = el.classList.contains('danger') ? REVEALEDCORRECTMINEMARKER : REALMINEMARKERHTMLWHENREVEALED;
         } else if (data !== MINEMARKER && el.classList.contains('danger')) {
             el.classList.remove('danger');
             el.classList.add('wrong');
