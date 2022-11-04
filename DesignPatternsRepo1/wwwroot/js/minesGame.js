@@ -16,7 +16,7 @@ const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';
 const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
 const SUPPOSEDMINEMARKER = 'X';
 const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
-const REVEALEDCORRECTMINEMARKER = '<i class="fa-solid fa-circle-check"></i>';
+const REVEALEDCORRECTMINEMARKER = '<i class="fa-solid fa-check"></i>';
 let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
 let map = new Map();
 let won = false;
@@ -507,7 +507,7 @@ function setRevealed(el) {
 }
 
 function gameOver(win) {
-    debugger;
+    //debugger;
     stopAndClearAllGameTimers();
     document.querySelectorAll('#playingField td').forEach(el => {
         let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
