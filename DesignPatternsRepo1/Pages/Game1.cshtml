@@ -65,8 +65,10 @@
         <div class="mb-2">
             <h2><i class="fa-solid fa-chess-bishop mr-3"></i>Current game:</h2>
         </div>
-        <div id="elapsedTime"><i class="fa-regular fa-clock mr-2"></i>Elapsed: <span id="elapsedTimeString"></span></div>
-        <div id="remainingTime"><i class="fa-regular fa-clock mr-2"></i>Remaining time: <span id="remainingTimeString"></span></div>
+       @* <div id="elapsedTime"><i class="fa-regular fa-clock mr-2"></i>Elapsed: <span id="elapsedTimeString"></span></div>
+        <div id="remainingTime"><i class="fa-regular fa-clock mr-2"></i>Remaining time: <span id="remainingTimeString"></span></div>*@
+        <div id="timerArea"><i class="fa-regular fa-clock mr-2"></i><span id="timerHeaderString"></span>: <span id="timerValue"></span></div>
+
         <label class="checkbox">
             <input id="timedModeSwitch" type="checkbox" onclick="timedModeChange();"/>Timed mode</label>
         <div><i class="fa-solid fa-asterisk mr-2 mt-3"></i> Mines left: <span id="minesLeft"></span></div>

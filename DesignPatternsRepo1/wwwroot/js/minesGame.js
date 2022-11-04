@@ -119,6 +119,9 @@ function resetGame() {
     stopAndClearAllGameTimers();
     if (timedMode) {
         countdownSeconds = COUNTDOWNSECONDS;
+        document.getElementById('timerHeaderString').innerText = 'Remaining time';
+        document.getElementById('timerValue').innerText = `${countdownSeconds} seconds timer will start as soon as any cell on the field is clicked.`;
+
         document.getElementById('remainingTimeString').innerText = '60 seconds timer will start as soon as any cell on the field is clicked.';
         document.getElementById('remainingTime').classList.remove('is-hidden');
         document.getElementById('elapsedTime').classList.add('is-hidden');
@@ -126,6 +129,9 @@ function resetGame() {
         //    timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
         //}
     } else {
+        document.getElementById('timerHeaderString').innerText = 'Elapsed time';
+        document.getElementById('timerValue').innerText = `Timer will start as soon as any cell on the field is clicked.`;
+
         document.getElementById('elapsedTime').classList.remove('is-hidden');
         document.getElementById('elapsedTimeString').innerText = 'Timer will start as soon as the game is started.';
         document.getElementById('remainingTime').classList.add('is-hidden');
@@ -169,10 +175,10 @@ function showTimedModeCountdown() {
 }
 
 //Timed mode
-function getRemainingSeconds() {
-    let currentTime = (new Date).getTime();
-    return Math.round(Math.floor(gameStartedAtSeconds - startTime) / 1000);
-}
+//function getRemainingSeconds() {
+//    //let currentTime = (new Date).getTime();
+//    return Math.round(Math.floor(gameStartedAtSeconds - startTime) / 1000);
+//}
 
 function timedModeChange() {
     //debugger;
