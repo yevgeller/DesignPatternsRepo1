@@ -71,7 +71,6 @@ function setGameParameters(params) {
 
 function determineUserInputAsInt(min, max, fieldName, defaultValue) {
     let userInput = document.getElementById(fieldName).value;
-    //console.log(`Read ${!userInput ? '_nothing_' : userInput} for field ${fieldName} `);
     let candidate = parseInt(userInput);
     if (!candidate) return defaultValue;
     if (candidate < min) return min;
@@ -111,8 +110,7 @@ function resetGame() {
     calculateMarkers();
     createTable();
     minesLeft = MINECOUNT;
-    setMineCountDisplay();
-     
+    setMineCountDisplay();     
 
     hintCount = 0;
     stopAndClearAllGameTimers();
@@ -159,13 +157,8 @@ function showTimedModeCountdown() {
 }
 
 //Timed mode
-//function getRemainingSeconds() {
-//    //let currentTime = (new Date).getTime();
-//    return Math.round(Math.floor(gameStartedAtSeconds - startTime) / 1000);
-//}
 
 function timedModeChange() {
-    //debugger;
     timedMode = !timedMode;
     let el = document.getElementById('timedModeSwitch');
     if (timedMode) {
@@ -173,19 +166,7 @@ function timedModeChange() {
     } else {
         el.innerHTML = '<i class="fa-solid fa-stopwatch mr-3"></i>Timed Mode';
     }
-   
-    //timedMode = el.checked;
     resetGame();
-
-    //if (el.checked) {
-    //    //hide elapsed time
-    //    //stop elapsed time?
-    //    //start countdown on click in a field
-    //    //start timer to lose game if time is out
-    //    console.log('timed mode selected');
-    //} else {
-    //    console.log('take all the time you need');
-    //}
 }
 
 function formatSecondsIntoTimeString(secs) {
@@ -324,12 +305,6 @@ function determineRowAndCol(attrData) {
 
     return ret;
 }
-
-//function helperLogRowColDifferences(row, col, rowColArr) {
-//    console.assert(row === rowColArr[0], 'data-row !== rowColArr[0]');
-//    console.assert(col === rowColArr[1], 'data-col !== rowColArr[1]');
-//    console.log(`Row is ${row}, rowColArr[0] is ${rowColArr[0]}, col is ${col}, rowColArr[1] is ${rowColArr[1]}`);
-//}
 
 function revealCell(el) {
     let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
