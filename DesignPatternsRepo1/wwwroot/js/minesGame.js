@@ -150,10 +150,21 @@ function showTimer() {
 
 function showTimedModeCountdown() {
     countdownSeconds -= 1;
-    document.getElementById('timerValue').innerText = formatSecondsIntoTimeString(countdownSeconds);
+    let el = document.getElementById('timerValue');
+    el.innerText = formatSecondsIntoTimeString(countdownSeconds);
+    el.classList = [];
+    el.classList.add(...determineSizeOfTimerText(countdownSeconds));
     if (countdownSeconds <= 0) {
         gameOver(false);
     }
+}
+
+function determineSizeOfTimerText(secondsLeft) {
+    let ratio = secondsLeft / COUNTDOWNSECONDS;
+    if (ratio >= 0.7) return ['is-size-6'];
+    if (ratio > 0.5) return ['is-size-6', 'colorYellow'];
+    if (ratio > 0.25) return ['is-size-4', 'colorOrange'];
+    return ['is-size-2','colorRed'];
 }
 
 //Timed mode
