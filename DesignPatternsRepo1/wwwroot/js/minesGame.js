@@ -114,13 +114,16 @@ function resetGame() {
 
     hintCount = 0;
     stopAndClearAllGameTimers();
+    document.getElementById('timerValue').classList = [];
     if (timedMode) {
         countdownSeconds = COUNTDOWNSECONDS;
         document.getElementById('timerHeaderString').innerText = 'Remaining time';
-        document.getElementById('timerValue').innerText = `${countdownSeconds} seconds timer will start as soon as any cell on the field is clicked.`;
+        document.getElementById('timerValue').innerText = `${countdownSeconds} seconds.`;
+        document.getElementById('timerValue').classList.add('is-size-2');
     } else {
         document.getElementById('timerHeaderString').innerText = 'Elapsed time';
         document.getElementById('timerValue').innerText = `Timer will start as soon as any cell on the field is clicked.`;
+        document.getElementById('timerValue').classList.add('is-size-6');
     }
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('click', clickCell));
     document.querySelectorAll('#playingField td').forEach(el => el.addEventListener('contextmenu', toggleDanger, false));
@@ -161,9 +164,9 @@ function showTimedModeCountdown() {
 
 function determineSizeOfTimerText(secondsLeft) {
     let ratio = secondsLeft / COUNTDOWNSECONDS;
-    if (ratio >= 0.7) return ['is-size-6'];
-    if (ratio > 0.5) return ['is-size-6', 'colorYellow'];
-    if (ratio > 0.25) return ['is-size-4', 'colorOrange'];
+    if (ratio >= 0.7) return ['is-size-2'];
+    if (ratio > 0.5) return ['is-size-2', 'colorYellow'];
+    if (ratio > 0.25) return ['is-size-2', 'colorOrange'];
     return ['is-size-2','colorRed'];
 }
 
