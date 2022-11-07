@@ -15,6 +15,7 @@ const MINEMARKER = 'O';
 const WRONGMINEMARKER = '<i class="fa-solid fa-ban"></i>';
 const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
 const SUPPOSEDMINEMARKER = 'X';
+const EXPLODEDONTHISMINE = 'E';
 const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
 const REVEALEDCORRECTMINEMARKER = '<i class="fa-solid fa-check"></i>';
 const EXPLODEDMINEMARKER = '<i class="fa-solid fa-explosion"></i>';
@@ -340,7 +341,7 @@ function revealCell(el) {
     el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
 
     if (data === MINEMARKER) {
-        field[row][col] = '5';
+        field[row][col] = EXPLODEDONTHISMINE;
         el.innerHTML = EXPLODEDMINEMARKER;
         gameOver(false);
     } else if (data === CELLWITHNOMINESAROUNDDESIGNATOR) {
@@ -513,10 +514,11 @@ function gameOver(win) {
         el.classList.remove('hinted');
         el.removeEventListener('click', clickCell);
         el.removeEventListener('contextmenu', toggleDanger, false);
-        if (data === MINEMARKER) {
+        if (data === MINEMARKER || data === EXPLODEDONTHISMINE) {
             el.style.backgroundColor = (win ? 'green' : 'red');
             el.style.color = (win ? 'black' : 'white');
-            el.innerHTML = el.classList.contains('danger') ? REVEALEDCORRECTMINEMARKER : REALMINEMARKERHTMLWHENREVEALED;
+            if (data === MINEMARKER) el.innerHTML = el.classList.contains('danger') ? REVEALEDCORRECTMINEMARKER : REALMINEMARKERHTMLWHENREVEALED;
+            if (data === EXPLODEDONTHISMINE) el.innerHTML = EXPLODEDMINEMARKER;
         } else if (data !== MINEMARKER && el.classList.contains('danger')) {
             el.classList.remove('danger');
             el.classList.add('wrong');
