@@ -17,6 +17,7 @@ const CELLWITHNOMINESAROUNDDESIGNATOR = '.';
 const SUPPOSEDMINEMARKER = 'X';
 const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
 const REVEALEDCORRECTMINEMARKER = '<i class="fa-solid fa-check"></i>';
+const EXPLODEDMINEMARKER = '<i class="fa-solid fa-explosion"></i>';
 let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
 let map = new Map();
 let won = false;
@@ -331,6 +332,7 @@ function revealCell(el) {
         map.set(row + '-' + col, 1);
     }
     let data = getCellData(row, col);
+    debugger;
     el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : '';
     el.className = 'playingField';
     el.classList.add('revealed');
@@ -338,6 +340,7 @@ function revealCell(el) {
     el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
 
     if (data === MINEMARKER) {
+        el.innerHTML = EXPLODEDMINEMARKER;
         gameOver(false);
     } else if (data === CELLWITHNOMINESAROUNDDESIGNATOR) {
         el.removeEventListener('contextmenu', toggleDanger, false);
