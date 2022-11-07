@@ -56,41 +56,31 @@
             <button id="timedModeSwitch" class="button" onclick="timedModeChange();"><i class="fa-solid fa-stopwatch mr-3"></i>Timed Mode</button>
 
             <div class="control">
-                <div class="mt-2">
+                <div style="min-height:50px;">
                     <label class="radio">
                         <input type="radio" id="chbS" name="foobar">
-                        <i class="fa-solid fa-s mr-3"></i>5x5x5M
+                        <i class="fa-solid fa-s mr-3"></i>5Wx5Hx5M
                     </label>
                 </div>
-                <div class="mt-2">
-                    <div>
+                <div style="min-height:50px;">
                     <label class="radio">
                         <input type="radio" id="chbM" name="foobar" checked>
-                        <i class="fa-solid fa-m mr-3"></i>10x10x20M
+                        <i class="fa-solid fa-m mr-3"></i>10Wx10Hx20M
                     </label>
                 </div>
-                    <div class="mt-2">
-                        <div>
+                <div style="min-height:50px;">
                     <label class="radio">
                         <input type="radio" id="chbXL" name="foobar">
-                        <i class="fa-solid fa-l mr-3"></i>20x20x100M
+                        <i class="fa-solid fa-l mr-3"></i>20Wx20Hx100M
                     </label>
                 </div>
-                        <div class="mt-2">
-                            <div>
-                    <div class="container is-flex is-flex-direction-row is-align-items-flex-start gap20px">
+                <div style="min-height:50px;">
+                    <div class="container is-flex is-flex-direction-row is-align-items-center gap20px">
                         <label class="radio">
                             <input type="radio" id="chbCustom" name="foobar">
-                            <i class="fa-solid fa-l mr-3"></i>Custom
+                            Custom
                         </label>
-                        <div class="field">
-                            <p class="control has-icons-left has-icons-right">
-                                <input class="input ma-w-120" type="number" id="minesAmountInput" placeholder="Mines">
-                                <span class="icon is-small is-left">
-                                    <i class="fa-solid fa-asterisk"></i>
-                                </span>
-                            </p>
-                        </div>
+                        
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
                                 <input class="input ma-w-120" type="number" id="playingFieldWidthInput" placeholder="Width" min="5" max="20">
@@ -104,6 +94,14 @@
                                 <input class="input ma-w-120" type="number" id="playingFieldHeightInput" placeholder="Height" min="5" max="20">
                                 <span class="icon is-small is-left">
                                     <i class="fa-solid fa-arrows-up-down"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left has-icons-right">
+                                <input class="input ma-w-120" type="number" id="minesAmountInput" placeholder="Mines">
+                                <span class="icon is-small is-left">
+                                    <i class="fa-solid fa-asterisk"></i>
                                 </span>
                             </p>
                         </div>
