@@ -340,6 +340,7 @@ function revealCell(el) {
     el.setAttribute('data-hint', SUPPOSEDMINEMARKER);
 
     if (data === MINEMARKER) {
+        field[row][col] = '5';
         el.innerHTML = EXPLODEDMINEMARKER;
         gameOver(false);
     } else if (data === CELLWITHNOMINESAROUNDDESIGNATOR) {
