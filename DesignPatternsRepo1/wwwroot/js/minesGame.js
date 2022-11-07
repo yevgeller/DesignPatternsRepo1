@@ -115,6 +115,8 @@ function resetGame() {
     hintCount = 0;
     stopAndClearAllGameTimers();
     document.getElementById('timerValue').classList = [];
+    timedMode = document.getElementById('chbTimedMode').checked;
+    console.log('timedMode:', timedMode);
     if (timedMode) {
         countdownSeconds = COUNTDOWNSECONDS;
         document.getElementById('timerHeaderString').innerText = 'Remaining time';
@@ -172,16 +174,16 @@ function determineSizeOfTimerText(secondsLeft) {
 
 //Timed mode
 
-function timedModeChange() {
-    timedMode = !timedMode;
-    let el = document.getElementById('timedModeSwitch');
-    if (timedMode) {
-        el.innerHTML = '<i class="fa-regular fa-clock mr-3"></i>Timeless';
-    } else {
-        el.innerHTML = '<i class="fa-solid fa-stopwatch mr-3"></i>Timed Mode';
-    }
-    resetGame();
-}
+//function timedModeChange() {
+//    timedMode = !timedMode;
+//    let el = document.getElementById('timedModeSwitch');
+//    if (timedMode) {
+//        el.innerHTML = '<i class="fa-regular fa-clock mr-3"></i>Timeless';
+//    } else {
+//        el.innerHTML = '<i class="fa-solid fa-stopwatch mr-3"></i>Timed Mode';
+//    }
+//    resetGame();
+//}
 
 function formatSecondsIntoTimeString(secs) {
     let totalDays = Math.floor(secs / secondsInADay);

@@ -16,7 +16,11 @@
 <link rel="stylesheet" href="~/css/minesGame.css" />
 <div class="is-flex">
     <div class="m-6 is-flex-direction-column" style="min-width:450px;">
-        <div id="tbl"></div>
+        <div id="tbl"></div> 
+        <div class="mt-6 container is-flex is-flex-direction-row is-align-items-flex-start gap20px">
+            <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
+            <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
+        </div>
         <div class="mt-6">Game parameters:</div>
        @* <div class="container is-flex is-flex-direction-row is-align-items-flex-start gap20px">
             <div class="field">
@@ -45,10 +49,7 @@
             </div>
             <button class="button" onclick="resetGame()"><i class="fa-solid fa-play mr-3"></i>Play</button>
         </div>*@
-        <div class="mt-6 container is-flex is-flex-direction-row is-align-items-flex-start gap20px">
-            <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
-            <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
-        </div>
+       
         <div class="mt-5 container is-flex is-flex-direction-column is-align-items-flex-start gap20px">
            @* <button id="setSmallEasy" class="button" onclick="smallestAndEasiest()"><i class="fa-solid fa-x"></i><i class="fa-solid fa-s mr-3"></i>Smallest and easiest</button>
             <button id="resetGameParams" class="button" onclick="resetGameParametersAndStartNewGame()"><i class="fa-solid fa-m mr-3"></i>Default game settings</button>
