@@ -4,7 +4,7 @@
 }
 
 @*
-
+    big hint button is active after a losse
     clean up logging
     abstract state
     remove timers
@@ -59,19 +59,19 @@
             <div class="box">
                 <div style="min-height:50px;">
                     <label class="radio">
-                        <input type="radio" id="chbS" name="foobar">
+                        <input type="radio" id="chbS" name="parameters" onchange="setGameParameters([5,5,5]);">
                         <i class="fa-solid fa-s mr-3"></i>5Wx5Hx5M
                     </label>
                 </div>
                 <div style="min-height:50px;">
                     <label class="radio">
-                        <input type="radio" id="chbM" name="foobar" checked>
+                        <input type="radio" id="chbM" name="parameters" checked onchange="setGameParameters([10,10,20]);">
                         <i class="fa-solid fa-m mr-3"></i>10Wx10Hx20M
                     </label>
                 </div>
                 <div style="min-height:50px;">
                     <label class="radio">
-                        <input type="radio" id="chbXL" name="foobar">
+                        <input type="radio" id="chbXL" name="parameters" onchange="setGameParameters([20,20,100]);">
                         <i class="fa-solid fa-l mr-3"></i>20Wx20Hx100M
                     </label>
                 </div>
