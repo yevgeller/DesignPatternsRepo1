@@ -664,3 +664,8 @@ function largestAndHardest() {
     setGameParameters([20, 20, 100]);
     resetGame();
 }
+
+function setGameParamsToCustom() {
+    console.log('currently checked', document.getElementById('chbCustom').checked);
+    document.getElementById('chbCustom').checked = true;
+}

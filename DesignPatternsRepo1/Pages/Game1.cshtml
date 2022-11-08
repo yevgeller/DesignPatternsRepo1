@@ -79,13 +79,13 @@
                 <div style="min-height:50px;">
                     <div class="container is-flex is-flex-direction-row is-align-items-center gap20px">
                         <label class="radio">
-                            <input type="radio" id="chbCustom" name="foobar">
+                            <input type="radio" id="chbCustom" name="parameters">
                             Custom
                         </label>
 
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
-                                <input class="input ma-w-120" type="number" id="playingFieldWidthInput" placeholder="Width" min="5" max="20">
+                                <input class="input ma-w-120" type="number" id="playingFieldWidthInput" placeholder="Width" min="5" max="20" onchange="setGameParamsToCustom();">
                                 <span class="icon is-small is-left">
                                     <i class="fa-solid fa-arrows-left-right"></i>
                                 </span>
