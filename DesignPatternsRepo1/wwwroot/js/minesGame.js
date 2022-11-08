@@ -157,13 +157,15 @@ function showTimer() {
 
 function showTimedModeCountdown() {
     countdownSeconds -= 1;
+    if (countdownSeconds <= 0) {
+        countdownSeconds = 0;
+        gameOver(false);
+    }
     let el = document.getElementById('timerValue');
     el.innerText = formatSecondsIntoTimeString(countdownSeconds);
     el.classList = [];
     el.classList.add(...determineSizeOfTimerText(countdownSeconds));
-    if (countdownSeconds <= 0) {
-        gameOver(false);
-    }
+
 }
 
 function determineSizeOfTimerText(secondsLeft) {
