@@ -176,19 +176,6 @@ function determineSizeOfTimerText(secondsLeft) {
     return ['is-size-2','colorRed'];
 }
 
-//Timed mode
-
-//function timedModeChange() {
-//    timedMode = !timedMode;
-//    let el = document.getElementById('timedModeSwitch');
-//    if (timedMode) {
-//        el.innerHTML = '<i class="fa-regular fa-clock mr-3"></i>Timeless';
-//    } else {
-//        el.innerHTML = '<i class="fa-solid fa-stopwatch mr-3"></i>Timed Mode';
-//    }
-//    resetGame();
-//}
-
 function formatSecondsIntoTimeString(secs) {
     let totalDays = Math.floor(secs / secondsInADay);
     let totalHours = Math.floor((secs - totalDays * secondsInADay) / secondsInAnHour);

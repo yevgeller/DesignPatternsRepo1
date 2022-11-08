@@ -22,7 +22,7 @@
             <button id="smallHintButton" class="button" onclick="giveHint(false)"><i class="fa-regular fa-hourglass mr-3"></i>Small Hint (+10 seconds penalty)</button>
             <button id="largeHintButton" class="button" onclick="giveHint(true)"><i class="fa-solid fa-triangle-exclamation mr-3"></i>Big Hint (+30 seconds penalty)</button>
         </div>
-        <div class="mt-6">Game parameters:</div>
+        
         @* <div class="container is-flex is-flex-direction-row is-align-items-flex-start gap20px">
         <div class="field">
         <p class="control has-icons-left has-icons-right">
@@ -50,9 +50,11 @@
         </div>
         <button class="button" onclick="resetGame()"><i class="fa-solid fa-play mr-3"></i>Play</button>
         </div>*@
-
+        
         <div class="mt-5 container is-flex is-flex-direction-column is-align-items-flex-start gap20px">
+           
             <div class="box">
+                <div class="is-size-5 mb-3">Game parameters:</div>
                 <div style="min-height:50px;">
                     <label class="radio">
                         <input type="radio" id="chbS" name="parameters" onchange="setGameParameters([5,5,5]);">
