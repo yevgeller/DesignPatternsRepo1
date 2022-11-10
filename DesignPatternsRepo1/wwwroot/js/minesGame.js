@@ -271,6 +271,7 @@ function determineHint(cellContents) {
 function setMineCountDisplay() {
     let el = document.getElementById('minesLeft');
     el.innerText = minesLeft;
+    document.getAnimations('minesPluralOrSingular').innerText = minesLeft === 1 ? '' : 's';
     let ratio = minesLeft / MINECOUNT;
 
     if (ratio <= 0.25) {

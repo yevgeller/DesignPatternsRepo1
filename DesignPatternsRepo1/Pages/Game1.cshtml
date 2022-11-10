@@ -13,6 +13,7 @@
     reformat code for a better reading
     fix negative time display for timed mode
     Instead of "Mines left: X", say "X mines left"
+    Pause
 *@
 <link rel="stylesheet" href="~/css/minesGame.css" />
 <div class="is-flex">
@@ -134,7 +135,7 @@
 
         @*<label class="checkbox">
         <input id="timedModeSwitch" type="checkbox" onclick="timedModeChange();"/>Timed mode</label>*@
-        <div><i class="fa-solid fa-asterisk mr-2 mt-3"></i> Mines left: <span id="minesLeft"></span></div>
+        <div><i class="fa-solid fa-asterisk mr-2 mt-3"></i><span id="minesLeft"></span> mine<span id="minesPluralOrSingular"></span> left: </div>
     </div>
 </div>
 
