@@ -109,7 +109,7 @@
                     </div>
                 </div>
                 <div class="mt-3 mr-3" style="min-height:50px;">
-                    <label class="checkbox">
+                    <label class="checkbox" id="timedModeSwitch">
                         <input type="checkbox" id="chbTimedMode">
                         <i class="fa-solid fa-stopwatch mr-3 ml-3 is-size-3"></i>Timed Mode
                     </label>
@@ -130,11 +130,7 @@
         <div class="mb-2">
             <h2><i class="fa-solid fa-chess-bishop mr-3"></i>Current game:</h2>
         </div>
-
         <div id="timerArea"><i class="fa-regular fa-clock mr-2"></i><span id="timerHeaderString"></span>: <div id="timerValue" style="min-height:60px;"></div></div>
-
-        @*<label class="checkbox">
-        <input id="timedModeSwitch" type="checkbox" onclick="timedModeChange();"/>Timed mode</label>*@
         <div id="remainingMineCounterArea"><i class="fa-solid fa-asterisk mr-2 mt-3"></i><span id="minesLeft"></span> mine<span id="minesPluralOrSingular"></span> left</div>
     </div>
 </div>

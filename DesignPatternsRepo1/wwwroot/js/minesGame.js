@@ -92,6 +92,7 @@ function setMinMaxParameters(id, min, max) {
 
 document.addEventListener('DOMContentLoaded', function () {
     resetGame();
+    document.getElementById('timedModeSwitch').addEventListener('click', toggleTimedMode, false);
 });
 
 function stopAndClearAllGameTimers() {
@@ -662,4 +663,9 @@ function largestAndHardest() {
 function setGameParamsToCustom() {
     console.log('currently checked', document.getElementById('chbCustom').checked);
     document.getElementById('chbCustom').checked = true;
+}
+
+function toggleTimedMode(e) {
+    resetGame();
+    e.preventDefault();
 }
