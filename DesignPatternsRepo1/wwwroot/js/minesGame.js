@@ -125,6 +125,7 @@ function resetGame() {
         document.getElementById('timerHeaderString').innerText = 'Remaining time';
         document.getElementById('timerValue').innerText = `${countdownSeconds} seconds.`;
         document.getElementById('timerValue').classList.add('is-size-2');
+        //freeBigHint();
     } else {
         document.getElementById('timerHeaderString').innerText = 'Elapsed time';
         document.getElementById('timerValue').innerText = `Timer will start as soon as any cell on the field is clicked.`;
@@ -558,6 +559,16 @@ function giveHint(isBig) {
     hintCount++;
 }
 
+function freeBigHint() {
+  let hintCandidates = getHintCandidates(true);
+    let hintCandidatesCount = hintCandidates.length;
+
+    if (hintCandidatesCount > 0) {
+        let rnd = randomNumber(hintCandidates.length);
+        hintCandidates[rnd].classList.add('hinted');
+    }
+}
+
 function reassessWhetherCanGiveBigHint() {
     let largeHintCandidatesNumber = getHintCandidates(true).length;
     document.getElementById('largeHintButton').disabled = largeHintCandidatesNumber === 0;
@@ -666,6 +677,14 @@ function setGameParamsToCustom() {
 }
 
 function toggleTimedMode(e) {
+    debugger;
+    //try this:
+    //timedMode = !timedMode
+    //document.getElementById('chbTimedMode').checked = timedMode;
+    //resetGame();
+    //e.preventDefault();
+
+    document.getElementById('chbTimedMode').checked = !document.getElementById('chbTimedMode').checked;
     resetGame();
     e.preventDefault();
 }
