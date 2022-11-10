@@ -679,12 +679,12 @@ function setGameParamsToCustom() {
 function toggleTimedMode(e) {
     debugger;
     //try this:
-    //timedMode = !timedMode
-    //document.getElementById('chbTimedMode').checked = timedMode;
-    //resetGame();
-    //e.preventDefault();
-
-    document.getElementById('chbTimedMode').checked = !document.getElementById('chbTimedMode').checked;
+    timedMode = !timedMode
+    document.getElementById('chbTimedMode').checked = timedMode;
     resetGame();
     e.preventDefault();
+
+    //document.getElementById('chbTimedMode').checked = !document.getElementById('chbTimedMode').checked;
+    //resetGame();
+    //e.preventDefault();
 }
