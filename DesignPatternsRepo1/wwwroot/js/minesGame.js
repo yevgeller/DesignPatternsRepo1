@@ -270,19 +270,22 @@ function determineHint(cellContents) {
 
 function setMineCountDisplay() {
     debugger;
-    let el = document.getElementById('minesLeft');
-    el.innerText = minesLeft >= 0 ? minesLeft : '?';
+    document.getElementById('minesLeft').innerText = minesLeft >= 0 ? minesLeft : '?';
+
+    let el = document.getElementById('remainingMineCounterArea');
     document.getElementById('minesPluralOrSingular').innerHTML = minesLeft === 1 ? '' : 's';
     let ratio = minesLeft / MINECOUNT;
-
-    if (ratio <= 0.25) {
+    //remainingMineCounterArea
+    if (ratio < 0) {
+        el.classList = ['negativeMineCount'];
+    } else    if (ratio <= 0.25) {
         el.classList = ['almostWon'];
     } else if (ratio <= 0.5) {
         el.classList = ['continuingToWin'];
     } else if (ratio <= 0.75) {
         el.classList = ['startingToWin'];
     } else {
-        el.className = '';
+        el.className = 'initialMineCount';
     }
 }
 
