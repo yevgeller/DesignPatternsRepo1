@@ -32,6 +32,7 @@ let secondsInAnHour = secondsInAMinute * 60;
 let secondsInADay = secondsInAnHour * 24;
 let timedMode = false;
 let countdownSeconds = COUNTDOWNSECONDS;
+let gameInProgress = false;
 
 class Cell {
     constructor(row, col) {
@@ -112,6 +113,7 @@ function resetGame() {
     createField();
     calculateMarkers();
     createTable();
+    createFakeTable();
     minesLeft = MINECOUNT;
     setMineCountDisplay();     
 
@@ -238,8 +240,6 @@ function createTable() {
         let tr = document.createElement('tr');
         for (let j = 0; j < FIELDWIDTH; j++) {
             let td = document.createElement('td');
-            //td.setAttribute('data-row', i);
-            //td.setAttribute('data-col', j);
             td.setAttribute('data-hidden', '1');
             td.setAttribute('data-cell', 'cell-' + i + '-' + j);
             td.setAttribute('data-hint', determineHint(field[i][j]));
@@ -257,6 +257,29 @@ function createTable() {
     console.log('Table created in ' + diff + ' ms');
 }
 
+function createFakeTable() {
+    let filler = 'P A U S E D '.split('');
+    let container = document.getElementById('tbl_paused');
+    container.innerHTML = '';
+    let tbl = document.createElement('table');
+    tbl.setAttribute('id', 'fakePlayingField');
+    let tbody = document.createElement('tbody')
+    for (let i = 0; i < FIELDHEIGHT; i++) {
+        let tr = document.createElement('tr');
+        for (let j = 0; j < FIELDWIDTH; j++) {
+            let td = document.createElement('td');            
+            td.classList.add('playingField');
+            let charHere = filler[(j+i) % filler.length];
+            debugger;
+            td.appendChild(document.createTextNode(charHere));
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+        }
+        tbl.appendChild(tbody);
+        container.appendChild(tbl);
+    }
+}
+
 function determineHint(cellContents) {
     let ret = 'S';
     switch (cellContents) {
@@ -271,7 +294,7 @@ function determineHint(cellContents) {
 }
 
 function setMineCountDisplay() {
-    debugger;
+    //debugger;
     document.getElementById('minesLeft').innerText = minesLeft >= 0 ? minesLeft : '?';
 
     let el = document.getElementById('remainingMineCounterArea');
@@ -292,6 +315,7 @@ function setMineCountDisplay() {
 }
 
 function clickCell(el) {
+    gameInProgress = true;
     if (timedMode && !timedModeTimerIntervalId) {
         console.log('timed mode timer started');
         timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
@@ -329,7 +353,7 @@ function revealCell(el) {
         map.set(row + '-' + col, 1);
     }
     let data = getCellData(row, col);
-    debugger;
+    //debugger;
     el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : '';
     el.className = 'playingField';
     el.classList.add('revealed');
@@ -677,7 +701,7 @@ function setGameParamsToCustom() {
 }
 
 function toggleTimedMode(e) {
-    debugger;
+    //debugger;
     //try this:
     timedMode = !timedMode
     document.getElementById('chbTimedMode').checked = timedMode;
@@ -687,4 +711,14 @@ function toggleTimedMode(e) {
     //document.getElementById('chbTimedMode').checked = !document.getElementById('chbTimedMode').checked;
     //resetGame();
     //e.preventDefault();
+}
+
+function pauseGame() {
+    document.getElementById('tbl').classList.add('is-hidden');
+    document.getElementById('tbl_paused').classList.remove('is-hidden');
+}
+
+function continueGame() {
+    document.getElementById('tbl').classList.remove('is-hidden');
+    document.getElementById('tbl_paused').classList.add('is-hidden');
 }
