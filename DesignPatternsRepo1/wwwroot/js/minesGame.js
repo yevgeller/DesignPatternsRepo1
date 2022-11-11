@@ -270,7 +270,6 @@ function createFakeTable() {
             let td = document.createElement('td');            
             td.classList.add('playingField');
             let charHere = filler[(j+i) % filler.length];
-            debugger;
             td.appendChild(document.createTextNode(charHere));
             tr.appendChild(td);
             tbody.appendChild(tr);
