@@ -321,12 +321,12 @@ function clickCell(el) {
     gameInProgress = true;
     if (timedMode && !timedModeTimerIntervalId) {
         console.log('timed mode timer started');
-        timedModeTimerIntervalId = setInterval(processCountdownInTimedMode, 1000);
+        startCountdownTimer();
     }
     if (!timedMode && !timerIntervalId) {
         console.log('count up started');
         startTime = (new Date).getTime();
-        timerIntervalId = setInterval(showTimer, 1000);
+        startCountUpTimer();
     }
     el.target.classList.remove('hinted');
     let hidden = el.currentTarget.getAttribute('data-hidden');
@@ -719,9 +719,22 @@ function toggleTimedMode(e) {
 function pauseGame() {
     document.getElementById('tbl').classList.add('is-hidden');
     document.getElementById('tbl_paused').classList.remove('is-hidden');
+    stopAndClearAllGameTimers();
 }
 
 function continueGame() {
     document.getElementById('tbl').classList.remove('is-hidden');
     document.getElementById('tbl_paused').classList.add('is-hidden');
+}
+
+function startCountUpTimer() {
+    if (!timerIntervalId) {
+        timerIntervalId = setInterval(showTimer, 1000);
+    }
+}
+
+function startCountdownTimer() {
+    if (!timedModeTimerIntervalId) {
+        timedModeTimerIntervalId = setInterval(processCountdownInTimedMode, 1000);
+    }
 }
