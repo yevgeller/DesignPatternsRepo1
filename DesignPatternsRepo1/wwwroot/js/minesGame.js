@@ -125,9 +125,9 @@ function resetGame() {
     if (timedMode) {
         countdownSeconds = COUNTDOWNSECONDS;
         document.getElementById('timerHeaderString').innerText = 'Remaining time';
-        document.getElementById('timerValue').innerText = `${countdownSeconds} seconds.`;
+        document.getElementById('timerValue').innerText = `${countdownSeconds} seconds`;
         document.getElementById('timerValue').classList.add('is-size-2');
-        //freeBigHint();
+        freeBigHint();
     } else {
         document.getElementById('timerHeaderString').innerText = 'Elapsed time';
         document.getElementById('timerValue').innerText = `Timer will start as soon as any cell on the field is clicked.`;
@@ -169,7 +169,6 @@ function processCountdownInTimedMode() {
 }
 
 function showTimedModeCountdown() {
-
     let el = document.getElementById('timerValue');
     el.innerText = formatSecondsIntoTimeString(countdownSeconds);
     el.classList = [];
@@ -322,7 +321,7 @@ function clickCell(el) {
     gameInProgress = true;
     if (timedMode && !timedModeTimerIntervalId) {
         console.log('timed mode timer started');
-        timedModeTimerIntervalId = setInterval(showTimedModeCountdown, 1000);
+        timedModeTimerIntervalId = setInterval(processCountdownInTimedMode, 1000);
     }
     if (!timedMode && !timerIntervalId) {
         console.log('count up started');
