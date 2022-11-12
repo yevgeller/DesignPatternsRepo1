@@ -115,7 +115,7 @@ function resetGame() {
     createTable();
     createFakeTable();
     minesLeft = MINECOUNT;
-    setMineCountDisplay();     
+    setMineCountDisplay();
 
     hintCount = 0;
     stopAndClearAllGameTimers();
@@ -159,12 +159,17 @@ function showTimer() {
 
 }
 
-function showTimedModeCountdown() {
+function processCountdownInTimedMode() {
     countdownSeconds -= 1;
     if (countdownSeconds <= 0) {
         countdownSeconds = 0;
         gameOver(false);
     }
+    showTimedModeCountdown();
+}
+
+function showTimedModeCountdown() {
+
     let el = document.getElementById('timerValue');
     el.innerText = formatSecondsIntoTimeString(countdownSeconds);
     el.classList = [];
@@ -177,7 +182,7 @@ function determineSizeOfTimerText(secondsLeft) {
     if (ratio >= 0.7) return ['is-size-2'];
     if (ratio > 0.5) return ['is-size-2', 'colorYellow'];
     if (ratio > 0.25) return ['is-size-2', 'colorOrange'];
-    return ['is-size-2','colorRed'];
+    return ['is-size-2', 'colorRed'];
 }
 
 function formatSecondsIntoTimeString(secs) {
@@ -267,9 +272,9 @@ function createFakeTable() {
     for (let i = 0; i < FIELDHEIGHT; i++) {
         let tr = document.createElement('tr');
         for (let j = 0; j < FIELDWIDTH; j++) {
-            let td = document.createElement('td');            
+            let td = document.createElement('td');
             td.classList.add('playingField');
-            let charHere = filler[(j+i) % filler.length];
+            let charHere = filler[(j + i) % filler.length];
             td.appendChild(document.createTextNode(charHere));
             tr.appendChild(td);
             tbody.appendChild(tr);
@@ -302,7 +307,7 @@ function setMineCountDisplay() {
     //remainingMineCounterArea
     if (ratio < 0) {
         el.classList = ['negativeMineCount'];
-    } else    if (ratio <= 0.25) {
+    } else if (ratio <= 0.25) {
         el.classList = ['almostWon'];
     } else if (ratio <= 0.5) {
         el.classList = ['continuingToWin'];
@@ -321,7 +326,7 @@ function clickCell(el) {
     }
     if (!timedMode && !timerIntervalId) {
         console.log('count up started');
-        startTime = (new Date).getTime();   
+        startTime = (new Date).getTime();
         timerIntervalId = setInterval(showTimer, 1000);
     }
     el.target.classList.remove('hinted');
@@ -583,7 +588,7 @@ function giveHint(isBig) {
 }
 
 function freeBigHint() {
-  let hintCandidates = getHintCandidates(true);
+    let hintCandidates = getHintCandidates(true);
     let hintCandidatesCount = hintCandidates.length;
 
     if (hintCandidatesCount > 0) {
