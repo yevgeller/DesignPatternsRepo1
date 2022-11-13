@@ -33,6 +33,7 @@ let timedMode = false;
 let countdownSeconds = COUNTDOWNSECONDS;
 let countUpSeconds = 0;
 let gameInProgress = false;
+let continueGameButton, pauseGameButton;
 
 class Cell {
     constructor(row, col) {
@@ -94,6 +95,8 @@ function setMinMaxParameters(id, min, max) {
 document.addEventListener('DOMContentLoaded', function () {
     resetGame();
     document.getElementById('timedModeSwitch').addEventListener('click', toggleTimedMode, false);
+    pauseGameButton = document.getElementById('pauseGameButton');
+    continueGameButton = document.getElementById('continueGameButton');
 });
 
 function stopAndClearAllGameTimers() {
@@ -726,16 +729,16 @@ function toggleTimedMode(e) {
 function pauseGame() {
     document.getElementById('tbl').classList.add('is-hidden');
     document.getElementById('tbl_paused').classList.remove('is-hidden');
-    document.getElementById('continueGameButton').classList.remove('is-hidden');
-    document.getElementById('pauseGameButton').classList.add('is-hidden');
+    continueGameButton.classList.remove('is-hidden');
+    pauseGameButton.classList.add('is-hidden');
     stopAndClearAllGameTimers();
 }
 
 function continueGame() {
     document.getElementById('tbl').classList.remove('is-hidden');
     document.getElementById('tbl_paused').classList.add('is-hidden');
-    document.getElementById('continueGameButton').classList.add('is-hidden');
-    document.getElementById('pauseGameButton').classList.remove('is-hidden');
+    continueGameButton.classList.add('is-hidden');
+    pauseGameButton.classList.remove('is-hidden');
     timedMode ? startCountdownTimer() : startCountUpTimer();
 }
 
