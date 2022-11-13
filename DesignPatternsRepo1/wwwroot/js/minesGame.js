@@ -93,10 +93,10 @@ function setMinMaxParameters(id, min, max) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    resetGame();
     document.getElementById('timedModeSwitch').addEventListener('click', toggleTimedMode, false);
     pauseGameButton = document.getElementById('pauseGameButton');
     continueGameButton = document.getElementById('continueGameButton');
+    resetGame();
 });
 
 function stopAndClearAllGameTimers() {
@@ -142,8 +142,9 @@ function resetGame() {
     document.getElementById('largeHintButton').disabled = !getHintCandidates(true).length;
     document.getElementById('smallHintButton').disabled = false;
     document.getElementById('minesLeft').className = '';
-    document.getElementById('continueGameButton').classList.add('is-hidden');
-    document.getElementById('pauseGameButton').classList.remove('is-hidden');
+    continueGameButton.classList.add('is-hidden');
+    pauseGameButton.classList.remove('is-hidden');
+    pauseGameButton.disabled = true;
     let end = (new Date()).getTime();
     let diff = end - start;
     console.log('Game is set and ready in ' + diff + ' ms');
@@ -185,7 +186,6 @@ function showTimedModeCountdown() {
     el.innerText = formatSecondsIntoTimeString(countdownSeconds);
     el.classList = [];
     el.classList.add(...determineSizeOfTimerText(countdownSeconds));
-
 }
 
 function determineSizeOfTimerText(secondsLeft) {
@@ -212,8 +212,6 @@ function formatSecondsIntoTimeString(secs) {
 
 function createField() {
     let mineCount = MINECOUNT;
-    //TODO: stopwatch here
-    let start = (new Date()).getTime();
 
     while (mineCount > 0) {
         rndRow = randomNumber(FIELDHEIGHT);
@@ -223,13 +221,9 @@ function createField() {
             mineCount--;
         }
     }
-    let end = (new Date()).getTime();
-    let diff = end - start;
-    console.log('Field created in ' + diff + ' ms');
 }
 
 function calculateMarkers() {
-    let start = (new Date()).getTime();
     for (let i = 0; i < field.length; i++) {
         for (let j = 0; j < field[i].length; j++) {
             if (field[i][j] === MINEMARKER) continue;
@@ -239,14 +233,9 @@ function calculateMarkers() {
             }
         }
     }
-    let end = (new Date()).getTime();
-    let diff = end - start;
-    console.log('Field markers calculated in ' + diff + ' ms');
 }
 
 function createTable() {
-
-    let start = (new Date()).getTime();
     let container = document.getElementById('tbl');
     container.innerHTML = '';
     let tbl = document.createElement('table');
@@ -268,9 +257,6 @@ function createTable() {
         tbl.appendChild(tbody);
         container.appendChild(tbl);
     }
-    let end = (new Date()).getTime();
-    let diff = end - start;
-    console.log('Table created in ' + diff + ' ms');
 }
 
 function createFakeTable() {
@@ -309,7 +295,6 @@ function determineHint(cellContents) {
 }
 
 function setMineCountDisplay() {
-    //debugger;
     document.getElementById('minesLeft').innerText = minesLeft >= 0 ? minesLeft : '?';
 
     let el = document.getElementById('remainingMineCounterArea');
@@ -331,6 +316,7 @@ function setMineCountDisplay() {
 
 function clickCell(el) {
     gameInProgress = true;
+    pauseGameButton.disabled = false;
     if (timedMode && !timedModeTimerIntervalId) {
         startCountdownTimer();
     }
@@ -534,14 +520,11 @@ function setRevealed(el) {
 }
 
 function gameOver(win) {
-    //debugger;
     stopAndClearAllGameTimers();
     document.querySelectorAll('#playingField td').forEach(el => {
         let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
         let row = rowCol[0];// el.getAttribute('data-row');
         let col = rowCol[1];// el.getAttribute('data-col');
-        //let row = el.getAttribute('data-row');
-        //let col = el.getAttribute('data-col');
 
         let data = getCellData(row, col);
         el.classList.remove('hinted');
@@ -581,6 +564,7 @@ function gameOver(win) {
     document.getElementById('results').appendChild(li);
     document.getElementById('smallHintButton').disabled = true;
     document.getElementById('largeHintButton').disabled = true;
+    pauseGameButton.disabled = true;
 }
 
 function giveHint(isBig) {
