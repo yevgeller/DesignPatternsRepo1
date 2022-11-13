@@ -139,6 +139,8 @@ function resetGame() {
     document.getElementById('largeHintButton').disabled = !getHintCandidates(true).length;
     document.getElementById('smallHintButton').disabled = false;
     document.getElementById('minesLeft').className = '';
+    document.getElementById('continueGameButton').classList.add('is-hidden');
+    document.getElementById('pauseGameButton').classList.remove('is-hidden');
     let end = (new Date()).getTime();
     let diff = end - start;
     console.log('Game is set and ready in ' + diff + ' ms');
@@ -724,12 +726,16 @@ function toggleTimedMode(e) {
 function pauseGame() {
     document.getElementById('tbl').classList.add('is-hidden');
     document.getElementById('tbl_paused').classList.remove('is-hidden');
+    document.getElementById('continueGameButton').classList.remove('is-hidden');
+    document.getElementById('pauseGameButton').classList.add('is-hidden');
     stopAndClearAllGameTimers();
 }
 
 function continueGame() {
     document.getElementById('tbl').classList.remove('is-hidden');
     document.getElementById('tbl_paused').classList.add('is-hidden');
+    document.getElementById('continueGameButton').classList.add('is-hidden');
+    document.getElementById('pauseGameButton').classList.remove('is-hidden');
     timedMode ? startCountdownTimer() : startCountUpTimer();
 }
 
