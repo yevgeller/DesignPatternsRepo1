@@ -23,7 +23,7 @@ let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELL
 let map = new Map();
 let won = false;
 let minesLeft = 0;
-let startTime = (new Date).getTime();
+//let startTime = (new Date).getTime();
 let timerIntervalId, timedModeTimerIntervalId;
 let hintCount = 0;
 let penaltyTimeInSeconds = 0;
@@ -32,6 +32,7 @@ let secondsInAnHour = secondsInAMinute * 60;
 let secondsInADay = secondsInAnHour * 24;
 let timedMode = false;
 let countdownSeconds = COUNTDOWNSECONDS;
+let countUpSeconds = 0;
 let gameInProgress = false;
 
 class Cell {
@@ -129,6 +130,7 @@ function resetGame() {
         document.getElementById('timerValue').classList.add('is-size-2');
         freeBigHint();
     } else {
+        countUpSeconds = 0;
         document.getElementById('timerHeaderString').innerText = 'Elapsed time';
         document.getElementById('timerValue').innerText = `Timer will start as soon as any cell on the field is clicked.`;
         document.getElementById('timerValue').classList.add('is-size-6');
@@ -143,18 +145,24 @@ function resetGame() {
     console.log('Game is set and ready in ' + diff + ' ms');
 }
 
-function getElapsedSeconds() {
-    let currentTime = (new Date).getTime();
-    return Math.round(Math.floor(currentTime - startTime) / 1000);
-}
+//function getElapsedSeconds() {
+//    return countUpSeconds;
+//    //let currentTime = (new Date).getTime();
+//    //return Math.round(Math.floor(currentTime - startTime) / 1000);
+//}
 
-function getElapsedSecondsAdjustedForPenalties() {
-    let secondsElapsedWithoutPenalties = getElapsedSeconds();
-    return secondsElapsedWithoutPenalties + penaltyTimeInSeconds;
+//function getElapsedSecondsAdjustedForPenalties() {
+//    let secondsElapsedWithoutPenalties = getElapsedSeconds();
+//    return secondsElapsedWithoutPenalties + penaltyTimeInSeconds;
+//}
+
+function processCountUpTimer() {
+    countUpSeconds++;
+    showTimer();
 }
 
 function showTimer() {
-    let seconds = getElapsedSecondsAdjustedForPenalties();
+    let seconds = countUpSeconds + penaltyTimeInSeconds; // getElapsedSecondsAdjustedForPenalties();
     document.getElementById('timerValue').innerText = formatSecondsIntoTimeString(seconds);
 
 }
@@ -320,12 +328,10 @@ function setMineCountDisplay() {
 function clickCell(el) {
     gameInProgress = true;
     if (timedMode && !timedModeTimerIntervalId) {
-        console.log('timed mode timer started');
         startCountdownTimer();
     }
     if (!timedMode && !timerIntervalId) {
-        console.log('count up started');
-        startTime = (new Date).getTime();
+        //startTime = (new Date).getTime();
         startCountUpTimer();
     }
     el.target.classList.remove('hinted');
@@ -552,7 +558,7 @@ function gameOver(win) {
 
     let li = document.createElement('li');
     li.classList.add(win ? 'win' : 'loss');
-    li.innerHTML = formatSecondsIntoTimeString(getElapsedSecondsAdjustedForPenalties()); //< 5 seconds, do something that doesn't count
+    li.innerHTML = formatSecondsIntoTimeString(timedMode ? countdownSeconds : countUpSeconds); //< 5 seconds, do something that doesn't count
     if (!win) {
         li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
     }
@@ -725,11 +731,12 @@ function pauseGame() {
 function continueGame() {
     document.getElementById('tbl').classList.remove('is-hidden');
     document.getElementById('tbl_paused').classList.add('is-hidden');
+    timedMode ? startCountdownTimer() : startCountUpTimer();
 }
 
 function startCountUpTimer() {
     if (!timerIntervalId) {
-        timerIntervalId = setInterval(showTimer, 1000);
+        timerIntervalId = setInterval(processCountUpTimer, 1000);
     }
 }
 
