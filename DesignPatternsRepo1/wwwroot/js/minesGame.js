@@ -23,7 +23,6 @@ let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELL
 let map = new Map();
 let won = false;
 let minesLeft = 0;
-//let startTime = (new Date).getTime();
 let timerIntervalId, timedModeTimerIntervalId;
 let hintCount = 0;
 let penaltyTimeInSeconds = 0;
@@ -158,10 +157,10 @@ function resetGame() {
 
 function processCountUpTimer() {
     countUpSeconds++;
-    showTimer();
+    showElapsedTimer();
 }
 
-function showTimer() {
+function showElapsedTimer() {
     let seconds = countUpSeconds + penaltyTimeInSeconds; // getElapsedSecondsAdjustedForPenalties();
     document.getElementById('timerValue').innerText = formatSecondsIntoTimeString(seconds);
 
