@@ -150,26 +150,14 @@ function resetGame() {
     console.log('Game is set and ready in ' + diff + ' ms');
 }
 
-//function getElapsedSeconds() {
-//    return countUpSeconds;
-//    //let currentTime = (new Date).getTime();
-//    //return Math.round(Math.floor(currentTime - startTime) / 1000);
-//}
-
-//function getElapsedSecondsAdjustedForPenalties() {
-//    let secondsElapsedWithoutPenalties = getElapsedSeconds();
-//    return secondsElapsedWithoutPenalties + penaltyTimeInSeconds;
-//}
-
 function processCountUpTimer() {
     countUpSeconds++;
     showElapsedTimer();
 }
 
 function showElapsedTimer() {
-    let seconds = countUpSeconds + penaltyTimeInSeconds; // getElapsedSecondsAdjustedForPenalties();
+    let seconds = countUpSeconds + penaltyTimeInSeconds;
     document.getElementById('timerValue').innerText = formatSecondsIntoTimeString(seconds);
-
 }
 
 function processCountdownInTimedMode() {
@@ -321,7 +309,6 @@ function clickCell(el) {
         startCountdownTimer();
     }
     if (!timedMode && !timerIntervalId) {
-        //startTime = (new Date).getTime();
         startCountUpTimer();
     }
     el.target.classList.remove('hinted');
@@ -345,14 +332,13 @@ function determineRowAndCol(attrData) {
 
 function revealCell(el) {
     let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
-    let row = rowCol[0];// el.getAttribute('data-row');
-    let col = rowCol[1];// el.getAttribute('data-col');
+    let row = rowCol[0];
+    let col = rowCol[1];
 
     if (!map.get(row + '-' + col)) {
         map.set(row + '-' + col, 1);
     }
     let data = getCellData(row, col);
-    //debugger;
     el.innerText = data !== CELLWITHNOMINESAROUNDDESIGNATOR ? data : '';
     el.className = 'playingField';
     el.classList.add('revealed');
@@ -380,8 +366,6 @@ function revealSurroundingCells(el) {
     let rowCol = determineRowAndCol(el.target.getAttribute('data-cell'));
     let row = rowCol[0];
     let col = rowCol[1];
-    //let row = el.target.getAttribute('data-row');
-    //let col = el.target.getAttribute('data-col');
     let toProcess = getSurroundingCellsThatCanBeRevealedBecauseAllDangerCellsAreMarked(row, col);
     if (toProcess.length) {
         processCells(toProcess);
@@ -523,8 +507,8 @@ function gameOver(win) {
     stopAndClearAllGameTimers();
     document.querySelectorAll('#playingField td').forEach(el => {
         let rowCol = determineRowAndCol(el.getAttribute('data-cell'));
-        let row = rowCol[0];// el.getAttribute('data-row');
-        let col = rowCol[1];// el.getAttribute('data-col');
+        let row = rowCol[0];
+        let col = rowCol[1];
 
         let data = getCellData(row, col);
         el.classList.remove('hinted');
