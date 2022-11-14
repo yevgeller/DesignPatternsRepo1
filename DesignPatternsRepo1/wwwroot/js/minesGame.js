@@ -202,8 +202,8 @@ function createField() {
     let mineCount = MINECOUNT;
 
     while (mineCount > 0) {
-        rndRow = randomNumber(FIELDHEIGHT);
-        rndCol = randomNumber(FIELDWIDTH);
+       let  rndRow = randomNumber(FIELDHEIGHT);
+        let rndCol = randomNumber(FIELDWIDTH);
         if (field[rndRow][rndCol] !== MINEMARKER) {
             field[rndRow][rndCol] = MINEMARKER;
             mineCount--;
