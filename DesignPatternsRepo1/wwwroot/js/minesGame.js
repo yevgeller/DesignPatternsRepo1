@@ -34,6 +34,7 @@ let countdownSeconds = COUNTDOWNSECONDS;
 let countUpSeconds = 0;
 let gameInProgress = false;
 let continueGameButton, pauseGameButton;
+let showInstructions = false;
 
 class Cell {
     constructor(row, col) {
@@ -720,4 +721,11 @@ function startCountdownTimer() {
     if (!timedModeTimerIntervalId) {
         timedModeTimerIntervalId = setInterval(processCountdownInTimedMode, 1000);
     }
+}
+
+function toggleInstructions() {
+    showInstructions = !showInstructions;
+    let el = document.getElementById('instructionsBody');
+    if (showInstructions) el.classList.remove('is-hidden');
+    if (!showInstructions) el.classList.add('is-hidden');
 }
