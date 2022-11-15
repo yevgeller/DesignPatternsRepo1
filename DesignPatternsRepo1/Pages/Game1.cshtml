@@ -91,7 +91,7 @@
                         </div>
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
-                                <input class="input ma-w-120" type="number" id="playingFieldHeightInput" placeholder="Height" min="5" max="20">
+                                <input class="input ma-w-120" type="number" id="playingFieldHeightInput" placeholder="Height" min="5" max="20" onchange="setGameParamsToCustom();">
                                 <span class="icon is-small is-left">
                                     <i class="fa-solid fa-arrows-up-down"></i>
                                 </span>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="field">
                             <p class="control has-icons-left has-icons-right">
-                                <input class="input ma-w-120" type="number" id="minesAmountInput" placeholder="Mines">
+                                <input class="input ma-w-120" type="number" id="minesAmountInput" placeholder="Mines" onchange="setGameParamsToCustom();">
                                 <span class="icon is-small is-left">
                                     <i class="fa-solid fa-asterisk"></i>
                                 </span>
