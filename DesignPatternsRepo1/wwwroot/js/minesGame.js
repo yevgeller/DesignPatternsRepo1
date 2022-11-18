@@ -57,8 +57,26 @@ class Result {
     }
 
     get result() {
-        let ret = `${this.width}Wx${this.height}H, ${this.mines}M ${formatSecondsIntoTimeString(duration)}`;
-        if (this.penalty > 0) ret += `${this.hints} hints used, penalty time of ${formatSecondsIntoTimeString(penalty)}`;
+        let li = document.createElement('li');
+        li.classList.add(win ? 'win' : 'loss');
+        li.innerHTML = formatSecondsIntoTimeString(this.duration); //< 5 seconds, do something that doesn't count
+        if (!win) {
+            li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
+        }
+        else {
+            minesLeft = 0;
+            setMineCountDisplay();
+
+            if (hintCount > 0) {
+                let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
+                li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}.`;
+            } else {
+                li.innerHTML += `. No hints used! ${randomCompliment()}!`;
+            }
+        }
+        let ret = `${this.width}Wx${this.height}H, ${this.mines}M ${formatSecondsIntoTimeString(this.duration)}`;
+        if (this.penalty > 0) ret += `${this.hints} hints used, penalty time of ${formatSecondsIntoTimeString(this.penalty)}`;
+        return ret;
     }
 }
 
