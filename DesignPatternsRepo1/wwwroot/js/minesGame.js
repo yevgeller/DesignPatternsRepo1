@@ -35,7 +35,7 @@ let countUpSeconds = 0;
 let gameInProgress = false;
 let continueGameButton, pauseGameButton;
 let showInstructions = false;
-let results = {};
+let results = [];
 
 class Cell {
     constructor(row, col) {
@@ -45,19 +45,20 @@ class Cell {
 }
 
 class Result {
-    constructor(win, width, height, mines, minesTotal, duration, penalty = 0) {
+    constructor(win, width, height, mines, minesTotal, duration, hints, penalty = 0) {
         this.win = win;
         this.width = width;
         this.height = height;
         this.mines = mines;
         this.minesTotal = minesTotal;
         this.duration = duration;
+        this.hints = hints;
         this.penalty = penalty;
     }
 
     get result() {
         let ret = `${this.width}Wx${this.height}H, ${this.mines}M ${formatSecondsIntoTimeString(duration)}`;
-        if (this.penalty > 0) ret += `, penalty time of ${formatSecondsIntoTimeString(penalty)}`;
+        if (this.penalty > 0) ret += `${this.hints} hints used, penalty time of ${formatSecondsIntoTimeString(penalty)}`;
     }
 }
 
