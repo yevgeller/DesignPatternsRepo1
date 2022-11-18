@@ -45,11 +45,12 @@ class Cell {
 }
 
 class Result {
-    constructor(outcome, width, height, mines, duration, penalty = 0) {
-        this.outcome = outcome;
+    constructor(win, width, height, mines, minesTotal, duration, penalty = 0) {
+        this.win = win;
         this.width = width;
         this.height = height;
         this.mines = mines;
+        this.minesTotal = minesTotal;
         this.duration = duration;
         this.penalty = penalty;
     }
@@ -544,6 +545,8 @@ function gameOver(win) {
             minesLeft += 1;
         }
     });
+
+    results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, countUpSeconds, penaltyTimeInSeconds));
 
     let li = document.createElement('li');
     li.classList.add(win ? 'win' : 'loss');
