@@ -35,11 +35,28 @@ let countUpSeconds = 0;
 let gameInProgress = false;
 let continueGameButton, pauseGameButton;
 let showInstructions = false;
+let results = {};
 
 class Cell {
     constructor(row, col) {
         this.row = row;
         this.col = col;
+    }
+}
+
+class Result {
+    constructor(outcome, width, height, mines, duration, penalty = 0) {
+        this.outcome = outcome;
+        this.width = width;
+        this.height = height;
+        this.mines = mines;
+        this.duration = duration;
+        this.penalty = penalty;
+    }
+
+    get result() {
+        let ret = `${this.width}Wx${this.height}H, ${this.mines}M ${formatSecondsIntoTimeString(duration)}`;
+        if (this.penalty > 0) ret += `, penalty time of ${formatSecondsIntoTimeString(penalty)}`;
     }
 }
 
