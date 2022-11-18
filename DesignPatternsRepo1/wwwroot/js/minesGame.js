@@ -547,11 +547,11 @@ function gameOver(win) {
         }
     });
 
-    results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, countUpSeconds, penaltyTimeInSeconds));
+    results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds, penaltyTimeInSeconds));
 
     let li = document.createElement('li');
     li.classList.add(win ? 'win' : 'loss');
-    li.innerHTML = formatSecondsIntoTimeString(timedMode ? countdownSeconds : countUpSeconds); //< 5 seconds, do something that doesn't count
+    li.innerHTML = formatSecondsIntoTimeString(timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds); //< 5 seconds, do something that doesn't count
     if (!win) {
         li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
     }
