@@ -44,6 +44,10 @@ class Cell {
     }
 }
 
+function addTestResults() {
+    console.log('adding test results');
+}
+
 class Result {
     constructor(win, width, height, mines, minesTotal, duration, hints, penalty = 0) {
         this.win = win;
