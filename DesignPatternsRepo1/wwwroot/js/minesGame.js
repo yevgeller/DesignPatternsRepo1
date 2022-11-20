@@ -620,6 +620,10 @@ function gameOver(win) {
     pauseGameButton.disabled = true;
 }
 
+function showResults() {
+
+}
+
 function giveHint(isBig) {
     let hintCandidates = getHintCandidates(isBig);
     let hintCandidatesCount = hintCandidates.length;
