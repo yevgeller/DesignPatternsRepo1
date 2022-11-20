@@ -634,9 +634,11 @@ function showResults() {
         console.log('header', hdr);
         let theseResults = results.filter(x => x.header === hdr);
         //figure out why this is empty
-        console.table(theseResults);
+        //console.table(theseResults);
+        theseResults.forEach(res => console.log(res.header, res.comparator));
         let sorted = theseResults.sort((a, b) => { a.comparator < b.comparator });
-        console.table(sorted);
+        //console.table(sorted);
+        sorted.forEach(res => console.log(res.header, res.comparator));
         //foreach theseResults,
         //sort it
         //create an ol
