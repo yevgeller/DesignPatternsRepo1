@@ -102,6 +102,11 @@ class Result {
     get comparator() {
         return this.width * this.height * this.minesTotal;
     }
+
+    get header() {
+        return `${this.width} x ${this.height}, ${this.minesTotal} mines:`
+    }
+
 }
 
 function resetGameParameters() {
