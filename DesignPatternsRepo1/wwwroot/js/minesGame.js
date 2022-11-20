@@ -630,9 +630,9 @@ function showResults() {
     console.log(distinctHeaders);
     //document.getElementById('results2').appendChild(li);
     //sort headers
-    distinctHeaders.forEach(x => {
-        console.log('header', x);
-        let theseResults = results.find(x => x.header === x);
+    distinctHeaders.forEach(hdr => {
+        console.log('header', hdr);
+        let theseResults = results.filter(x => x.header === hdr);
         //figure out why this is empty
         console.table(theseResults);
         //foreach theseResults,
