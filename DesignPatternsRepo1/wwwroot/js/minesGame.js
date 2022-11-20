@@ -47,14 +47,20 @@ class Cell {
 function addTestResults() {
     console.log('adding test results');
     results.push(new Result(true, 10, 10, 20, 20, 90, 0, 0));
-    results.push(new Result(false, 10, 10, 3, 20, 10, 0, 0));
+    results.push(new Result(false, 10, 10, 3, 20, 10, 1, 10));
     results.push(new Result(false, 10, 10, 0, 19, 5, 0, 0));
     results.push(new Result(true,  9, 9, 20, 20, 90, 0, 0));
     results.push(new Result(false, 9, 9, 3, 20, 10, 0, 0));
     results.push(new Result(false, 9, 9, 0, 19, 5, 0, 0));
     results.push(new Result(true,  11,11, 20, 20, 90, 0, 0));
     results.push(new Result(false, 11,11, 3, 20, 10, 0, 0));
-    results.push(new Result(false, 11,11, 0, 19, 5, 0, 0));
+    results.push(new Result(false, 11, 11, 0, 19, 5, 2, 20));
+    results.push(new Result(true, 10, 10, 20, 20, 55, 0, 0));
+    results.push(new Result(false, 10, 10, 3, 20, 15, 0, 0));
+    results.push(new Result(false, 10, 10, 0, 19, 8, 0, 0));
+    results.push(new Result(true, 9, 9, 20, 20, 100, 3, 50));
+    results.push(new Result(false, 9, 9, 3, 20, 20, 0, 0));
+    results.push(new Result(false, 9, 9, 0, 19, 25, 0, 0));
 }
 
 class Result {
@@ -91,6 +97,10 @@ class Result {
         //if (this.penalty > 0) ret += `${this.hints} hints used, penalty time of ${formatSecondsIntoTimeString(this.penalty)}`;
         //return ret;
         return li;
+    }
+
+    get comparator() {
+        return this.width * this.height * this.minesTotal;
     }
 }
 
