@@ -61,6 +61,7 @@ function addTestResults() {
     results.push(new Result(true, 9, 9, 20, 20, 100, 3, 50));
     results.push(new Result(false, 9, 9, 3, 20, 20, 0, 0));
     results.push(new Result(false, 9, 9, 0, 19, 25, 0, 0));
+    showResults();
 }
 
 class Result {
@@ -621,7 +622,24 @@ function gameOver(win) {
 }
 
 function showResults() {
-
+    document.getElementById('scoreboardDiv').classList.remove('is-hidden');
+    let headers = [];
+    results.forEach(x => headers.push(x.header));
+    console.log('headers', headers);
+    let distinctHeaders = new Set(headers);
+    console.log(distinctHeaders);
+    //document.getElementById('results2').appendChild(li);
+    //sort headers
+    distinctHeaders.forEach(x => {
+        console.log('header', x);
+        let theseResults = results.find(x => x.header === x);
+        //figure out why this is empty
+        console.table(theseResults);
+        //foreach theseResults,
+        //sort it
+        //create an ol
+        //add a li with a result
+    });
 }
 
 function giveHint(isBig) {
