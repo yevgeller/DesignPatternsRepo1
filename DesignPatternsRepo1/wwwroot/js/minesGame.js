@@ -101,7 +101,7 @@ class Result {
     }
 
     get comparator() {
-        return this.width * this.height * this.minesTotal;
+        return this.width * this.height * this.minesTotal * (this.duration + this.penalty);
     }
 
     get header() {
@@ -637,11 +637,11 @@ function showResults() {
         console.log('header', hdr);
         let theseResults = results.filter(x => x.header === hdr);
         //figure out why this is empty
-        //console.table(theseResults);
+        console.table(theseResults);
         theseResults.forEach(res => console.log(res.header, res.comparator));
         let sorted = theseResults.sort((a, b) => { a.comparator < b.comparator });
         //console.table(sorted);
-        sorted.forEach(res => console.log(res.header, res.comparator));
+        sorted.forEach(res => console.log(res.summary));
         //foreach theseResults,
         //sort it
         //create an ol
