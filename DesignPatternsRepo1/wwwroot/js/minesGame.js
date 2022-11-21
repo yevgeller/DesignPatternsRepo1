@@ -628,18 +628,17 @@ function showResults() {
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     let headers = [];
     results.forEach(x => headers.push(x.header));
-    console.log('headers', headers);
     let distinctHeaders = new Set(headers);
-    console.table(distinctHeaders);
-    console.log('--- sorted headers ---');
     let distinctHeadersArray = Array.from(distinctHeaders).sort();
-    console.table(distinctHeadersArray);
-    //document.getElementById('results2').appendChild(li);
-    //sort headers
+    let rootEl = document.getElementById('results2');
+
     distinctHeaders.forEach(hdr => {
         //console.log('header', hdr);
-        //let theseResults = results.filter(x => x.header === hdr);
-        //console.table(theseResults);
+        let theseResults = results
+            .filter(x => x.header === hdr)
+            .sort((a, b) => a.comparator < b.comparator);
+        console.log(hdr);
+        console.table(theseResults);
         //theseResults.forEach(res => console.log(res.header, res.comparator, '||', res.summary));
         //let sorted = theseResults.sort((a, b) => { a.comparator < b.comparator });
         ////console.table(sorted);
