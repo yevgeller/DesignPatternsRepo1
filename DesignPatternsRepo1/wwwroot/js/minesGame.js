@@ -630,22 +630,24 @@ function showResults() {
     results.forEach(x => headers.push(x.header));
     console.log('headers', headers);
     let distinctHeaders = new Set(headers);
-    console.log(distinctHeaders);
+    console.table(distinctHeaders);
+    console.log('--- sorted headers ---');
+    let distinctHeadersArray = Array.from(distinctHeaders).sort();
+    console.table(distinctHeadersArray);
     //document.getElementById('results2').appendChild(li);
     //sort headers
     distinctHeaders.forEach(hdr => {
-        console.log('header', hdr);
-        let theseResults = results.filter(x => x.header === hdr);
-        //figure out why this is empty
-        console.table(theseResults);
-        theseResults.forEach(res => console.log(res.header, res.comparator));
-        let sorted = theseResults.sort((a, b) => { a.comparator < b.comparator });
-        //console.table(sorted);
-        sorted.forEach(res => console.log(res.summary));
-        //foreach theseResults,
-        //sort it
-        //create an ol
-        //add a li with a result
+        //console.log('header', hdr);
+        //let theseResults = results.filter(x => x.header === hdr);
+        //console.table(theseResults);
+        //theseResults.forEach(res => console.log(res.header, res.comparator, '||', res.summary));
+        //let sorted = theseResults.sort((a, b) => { a.comparator < b.comparator });
+        ////console.table(sorted);
+        //sorted.forEach(res => console.log(res.summary));
+        ////foreach theseResults,
+        ////sort it
+        ////create an ol
+        ////add a li with a result
     });
 }
 
