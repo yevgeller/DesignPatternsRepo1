@@ -634,6 +634,13 @@ function showResults() {
 
     distinctHeaders.forEach(hdr => {
         //console.log('header', hdr);
+        let resultContainer = document.createElement('div');
+        let headerElement = document.createElement('h3');
+        headerElement.innerText = hdr;
+        headerElement.classList.add('is-size-3');
+        resultContainer.appendChild(headerElement);
+
+        rootEl.appendChild(resultContainer);
         let theseResults = results
             .filter(x => x.header === hdr)
             .sort((a, b) => a.comparator < b.comparator);
