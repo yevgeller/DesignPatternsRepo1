@@ -108,6 +108,9 @@ class Result {
         return `${this.width} x ${this.height}, ${this.minesTotal} mines:`
     }
 
+    get summary() {
+        return `${this.width}x${this.height} (${this.win ? 'won' : 'lost'}${this.win ? '' : ', '}${this.win ? '' : (this.mines + '/' + this.minesTotal)}), ${this.duration}+${this.penalty}`
+    }
 }
 
 function resetGameParameters() {
