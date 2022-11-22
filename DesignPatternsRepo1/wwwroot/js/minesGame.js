@@ -599,7 +599,7 @@ function gameOver(win) {
     });
 
     results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds, penaltyTimeInSeconds));
-    showResults();
+   // showResults();
     //let li = document.createElement('li');
     //li.classList.add(win ? 'win' : 'loss');
     //li.innerHTML = formatSecondsIntoTimeString(timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds); //< 5 seconds, do something that doesn't count
@@ -618,7 +618,7 @@ function gameOver(win) {
     //    }
     //}
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
-    document.getElementById('results').appendChild(li);
+    //document.getElementById('results').appendChild(li);
     document.getElementById('smallHintButton').disabled = true;
     document.getElementById('largeHintButton').disabled = true;
     pauseGameButton.disabled = true;
@@ -629,9 +629,9 @@ function showResults() {
     let headers = [];
     results.forEach(x => headers.push(x.header));
     let distinctHeaders = new Set(headers);
-    let distinctHeadersArray = Array.from(distinctHeaders).sort();
+    //let distinctHeadersArray = Array.from(distinctHeaders).sort();
     let rootEl = document.getElementById('results2');
-
+    rootEl.innerHTML = "";
     distinctHeaders.forEach(hdr => {
         //console.log('header', hdr);
         let resultContainer = document.createElement('div');
