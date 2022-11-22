@@ -644,8 +644,14 @@ function showResults() {
         let theseResults = results
             .filter(x => x.header === hdr)
             .sort((a, b) => a.comparator < b.comparator);
-        console.log(hdr);
-        console.table(theseResults);
+        if (theseResults.length > 0) {
+                let listContainer = document.createElement('ol');
+            theseResults.forEach(res => {
+                listContainer.appendChild(res.result);
+            });
+        }
+        //console.log(hdr);
+        //console.table(theseResults);
         //theseResults.forEach(res => console.log(res.header, res.comparator, '||', res.summary));
         //let sorted = theseResults.sort((a, b) => { a.comparator < b.comparator });
         ////console.table(sorted);
