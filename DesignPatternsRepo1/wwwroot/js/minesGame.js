@@ -49,11 +49,11 @@ function addTestResults() {
     results.push(new Result(true, 10, 10, 20, 20, 90, 0, 0));
     results.push(new Result(false, 10, 10, 3, 20, 10, 1, 10));
     results.push(new Result(false, 10, 10, 0, 19, 5, 0, 0));
-    results.push(new Result(true,  9, 9, 20, 20, 90, 0, 0));
+    results.push(new Result(true, 9, 9, 20, 20, 90, 0, 0));
     results.push(new Result(false, 9, 9, 3, 20, 10, 0, 0));
     results.push(new Result(false, 9, 9, 0, 19, 5, 0, 0));
-    results.push(new Result(true,  11,11, 20, 20, 90, 0, 0));
-    results.push(new Result(false, 11,11, 3, 20, 10, 0, 0));
+    results.push(new Result(true, 11, 11, 20, 20, 90, 0, 0));
+    results.push(new Result(false, 11, 11, 3, 20, 10, 0, 0));
     results.push(new Result(false, 11, 11, 0, 19, 5, 2, 20));
     results.push(new Result(true, 10, 10, 20, 20, 55, 0, 0));
     results.push(new Result(false, 10, 10, 3, 20, 15, 0, 0));
@@ -273,7 +273,7 @@ function createField() {
     let mineCount = MINECOUNT;
 
     while (mineCount > 0) {
-       let  rndRow = randomNumber(FIELDHEIGHT);
+        let rndRow = randomNumber(FIELDHEIGHT);
         let rndCol = randomNumber(FIELDWIDTH);
         if (field[rndRow][rndCol] !== MINEMARKER) {
             field[rndRow][rndCol] = MINEMARKER;
@@ -640,16 +640,18 @@ function showResults() {
         headerElement.classList.add('is-size-3');
         resultContainer.appendChild(headerElement);
 
-        rootEl.appendChild(resultContainer);
         let theseResults = results
             .filter(x => x.header === hdr)
             .sort((a, b) => a.comparator < b.comparator);
         if (theseResults.length > 0) {
-                let listContainer = document.createElement('ol');
+            let listContainer = document.createElement('ol');
             theseResults.forEach(res => {
                 listContainer.appendChild(res.result);
             });
+            resultContainer.appendChild(listContainer);
         }
+
+        rootEl.appendChild(resultContainer);
         //console.log(hdr);
         //console.table(theseResults);
         //theseResults.forEach(res => console.log(res.header, res.comparator, '||', res.summary));
