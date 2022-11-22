@@ -599,24 +599,24 @@ function gameOver(win) {
     });
 
     results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds, penaltyTimeInSeconds));
+    showResults();
+    //let li = document.createElement('li');
+    //li.classList.add(win ? 'win' : 'loss');
+    //li.innerHTML = formatSecondsIntoTimeString(timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds); //< 5 seconds, do something that doesn't count
+    //if (!win) {
+    //    li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
+    //}
+    //else {
+    //    minesLeft = 0;
+    //    setMineCountDisplay();
 
-    let li = document.createElement('li');
-    li.classList.add(win ? 'win' : 'loss');
-    li.innerHTML = formatSecondsIntoTimeString(timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds); //< 5 seconds, do something that doesn't count
-    if (!win) {
-        li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
-    }
-    else {
-        minesLeft = 0;
-        setMineCountDisplay();
-
-        if (hintCount > 0) {
-            let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
-            li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}.`;
-        } else {
-            li.innerHTML += `. No hints used! ${randomCompliment()}!`;
-        }
-    }
+    //    if (hintCount > 0) {
+    //        let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
+    //        li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}.`;
+    //    } else {
+    //        li.innerHTML += `. No hints used! ${randomCompliment()}!`;
+    //    }
+    //}
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     document.getElementById('results').appendChild(li);
     document.getElementById('smallHintButton').disabled = true;
