@@ -81,7 +81,7 @@ class Result {
         li.classList.add(this.win ? 'win' : 'loss');
         li.innerHTML = formatSecondsIntoTimeString(this.duration); //< 5 seconds, do something that doesn't count
         if (!this.win) {
-            li.innerHTML += ', ' + (this.minesTotal - this.mines) + ' out of ' + MINECOUNT + ' correct';
+            li.innerHTML += `, ${this.mines} out of ${this.minesTotal} correct`;
         }
         else {
             minesLeft = 0;
@@ -599,7 +599,7 @@ function gameOver(win) {
     });
 
     results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds, penaltyTimeInSeconds));
-   // showResults();
+    showResults();
     //let li = document.createElement('li');
     //li.classList.add(win ? 'win' : 'loss');
     //li.innerHTML = formatSecondsIntoTimeString(timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds); //< 5 seconds, do something that doesn't count
