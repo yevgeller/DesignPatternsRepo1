@@ -167,6 +167,11 @@ document.addEventListener('DOMContentLoaded', function () {
     pauseGameButton = document.getElementById('pauseGameButton');
     continueGameButton = document.getElementById('continueGameButton');
     resetGame();
+    document.addEventListener('keydown', function (event) {
+        if (event.ctrlKey && event.key === 'z') {
+            alert('Undo!');
+        }
+    });
 });
 
 function stopAndClearAllGameTimers() {
