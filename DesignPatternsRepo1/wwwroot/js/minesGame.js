@@ -102,7 +102,7 @@ class Result {
 
     get header() {
         if (this.duration < 10) {
-            return `(Non-starter)  ${this.width} x ${this.height}, ${this.minesTotal} mines:`;
+            return `Unlucky start/quick loss:`;
         }
         return `${this.width} x ${this.height}, ${this.minesTotal} mines:`
     }
