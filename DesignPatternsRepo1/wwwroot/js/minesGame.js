@@ -84,7 +84,7 @@ class Result {
             li.innerHTML += `, ${this.mines} out of ${this.minesTotal} correct`;
         }
         else {
-            minesLeft = 0;
+            //minesLeft = 0;
             setMineCountDisplay();
 
             if (hintCount > 0) {
