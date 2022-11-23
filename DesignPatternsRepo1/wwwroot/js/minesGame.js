@@ -79,12 +79,11 @@ class Result {
     get result() {
         let li = document.createElement('li');
         li.classList.add(this.win ? 'win' : 'loss');
-        li.innerHTML = formatSecondsIntoTimeString(this.duration); //< 5 seconds, do something that doesn't count
+        li.innerHTML = formatSecondsIntoTimeString(this.duration); 
         if (!this.win) {
             li.innerHTML += `, ${this.mines} out of ${this.minesTotal} correct`;
         }
         else {
-            //minesLeft = 0;
             setMineCountDisplay();
 
             if (hintCount > 0) {
@@ -94,9 +93,6 @@ class Result {
                 li.innerHTML += `. No hints used! ${randomCompliment()}!`;
             }
         }
-        //let ret = `${this.width}Wx${this.height}H, ${this.mines}M ${formatSecondsIntoTimeString(this.duration)}`;
-        //if (this.penalty > 0) ret += `${this.hints} hints used, penalty time of ${formatSecondsIntoTimeString(this.penalty)}`;
-        //return ret;
         return li;
     }
 
@@ -105,6 +101,9 @@ class Result {
     }
 
     get header() {
+        if (this.duration < 10) {
+            return `(Non-starter)  ${this.width} x ${this.height}, ${this.minesTotal} mines:`;
+        }
         return `${this.width} x ${this.height}, ${this.minesTotal} mines:`
     }
 
