@@ -79,7 +79,7 @@ class Result {
     get result() {
         let li = document.createElement('li');
         li.classList.add(this.win ? 'win' : 'loss');
-        li.innerHTML = formatSecondsIntoTimeString(this.duration); 
+        li.innerHTML = formatSecondsIntoTimeString(this.duration);
         if (!this.win) {
             li.innerHTML += `, ${this.mines} out of ${this.minesTotal} correct`;
         }
@@ -169,8 +169,8 @@ document.addEventListener('DOMContentLoaded', function () {
     resetGame();
     //https://stackoverflow.com/questions/16006583/capturing-ctrlz-key-combination-in-javascript
     document.addEventListener('keydown', function (event) {
-        if (event.ctrlKey && event.key === 'z') {
-            alert('Undo!');
+        if (event.key === 'p') {
+            resetGame();
         }
     });
 });
