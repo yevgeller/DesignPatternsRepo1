@@ -167,6 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
     pauseGameButton = document.getElementById('pauseGameButton');
     continueGameButton = document.getElementById('continueGameButton');
     resetGame();
+    //https://stackoverflow.com/questions/16006583/capturing-ctrlz-key-combination-in-javascript
     document.addEventListener('keydown', function (event) {
         if (event.ctrlKey && event.key === 'z') {
             alert('Undo!');
