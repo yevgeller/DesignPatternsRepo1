@@ -81,7 +81,7 @@ class Result {
     get result() {
         let li = document.createElement('li');
         li.classList.add(this.win ? 'win' : 'loss');
-        li.innerHTML = formatSecondsIntoTimeString(this.duration);
+        li.innerHTML = formatSecondsIntoTimeString(this.duration + this.penalty);
         if (this.penalty > 0) li.innerHTML += ` (${formatSecondsIntoTimeString(this.penalty)} penalty)`;
         if (!this.win) {
             li.innerHTML += `, ${this.mines} out of ${this.minesTotal} correct`;
@@ -96,7 +96,6 @@ class Result {
                 li.innerHTML += `. No hints used! ${randomCompliment()}!`;
             }
         }
-        li.innerHTML += ` C: ${this.comparator}`;
         return li;
     }
 
