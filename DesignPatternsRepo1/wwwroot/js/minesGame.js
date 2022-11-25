@@ -613,7 +613,7 @@ function gameOver(win) {
         }
     });
 
-    results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds, timedMode, penaltyTimeInSeconds));
+    results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds, hintCount, timedMode, penaltyTimeInSeconds));
     showResults();
 
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
@@ -633,7 +633,6 @@ function showResults() {
     let rootEl = document.getElementById('results2');
     rootEl.innerHTML = "";
     distinctHeaders.forEach(hdr => {
-        //console.log('header', hdr);
         let resultContainer = document.createElement('div');
         let headerElement = document.createElement('h3');
         headerElement.innerText = hdr;
@@ -655,16 +654,6 @@ function showResults() {
         }
 
         rootEl.appendChild(resultContainer);
-        //console.log(hdr);
-        //console.table(theseResults);
-        //theseResults.forEach(res => console.log(res.header, res.comparator, '||', res.summary));
-        //let sorted = theseResults.sort((a, b) => { a.comparator < b.comparator });
-        ////console.table(sorted);
-        //sorted.forEach(res => console.log(res.summary));
-        ////foreach theseResults,
-        ////sort it
-        ////create an ol
-        ////add a li with a result
     });
 }
 
