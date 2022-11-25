@@ -19,6 +19,7 @@ const EXPLODEDONTHISMINE = 'E';
 const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
 const REVEALEDCORRECTMINEMARKER = '<i class="fa-solid fa-check"></i>';
 const EXPLODEDMINEMARKER = '<i class="fa-solid fa-explosion"></i>';
+const TIMEDMODEICON = '<i class="fa-solid fa-stopwatch mr-3 ml-3"></i>';
 let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
 let map = new Map();
 let won = false;
@@ -81,6 +82,7 @@ class Result {
         let li = document.createElement('li');
         li.classList.add(this.win ? 'win' : 'loss');
         li.innerHTML = formatSecondsIntoTimeString(this.duration);
+        if (this.penalty > 0) li.innerHTML += ` (${formatSecondsIntoTimeString(this.penalty)} penalty)`;
         if (!this.win) {
             li.innerHTML += `, ${this.mines} out of ${this.minesTotal} correct`;
         }
@@ -94,6 +96,7 @@ class Result {
                 li.innerHTML += `. No hints used! ${randomCompliment()}!`;
             }
         }
+        li.innerHTML += ` C: ${this.comparator}`;
         return li;
     }
 
@@ -631,7 +634,7 @@ function showResults() {
 
         let theseResults = results
             .filter(x => x.header === hdr)
-            .sort((a, b) => a.comparator < b.comparator);
+            .sort((a, b) => a.comparator - b.comparator);
         if (theseResults.length > 0) {
             let listContainer = document.createElement('ol');
             theseResults.forEach(res => {
