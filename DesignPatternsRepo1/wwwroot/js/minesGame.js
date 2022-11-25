@@ -19,7 +19,7 @@ const EXPLODEDONTHISMINE = 'E';
 const REALMINEMARKERHTMLWHENREVEALED = '<i class="fa-solid fa-asterisk"></i>';
 const REVEALEDCORRECTMINEMARKER = '<i class="fa-solid fa-check"></i>';
 const EXPLODEDMINEMARKER = '<i class="fa-solid fa-explosion"></i>';
-const TIMEDMODEICON = '<i class="fa-solid fa-stopwatch mr-3 ml-3"></i>';
+const TIMEDMODEICON = '<i class="fa-solid fa-stopwatch ml-1"></i>';
 let field = Array.from(Array(FIELDHEIGHT), () => new Array(FIELDWIDTH).fill(CELLWITHNOMINESAROUNDDESIGNATOR));
 let map = new Map();
 let won = false;
@@ -96,6 +96,7 @@ class Result {
                 li.innerHTML += `. No hints used! ${randomCompliment()}!`;
             }
         }
+        if (this.isTimedMode) li.innerHTML += TIMEDMODEICON;
         return li;
     }
 
