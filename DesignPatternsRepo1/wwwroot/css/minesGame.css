@@ -7,7 +7,9 @@
 .latestResult {
     animation-name: resultAnimation;
     animation-duration: 5s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 1;
+font-weight:bold;
+color:yellow;
 }
 
 .playingField {

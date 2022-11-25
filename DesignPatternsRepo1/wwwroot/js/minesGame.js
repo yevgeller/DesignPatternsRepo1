@@ -626,6 +626,8 @@ function showResults() {
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     let headers = [];
     results.forEach(x => headers.push(x.header));
+    let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp))
+    console.log(lastResultTimeStamp);
     let distinctHeaders = new Set(headers);
     //let distinctHeadersArray = Array.from(distinctHeaders).sort();
     let rootEl = document.getElementById('results2');
@@ -642,15 +644,13 @@ function showResults() {
             .filter(x => x.header === hdr)
             .sort((a, b) => a.comparator - b.comparator);
         if (theseResults.length > 0) {
-            let listContainer = document.createElement('ol');
-            for (let i = 0; i < theseResults.length; i++) {
-                let resultItem = theseResults[i].result;
-                listContainer.appendChild(resultItem);
-            }
+            let listContainer = document.createElement('ol');            
 
-            //theseResults.forEach(res => {
-            //    listContainer.appendChild(res.result);
-            //});
+            theseResults.forEach(res => {
+                let result = res.result;
+                if (res.timeStamp === lastResultTimeStamp) result.classList.add('latestResult');
+                listContainer.appendChild(result);
+            });
             resultContainer.appendChild(listContainer);
         }
 
