@@ -52,27 +52,27 @@ function getCurrentResultId() {
 
 function addTestResults() {
     console.log('adding test results');
-    results.push(new Result(getCurrentResultId(), true, 10, 10, 20, 20, 90, 0, false, 0));
-    results.push(new Result(getCurrentResultId(), false, 10, 10, 3, 20, 10, 1, false, 10));
-    results.push(new Result(getCurrentResultId(), false, 10, 10, 0, 19, 5, 0, false, 0));
-    results.push(new Result(getCurrentResultId(), true, 9, 9, 20, 20, 90, 0, false, 0));
-    results.push(new Result(getCurrentResultId(), false, 9, 9, 3, 20, 10, 0, false, 0));
-    results.push(new Result(getCurrentResultId(), false, 9, 9, 0, 19, 5, 0, false, 0));
-    results.push(new Result(getCurrentResultId(), true, 11, 11, 20, 20, 90, 0, false, 0));
-    results.push(new Result(getCurrentResultId(), false, 11, 11, 3, 20, 10, 0, false, 0));
-    results.push(new Result(getCurrentResultId(), false, 11, 11, 0, 19, 5, 2, false, 20));
-    results.push(new Result(getCurrentResultId(), true, 10, 10, 20, 20, 55, 0,true, 0));
-    results.push(new Result(getCurrentResultId(), false, 10, 10, 3, 20, 15, 0,true, 0));
-    results.push(new Result(getCurrentResultId(), false, 10, 10, 0, 19, 8, 0,true, 0));
-    results.push(new Result(getCurrentResultId(), true, 9, 9, 20, 20, 100, 3,true, 50));
-    results.push(new Result(getCurrentResultId(), false, 9, 9, 3, 20, 20, 0,true, 0));
-    results.push(new Result(getCurrentResultId(), false, 9, 9, 0, 19, 25, 0, true, 0));
+    results.push(new Result(true, 10, 10, 20, 20, 90, 0, false, 0));
+    results.push(new Result(false, 10, 10, 3, 20, 10, 1, false, 10));
+    results.push(new Result(false, 10, 10, 0, 19, 5, 0, false, 0));
+    results.push(new Result(true, 9, 9, 20, 20, 90, 0, false, 0));
+    results.push(new Result(false, 9, 9, 3, 20, 10, 0, false, 0));
+    results.push(new Result(false, 9, 9, 0, 19, 5, 0, false, 0));
+    results.push(new Result(true, 11, 11, 20, 20, 90, 0, false, 0));
+    results.push(new Result(false, 11, 11, 3, 20, 10, 0, false, 0));
+    results.push(new Result(false, 11, 11, 0, 19, 5, 2, false, 20));
+    results.push(new Result(true, 10, 10, 20, 20, 55, 0,true, 0));
+    results.push(new Result(false, 10, 10, 3, 20, 15, 0,true, 0));
+    results.push(new Result(false, 10, 10, 0, 19, 8, 0,true, 0));
+    results.push(new Result(true, 9, 9, 20, 20, 100, 3,true, 50));
+    results.push(new Result(false, 9, 9, 3, 20, 20, 0,true, 0));
+    results.push(new Result(false, 9, 9, 0, 19, 25, 0, true, 0));
     showResults();
 }
 
 class Result {
-    constructor(id, win, width, height, mines, minesTotal, duration, hints, isTimedMode, penalty = 0) {
-        this.id = id;
+    constructor(win, width, height, mines, minesTotal, duration, hints, isTimedMode, penalty = 0) {
+        this.timeStamp = new Date().getTime();
         this.win = win;
         this.width = width;
         this.height = height;
@@ -643,9 +643,14 @@ function showResults() {
             .sort((a, b) => a.comparator - b.comparator);
         if (theseResults.length > 0) {
             let listContainer = document.createElement('ol');
-            theseResults.forEach(res => {
-                listContainer.appendChild(res.result);
-            });
+            for (let i = 0; i < theseResults.length; i++) {
+                let resultItem = theseResults[i].result;
+                listContainer.appendChild(resultItem);
+            }
+
+            //theseResults.forEach(res => {
+            //    listContainer.appendChild(res.result);
+            //});
             resultContainer.appendChild(listContainer);
         }
 
