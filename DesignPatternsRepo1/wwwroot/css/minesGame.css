@@ -1,13 +1,14 @@
 ﻿.hinted {
     animation-name: hintAnimation;
-    animation-iteration-count: 3;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
 }
 
 .latestResult {
     animation-name: resultAnimation;
-    animation-duration: 5s;
-    animation-iteration-count: 1;
-    text-decoration:underline;
+    /*animation-duration: 5s;*/
+    animation-iteration-count: 3;
+    /*text-decoration:underline;*/
 }
 
 .playingField {
