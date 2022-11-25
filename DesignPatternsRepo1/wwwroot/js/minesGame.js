@@ -46,26 +46,26 @@ class Cell {
 
 function addTestResults() {
     console.log('adding test results');
-    results.push(new Result(true, 10, 10, 20, 20, 90, 0, 0));
-    results.push(new Result(false, 10, 10, 3, 20, 10, 1, 10));
-    results.push(new Result(false, 10, 10, 0, 19, 5, 0, 0));
-    results.push(new Result(true, 9, 9, 20, 20, 90, 0, 0));
-    results.push(new Result(false, 9, 9, 3, 20, 10, 0, 0));
-    results.push(new Result(false, 9, 9, 0, 19, 5, 0, 0));
-    results.push(new Result(true, 11, 11, 20, 20, 90, 0, 0));
-    results.push(new Result(false, 11, 11, 3, 20, 10, 0, 0));
-    results.push(new Result(false, 11, 11, 0, 19, 5, 2, 20));
-    results.push(new Result(true, 10, 10, 20, 20, 55, 0, 0));
-    results.push(new Result(false, 10, 10, 3, 20, 15, 0, 0));
-    results.push(new Result(false, 10, 10, 0, 19, 8, 0, 0));
-    results.push(new Result(true, 9, 9, 20, 20, 100, 3, 50));
-    results.push(new Result(false, 9, 9, 3, 20, 20, 0, 0));
-    results.push(new Result(false, 9, 9, 0, 19, 25, 0, 0));
+    results.push(new Result(true, 10, 10, 20, 20, 90, 0, false, 0));
+    results.push(new Result(false, 10, 10, 3, 20, 10, 1, false, 10));
+    results.push(new Result(false, 10, 10, 0, 19, 5, 0, false, 0));
+    results.push(new Result(true, 9, 9, 20, 20, 90, 0, false, 0));
+    results.push(new Result(false, 9, 9, 3, 20, 10, 0, false, 0));
+    results.push(new Result(false, 9, 9, 0, 19, 5, 0, false, 0));
+    results.push(new Result(true, 11, 11, 20, 20, 90, 0, false, 0));
+    results.push(new Result(false, 11, 11, 3, 20, 10, 0, false, 0));
+    results.push(new Result(false, 11, 11, 0, 19, 5, 2, false, 20));
+    results.push(new Result(true, 10, 10, 20, 20, 55, 0,true, 0));
+    results.push(new Result(false, 10, 10, 3, 20, 15, 0,true, 0));
+    results.push(new Result(false, 10, 10, 0, 19, 8, 0,true, 0));
+    results.push(new Result(true, 9, 9, 20, 20, 100, 3,true, 50));
+    results.push(new Result(false, 9, 9, 3, 20, 20, 0,true, 0));
+    results.push(new Result(false, 9, 9, 0, 19, 25, 0, true, 0));
     showResults();
 }
 
 class Result {
-    constructor(win, width, height, mines, minesTotal, duration, hints, penalty = 0) {
+    constructor(win, width, height, mines, minesTotal, duration, hints, isTimedMode, penalty = 0) {
         this.win = win;
         this.width = width;
         this.height = height;
@@ -73,6 +73,7 @@ class Result {
         this.minesTotal = minesTotal;
         this.duration = duration;
         this.hints = hints;
+        this.isTimedMode = isTimedMode;
         this.penalty = penalty;
     }
 
@@ -603,27 +604,10 @@ function gameOver(win) {
         }
     });
 
-    results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds, penaltyTimeInSeconds));
+    results.push(new Result(win, FIELDWIDTH, FIELDHEIGHT, MINECOUNT - minesLeft, MINECOUNT, timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds, timedMode, penaltyTimeInSeconds));
     showResults();
-    //let li = document.createElement('li');
-    //li.classList.add(win ? 'win' : 'loss');
-    //li.innerHTML = formatSecondsIntoTimeString(timedMode ? (COUNTDOWNSECONDS - countdownSeconds) : countUpSeconds); //< 5 seconds, do something that doesn't count
-    //if (!win) {
-    //    li.innerHTML += ', ' + (MINECOUNT - minesLeft) + ' out of ' + MINECOUNT + ' correct';
-    //}
-    //else {
-    //    minesLeft = 0;
-    //    setMineCountDisplay();
 
-    //    if (hintCount > 0) {
-    //        let formattedPenaltyTime = formatSecondsIntoTimeString(penaltyTimeInSeconds);
-    //        li.innerHTML += `. ${hintCount} hint${hintCount > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}.`;
-    //    } else {
-    //        li.innerHTML += `. No hints used! ${randomCompliment()}!`;
-    //    }
-    //}
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
-    //document.getElementById('results').appendChild(li);
     document.getElementById('smallHintButton').disabled = true;
     document.getElementById('largeHintButton').disabled = true;
     pauseGameButton.disabled = true;
