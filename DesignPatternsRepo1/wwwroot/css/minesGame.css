@@ -1,15 +1,13 @@
 ﻿.hinted {
     animation-name: hintAnimation;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: 3;
 }
 
 .latestResult {
     animation-name: resultAnimation;
     animation-duration: 5s;
     animation-iteration-count: 1;
-font-weight:bold;
-color:yellow;
+    text-decoration:underline;
 }
 
 .playingField {
@@ -54,7 +52,7 @@ color:yellow;
 
 @keyframes resultAnimation {
      0% {
-        background-color: #fff;
+        background-color: none;
     }
 
     50% {
@@ -62,7 +60,7 @@ color:yellow;
     }
 
     100% {
-        background-color: gray;
+        background-color: none;
     }
 }
 
