@@ -4,6 +4,12 @@
     animation-iteration-count: infinite;
 }
 
+.latestResult {
+    animation-name: resultAnimation;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+
 .playingField {
     border: 1px solid red;
     padding: 1px;
@@ -43,6 +49,21 @@
     background-color: white;
     color: red;
 }
+
+@keyframes resultAnimation {
+     0% {
+        background-color: #fff;
+    }
+
+    50% {
+        background-color: darkgray;
+    }
+
+    100% {
+        background-color: gray;
+    }
+}
+
 
 @keyframes hintAnimation {
     0% {
