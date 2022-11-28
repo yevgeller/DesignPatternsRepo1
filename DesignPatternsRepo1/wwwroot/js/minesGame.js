@@ -639,19 +639,11 @@ function showResults() {
         headerElement.classList.add('is-size-3');
         resultContainer.appendChild(headerElement);
 
-        let theseResults = results
-            .filter(x => x.header === hdr)
+        let theseWins = results
+            .filter(x => x.header === hdr && x.win)
             .sort((a, b) => a.comparator - b.comparator);
-        if (theseResults.length > 0) {
-            createListOfResults(theseResults, resultContainer, lastResultTimeStamp);
-            //let listContainer = document.createElement('ol');            
-
-            //theseResults.forEach(res => {
-            //    let result = res.result;
-            //    if (res.timeStamp === lastResultTimeStamp) result.classList.add('latestResult');
-            //    listContainer.appendChild(result);
-            //});
-            //resultContainer.appendChild(listContainer);
+        if (theseWins.length > 0) {
+            createListOfResults(theseWins, resultContainer, lastResultTimeStamp);
         }
 
         rootEl.appendChild(resultContainer);
