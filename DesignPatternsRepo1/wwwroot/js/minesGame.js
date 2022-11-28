@@ -651,6 +651,10 @@ function showResults() {
 }
 
 function createListOfResults(results, container, lastResultTimeStamp) {
+    let header = document.createElement('h1');
+    header.innerHTML = "Wins";
+
+    container.appendChild(header);
     let listContainer = document.createElement('ol');
     results.forEach(res => {
         let result = res.result;
