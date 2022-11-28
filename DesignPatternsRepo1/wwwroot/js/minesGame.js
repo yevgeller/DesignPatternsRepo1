@@ -643,18 +643,29 @@ function showResults() {
             .filter(x => x.header === hdr)
             .sort((a, b) => a.comparator - b.comparator);
         if (theseResults.length > 0) {
-            let listContainer = document.createElement('ol');            
+            createListOfResults(theseResults, resultContainer, lastResultTimeStamp);
+            //let listContainer = document.createElement('ol');            
 
-            theseResults.forEach(res => {
-                let result = res.result;
-                if (res.timeStamp === lastResultTimeStamp) result.classList.add('latestResult');
-                listContainer.appendChild(result);
-            });
-            resultContainer.appendChild(listContainer);
+            //theseResults.forEach(res => {
+            //    let result = res.result;
+            //    if (res.timeStamp === lastResultTimeStamp) result.classList.add('latestResult');
+            //    listContainer.appendChild(result);
+            //});
+            //resultContainer.appendChild(listContainer);
         }
 
         rootEl.appendChild(resultContainer);
     });
+}
+
+function createListOfResults(results, container, lastResultTimeStamp) {
+    let listContainer = document.createElement('ol');
+    results.forEach(res => {
+        let result = res.result;
+        if (res.timeStamp === lastResultTimeStamp) result.classList.add('latestResult');
+        listContainer.appendChild(result);
+    });
+    container.appendChild(listContainer);
 }
 
 function giveHint(isBig) {
