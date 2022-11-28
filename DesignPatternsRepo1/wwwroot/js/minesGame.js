@@ -652,7 +652,8 @@ function showResults() {
 
 function createListOfResults(results, container, lastResultTimeStamp) {
     let header = document.createElement('h1');
-    header.innerHTML = "Wins";
+    header.innerHTML = results[0].win ? "Wins" : "Losses";
+    header.classList.add('is-size-5');
 
     container.appendChild(header);
     let listContainer = document.createElement('ol');
