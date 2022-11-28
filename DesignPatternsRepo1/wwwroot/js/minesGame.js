@@ -639,18 +639,30 @@ function showResults() {
         headerElement.classList.add('is-size-3');
         resultContainer.appendChild(headerElement);
 
-        let theseWins = results
-            .filter(x => x.header === hdr && x.win)
-            .sort((a, b) => a.comparator - b.comparator);
-        if (theseWins.length > 0) {
-            createListOfResults(theseWins, resultContainer, lastResultTimeStamp);
-        }
+        determineResultsToDisplay(true, hdr, resultContainer, lastResultTimeStamp);
+        determineResultsToDisplay(false, hdr, resultContainer, lastResultTimeStamp);
+
+        //let winningResults = results
+        //    .filter(x => x.header === hdr && x.win)
+        //    .sort((a, b) => a.comparator - b.comparator);
+        //if (winningResults.length > 0) {
+        //    createAndDisplayListOfResults(winningResults, resultContainer, lastResultTimeStamp);
+        //}
 
         rootEl.appendChild(resultContainer);
     });
 }
 
-function createListOfResults(results, container, lastResultTimeStamp) {
+function determineResultsToDisplay(gameStatus, hdr, resultContainer, lastResultTimeStamp) {
+    let filteredResults = results
+        .filter(x => x.header === hdr && x.win === gameStatus)
+        .sort((a, b) => a.comparator - b.comparator);
+    if (filteredResults.length > 0) {
+        createAndDisplayListOfResults(filteredResults, resultContainer, lastResultTimeStamp);
+    }
+}
+
+function createAndDisplayListOfResults(results, container, lastResultTimeStamp) {
     let header = document.createElement('h1');
     header.innerHTML = results[0].win ? "Wins" : "Losses";
     header.classList.add('is-size-5');
