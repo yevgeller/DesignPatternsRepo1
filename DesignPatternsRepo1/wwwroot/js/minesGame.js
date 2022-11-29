@@ -649,17 +649,26 @@ function determineResultsToDisplay(gameStatus, hdr, resultContainer, lastResultT
     let filteredResults = results
         .filter(x => x.header === hdr && x.win === gameStatus)
         .sort((a, b) => a.comparator - b.comparator);
-    
+    createResultCategoryHeader(resultContainer, filteredResults.length, gameStatus);
         createAndDisplayListOfResults(filteredResults, gameStatus, resultContainer, lastResultTimeStamp);
 }
 
-function createAndDisplayListOfResults(results, gameStatus, container, lastResultTimeStamp) {
+function createResultCategoryHeader(container, resultsCount, gameStatus) {
     let header = document.createElement('h1');
-    header.innerHTML = gameStatus ? "Wins" : "Losses";
     header.classList.add('is-size-5');
 
+    if (resultsCount === 0) {
+        header.innerHTML = gameStatus ? "No wins" : "No losses";
+    } else {
+        header.innerHTML = gameStatus ? "Wins" : "Losses";
+    }
     container.appendChild(header);
+}
+
+function createAndDisplayListOfResults(results, gameStatus, container, lastResultTimeStamp) {
+    
     if (results.length > 0) {
+
         let listContainer = document.createElement('ol');
         results.forEach(res => {
             let result = res.result;
