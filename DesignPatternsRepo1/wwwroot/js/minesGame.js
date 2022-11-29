@@ -629,7 +629,6 @@ function showResults() {
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp))
     console.log(lastResultTimeStamp);
     let distinctHeaders = new Set(headers);
-    //let distinctHeadersArray = Array.from(distinctHeaders).sort();
     let rootEl = document.getElementById('results2');
     rootEl.innerHTML = "";
     distinctHeaders.forEach(hdr => {
@@ -641,13 +640,6 @@ function showResults() {
 
         determineResultsToDisplay(true, hdr, resultContainer, lastResultTimeStamp);
         determineResultsToDisplay(false, hdr, resultContainer, lastResultTimeStamp);
-
-        //let winningResults = results
-        //    .filter(x => x.header === hdr && x.win)
-        //    .sort((a, b) => a.comparator - b.comparator);
-        //if (winningResults.length > 0) {
-        //    createAndDisplayListOfResults(winningResults, resultContainer, lastResultTimeStamp);
-        //}
 
         rootEl.appendChild(resultContainer);
     });
