@@ -677,10 +677,6 @@ function createAndDisplayListOfResults(results, gameStatus, container, lastResul
         });
 
         container.appendChild(listContainer);
-    } else {
-        let spacer = document.createElement('div');
-        spacer.innerHTML = "None."
-        container.appendChild(spacer);
     }
 }
 
