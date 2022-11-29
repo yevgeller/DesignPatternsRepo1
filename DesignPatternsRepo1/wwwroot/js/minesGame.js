@@ -649,24 +649,30 @@ function determineResultsToDisplay(gameStatus, hdr, resultContainer, lastResultT
     let filteredResults = results
         .filter(x => x.header === hdr && x.win === gameStatus)
         .sort((a, b) => a.comparator - b.comparator);
-    if (filteredResults.length > 0) {
-        createAndDisplayListOfResults(filteredResults, resultContainer, lastResultTimeStamp);
-    }
+    
+        createAndDisplayListOfResults(filteredResults, gameStatus, resultContainer, lastResultTimeStamp);
 }
 
-function createAndDisplayListOfResults(results, container, lastResultTimeStamp) {
+function createAndDisplayListOfResults(results, gameStatus, container, lastResultTimeStamp) {
     let header = document.createElement('h1');
-    header.innerHTML = results[0].win ? "Wins" : "Losses";
+    header.innerHTML = gameStatus ? "Wins" : "Losses";
     header.classList.add('is-size-5');
 
     container.appendChild(header);
-    let listContainer = document.createElement('ol');
-    results.forEach(res => {
-        let result = res.result;
-        if (res.timeStamp === lastResultTimeStamp) result.classList.add('latestResult');
-        listContainer.appendChild(result);
-    });
-    container.appendChild(listContainer);
+    if (results.length > 0) {
+        let listContainer = document.createElement('ol');
+        results.forEach(res => {
+            let result = res.result;
+            if (res.timeStamp === lastResultTimeStamp) result.classList.add('latestResult');
+            listContainer.appendChild(result);
+        });
+
+        container.appendChild(listContainer);
+    } else {
+        let spacer = document.createElement('div');
+        spacer.innerHTML = "None."
+        container.appendChild(spacer);
+    }
 }
 
 function giveHint(isBig) {
