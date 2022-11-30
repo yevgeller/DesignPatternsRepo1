@@ -626,8 +626,7 @@ function showResults() {
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     let headers = [];
     results.forEach(x => headers.push(x.header));
-    let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp))
-    console.log(lastResultTimeStamp);
+    let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let distinctHeaders = new Set(headers);
     let rootEl = document.getElementById('results2');
     rootEl.innerHTML = "";
