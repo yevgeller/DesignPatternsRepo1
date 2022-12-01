@@ -628,7 +628,7 @@ function showResults() {
     results.forEach(x => headers.push(x.header));
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let distinctHeaders = new Set(headers);
-    let rootEl = document.getElementById('results2');
+    let rootEl = document.getElementById('results');
     rootEl.innerHTML = "";
     distinctHeaders.forEach(hdr => {
         let resultContainer = document.createElement('div');
