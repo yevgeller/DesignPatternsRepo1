@@ -649,8 +649,10 @@ function determineResultsToDisplay(gameStatus, hdr, resultContainer, lastResultT
     let filteredResults = results
         .filter(x => x.header === hdr && x.win === gameStatus)
         .sort((a, b) => a.comparator - b.comparator);
-    createResultCategoryHeader(resultContainer, filteredResults.length, gameStatus);
-        createAndDisplayListOfResults(filteredResults, gameStatus, resultContainer, lastResultTimeStamp);
+    if (!hdr.toLowerCase().startsWith('un')) {
+        createResultCategoryHeader(resultContainer, filteredResults.length, gameStatus);
+    }
+    createAndDisplayListOfResults(filteredResults, gameStatus, resultContainer, lastResultTimeStamp);
 }
 
 function createResultCategoryHeader(container, resultsCount, gameStatus) {
