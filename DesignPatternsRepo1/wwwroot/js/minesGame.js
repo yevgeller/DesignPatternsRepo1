@@ -107,6 +107,7 @@ class Result {
     }
 
     get comparator() {
+        if (this.duration < 10) return Number.MIN_SAFE_INTEGER;
         return this.width * this.height * this.minesTotal * (this.duration + this.penalty);
     }
 
@@ -627,7 +628,7 @@ function showResults() {
     let headers = [];
     results.forEach(x => headers.push(x.header));
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
-    let distinctHeaders = new Set(headers);
+    let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
     rootEl.innerHTML = "";
     distinctHeaders.forEach(hdr => {
