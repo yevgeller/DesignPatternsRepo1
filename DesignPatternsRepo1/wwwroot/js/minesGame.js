@@ -118,8 +118,13 @@ class Result {
         return `${this.width} x ${this.height}, ${this.minesTotal} mines:`
     }
 
+    get headerComparator() {
+        if (this.duration < 10) return Number.MIN_SAFE_INTEGER;
+        return this.width * this.height * this.minesTotal;
+    }
+
     get headerObject() {        
-        return { 'header': this.header, 'comparator': this.comparator };
+        return { 'header': this.header, 'headerComparator': this.headerComparator };
     }
 
     get summary() {
