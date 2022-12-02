@@ -118,6 +118,10 @@ class Result {
         return `${this.width} x ${this.height}, ${this.minesTotal} mines:`
     }
 
+    get headerObject() {        
+        return { 'header': this.header, 'comparator': this.comparator };
+    }
+
     get summary() {
         return `${this.width}x${this.height} (${this.win ? 'won' : 'lost'}${this.win ? '' : ', '}${this.win ? '' : (this.mines + '/' + this.minesTotal)}), ${this.duration}+${this.penalty}`
     }
@@ -626,7 +630,8 @@ function gameOver(win) {
 function showResults() {
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     let headers = [];
-    results.forEach(x => headers.push(x.header));
+    results.forEach(x => headers.push(x.headerObject));
+    debugger;
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
@@ -634,12 +639,12 @@ function showResults() {
     distinctHeaders.forEach(hdr => {
         let resultContainer = document.createElement('div');
         let headerElement = document.createElement('h3');
-        headerElement.innerText = hdr;
+        headerElement.innerText = hdr.header;
         headerElement.classList.add('is-size-3');
         resultContainer.appendChild(headerElement);
 
-        determineResultsToDisplay(true, hdr, resultContainer, lastResultTimeStamp);
-        determineResultsToDisplay(false, hdr, resultContainer, lastResultTimeStamp);
+        determineResultsToDisplay(true, hdr.header, resultContainer, lastResultTimeStamp);
+        determineResultsToDisplay(false, hdr.header, resultContainer, lastResultTimeStamp);
 
         rootEl.appendChild(resultContainer);
     });
