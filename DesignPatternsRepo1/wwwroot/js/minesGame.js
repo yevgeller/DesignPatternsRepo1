@@ -193,7 +193,11 @@ document.addEventListener('DOMContentLoaded', function () {
             resetGame();
         }
         if (event.key === 'p') {
-            pauseGame();
+            if (pauseGameButton.classList.contains('is-hidden')) {
+                continueGame();
+            } else {
+                pauseGame();
+            }
         }
     });
 });
