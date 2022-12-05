@@ -61,11 +61,11 @@ function addTestResults() {
     results.push(new Result(true, 11, 11, 20, 20, 90, 0, false, 0));
     results.push(new Result(false, 11, 11, 3, 20, 10, 0, false, 0));
     results.push(new Result(false, 11, 11, 0, 19, 5, 2, false, 20));
-    results.push(new Result(true, 10, 10, 20, 20, 55, 0,true, 0));
-    results.push(new Result(false, 10, 10, 3, 20, 15, 0,true, 0));
-    results.push(new Result(false, 10, 10, 0, 19, 8, 0,true, 0));
-    results.push(new Result(true, 9, 9, 20, 20, 100, 3,true, 50));
-    results.push(new Result(false, 9, 9, 3, 20, 20, 0,true, 0));
+    results.push(new Result(true, 10, 10, 20, 20, 55, 0, true, 0));
+    results.push(new Result(false, 10, 10, 3, 20, 15, 0, true, 0));
+    results.push(new Result(false, 10, 10, 0, 19, 8, 0, true, 0));
+    results.push(new Result(true, 9, 9, 20, 20, 100, 3, true, 50));
+    results.push(new Result(false, 9, 9, 3, 20, 20, 0, true, 0));
     results.push(new Result(false, 9, 9, 0, 19, 25, 0, true, 0));
     showResults();
 }
@@ -123,7 +123,7 @@ class Result {
         return this.width * this.height * this.minesTotal;
     }
 
-    get headerObject() {        
+    get headerObject() {
         return { 'header': this.header, 'headerComparator': this.headerComparator };
     }
 
@@ -245,8 +245,7 @@ function resetGame() {
     document.getElementById('largeHintButton').disabled = !getHintCandidates(true).length;
     document.getElementById('smallHintButton').disabled = false;
     document.getElementById('minesLeft').className = '';
-    resumeGameButton.classList.add('is-hidden');
-    pauseGameButton.classList.remove('is-hidden');
+    resumeGameUIchanges();
     pauseGameButton.disabled = true;
     let end = (new Date()).getTime();
     let diff = end - start;
@@ -685,7 +684,7 @@ function createResultCategoryHeader(container, resultsCount, gameStatus) {
 }
 
 function createAndDisplayListOfResults(results, gameStatus, container, lastResultTimeStamp) {
-    
+
     if (results.length > 0) {
 
         let listContainer = document.createElement('ol');
@@ -851,19 +850,19 @@ function pauseGame() {
 }
 
 function resumeGame() {
-    continueGameUIchanges();
-    continueGameHandleTimers();
+    resumeGameUIchanges();
+    resumeGameHandleTimers();
 }
 
-function continueGameUIchanges() {
- document.getElementById('tbl').classList.remove('is-hidden');
+function resumeGameUIchanges() {
+    document.getElementById('tbl').classList.remove('is-hidden');
     document.getElementById('tbl_paused').classList.add('is-hidden');
     resumeGameButton.classList.add('is-hidden');
     pauseGameButton.classList.remove('is-hidden');
 }
 
-function continueGameHandleTimers() {
-timedMode ? startCountdownTimer() : startCountUpTimer();
+function resumeGameHandleTimers() {
+    timedMode ? startCountdownTimer() : startCountUpTimer();
 }
 
 function startCountUpTimer() {

@@ -6,11 +6,11 @@
 @*
     Backlog:
 
-    Bug:
-    Start game, hit pause, hit start new game, the pause screen is not removed
+    ?If there is only one result, don't show no losses/wins
     Sort win/loss category properly
-    Remove win/loss header from unlucky starts
+    Fix results display
 
+    add arrow to instructions box
     abstract state
     reformat code for a better reading
 *@
@@ -88,8 +88,8 @@
                     </label>
                 </div>
                 <div style="min-height:50px;">
-                    <button class="button" style="min-width:120px;" onclick="resumeGame()" id="resumeGameButton"><i class="fa-solid fa-play mr-3"></i>Resume (p)</button>
-                    <button class="button" style="min-width:120px;" onclick="pauseGame()" id="pauseGameButton"><i class="fa-solid fa-pause mr-3"></i>Pause (p)</button>
+                    <button class="button" style="min-width:150px;" onclick="resumeGame()" id="resumeGameButton"><i class="fa-solid fa-play mr-3"></i>Resume (p)</button>
+                    <button class="button" style="min-width:150px;" onclick="pauseGame()" id="pauseGameButton"><i class="fa-solid fa-pause mr-3"></i>Pause (p)</button>
                     <button class="button" onclick="resetGame()"><i class="fa-solid fa-arrow-rotate-right mr-3"></i>Start new game &nbsp;&nbsp;(n)</button>
                 </div>
             </div>
