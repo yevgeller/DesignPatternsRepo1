@@ -189,8 +189,11 @@ document.addEventListener('DOMContentLoaded', function () {
     resetGame();
     //https://stackoverflow.com/questions/16006583/capturing-ctrlz-key-combination-in-javascript
     document.addEventListener('keydown', function (event) {
-        if (event.key === 'p') {
+        if (event.key === 'n') {
             resetGame();
+        }
+        if (event.key === 'p') {
+            pauseGame();
         }
     });
 });
