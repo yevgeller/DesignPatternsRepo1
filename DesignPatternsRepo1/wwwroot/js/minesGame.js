@@ -34,7 +34,7 @@ let timedMode = false;
 let countdownSeconds = COUNTDOWNSECONDS;
 let countUpSeconds = 0;
 let gameInProgress = false;
-let continueGameButton, pauseGameButton;
+let resumeGameButton, pauseGameButton;
 let showInstructions = false;
 let results = [];
 let currentResultId = 0;
@@ -185,7 +185,7 @@ function setMinMaxParameters(id, min, max) {
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('timedModeSwitch').addEventListener('click', toggleTimedMode, false);
     pauseGameButton = document.getElementById('pauseGameButton');
-    continueGameButton = document.getElementById('continueGameButton');
+    resumeGameButton = document.getElementById('resumeGameButton');
     resetGame();
     //https://stackoverflow.com/questions/16006583/capturing-ctrlz-key-combination-in-javascript
     document.addEventListener('keydown', function (event) {
@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         if (event.key === 'p') {
             if (pauseGameButton.classList.contains('is-hidden')) {
-                continueGame();
+                resumeGame();
             } else {
                 pauseGame();
             }
@@ -245,7 +245,7 @@ function resetGame() {
     document.getElementById('largeHintButton').disabled = !getHintCandidates(true).length;
     document.getElementById('smallHintButton').disabled = false;
     document.getElementById('minesLeft').className = '';
-    continueGameButton.classList.add('is-hidden');
+    resumeGameButton.classList.add('is-hidden');
     pauseGameButton.classList.remove('is-hidden');
     pauseGameButton.disabled = true;
     let end = (new Date()).getTime();
@@ -845,17 +845,25 @@ function toggleTimedMode(e) {
 function pauseGame() {
     document.getElementById('tbl').classList.add('is-hidden');
     document.getElementById('tbl_paused').classList.remove('is-hidden');
-    continueGameButton.classList.remove('is-hidden');
+    resumeGameButton.classList.remove('is-hidden');
     pauseGameButton.classList.add('is-hidden');
     stopAndClearAllGameTimers();
 }
 
-function continueGame() {
-    document.getElementById('tbl').classList.remove('is-hidden');
+function resumeGame() {
+    continueGameUIchanges();
+    continueGameHandleTimers();
+}
+
+function continueGameUIchanges() {
+ document.getElementById('tbl').classList.remove('is-hidden');
     document.getElementById('tbl_paused').classList.add('is-hidden');
-    continueGameButton.classList.add('is-hidden');
+    resumeGameButton.classList.add('is-hidden');
     pauseGameButton.classList.remove('is-hidden');
-    timedMode ? startCountdownTimer() : startCountUpTimer();
+}
+
+function continueGameHandleTimers() {
+timedMode ? startCountdownTimer() : startCountUpTimer();
 }
 
 function startCountUpTimer() {
