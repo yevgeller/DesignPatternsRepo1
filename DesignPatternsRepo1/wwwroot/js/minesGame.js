@@ -132,6 +132,10 @@ class Result {
     }
 }
 
+function compareResultsHeader(result) {
+
+}
+
 function resetGameParameters() {
     FIELDWIDTH = DEFAULTFIELDWIDTH;
     FIELDHEIGHT = DEFAULTFIELDHEIGHT;
