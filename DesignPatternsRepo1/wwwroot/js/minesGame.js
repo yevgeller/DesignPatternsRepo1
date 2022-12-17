@@ -124,7 +124,7 @@ class Result {
     }
 
     get headerObject() {
-        return { 'header': this.header, 'headerComparator': this.headerComparator };
+        return { 'header': this.header, 'headerComparator': this.headerComparator, 'height': this.height, 'width': this.width };
     }
 
     get summary() {
