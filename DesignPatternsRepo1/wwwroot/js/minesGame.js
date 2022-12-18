@@ -647,10 +647,13 @@ function showResults() {
     let headers = [];
     results.forEach(x => {
         debugger;
-        let candidate = headers.filter(h => h.header == x.headerObject.header
+        let candidate = headers.filter(h =>
+            (h.headerComparator == x.headerObject.comparator && h.headerComparator == number.MIN_SAFE_INTEGER)
+            ||
+            (h.header == x.headerObject.header
             && h.headerComparator == x.headerObject.headerComparator
             && h.height == x.headerObject.height
-            && h.width == x.headerObject.width
+            && h.width == x.headerObject.width)
             //need to handle quick losses
         );
         if (!candidate.length)
