@@ -645,7 +645,15 @@ function gameOver(win) {
 function showResults() {
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     let headers = [];
-    results.forEach(x => headers.push(x.headerObject));
+    results.forEach(x => {
+        let candidate = headers.filter(h => h.header == x.headerObject.header
+            && h.headerComparator == x.headerObject.headerComparator
+            && h.height == x.headerObject.height
+            && h.width == x.headerObject.width
+        );
+        if (!candidate)
+            headers.push(x.headerObject);
+    });
     debugger;
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let distinctHeaders = Array.from(new Set(headers)).sort();
