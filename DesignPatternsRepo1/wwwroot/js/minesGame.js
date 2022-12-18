@@ -651,6 +651,7 @@ function showResults() {
             && h.headerComparator == x.headerObject.headerComparator
             && h.height == x.headerObject.height
             && h.width == x.headerObject.width
+            //need to handle quick losses
         );
         if (!candidate.length)
             headers.push(x.headerObject);
