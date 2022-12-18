@@ -646,12 +646,13 @@ function showResults() {
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     let headers = [];
     results.forEach(x => {
+        debugger;
         let candidate = headers.filter(h => h.header == x.headerObject.header
             && h.headerComparator == x.headerObject.headerComparator
             && h.height == x.headerObject.height
             && h.width == x.headerObject.width
         );
-        if (!candidate)
+        if (!candidate.length)
             headers.push(x.headerObject);
     });
     debugger;
