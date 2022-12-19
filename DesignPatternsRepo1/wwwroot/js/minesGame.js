@@ -667,6 +667,12 @@ function showResults() {
     //let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
     rootEl.innerHTML = "";
+
+
+    if (lastPlayedCategoryCandidate.length === 1) {
+        createResultContainer(lastPlayedCategoryCandidate[0], rootEl, lastResultTimeStamp);
+    }
+
     headers.forEach(hdr => {
 //test this
         createResultContainer(hdr, rootEl, lastResultTimeStamp);
