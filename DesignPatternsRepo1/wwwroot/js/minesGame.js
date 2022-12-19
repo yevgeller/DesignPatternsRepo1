@@ -657,11 +657,7 @@ function showResults() {
         );
         if (!candidate.length)
             headers.push(x.headerObject);
-    });
-    debugger;
-    //it's getting distinct headers
-    //sort array
-    //cleanup
+    });    
 
     headers.sort((a, b) => a.headerComparator - b.headerComparator);
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
