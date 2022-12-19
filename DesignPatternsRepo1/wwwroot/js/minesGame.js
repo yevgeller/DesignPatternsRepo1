@@ -668,21 +668,33 @@ function showResults() {
     let rootEl = document.getElementById('results');
     rootEl.innerHTML = "";
     headers.forEach(hdr => {
-        let resultContainer = document.createElement('div');
-        let headerElement = document.createElement('h3');
-        headerElement.innerText = hdr.header;
-        headerElement.classList.add('is-size-3');
-        resultContainer.appendChild(headerElement);
+//test this
+        createResultContainer(hdr, rootEl, lastResultTimeStamp);
 
-        determineResultsToDisplay(true, hdr.header, resultContainer, lastResultTimeStamp);
-        determineResultsToDisplay(false, hdr.header, resultContainer, lastResultTimeStamp);
+        //let resultContainer = document.createElement('div');
+        //let headerElement = document.createElement('h3');
+        //headerElement.innerText = hdr.header;
+        //headerElement.classList.add('is-size-3');
+        //resultContainer.appendChild(headerElement);
 
-        rootEl.appendChild(resultContainer);
+        //determineResultsToDisplay(true, hdr.header, resultContainer, lastResultTimeStamp);
+        //determineResultsToDisplay(false, hdr.header, resultContainer, lastResultTimeStamp);
+
+        //rootEl.appendChild(resultContainer);
     });
 }
 
 function createResultContainer(header, rootEl, lastResultTimeStamp) {
-    //here
+    let resultContainer = document.createElement('div');
+    let headerElement = document.createElement('h3');
+    headerElement.innerText = header.header;
+    headerElement.classList.add('is-size-3');
+    resultContainer.appendChild(headerElement);
+
+    determineResultsToDisplay(true, header.header, resultContainer, lastResultTimeStamp);
+    determineResultsToDisplay(false, header.header, resultContainer, lastResultTimeStamp);
+
+    rootEl.appendChild(resultContainer);
 }
 
 function determineResultsToDisplay(gameStatus, hdr, resultContainer, lastResultTimeStamp) {
