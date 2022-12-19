@@ -664,10 +664,10 @@ function showResults() {
     let lastPlayedCategoryCandidate = results.filter(x => x.timeStamp == lastResultTimeStamp);
 
 
-    let distinctHeaders = Array.from(new Set(headers)).sort();
+    //let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
     rootEl.innerHTML = "";
-    distinctHeaders.forEach(hdr => {
+    headers.forEach(hdr => {
         let resultContainer = document.createElement('div');
         let headerElement = document.createElement('h3');
         headerElement.innerText = hdr.header;
