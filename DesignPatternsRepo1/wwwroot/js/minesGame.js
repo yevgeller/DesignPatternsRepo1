@@ -681,6 +681,10 @@ function showResults() {
     });
 }
 
+function createResultContainer(header, rootEl, lastResultTimeStamp) {
+    //here
+}
+
 function determineResultsToDisplay(gameStatus, hdr, resultContainer, lastResultTimeStamp) {
     let filteredResults = results
         .filter(x => x.header === hdr && x.win === gameStatus)
