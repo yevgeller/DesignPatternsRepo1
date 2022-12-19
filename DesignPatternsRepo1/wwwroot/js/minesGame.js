@@ -648,7 +648,7 @@ function showResults() {
     results.forEach(x => {
         debugger;
         let candidate = headers.filter(h =>
-            (h.header == x.headerObject.header && h.headerComparator == number.MIN_SAFE_INTEGER)
+            (h.header == x.headerObject.header && h.headerComparator == Number.MIN_SAFE_INTEGER)
             ||
             (h.header == x.headerObject.header
             && h.headerComparator == x.headerObject.headerComparator
