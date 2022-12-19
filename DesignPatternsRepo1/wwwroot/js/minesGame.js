@@ -658,7 +658,7 @@ function showResults() {
         if (!candidate.length)
             headers.push(x.headerObject);
     });    
-
+    //Have current category always on top
     headers.sort((a, b) => a.headerComparator - b.headerComparator);
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let distinctHeaders = Array.from(new Set(headers)).sort();
