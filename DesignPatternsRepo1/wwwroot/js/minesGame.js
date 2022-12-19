@@ -660,6 +660,9 @@ function showResults() {
             headers.push(x.headerObject);
     });
     debugger;
+    //it's getting distinct headers
+    //sort array
+    //cleanup 
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
