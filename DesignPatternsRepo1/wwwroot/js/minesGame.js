@@ -645,8 +645,7 @@ function gameOver(win) {
 function showResults() {
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     let headers = [];
-    results.forEach(x => {
-        debugger;
+    results.forEach(x => {        
         let candidate = headers.filter(h =>
             (h.header == x.headerObject.header && h.headerComparator == Number.MIN_SAFE_INTEGER)
             ||
@@ -662,7 +661,9 @@ function showResults() {
     debugger;
     //it's getting distinct headers
     //sort array
-    //cleanup 
+    //cleanup
+
+    headers.sort((a, b) => a.headerComparator - b.headerComparator);
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
