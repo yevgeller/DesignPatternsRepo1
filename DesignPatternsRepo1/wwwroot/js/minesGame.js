@@ -661,6 +661,9 @@ function showResults() {
     //Have current category always on top
     headers.sort((a, b) => a.headerComparator - b.headerComparator);
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
+    let lastPlayedCategoryCandidate = results.filter(x => x.timeStamp == lastResultTimeStamp);
+
+
     let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
     rootEl.innerHTML = "";
