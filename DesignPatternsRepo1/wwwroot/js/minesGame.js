@@ -688,6 +688,7 @@ function showResults() {
         //determineResultsToDisplay(false, hdr.header, resultContainer, lastResultTimeStamp);
 
         //rootEl.appendChild(resultContainer);
+
     });
 }
 
