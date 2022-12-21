@@ -645,19 +645,19 @@ function gameOver(win) {
 function showResults() {
     document.getElementById('scoreboardDiv').classList.remove('is-hidden');
     let headers = [];
-    results.forEach(x => {        
+    results.forEach(x => {
         let candidate = headers.filter(h =>
             (h.header == x.headerObject.header && h.headerComparator == Number.MIN_SAFE_INTEGER)
             ||
             (h.header == x.headerObject.header
-            && h.headerComparator == x.headerObject.headerComparator
-            && h.height == x.headerObject.height
-            && h.width == x.headerObject.width)
+                && h.headerComparator == x.headerObject.headerComparator
+                && h.height == x.headerObject.height
+                && h.width == x.headerObject.width)
             //need to handle quick losses
         );
         if (!candidate.length)
             headers.push(x.headerObject);
-    });    
+    });
     //Have current category always on top
     headers.sort((a, b) => a.headerComparator - b.headerComparator);
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
@@ -668,13 +668,14 @@ function showResults() {
     let rootEl = document.getElementById('results');
     rootEl.innerHTML = "";
 
-
+    //test this:
     if (lastPlayedCategoryCandidate.length === 1) {
         createResultContainer(lastPlayedCategoryCandidate[0], rootEl, lastResultTimeStamp);
     }
 
+    //remove duplicate element here:
     headers.forEach(hdr => {
-//test this
+        //test this
         createResultContainer(hdr, rootEl, lastResultTimeStamp);
 
         //let resultContainer = document.createElement('div');
