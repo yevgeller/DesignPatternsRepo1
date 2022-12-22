@@ -674,7 +674,7 @@ function showResults() {
     }
 
     //remove duplicate element here:
-    headers.forEach(hdr => {
+    headers.filter(x=>x.timeStamp != lastResultTimeStamp).forEach(hdr => {
         //test this
         createResultContainer(hdr, rootEl, lastResultTimeStamp);
     });
