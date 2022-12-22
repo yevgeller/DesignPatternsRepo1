@@ -675,10 +675,12 @@ function showResults() {
     }
 
     //remove duplicate element here:
-    headers.filter(x=>x.timeStamp != lastResultTimeStamp).forEach(hdr => {
-        //test this
-        createResultContainer(hdr, rootEl, lastResultTimeStamp);
-    });
+    if (headers.length > 1) {
+        headers.filter(x => x.header != lastPlayedCategoryCandidate[0].header).forEach(hdr => {
+            //test this
+            createResultContainer(hdr, rootEl, lastResultTimeStamp);
+        });
+    }
 }
 
 function createResultContainer(header, rootEl, lastResultTimeStamp) {
