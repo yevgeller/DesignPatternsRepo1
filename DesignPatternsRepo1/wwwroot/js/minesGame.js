@@ -71,7 +71,7 @@ function addTestResults() {
 }
 
 class Result {
-    constructor(win, width, height, mines, minesTotal, duration, hints, isTimedMode, complementWord, penalty = 0) {
+    constructor(win, width, height, mines, minesTotal, duration, hints, isTimedMode, penalty = 0) {
         this.timeStamp = new Date().getTime();
         this.win = win;
         this.width = width;
@@ -81,7 +81,7 @@ class Result {
         this.duration = duration;
         this.hints = hints;
         this.isTimedMode = isTimedMode;
-        this.complementWord = "";
+        this.complementWord = hints > 0 ? "" : randomCompliment();
         this.penalty = penalty;
     }
 
@@ -100,7 +100,7 @@ class Result {
                 let formattedPenaltyTime = formatSecondsIntoTimeString(this.penalty);
                 li.innerHTML += `. ${this.hints} hint${this.hints > 1 ? 's' : ''}  used for a total penalty time of ${formattedPenaltyTime}.`;
             } else {
-                li.innerHTML += `. No hints used! ${randomCompliment()}!`;
+                li.innerHTML += `. No hints used! ${this.complementWord}!`;
             }
         }
         if (this.isTimedMode) li.innerHTML += TIMEDMODEICON;
