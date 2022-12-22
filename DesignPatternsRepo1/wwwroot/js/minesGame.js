@@ -662,7 +662,7 @@ function showResults() {
     headers.sort((a, b) => a.headerComparator - b.headerComparator);
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let lastPlayedCategoryCandidate = results.filter(x => x.timeStamp == lastResultTimeStamp);
-
+    debugger;
 
     //let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
@@ -677,18 +677,6 @@ function showResults() {
     headers.forEach(hdr => {
         //test this
         createResultContainer(hdr, rootEl, lastResultTimeStamp);
-
-        //let resultContainer = document.createElement('div');
-        //let headerElement = document.createElement('h3');
-        //headerElement.innerText = hdr.header;
-        //headerElement.classList.add('is-size-3');
-        //resultContainer.appendChild(headerElement);
-
-        //determineResultsToDisplay(true, hdr.header, resultContainer, lastResultTimeStamp);
-        //determineResultsToDisplay(false, hdr.header, resultContainer, lastResultTimeStamp);
-
-        //rootEl.appendChild(resultContainer);
-
     });
 }
 
