@@ -71,7 +71,7 @@ function addTestResults() {
 }
 
 class Result {
-    constructor(win, width, height, mines, minesTotal, duration, hints, isTimedMode, penalty = 0) {
+    constructor(win, width, height, mines, minesTotal, duration, hints, isTimedMode, complementWord, penalty = 0) {
         this.timeStamp = new Date().getTime();
         this.win = win;
         this.width = width;
@@ -81,6 +81,7 @@ class Result {
         this.duration = duration;
         this.hints = hints;
         this.isTimedMode = isTimedMode;
+        this.complementWord = "";
         this.penalty = penalty;
     }
 
