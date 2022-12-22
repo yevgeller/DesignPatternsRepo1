@@ -112,7 +112,7 @@ class Result {
     }
 
     get header() {
-        if (this.duration < 10) {
+        if (!this.win && this.duration < 10) {
             return `Unlucky start/quick loss:`;
         }
         return `${this.width} x ${this.height}, ${this.minesTotal} mines:`
