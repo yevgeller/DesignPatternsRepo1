@@ -89,9 +89,18 @@
             </div>
         </div>
         <div class="mt-3" style="max-width:550px;">
-            <article class="message is-info">
+            <article class="message is-dark">
                 <div class="message-header" onclick="toggleInstructions();" style="cursor:pointer;">
                     Instructions
+                    <button class="delete" aria-label="delete"></button>
+                    <button>
+                        <span class="icon-text">
+                            <span class="icon">
+                                <i class="fas fa-home"></i>
+                            </span>
+                            <span>Home</span>
+                        </span>
+                    </button>
                 </div>
                 <div class="message-body is-hidden" id="instructionsBody">
                     <div>The objective of the game is to find all the hidden mines in the field. </div>
