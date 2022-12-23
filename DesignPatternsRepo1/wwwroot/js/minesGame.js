@@ -895,11 +895,19 @@ function startCountdownTimer() {
 function toggleInstructions() {
     showInstructions = !showInstructions;
     let el = document.getElementById('instructionsBody');
-    if (showInstructions) el.classList.remove('is-hidden');
-    if (!showInstructions) el.classList.add('is-hidden');
+    let headerIcon = document.getElementById('instructionsHeaderIconContainer');
+    if (showInstructions) {
+        el.classList.remove('is-hidden');
+        headerIcon.innerHTML = '<i class="fa-solid fa-circle-up"></i>';
+    } else {
+        el.classList.add('is-hidden');
+        headerIcon.innerHTML = '<i class="fa-solid fa-circle-down"></i>';
+    }
 }
 
-function addTestResults() {
+
+//remove this
+function addTestResults() { 
     console.log('adding test results');
     results.push(new Result(true, 10, 10, 20, 20, 90, 0, false, 0));
     results.push(new Result(false, 10, 10, 3, 20, 10, 1, false, 10));
