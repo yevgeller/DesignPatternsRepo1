@@ -38,6 +38,7 @@ let resumeGameButton, pauseGameButton;
 let showInstructions = false;
 let results = [];
 let currentResultId = 0;
+let UNLUCKYSTARTTHRESHOLD = 7;
 
 class Cell {
     constructor(row, col) {
@@ -88,7 +89,7 @@ class Result {
     }
 
     get comparator() {
-        if (this.duration < 10) return Number.MIN_SAFE_INTEGER;
+        if (this.duration < UNLUCKYSTARTTHRESHOLD) return Number.MIN_SAFE_INTEGER;
         return this.width * this.height * this.minesTotal * (this.duration + this.penalty);
     }
 
