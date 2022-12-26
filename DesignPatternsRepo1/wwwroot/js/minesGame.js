@@ -94,14 +94,14 @@ class Result {
     }
 
     get header() {
-        if (!this.win && this.duration < 10) {
+        if (!this.win && this.duration < UNLUCKYSTARTTHRESHOLD) {
             return `Unlucky start/quick loss:`;
         }
         return `${this.width} x ${this.height}, ${this.minesTotal} mines:`
     }
 
     get headerComparator() {
-        if (this.duration < 10) return Number.MIN_SAFE_INTEGER;
+        if (this.duration < UNLUCKYSTARTTHRESHOLD) return Number.MIN_SAFE_INTEGER;
         return this.width * this.height * this.minesTotal;
     }
 
