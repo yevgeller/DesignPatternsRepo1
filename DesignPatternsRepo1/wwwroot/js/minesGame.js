@@ -40,6 +40,7 @@ let results = [];
 let currentResultId = 0;
 let UNLUCKYSTARTTHRESHOLD = 7;
 let PENALTYBIGHINT = 30;
+let PENALTYSMALLHINT = 10;
 
 class Cell {
     constructor(row, col) {
@@ -723,8 +724,8 @@ function giveHint(isBig) {
         let rnd = randomNumber(hintCandidates.length);
         hintCandidates[rnd].classList.add('hinted');
     }
-    penaltyTimeInSeconds += (isBig ? 30 : 10);
-    if (timedMode) countdownSeconds -= (isBig ? 30 : 10);
+    penaltyTimeInSeconds += (isBig ? PENALTYBIGHINT : PENALTYSMALLHINT);
+    if (timedMode) countdownSeconds -= (isBig ? PENALTYBIGHINT : PENALTYSMALLHINT);
     hintCount++;
 }
 
