@@ -39,6 +39,7 @@ let showInstructions = false;
 let results = [];
 let currentResultId = 0;
 let UNLUCKYSTARTTHRESHOLD = 7;
+let PENALTYBIGHINT = 30;
 
 class Cell {
     constructor(row, col) {
