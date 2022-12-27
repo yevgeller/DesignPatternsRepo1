@@ -637,30 +637,24 @@ function showResults() {
                 && h.headerComparator == x.headerObject.headerComparator
                 && h.height == x.headerObject.height
                 && h.width == x.headerObject.width)
-            //need to handle quick losses
         );
         if (!candidate.length)
             headers.push(x.headerObject);
     });
-    //Have current category always on top
+
     headers.sort((a, b) => a.headerComparator - b.headerComparator);
     let lastResultTimeStamp = Math.max(...results.map(o => o.timeStamp));
     let lastPlayedCategoryCandidate = results.filter(x => x.timeStamp == lastResultTimeStamp);
-    debugger;
 
-    //let distinctHeaders = Array.from(new Set(headers)).sort();
     let rootEl = document.getElementById('results');
     rootEl.innerHTML = "";
 
-    //test this:
     if (lastPlayedCategoryCandidate.length === 1) {
         createResultContainer(lastPlayedCategoryCandidate[0], rootEl, lastResultTimeStamp);
     }
 
-    //remove duplicate element here:
     if (headers.length > 1) {
         headers.filter(x => x.header != lastPlayedCategoryCandidate[0].header).forEach(hdr => {
-            //test this
             createResultContainer(hdr, rootEl, lastResultTimeStamp);
         });
     }
